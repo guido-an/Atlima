@@ -1,4 +1,7 @@
+const passport = require('passport')
+const FacebookStrategy = require('passport-facebook').Strategy
 const express = require('express')
+
 const router = express.Router()
 const User = require('../models/User')
 
@@ -20,7 +23,6 @@ router.post('/signup', (req, res, next) => {
       res.status(400).json({ message: 'The username already exists' })
       return
     }
-
     const salt = bcrypt.genSaltSync(bcryptSalt)
     const hashPass = bcrypt.hashSync(password, salt)
 
@@ -76,11 +78,22 @@ router.get('/logout', (req, res) => {
 /// LOGGEDIN
 router.get('/loggedin', (req, res, next) => {
   if (req.session.currentUser) {
-    console.log
     res.status(200).json({ user: req.session.currentUser })
   } else {
     res.json({ message: 'Unauthorized' })
   }
 })
+
+// FACEBOOK
+
+router.get('/facebook', passport.authenticate('facebook'))
+
+router.get(
+  '/facebook/callback',
+  passport.authenticate('facebook', {
+    successRedirect: 'http://localhost:3000/success',
+    failureRedirect: 'http://localhost:3000/fail'
+  })
+)
 
 module.exports = router
