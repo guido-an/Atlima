@@ -2,14 +2,6 @@ const passport = require('passport')
 const FacebookStrategy = require('passport-facebook').Strategy
 const User = require('../models/User')
 
-passport.serializeUser((user, cb) => {
-  cb(null, user)
-})
-
-passport.deserializeUser((user, cb) => {
-  cb(null, user)
-})
-
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
@@ -17,9 +9,9 @@ passport.use(new FacebookStrategy({
 },
 function (accessToken, refreshToken, profile, done) {
   console.log(profile._json, 'test')
-  const { first_name } = profile._json
+  const { name } = profile._json
   const userData = {
-    username: first_name
+    username: name
   }
   new User(userData).save()
   done(null, profile)

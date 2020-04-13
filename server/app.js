@@ -34,13 +34,16 @@ app.use(cors({
   credentials: true
 }))
 
-// ** test
-// Facebook Strategy
+// Passport Facebook Strategy
+passport.serializeUser((user, cb) => {
+  cb(null, user)
+})
+
+passport.deserializeUser((user, cb) => {
+  cb(null, user)
+})
 
 app.use(passport.initialize())
-
-
-// ** /test
 
 // Enable authentication using session + passport
 app.use(session({
