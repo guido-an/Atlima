@@ -37,42 +37,9 @@ app.use(cors({
 // ** test
 // Facebook Strategy
 
-const User = require('./models/User')
-passport.serializeUser((user, cb) => {
-  cb(null, user)
-})
-
-passport.deserializeUser((user, cb) => {
-  cb(null, user)
-})
-
-passport.use(new FacebookStrategy({
-  clientID: process.env.FACEBOOK_CLIENT_ID,
-  clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-  callbackURL: '/auth/facebook/callback'
-},
-function (accessToken, refreshToken, profile, done) {
-  console.log(profile._json, 'test')
-  const { first_name } = profile._json
-  const userData = {
-    username: first_name
-  }
-  new User(userData).save()
-  done(null, profile)
-}
-))
-
 app.use(passport.initialize())
 
-app.get('/auth/facebook', passport.authenticate('facebook'))
 
-app.get(
-  '/auth/facebook/callback',
-  passport.authenticate('facebook', {
-    successRedirect: 'http://localhost:3000/auth/facebook',
-    failureRedirect: '/fail'
-  })
-)
 // ** /test
 
 // Enable authentication using session + passport
