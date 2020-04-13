@@ -5,7 +5,7 @@ const Context = React.createContext()
 
 const service = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
-  withCredentials: true
+  withCredentials: true,
 })
 
 export class AuthStore extends React.Component {
@@ -23,12 +23,12 @@ export class AuthStore extends React.Component {
       console.log('data', data)
       return data
     }
-
+   
    logout = async () => {
       const { data } = await service.get('/auth/logout')
-      console.log(data)
       return data
     }
+ 
 
    loggedin = async () => {
     const { data } = await service.get('/auth/loggedin')
@@ -57,8 +57,10 @@ export class AuthStore extends React.Component {
   
    
   render(){
+    const { signup, login, logout, setUser, fetchUser, facebookLogin } = this
       return(
-          <Context.Provider value={{ ...this.state, signup: this.signup, login: this.login, logout: this.logout, setUser: this.setUser, fetchUser: this.fetchUser }}>
+          <Context.Provider 
+              value={{ ...this.state, signup, login, logout, setUser, fetchUser, }}>
               {this.props.children}
           </Context.Provider>
       )

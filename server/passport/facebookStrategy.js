@@ -8,7 +8,6 @@ passport.use(new FacebookStrategy({
   callbackURL: '/auth/facebook/callback'
 },
 function (accessToken, refreshToken, profile, done) {
-  console.log(profile._json, 'test')
   const { name } = profile._json
   const userData = {
     username: name

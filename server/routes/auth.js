@@ -1,5 +1,4 @@
 const passport = require('passport')
-const FacebookStrategy = require('passport-facebook').Strategy
 const express = require('express')
 
 const router = express.Router()
@@ -59,6 +58,7 @@ router.post('/login', (req, res) => {
     .then(passwordCorrect => {
       if (passwordCorrect) {
         req.session.currentUser = currentUser
+        console.log(req.session, 'testt')
         res.status(200).json({ message: 'Loggedin succesfully', currentUser })
       } else {
         res.status(401).send({
@@ -88,12 +88,25 @@ router.get('/loggedin', (req, res, next) => {
 
 router.get('/facebook', passport.authenticate('facebook'))
 
-router.get(
-  '/facebook/callback',
-  passport.authenticate('facebook', {
-    successRedirect: 'http://localhost:3000/success',
-    failureRedirect: 'http://localhost:3000/fail'
-  })
-)
+router.get('/facebook/callback', (req, res, next) => {
+  passport.authenticate('facebook', (err, user, info) => {
+    if (err) {
+      return next(err)
+    }
+    if (!user) {
+      console.log('2')
+      const message = 'Invalid credentials'
+      return res.send(message)
+    }
+    req.logIn(user, function (err) {
+      if (err) {
+        return next(err)
+      }
+      req.session.currentUser = user
+      console.log('4', user, req.session.currentUser)
+      res.redirect(process.env.CLIENT_URL)
+    })
+  })(req, res, next)
+})
 
 module.exports = router

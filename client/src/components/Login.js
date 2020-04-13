@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import AuthContext  from '../contexts/AuthContext'
+import FacebookLogin from './FacebookLogin'
 
 
 export default class Login extends Component {
@@ -24,7 +25,6 @@ export default class Login extends Component {
       this.context.setUser(loggedInUser.currentUser);
       this.props.history.push('/private');
     } catch (err) {
-      
       console.log(err, "message");
     }
   };
@@ -48,6 +48,7 @@ export default class Login extends Component {
           />
           <button>Login</button>
         </form>
+        <FacebookLogin/>
       </div>
     );
   }
