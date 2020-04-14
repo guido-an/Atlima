@@ -14,13 +14,13 @@ class App extends React.Component {
   componentDidMount(){
     this.context.fetchUser(); 
   }
-
+  
   render() {
     console.log(this.context, 'from app')
     return (
       <div>
         <Route path="/" component={Navbar}/>
-        <p>Hello {this.context.loggedInUser && this.context.loggedInUser.username}</p>
+      <p>Hello {this.context.loggedInUser && this.context.loggedInUser.firstName}</p>
         <Switch>
           <Route
             path="/auth/signup"

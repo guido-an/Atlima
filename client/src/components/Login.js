@@ -36,9 +36,9 @@ export default class Login extends Component {
         <form onSubmit={this.handleSubmit}>
           <input
             onChange={this.handleChange}
-            type="text"
-            name="username"
-            placeholder="name"
+            type="email"
+            name="email"
+            placeholder="email"
           />
           <input
             onChange={this.handleChange}
