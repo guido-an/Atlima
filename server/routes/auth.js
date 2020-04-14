@@ -76,12 +76,16 @@ router.get('/logout', (req, res) => {
 })
 
 /// LOGGEDIN
-router.get('/loggedin', (req, res, next) => {
-  if (req.session.currentUser) {
-    if (req.session.currentUser.provider === 'facebook') {
-      req.session.currentUser.lastName = req.session.currentUser.name.familyName
-      req.session.currentUser.firstName = req.session.currentUser.name.givenName
-    }
+router.get('/loggedin', (req, res) => {
+  if (req.session.currentUser.provider === 'facebook') {
+    User.findOne({ facebookId: req.session.currentUser.id })
+      .then(user => {
+        res.status(200).json({ user })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  } else if (req.session.currentUser) {
     res.status(200).json({ user: req.session.currentUser })
   } else {
     res.json({ message: 'Unauthorized' })
@@ -96,16 +100,14 @@ router.get('/facebook/callback', (req, res, next) => {
       return next(err)
     }
     if (!user) {
-      console.log('2')
       const message = 'Invalid credentials'
       return res.send(message)
     }
-    req.logIn(user, function (err) {
+    req.logIn(user, (err) => {
       if (err) {
         return next(err)
       }
       req.session.currentUser = user
-
       res.redirect(process.env.CLIENT_URL)
     })
   })(req, res, next)
