@@ -8,6 +8,7 @@ passport.use(new FacebookStrategy({
   callbackURL: '/auth/facebook/callback',
   profileFields: ['emails', 'name']
 },
+
 async function (accessToken, refreshToken, profile, done) {
   const { first_name, last_name, email, id } = profile._json
   const userData = {
