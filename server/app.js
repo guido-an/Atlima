@@ -58,4 +58,7 @@ require('./passport')(app)
 const authRoutes = require('./routes/auth')
 app.use('/auth', authRoutes)
 
+const postRoutes = require('./routes/post')
+app.use('/post', postRoutes)
+
 module.exports = app

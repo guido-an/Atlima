@@ -8,13 +8,18 @@ passport.use(new FacebookStrategy({
   callbackURL: '/auth/facebook/callback',
   profileFields: ['emails', 'name']
 },
-function (accessToken, refreshToken, profile, done) {
-  const { first_name, last_name, email } = profile._json
+async function (accessToken, refreshToken, profile, done) {
+  const { first_name, last_name, email, id } = profile._json
   const userData = {
     firstName: first_name,
     lastName: last_name,
     email,
-    provider: 'facebook'
+    provider: 'facebook',
+    facebookId: id
+  }
+  const user = await User.findOne({ facebookId: id })
+  if (user) {
+    done(null, profile)
   }
   new User(userData).save()
   done(null, profile)

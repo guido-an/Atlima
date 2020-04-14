@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import Private from './components/Private';
 import Login from './components/Login';
+import NewPost from './components/Post/New';
 
 
 class App extends React.Component {
@@ -34,6 +35,7 @@ class App extends React.Component {
             path="/private"
             component={Private}
           />
+          <NewPost/>
         </Switch>
       </div>
     );

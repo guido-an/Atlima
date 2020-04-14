@@ -55,9 +55,8 @@ export class AuthStore extends React.Component {
         }
     };
   
-   
   render(){
-    const { signup, login, logout, setUser, fetchUser, facebookLogin } = this
+    const { signup, login, logout, setUser, fetchUser } = this
       return(
           <Context.Provider 
               value={{ ...this.state, signup, login, logout, setUser, fetchUser, }}>

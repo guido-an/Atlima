@@ -30,7 +30,7 @@ export default class Signup extends Component {
   };
   
   render() {
-    console.log(this.context.signup, 'context')
+
     return (
       <div>
           <h1>Signup</h1>

@@ -5,14 +5,14 @@ const userSchema = new Schema({
   firstName: String,
   lastName: String,
   password: String,
-  email: String,
+  email: { type: String, unique: true },
   team: String,
   hometown: String,
   sponsors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sponsor' }],
   sports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sport' }],
-  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
   achievements: Array,
-  provider: String
+  provider: String,
+  facebookId: { type: String, unique: true }
 }, {
   timestamps: {
     createdAt: 'created_at',
