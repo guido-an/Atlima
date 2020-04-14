@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter} from 'react-router-dom'
-import { AuthStore } from './contexts/AuthContext'
+import { AuthStore } from './contexts/AuthContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(<AuthStore><BrowserRouter><App /></BrowserRouter></AuthStore>, document.getElementById('root'));
 
