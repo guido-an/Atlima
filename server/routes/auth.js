@@ -10,23 +10,23 @@ const bcryptSalt = 10
 
 /// POST SIGNUP
 router.post('/signup', (req, res, next) => {
-  const username = req.body.username
+  const email = req.body.email
   const password = req.body.password
-  if (username === '' || password === '') {
+  if (email === '' || password === '') {
     res.status(400).json({ message: 'Please provide credentials' })
     return
   }
 
-  User.findOne({ username }, 'username', (err, user) => {
+  User.findOne({ email }, 'email', (err, user) => {
     if (user !== null) {
-      res.status(400).json({ message: 'The username already exists' })
+      res.status(400).json({ message: 'The email already exists' })
       return
     }
     const salt = bcrypt.genSaltSync(bcryptSalt)
     const hashPass = bcrypt.hashSync(password, salt)
 
     const newUser = new User({
-      username,
+      email,
       password: hashPass
     })
 
@@ -44,11 +44,11 @@ router.post('/signup', (req, res, next) => {
 /// POST LOGIN
 router.post('/login', (req, res) => {
   let currentUser
-  User.findOne({ username: req.body.username })
+  User.findOne({ email: req.body.email })
     .then(user => {
       if (!user) {
         res.status(401).json({
-          errorMessage: "The username doesn't exist."
+          errorMessage: "The email doesn't exist."
         })
         return
       }
@@ -78,6 +78,10 @@ router.get('/logout', (req, res) => {
 /// LOGGEDIN
 router.get('/loggedin', (req, res, next) => {
   if (req.session.currentUser) {
+    if (req.session.currentUser.provider === 'facebook') {
+      req.session.currentUser.lastName = req.session.currentUser.name.familyName
+      req.session.currentUser.firstName = req.session.currentUser.name.givenName
+    }
     res.status(200).json({ user: req.session.currentUser })
   } else {
     res.json({ message: 'Unauthorized' })
@@ -85,9 +89,7 @@ router.get('/loggedin', (req, res, next) => {
 })
 
 // FACEBOOK
-
-router.get('/facebook', passport.authenticate('facebook'))
-
+router.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }))
 router.get('/facebook/callback', (req, res, next) => {
   passport.authenticate('facebook', (err, user, info) => {
     if (err) {
@@ -103,7 +105,7 @@ router.get('/facebook/callback', (req, res, next) => {
         return next(err)
       }
       req.session.currentUser = user
-      console.log('4', user, req.session.currentUser)
+
       res.redirect(process.env.CLIENT_URL)
     })
   })(req, res, next)

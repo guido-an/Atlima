@@ -35,7 +35,7 @@ export default class Signup extends Component {
       <div>
           <h1>Signup</h1>
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChange} type="text" placeholder="name" name="username" />
+          <input onChange={this.handleChange} type="email" placeholder="email" name="email" />
           <input onChange={this.handleChange} type="password" name="password" />
           <button>Signup</button>
         </form>

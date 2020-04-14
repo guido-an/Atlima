@@ -5,9 +5,9 @@ const postSchema = new Schema({
   media: String,
   content: String,
   location: String,
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  tag_users: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  sports: [{ type: mongoose.Schema.Types.ObjectId, ref: "Sport"}],
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  tag_users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  sports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sport' }]
 }, {
   timestamps: {
     createdAt: 'created_at',
