@@ -2,6 +2,11 @@ import React from 'react'
 import axios from 'axios'
 import AuthContext  from '../../contexts/AuthContext'
 
+const service = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+  withCredentials: true,
+})
+
 class Post extends React.Component {
   static contextType = AuthContext
 
@@ -12,7 +17,7 @@ class Post extends React.Component {
     onSubmit = async e => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/post/new', {
+            await service.post(`${process.env.REACT_APP_API_URL}/post/new`, {
               content: this.state.content,
               _id: this.context.loggedInUser._id
             }
