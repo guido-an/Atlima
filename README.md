@@ -1,2 +1,2 @@
-# MERN-Auth
-# hurricane-
+# MERN app
+Work in progress
