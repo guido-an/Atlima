@@ -2,15 +2,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
-  name: String,
+  displayName: String,
   password: String,
   email: String,
-  team: String,
-  hometown: String,
-  sponsors: [{ type: mongoose.Schema.Types.ObjectId, ref: "Sponsor"}], 
-  sports: [{ type: mongoose.Schema.Types.ObjectId, ref: "Sport"}],
-  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post"}],
-  achievements: Array,
+  location: String,
+  users: [{ type: mongoose.Schema.Types.ObjectId, ref: "Users"}],
 }, {
   timestamps: {
     createdAt: 'created_at',
