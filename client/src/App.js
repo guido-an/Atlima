@@ -7,7 +7,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Private from './components/Private';
 import Login from './components/Login';
 import NewPost from './components/Post/New';
-
+import AllPosts from './components/Post/AllPosts';
+import UserPosts from './components/Post/UserPosts';
 
 class App extends React.Component {
   static contextType = AuthContext
@@ -35,7 +36,19 @@ class App extends React.Component {
             path="/private"
             component={Private}
           />
-          <NewPost/>
+          <Route
+            path="/create-post"
+            component={NewPost} />}
+          />    
+          <Route
+            path="/all-posts"
+            component={AllPosts} />}
+          />   
+          <Route
+            path="/user-posts/:id"
+            component={UserPosts} />}
+          />       
+
         </Switch>
       </div>
     );

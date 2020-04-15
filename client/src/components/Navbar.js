@@ -15,21 +15,23 @@ class NavBar extends React.Component {
   render() {
     return (
       <header>
-      
           <Link to="/">Home</Link>
-       
-       
           <Link to="/auth/signup">Signup</Link>
        
-   
-          <Link to="/auth/login">Login</Link>
-          <Link to="#" onClick={this.logoutUser}>
-            Logout
-          </Link>
-  
-          <Link to="/private">
-            Private
-          </Link>
+         { this.context.loggedInUser ?  <Link to="#" onClick={this.logoutUser}>Logout</Link> : <Link to="/auth/login">Login</Link> }
+    
+          <br/><Link to="/create-post">
+            Create post
+          </Link><br/>
+          <Link to="/all-posts">
+            All posts
+          </Link><br/>
+          {this.context.loggedInUser && 
+          
+            <Link to={`/user-posts/${this.context.loggedInUser._id}`}>
+            User posts
+            </Link>
+          }
     
       </header>
     );
