@@ -19,11 +19,14 @@ class App extends React.Component {
   
   render() {
     console.log(this.context, 'from app')
+
     return (
       <div>
-        <Route path="/" component={Navbar}/>
-      <p>Hello {this.context.loggedInUser && this.context.loggedInUser.firstName}</p>
+      {this.context.loggedInUser && <Navbar />} 
+      {/* <p> {this.context.loggedInUser && 'Hello' + this.context.loggedInUser.firstName}</p> */}
+       {this.context.loggedInUser ? <AllPosts /> : <Login />}
         <Switch>
+         
           <Route
             path="/auth/signup"
             component={Signup}/>}
