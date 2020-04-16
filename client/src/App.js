@@ -36,9 +36,11 @@ class App extends React.Component {
             path="/private"
             component={Private}
           />
+      
           <Route
             path="/create-post"
             component={NewPost} />}
+   
           />    
           <Route
             path="/all-posts"

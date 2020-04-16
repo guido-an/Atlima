@@ -8,17 +8,17 @@ class Post extends React.Component {
 
   state = { 
       content: '',
-      media: ''
+      mediaArray: []
     }
   
   onSubmit = async e => {
     e.preventDefault();
-    this.getMediaUrl()
+    
       try {
       await CREATE_POST(
         this.state.content,
         this.context.loggedInUser._id,
-        this.state.media
+        this.state.mediaArray
       )
     }  catch(err){
           console.log(err)
@@ -32,10 +32,10 @@ class Post extends React.Component {
         });
     }
 
-    getMediaUrl = url => {
 
-      this.setState({ media: url })
-
+    getMediaArray = url => {
+      this.setState({ mediaArray: [...this.state.mediaArray, url]})
+      console.log(this.state.mediaArray, 'url from array ')
     }
 
   render () {
@@ -45,10 +45,11 @@ class Post extends React.Component {
             <input onChange={this.onInputChange} type="text" placeholder="content" name="content"/>
             <button>Create post</button>
         </form>
-        <ImageUpload getMediaUrl={this.getMediaUrl}/>
+        <ImageUpload getMediaArray={this.getMediaArray}/>
       </div>
     )
   }
 }
 
 export default Post
+
