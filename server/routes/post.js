@@ -5,11 +5,11 @@ const Post = require('../models/Post')
 
 // NEW POST
 router.post('/new', async (req, res) => {
-  const { content, _id, media } = req.body
+  const { content, _id, mediaArray } = req.body
   const newPost = new Post({
     content,
     user: ObjectId(_id),
-    media
+    mediaArray
   })
   try {
     const post = await newPost.save()

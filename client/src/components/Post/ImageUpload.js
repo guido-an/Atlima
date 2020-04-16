@@ -6,8 +6,11 @@ class ImageUpload extends Component {
  state = {
       image: null,
       url: "",
-      progress: 0
+      progress: 0,
+      mediaArray: []
     };
+
+
 
 
   handleUpload = e => {
@@ -34,8 +37,12 @@ class ImageUpload extends Component {
             .child(image.name)
             .getDownloadURL()
             .then(url => {
-              this.props.getMediaUrl(url)
-              this.setState({ url });
+              this.props.getMediaArray(url)
+              this.setState({ 
+                url,
+                mediaArray: [...this.state.mediaArray, url]
+              });
+              
             });
         }
       );
@@ -51,6 +58,12 @@ class ImageUpload extends Component {
           <div>
             <input type="file" onChange={this.handleUpload} />
           </div>
+          <img
+          src={this.state.url}
+          alt="Uploaded Images"
+          height="300"
+          width="400"
+        />
       </div>
     );
   }

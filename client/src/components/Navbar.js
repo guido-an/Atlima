@@ -15,6 +15,7 @@ class NavBar extends React.Component {
   render() {
     return (
       <header>
+ 
           <Link to="/">Home</Link>
           <Link to="/auth/signup">Signup</Link>
        

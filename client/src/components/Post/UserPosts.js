@@ -21,7 +21,7 @@ class UserPosts extends React.Component {
         }
     }
 
-  render () {
+  render () {''
     const displayUserPosts = this.state.posts && this.state.posts.map(post => {
         return (
             <div key={post._id}>
