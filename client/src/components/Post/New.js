@@ -3,11 +3,6 @@ import AuthContext  from '../../contexts/AuthContext'
 import { CREATE_POST } from '../../api/postAPI'
 import ImageUpload from './ImageUpload'
 
-const service = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-  withCredentials: true,
-})
-
 class Post extends React.Component {
   static contextType = AuthContext
 

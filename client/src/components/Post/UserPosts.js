@@ -14,7 +14,7 @@ class UserPosts extends React.Component {
         userId = this.props.match.params.id
         try {
             const userPosts = await GET_USER_POSTS(userId)
-            this.setState({ posts: userPosts.data })
+            this.setState({ posts: userPosts })
         }
         catch(err){
             console.log(err)
