@@ -1,14 +1,14 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import AuthContext  from './contexts/AuthContext'
-import Signup from './components/Signup';
+
+import Home from './pages/Home';
+import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
-import ProtectedRoute from './components/ProtectedRoute';
-import Private from './components/Private';
+
 import Login from './components/Login';
 import NewPost from './components/Post/New';
-import AllPosts from './components/Post/AllPosts';
-import UserPosts from './components/Post/UserPosts';
+
 
 class App extends React.Component {
   static contextType = AuthContext
@@ -23,36 +23,34 @@ class App extends React.Component {
     return (
       <div>
       {this.context.loggedInUser && <Navbar />} 
-      {/* <p> {this.context.loggedInUser && 'Hello' + this.context.loggedInUser.firstName}</p> */}
-       {this.context.loggedInUser ? <AllPosts /> : <Login />}
+      {/* {this.context.loggedInUser ? <Home /> : <Login />} */}
         <Switch>
-         
+     
+  
+        <Route
+            exact path="/"
+            component={Home} />
+          />   
+
           <Route
-            path="/auth/signup"
-            component={Signup}/>}
-          />
+            path="/login"
+            component={Login} />
+          /> 
+
           <Route
-            path="/auth/login"
-            component={Login} />}
-          />
-          <ProtectedRoute
-            path="/private"
-            component={Private}
+            path="/profile/:id"
+            component={Profile} />
           />
       
           <Route
             path="/create-post"
-            component={NewPost} />}
-   
+            component={NewPost} />
           />    
-          <Route
-            path="/all-posts"
-            component={AllPosts} />}
-          />   
-          <Route
+       
+          {/* <Route
             path="/user-posts/:id"
             component={UserPosts} />}
-          />       
+          />        */}
 
         </Switch>
       </div>
