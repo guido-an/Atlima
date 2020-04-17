@@ -1,0 +1,13 @@
+.absolute-bot {
+    width: 95vw;
+    position: fixed;
+    bottom: 1rem;
+    align-self: flex-end;
+    background-color: white;
+}
+
+@media screen and (min-width: 1024px) {
+    .absolute-bot {
+        width: 75vw;
+    }
+}

@@ -15,7 +15,7 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <nav className='aboslute-bot'>
+      <nav className='absolute-bot'>
         <div class="ui secondary fluid four item menu">
           <Link to="/" className="item"><i class="home icon"></i></Link>
           <Link to="#" onClick={this.logoutUser} className="item">
