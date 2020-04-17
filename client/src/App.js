@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import AuthContext  from './contexts/AuthContext'
 
 import Home from './pages/Home';
@@ -45,11 +45,6 @@ class App extends React.Component {
             path="/create-post"
             component={NewPost} />
           />    
-       
-          {/* <Route
-            path="/user-posts/:id"
-            component={UserPosts} />}
-          />        */}
 
         </Switch>
       </div>

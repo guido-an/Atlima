@@ -16,16 +16,16 @@ class NavBar extends React.Component {
   render() {
     return (
       <nav className='absolute-bot'>
-        <div class="ui secondary fluid four item menu">
-          <Link to="/" className="item"><i class="home icon"></i></Link>
+        <div className="ui secondary fluid four item menu">
+          <Link to="/" className="item"><i className="home icon"></i></Link>
           <Link to="#" onClick={this.logoutUser} className="item">
-            <i class="search icon"></i>
+            <i className="search icon"></i>
           </Link>
           <Link to="/create-post" className="item">
-            <i class="plus icon"></i>
+            <i className="plus icon"></i>
           </Link>
           <Link to="/create-post" className="item">
-            <i class="user icon"></i>
+            <i className="user icon"></i>
           </Link>
         </div>
       </nav>
