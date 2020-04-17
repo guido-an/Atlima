@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter} from 'react-router-dom'
 import { AuthStore } from './contexts/AuthContext';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.scss';
 
 ReactDOM.render(<AuthStore><BrowserRouter><App /></BrowserRouter></AuthStore>, document.getElementById('root'));
 

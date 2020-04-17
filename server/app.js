@@ -61,4 +61,7 @@ app.use('/auth', authRoutes)
 const postRoutes = require('./routes/post')
 app.use('/post', postRoutes)
 
+const profileRoutes = require('./routes/profile')
+app.use('/profile', profileRoutes)
+
 module.exports = app

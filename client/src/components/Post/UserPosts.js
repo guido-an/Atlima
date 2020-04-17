@@ -1,7 +1,11 @@
 import React from 'react'
 import { GET_USER_POSTS } from '../../api/postAPI'
+import AuthContext  from '../../contexts/AuthContext'
+
 
 class UserPosts extends React.Component {
+  static contextType = AuthContext
+
      state = { 
       posts: '',
     }
@@ -10,9 +14,10 @@ class UserPosts extends React.Component {
       this.getPosts()
     }
 
+
     getPosts = async userId => {
-        userId = this.props.match.params.id
         try {
+          userId = this.props.userId
             const userPosts = await GET_USER_POSTS(userId)
             this.setState({ posts: userPosts })
         }
@@ -21,7 +26,8 @@ class UserPosts extends React.Component {
         }
     }
 
-  render () {''
+  render () {
+    console.log(this.state.posts, 'posts user')
     const displayUserPosts = this.state.posts && this.state.posts.map(post => {
         return (
             <div key={post._id}>

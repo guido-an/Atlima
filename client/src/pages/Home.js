@@ -1,4 +1,5 @@
 import React from 'react';
+import AllPosts from '../components/Post/AllPosts'
 
 
 class Home extends React.Component {
@@ -7,7 +8,8 @@ class Home extends React.Component {
   
     return (
      <div>
-         home
+         <h1>Home</h1>
+         <AllPosts/>
    </div>
     );
   }

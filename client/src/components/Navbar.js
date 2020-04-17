@@ -1,3 +1,4 @@
+import './scss/navbar.scss'
 import React from 'react';
 import {Link} from 'react-router-dom';
 import AuthContext  from '../contexts/AuthContext'
@@ -14,27 +15,21 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <header>
- 
-          <Link to="/">Home</Link>
-          <Link to="/auth/signup">Signup</Link>
-       
-         { this.context.loggedInUser ?  <Link to="#" onClick={this.logoutUser}>Logout</Link> : <Link to="/auth/login">Login</Link> }
-    
-          <br/><Link to="/create-post">
-            Create post
-          </Link><br/>
-          <Link to="/all-posts">
-            All posts
-          </Link><br/>
-          {this.context.loggedInUser && 
-          
-            <Link to={`/user-posts/${this.context.loggedInUser._id}`}>
-            User posts
-            </Link>
-          }
-    
-      </header>
+      <nav className='aboslute-bot'>
+        <div class="ui secondary fluid four item menu">
+          <Link to="/" className="item"><i class="home icon"></i></Link>
+          <Link to="#" onClick={this.logoutUser} className="item">
+            <i class="search icon"></i>
+          </Link>
+          <Link to="/create-post" className="item">
+            <i class="plus icon"></i>
+          </Link>
+          <Link to="/create-post" className="item">
+            <i class="user icon"></i>
+          </Link>
+        </div>
+      </nav>
+      
     );
   }
 }

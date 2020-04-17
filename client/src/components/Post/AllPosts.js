@@ -1,7 +1,5 @@
 import React from 'react'
 import { GET_POSTS, DELETE_POST } from '../../api/postAPI'
-import axios from 'axios'
-
 
 class AllPosts extends React.Component {
   state = { 
@@ -27,8 +25,8 @@ class AllPosts extends React.Component {
     this.getPosts()
  }
 
-
   render () {
+    console.log(this.state.posts, 'all posts')
     return (
       <div>
           <h2>All posts</h2>
