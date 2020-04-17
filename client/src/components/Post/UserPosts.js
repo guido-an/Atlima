@@ -2,6 +2,8 @@ import React from 'react'
 import { GET_USER_POSTS } from '../../api/postAPI'
 import AuthContext  from '../../contexts/AuthContext'
 
+import PostCard from './PostCard'
+
 
 class UserPosts extends React.Component {
   static contextType = AuthContext
@@ -28,17 +30,13 @@ class UserPosts extends React.Component {
 
   render () {
     console.log(this.state.posts, 'posts user')
-    const displayUserPosts = this.state.posts && this.state.posts.map(post => {
-        return (
-            <div key={post._id}>
-              <p>{post.content}</p>
-            </div>
-        )
-    })
     return (
       <div>
-          <h2>User posts</h2>
-          {displayUserPosts}
+      {this.state.posts && this.state.posts.map(post => {
+           return (
+            <PostCard key={post._id} post={post} />
+           )
+       })}
       </div>
     )
   }

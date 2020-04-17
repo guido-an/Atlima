@@ -36,6 +36,7 @@ router.get('/all', async (req, res) => {
 router.get('/user/:id', async (req, res) => {
   try {
     const userPosts = await Post.find({ user: ObjectId(req.params.id) }).sort({ created_at: -1 })
+      .populate('user')
     res.status(200).send(userPosts)
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong' })
