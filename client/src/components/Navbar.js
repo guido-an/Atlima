@@ -24,12 +24,11 @@ class NavBar extends React.Component {
           <Link to="/create-post" className="item">
             <i className="plus icon"></i>
           </Link>
-          <Link to="/create-post" className="item">
+          <Link to={`/profile/${this.context.loggedInUser._id}`} className="item">
             <i className="user icon"></i>
           </Link>
         </div>
       </nav>
-      
     );
   }
 }

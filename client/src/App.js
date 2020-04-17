@@ -21,7 +21,7 @@ class App extends React.Component {
     console.log(this.context, 'from app')
 
     return (
-      <div className="ui container">
+      <div>
       {this.context.loggedInUser && <Navbar />} 
       {/* {this.context.loggedInUser ? <Home /> : <Login />} */}
         <Switch>

@@ -1,6 +1,8 @@
 import React from 'react'
 import { GET_POSTS, DELETE_POST } from '../../api/postAPI'
 
+import PostCard from './PostCard'
+
 class AllPosts extends React.Component {
   state = { 
       posts: '',
@@ -26,16 +28,11 @@ class AllPosts extends React.Component {
  }
 
   render () {
-    console.log(this.state.posts, 'all posts')
     return (
-      <div>
-          <h2>All posts</h2>
+      <div>   
        {this.state.posts && this.state.posts.map(post => {
            return (
-               <div key={post._id}>
-                 <p>{post.content}</p>
-                 <button onClick={() => this.deletePost(post._id)}>Delete post</button>
-               </div>
+            <PostCard key={post._id} post={post} />
            )
        })}
       </div>

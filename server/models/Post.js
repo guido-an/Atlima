@@ -7,7 +7,8 @@ const postSchema = new Schema({
   location: String,
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   tag_users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  sports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sport' }]
+  sports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sport' }],
+  likes: Number
 }, {
   timestamps: {
     createdAt: 'created_at',

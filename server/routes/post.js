@@ -9,7 +9,8 @@ router.post('/new', async (req, res) => {
   const newPost = new Post({
     content,
     user: ObjectId(_id),
-    mediaArray
+    mediaArray,
+    likes: 0
   })
   try {
     const post = await newPost.save()
@@ -24,6 +25,7 @@ router.post('/new', async (req, res) => {
 router.get('/all', async (req, res) => {
   try {
     const posts = await Post.find().sort({ created_at: -1 })
+      .populate('user')
     res.status(200).send(posts)
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong' })
@@ -44,12 +46,20 @@ router.get('/user/:id', async (req, res) => {
 router.post('/delete/:id', async (req, res) => {
   try {
     await Post.deleteOne({ _id: ObjectId(req.params.id) })
-    console.log('post deleted')
-    res.status(200).send({message: 'post deleted'})
+    res.status(200).send({ message: 'post deleted' })
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong' }, err)
   }
 })
 
+// LIKE A POST
+router.post('/like/:id', async (req, res) => {
+  try {
+    await Post.updateOne({ _id: req.params.id }, { $inc: { likes: 1 } })
+    res.status(200).send({ message: 'post deleted' })
+  } catch (err) {
+    res.status(400).send({ message: 'Something went wrong' }, err)
+  }
+})
 
 module.exports = router

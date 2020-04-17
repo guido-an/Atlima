@@ -1,0 +1,49 @@
+$margin-left: 10px;
+
+
+.post-card-container{
+    margin-bottom: 20px
+}
+
+// PostCard header
+.post-card-header{
+    display: flex;
+    position: relative;
+    top: 10px;
+    margin-left: $margin-left;
+}
+
+.post-card-header-content{
+    margin-left: 5px;
+    font-size: 12px;
+
+    p {
+        position: relative;
+        bottom: 2px
+    }
+    span {
+        position: relative;
+        bottom: 18px
+    }
+}
+
+// PostCard icons
+.post-card-icons{
+    display: flex;
+    margin-left: $margin-left;
+
+    div:nth-child(2) {
+        margin-left: $margin-left;
+    }
+}
+
+// PostCard bottom
+.post-card-bottom {
+    margin-top: 10px;
+    margin-left: $margin-left;
+
+    p:nth-child(2) {
+       position: relative;
+       bottom: 12px;
+    }
+}
