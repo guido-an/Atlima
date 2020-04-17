@@ -15,16 +15,20 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <header>
- 
-          <Link to="/" className="nav-a">Home</Link>
-          <Link to="#" onClick={this.logoutUser} className="nav-a">Logout</Link>
-          <Link to="/create-post" className="nav-a">Create post</Link>
-          <Link to={`/profile/${this.context.loggedInUser._id}`} className="nav-a">Profile</Link>
-    
-        
-    
-      </header>
+      <nav className='aboslute-bot'>
+        <div class="ui secondary fluid four item menu">
+          <Link to="/" className="item"><i class="home icon"></i></Link>
+          <Link to="#" onClick={this.logoutUser} className="item">
+            <i class="search icon"></i>
+          </Link>
+          <Link to="/create-post" className="item">
+            <i class="plus icon"></i>
+          </Link>
+          <Link to="/create-post" className="item">
+            <i class="user icon"></i>
+          </Link>
+        </div>
+      </nav>
       
     );
   }

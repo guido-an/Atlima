@@ -21,11 +21,10 @@ class App extends React.Component {
     console.log(this.context, 'from app')
 
     return (
-      <div>
+      <div className="ui container">
       {this.context.loggedInUser && <Navbar />} 
       {/* {this.context.loggedInUser ? <Home /> : <Login />} */}
         <Switch>
-     
   
         <Route
             exact path="/"

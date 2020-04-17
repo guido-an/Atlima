@@ -17,7 +17,7 @@ class UserPosts extends React.Component {
 
     getPosts = async userId => {
         try {
-          userId = this.context.loggedInUser._id
+          userId = this.props.userId
             const userPosts = await GET_USER_POSTS(userId)
             this.setState({ posts: userPosts })
         }
