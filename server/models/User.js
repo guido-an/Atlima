@@ -6,6 +6,7 @@ const userSchema = new Schema({
   lastName: String,
   password: String,
   email: { type: String, unique: true },
+  likedPosts: Array,
   team: String,
   hometown: String,
   sponsors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sponsor' }],
