@@ -1,0 +1,80 @@
+
+.profile-body{
+    padding-top: 10px;
+
+    .profile-menu{
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        margin: 1rem 0;
+        font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+        background: #fff;
+        font-weight: 400;
+        border: 1px solid rgba(34,36,38,.15);
+        border-left: 0 ;
+        border-right: 0;
+        -webkit-box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+        box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+        min-height: 2.85714286em;
+        width: 100vw;
+        padding-left: 0!important;
+        padding-right: 0!important;
+        margin-left: -1rem!important;
+        margin-right: -1rem!important;
+        text-align: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        .item {
+            border-right: 1px solid lightgray ;
+            width: 100vw;
+            padding-left: 0!important;
+            padding-right: 0!important;
+            margin-left: 0!important;
+            margin-right: 0!important;
+            text-align: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            position: relative;
+            vertical-align: middle;
+            line-height: 1;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background: 0 0;
+            padding: .92857143em 1.14285714em;
+            text-transform: none;
+            color: rgba(0,0,0,.87);
+            font-weight: 400;
+            -webkit-transition: background .1s ease,color .1s ease,-webkit-box-shadow .1s ease;
+            transition: background .1s ease,color .1s ease,-webkit-box-shadow .1s ease;
+            transition: background .1s ease,box-shadow .1s ease,color .1s ease;
+            transition: background .1s ease,box-shadow .1s ease,color .1s ease,-webkit-box-shadow .1s ease;
+        }
+        .active{
+            color: blue;
+        }
+    }
+
+    .profile-basics {
+        .header{
+            margin-bottom: 5px ;
+        }
+        .list{
+            margin-top: 15px;
+            .item{
+                margin-right: 1vw; 
+            }
+        }
+        
+    }
+    .button{
+        margin-bottom: 11px !important;
+        font-size: 11px !important;
+    }
+}
+
