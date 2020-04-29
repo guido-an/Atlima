@@ -1,5 +1,5 @@
 import React from 'react'
-import { GET_POSTS, DELETE_POST } from '../../api/postAPI'
+import { GET_POSTS, LIKE_A_POST } from '../../api/postAPI'
 
 import PostCard from './PostCard'
 
@@ -22,17 +22,26 @@ class AllPosts extends React.Component {
       }
    }
 
-  deletePost = async postId => {
-    await  DELETE_POST(postId)
-    this.getPosts()
- }
+   likePost = async postId => {
+    try {
+        await LIKE_A_POST(postId)
+        this.getPosts()
+    } catch(err){
+        console.log(err)
+    }
+   }
+
+//   deletePost = async postId => {
+//     await  DELETE_POST(postId)
+//     this.getPosts()
+//  }
 
   render () {
     return (
       <div>   
        {this.state.posts && this.state.posts.map(post => {
            return (
-            <PostCard key={post._id} post={post} />
+            <PostCard key={post._id} post={post} likePost={this.likePost} />
            )
        })}
       </div>

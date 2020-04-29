@@ -1,8 +1,8 @@
 const passport = require('passport')
 const express = require('express')
-
 const router = express.Router()
 const User = require('../models/User')
+const defineUser = require('../helpers/defineUser')
 
 // Bcrypt to encrypt passwords
 const bcrypt = require('bcrypt')
@@ -76,18 +76,11 @@ router.get('/logout', (req, res) => {
 })
 
 /// LOGGEDIN
-router.get('/loggedin', (req, res) => {
-  if (req.session.currentUser.provider === 'facebook') {
-    User.findOne({ facebookId: req.session.currentUser.id })
-      .then(user => {
-        res.status(200).json({ user })
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  } else if (req.session.currentUser) {
-    res.status(200).json({ user: req.session.currentUser })
-  } else {
+router.get('/loggedin', async (req, res) => {
+  try {
+    const user = await defineUser(req.session.currentUser)
+    res.status(200).json({ user })
+  } catch (err) {
     res.json({ message: 'Unauthorized' })
   }
 })

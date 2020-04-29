@@ -20,7 +20,6 @@ export class AuthStore extends React.Component {
 
    login = async user => {
       const { data } = await service.post('/auth/login', user)
-      console.log('data', data)
       return data
     }
    
@@ -32,7 +31,6 @@ export class AuthStore extends React.Component {
 
    loggedin = async () => {
     const { data } = await service.get('/auth/loggedin')
-    console.log(data, 'loggedin function')
     return data.user
    }
 
@@ -59,7 +57,7 @@ export class AuthStore extends React.Component {
     const { signup, login, logout, setUser, fetchUser } = this
       return(
           <Context.Provider 
-              value={{ ...this.state, signup, login, logout, setUser, fetchUser, }}>
+              value={{ ...this.state, signup, login, logout, setUser, fetchUser }}>
               {this.props.children}
           </Context.Provider>
       )

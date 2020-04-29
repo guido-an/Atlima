@@ -23,7 +23,7 @@ export default class Login extends Component {
     try {
       const loggedInUser = await this.context.login(this.state);
       this.context.setUser(loggedInUser.currentUser);
-      this.props.history.push('/private');
+      this.props.history.push('/');
     } catch (err) {
       console.log(err, "message");
     }
