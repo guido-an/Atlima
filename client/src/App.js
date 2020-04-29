@@ -5,10 +5,11 @@ import ProtectedRoute from './components/ProtectedRoute'
 
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar'; 
 import EditProfile from './components/Profile/EditProfile';
 import Private from './components/Private';
 
+import Signup from './components/Signup';
 import Login from './components/Login';
 import NewPost from './components/Post/New';
 
@@ -37,6 +38,11 @@ class App extends React.Component {
           /> 
 
           <Route
+            path="/signup"
+            component={Signup} />
+          /> 
+
+          <Route
             exact path="/profile/:id"
             component={Profile} />
           />
@@ -51,13 +57,11 @@ class App extends React.Component {
             component={EditProfile} />
           /> 
 
-          
-
           <ProtectedRoute
            path='/private'
            render={(props) => <Private {...props} auth='test' />}
             />
-                
+          
         </Switch>
       </div>
     );

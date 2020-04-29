@@ -14,7 +14,7 @@ class PostCard extends React.Component {
 
   render () {
     const { post } = this.props
-    console.log(post)
+
     return (
       <div className='post-card-container'>
         <div className='post-card-header'>
