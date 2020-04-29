@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 var ObjectId = require('mongodb').ObjectID
 const Post = require('../models/Post')
-const User = require('../models/User')
 const defineUser = require('../helpers/defineUser')
 const myFunctions = require('../helpers/postLikes')
 
@@ -81,6 +80,18 @@ router.post('/like/:id', async (req, res) => {
     }
   } catch (err) {
     res.json({ message: 'Something went wrong' })
+  }
+})
+
+router.post('/:id/comment', async (req, res) => {
+  const postId = req.params.id
+  const { content } = req.body
+  try {
+    const user = await defineUser(req.session.currentUser)
+    const myPost = await Post.findOneAndUpdate({ _id: postId }, { $addToSet: { comments: { user: user._id, content } } })
+    res.status(200).send({ myPost })
+  } catch (err) {
+    console.log(err)
   }
 })
 

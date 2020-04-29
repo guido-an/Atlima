@@ -1,17 +1,7 @@
 import '../scss/PostCard.scss'
 import React from 'react'
-import { LIKE_A_POST } from '../../api/postAPI'
 
 class PostCard extends React.Component {
-  //  likePost = async postId => {
-  //   try {
-  //       await LIKE_A_POST(postId)
-
-  //   } catch(err){
-  //       console.log(err)
-  //   }
-  //  }
-
   render () {
     const { post } = this.props
 

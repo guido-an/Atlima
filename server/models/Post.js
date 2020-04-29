@@ -10,10 +10,12 @@ const postSchema = new Schema({
   sports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sport' }],
   likes: [{
     _id: false,
-    likedBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    }
+    likedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+  }],
+  comments: [{
+    _id: false,
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    content: String
   }]
 }, {
   timestamps: {
