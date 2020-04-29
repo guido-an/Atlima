@@ -4,6 +4,7 @@ var ObjectId = require('mongodb').ObjectID
 const Post = require('../models/Post')
 const User = require('../models/User')
 const defineUser = require('../helpers/defineUser')
+const myFunctions = require('../helpers/postLikes')
 
 // NEW POST
 router.post('/new', async (req, res) => {
@@ -33,6 +34,16 @@ router.get('/all', async (req, res) => {
   }
 })
 
+// GET SINGLE POST
+router.get('/:id', async (req, res) => {
+  try {
+    const post = await Post.findOne({ _id: req.params.id })
+    res.status(200).send(post)
+  } catch (err) {
+    res.status(400).send({ message: 'Something went wrong' })
+  }
+})
+
 // GET USER POSTS
 router.get('/user/:id', async (req, res) => {
   try {
@@ -56,61 +67,21 @@ router.post('/delete/:id', async (req, res) => {
 
 // LIKE A POST
 router.post('/like/:id', async (req, res) => {
-  let likeExists
+  const postId = req.params.id
   try {
+    const post = await Post.findById({ _id: postId })
     const user = await defineUser(req.session.currentUser)
-    const post = await Post.findById({ _id: req.params.id })
-
-    post.likes.forEach(element => {
-      if (user._id == element.likedBy.toString()) {
-        likeExists = 'HERE!!!'
-      } else {
-        console.log('not here')
-        likeExists = 'NOT HERE'
-      }
-    })
-
-    console.log(likeExists, 'likeExists')
-
-    const filterPost = { _id: req.params.id }
-    const updatePost = { $addToSet: { likes: { likedBy: user._id } } }
-    const newPost = await Post.findOneAndUpdate(filterPost, updatePost, {
-      new: true
-    })
-
-    const filterUser = { _id: user._id }
-    const updateUser = { $addToSet: { likedPosts: newPost._id } }
-    await User.findOneAndUpdate(filterUser, updateUser, {
-      new: true
-    })
-
-    res.status(200).send({ message: 'post liked' })
+    const likeIsPresent = await myFunctions.checkIfLike(post, user)
+    if (!likeIsPresent) {
+      myFunctions.likeAPost(postId, user._id, true)
+      res.status(200).send({ message: 'post liked' })
+    } else {
+      myFunctions.likeAPost(postId, user._id, false)
+      res.status(200).send({ message: 'post unliked' })
+    }
   } catch (err) {
-    console.log(err)
     res.json({ message: 'Something went wrong' })
   }
 })
-// router.post('/like/:id', async (req, res) => {
-//   try {
-//     const user = await defineUser(req.session.currentUser)
-
-//     const filterPost = { _id: req.params.id }
-//     const updatePost = { $addToSet: { likes: { likedBy: user._id } } }
-//     const newPost = await Post.findOneAndUpdate(filterPost, updatePost, {
-//       new: true
-//     })
-
-//     const filterUser = { _id: user._id }
-//     const updateUser = { $addToSet: { likedPosts: newPost._id } }
-//     await User.findOneAndUpdate(filterUser, updateUser, {
-//       new: true
-//     })
-
-//     res.status(200).send({ message: 'post liked' })
-//   } catch (err) {
-//     console.log(err)
-//     res.json({ message: 'Something went wrong' })
-//   }
-// })
 
 module.exports = router

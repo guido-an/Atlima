@@ -27,6 +27,12 @@ export const GET_USER_POSTS = async userId => {
   return userPosts.data
 }
 
+export const GET_SINGLE_POST = async userId => {
+  const post = await service.get(`/post/${userId}`)
+  console.log(post.data, 'post test')
+  return post.data
+}
+
 export const LIKE_A_POST = async postId => {
   await service.post(`/post/like/${postId}`)
   console.log('post liked')
