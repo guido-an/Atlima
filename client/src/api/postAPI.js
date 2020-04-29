@@ -35,5 +35,9 @@ export const GET_SINGLE_POST = async userId => {
 
 export const LIKE_A_POST = async postId => {
   await service.post(`/post/like/${postId}`)
-  console.log('post liked')
+}
+
+export const COMMENT_A_POST = async (postId, content) => {
+  await service.post(`/post/${postId}/comment`, { content })
+  console.log('commment added')
 }
