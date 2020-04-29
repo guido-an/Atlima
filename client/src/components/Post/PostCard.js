@@ -1,25 +1,22 @@
 import '../scss/PostCard.scss'
 import React from 'react'
 import { LIKE_A_POST } from '../../api/postAPI'
- 
-class PostCard extends React.Component {
 
- clickOnLike = async postId => {
-  try {
-      await LIKE_A_POST(postId)
-      console.log('post like from component')
-  }
-  catch(err){
-      console.log(err)
-  }
- }
+class PostCard extends React.Component {
+  //  likePost = async postId => {
+  //   try {
+  //       await LIKE_A_POST(postId)
+
+  //   } catch(err){
+  //       console.log(err)
+  //   }
+  //  }
 
   render () {
-    console.log(this.props.post, 'from post card')
     const { post } = this.props
+    console.log(post)
     return (
       <div className='post-card-container'>
-
         <div className='post-card-header'>
           <div>
             <img className='ui avatar image circular' src='https://picsum.photos/250' />
@@ -35,8 +32,8 @@ class PostCard extends React.Component {
         </div>
 
         <div className='post-card-icons'>
-          <div>
-            <i  className='heart outline icon' />
+          <div onClick={() => this.props.likePost(post._id)}>
+            <i className='heart icon outline' />
           </div>
           <div>
             <i className='comment outline icon' />
@@ -45,11 +42,10 @@ class PostCard extends React.Component {
 
         <div className='post-card-bottom'>
           <div>
-            <p><strong>{post.likes} likes</strong></p>
+            <p><strong>{post.likes.length} likes</strong></p>
             <p><strong>{post.user.firstName}</strong><span> {post.content}</span></p>
           </div>
         </div>
-
       </div>
     )
   }

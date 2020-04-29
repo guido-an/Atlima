@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 var ObjectId = require('mongodb').ObjectID
 const Post = require('../models/Post')
+const User = require('../models/User')
+const defineUser = require('../helpers/defineUser')
 
 // NEW POST
 router.post('/new', async (req, res) => {
@@ -9,8 +11,7 @@ router.post('/new', async (req, res) => {
   const newPost = new Post({
     content,
     user: ObjectId(_id),
-    mediaArray,
-    likes: 0
+    mediaArray
   })
   try {
     const post = await newPost.save()
@@ -55,12 +56,61 @@ router.post('/delete/:id', async (req, res) => {
 
 // LIKE A POST
 router.post('/like/:id', async (req, res) => {
+  let likeExists
   try {
-    await Post.updateOne({ _id: req.params.id }, { $inc: { likes: 1 } })
-    res.status(200).send({ message: 'post deleted' })
+    const user = await defineUser(req.session.currentUser)
+    const post = await Post.findById({ _id: req.params.id })
+
+    post.likes.forEach(element => {
+      if (user._id == element.likedBy.toString()) {
+        likeExists = 'HERE!!!'
+      } else {
+        console.log('not here')
+        likeExists = 'NOT HERE'
+      }
+    })
+
+    console.log(likeExists, 'likeExists')
+
+    const filterPost = { _id: req.params.id }
+    const updatePost = { $addToSet: { likes: { likedBy: user._id } } }
+    const newPost = await Post.findOneAndUpdate(filterPost, updatePost, {
+      new: true
+    })
+
+    const filterUser = { _id: user._id }
+    const updateUser = { $addToSet: { likedPosts: newPost._id } }
+    await User.findOneAndUpdate(filterUser, updateUser, {
+      new: true
+    })
+
+    res.status(200).send({ message: 'post liked' })
   } catch (err) {
-    res.status(400).send({ message: 'Something went wrong' }, err)
+    console.log(err)
+    res.json({ message: 'Something went wrong' })
   }
 })
+// router.post('/like/:id', async (req, res) => {
+//   try {
+//     const user = await defineUser(req.session.currentUser)
+
+//     const filterPost = { _id: req.params.id }
+//     const updatePost = { $addToSet: { likes: { likedBy: user._id } } }
+//     const newPost = await Post.findOneAndUpdate(filterPost, updatePost, {
+//       new: true
+//     })
+
+//     const filterUser = { _id: user._id }
+//     const updateUser = { $addToSet: { likedPosts: newPost._id } }
+//     await User.findOneAndUpdate(filterUser, updateUser, {
+//       new: true
+//     })
+
+//     res.status(200).send({ message: 'post liked' })
+//   } catch (err) {
+//     console.log(err)
+//     res.json({ message: 'Something went wrong' })
+//   }
+// })
 
 module.exports = router
