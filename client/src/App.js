@@ -5,6 +5,7 @@ import AuthContext  from './contexts/AuthContext'
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
+import EditProfile from './components/Profile/EditProfile';
 
 import Login from './components/Login';
 import NewPost from './components/Post/New';
@@ -37,14 +38,19 @@ class App extends React.Component {
           /> 
 
           <Route
-            path="/profile/:id"
+            exact path="/profile/:id"
             component={Profile} />
           />
       
           <Route
             path="/create-post"
             component={NewPost} />
-          />    
+          />   
+
+          <Route
+            path="/profile/edit/:id"
+            component={EditProfile} />
+          /> 
 
         </Switch>
       </div>
