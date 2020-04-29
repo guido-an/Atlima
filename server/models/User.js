@@ -6,9 +6,13 @@ const userSchema = new Schema({
   lastName: String,
   password: String,
   email: { type: String, unique: true },
+  mediaArray: Array,
   likedPosts: Array,
   team: String,
   hometown: String,
+  country: String,
+  tour: Array,
+
   sponsors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sponsor' }],
   sports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sport' }],
   achievements: Array,
