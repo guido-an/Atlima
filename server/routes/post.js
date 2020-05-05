@@ -7,12 +7,14 @@ const myFunctions = require('../helpers/postLikes')
 
 // NEW POST
 router.post('/new', async (req, res) => {
-  const { content, _id, mediaArray } = req.body
+  const { content, mediaArray } = req.body
+
   const newPost = new Post({
     content,
-    user: ObjectId(_id),
+    user: req.session.currentUser._id,
     mediaArray
   })
+
   try {
     const post = await newPost.save()
     res.status(200).json(post)
@@ -27,6 +29,7 @@ router.get('/all', async (req, res) => {
   try {
     const posts = await Post.find().sort({ created_at: -1 })
       .populate('user')
+    console.log(posts, 'posts')
     res.status(200).send(posts)
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong' })

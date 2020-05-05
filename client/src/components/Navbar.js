@@ -14,7 +14,6 @@ class NavBar extends React.Component {
   }
 
   render() {
-    console.log(this.context, 'navbar context')
     return (
       <nav className='absolute-bot'>
         <div className="ui secondary fluid four item menu">

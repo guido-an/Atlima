@@ -5,10 +5,9 @@ const service = axios.create({
   withCredentials: true
 })
 
-export const CREATE_POST = async (content, _id, mediaArray) => {
+export const CREATE_POST = async (content, mediaArray) => {
   await service.post('/post/new', {
     content,
-    _id,
     mediaArray
   })
 }

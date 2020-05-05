@@ -12,12 +12,11 @@ const userSchema = new Schema({
   hometown: String,
   country: String,
   tour: Array,
-
   sponsors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sponsor' }],
   sports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sport' }],
   achievements: Array,
   provider: String,
-  facebookId: { type: String, unique: true }
+  facebookId: String
 }, {
   timestamps: {
     createdAt: 'created_at',

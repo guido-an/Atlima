@@ -6,12 +6,14 @@ export default class Signup extends Component {
   static contextType = AuthContext
 
   state = {
-    username: '',
-    password: ''
+    firstName: '',
+    lastName:'',
+    email: '',
+    password: '',
   };
 
   handleChange = e => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     this.setState({
       [name]: value
     });
@@ -22,7 +24,8 @@ export default class Signup extends Component {
     try{
     await this.context.signup(this.state) 
     this.context.setUser(this.state)
-    this.props.history.push('/')
+    this.context.fetchUser()
+    this.props.history.push('/onboarding')
     }
     catch(err){
       console.log(err)
@@ -35,8 +38,10 @@ export default class Signup extends Component {
       <div>
           <h1>Signup</h1>
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChange} type="email" placeholder="email" name="email" />
-          <input onChange={this.handleChange} type="password" name="password" />
+          <input onChange={this.handleChange} type="text" placeholder="First name" name="firstName" />
+          <input onChange={this.handleChange} type="text" placeholder="Last name" name="lastName" />
+          <input onChange={this.handleChange} type="email" placeholder="Email" name="email" />
+          <input onChange={this.handleChange} type="password" placeholder="******" name="password" />
           <button>Signup</button>
         </form>
       </div>

@@ -5,10 +5,11 @@ import ProtectedRoute from './components/ProtectedRoute'
 
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import OnBoarding from './pages/OnBoarding';
+
 import Navbar from './components/Navbar'; 
 import EditProfile from './components/Profile/EditProfile';
 import Private from './components/Private';
-
 import Signup from './components/Signup';
 import Login from './components/Login';
 import NewPost from './components/Post/New';
@@ -22,6 +23,7 @@ class App extends React.Component {
   }
   
   render() {
+    console.log(this.context, 'from app')
     return (
       <div>
       {this.context.loggedInUser && <Navbar /> }      
@@ -40,6 +42,11 @@ class App extends React.Component {
           <Route
             path="/signup"
             component={Signup} />
+          /> 
+
+          <Route
+            path="/onboarding"
+            component={OnBoarding} />
           /> 
 
           <Route

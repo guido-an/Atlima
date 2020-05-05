@@ -1,19 +1,19 @@
-import React from 'react';
+import React from 'react'
 import AllPosts from '../components/Post/AllPosts'
 
-
 class Home extends React.Component {
-  componentDidMount(){
+  componentDidMount () {
     console.log(this.props)
   }
-  render() {
+
+  render () {
     return (
-     <div>
-         <h1>Home</h1>
-         <AllPosts/>
-   </div>
-    );
+      <div>
+        <h1>Home</h1>
+        <AllPosts />
+      </div>
+    )
   }
 }
 
-export default Home;
+export default Home
