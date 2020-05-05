@@ -36,6 +36,7 @@ router.post('/signup', (req, res, next) => {
         res.status(200).json(user)
       })
       .catch(err => {
+        console.log(err)
         res.status(400).send({ message: 'Something went wrong' })
       })
   })
