@@ -64,4 +64,7 @@ app.use('/post', postRoutes)
 const profileRoutes = require('./routes/profile')
 app.use('/profile', profileRoutes)
 
+const sportRoutes = require('./routes/sport')
+app.use('/sport', sportRoutes)
+
 module.exports = app

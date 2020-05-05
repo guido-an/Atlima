@@ -10,13 +10,12 @@ const bcryptSalt = 10
 
 /// POST SIGNUP
 router.post('/signup', (req, res, next) => {
-  const email = req.body.email
-  const password = req.body.password
+  const { firstName, lastName, email, password } = req.body
+
   if (email === '' || password === '') {
     res.status(400).json({ message: 'Please provide credentials' })
     return
   }
-
   User.findOne({ email }, 'email', (err, user) => {
     if (user !== null) {
       res.status(400).json({ message: 'The email already exists' })
@@ -26,6 +25,8 @@ router.post('/signup', (req, res, next) => {
     const hashPass = bcrypt.hashSync(password, salt)
 
     const newUser = new User({
+      firstName,
+      lastName,
       email,
       password: hashPass
     })
@@ -33,9 +34,11 @@ router.post('/signup', (req, res, next) => {
     newUser
       .save()
       .then(user => {
+        req.session.currentUser = user
         res.status(200).json(user)
       })
       .catch(err => {
+        console.log(err)
         res.status(400).send({ message: 'Something went wrong' })
       })
   })
@@ -58,7 +61,6 @@ router.post('/login', (req, res) => {
     .then(passwordCorrect => {
       if (passwordCorrect) {
         req.session.currentUser = currentUser
-        console.log(req.session, 'testt')
         res.status(200).json({ message: 'Loggedin succesfully', currentUser })
       } else {
         res.status(401).send({

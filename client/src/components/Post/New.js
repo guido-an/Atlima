@@ -1,11 +1,9 @@
 import React from 'react'
-import AuthContext  from '../../contexts/AuthContext'
 import { CREATE_POST } from '../../api/postAPI'
 import ImageUpload from './ImageUpload'
 
 class Post extends React.Component {
-  static contextType = AuthContext
-
+  
   state = { 
       content: '',
       mediaArray: []
@@ -17,9 +15,9 @@ class Post extends React.Component {
       try {
       await CREATE_POST(
         this.state.content,
-        this.context.loggedInUser._id,
         this.state.mediaArray
       )
+      this.props.history.push('/')
     }  catch(err){
           console.log(err)
      }
@@ -35,7 +33,6 @@ class Post extends React.Component {
 
     getMediaArray = url => {
       this.setState({ mediaArray: [...this.state.mediaArray, url]})
-      console.log(this.state.mediaArray, 'url from array ')
     }
 
   render () {

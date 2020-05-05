@@ -47,6 +47,7 @@ export class AuthStore extends React.Component {
             loggedInUser: res,
           });
         } catch(err) {
+          console.log(err, 'err from context')
           this.setState({
             loggedInUser: null,
           });

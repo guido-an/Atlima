@@ -4,6 +4,7 @@ import React from 'react'
 class PostCard extends React.Component {
   render () {
     const { post } = this.props
+    console.log(post, 'poscard')
 
     return (
       <div className='post-card-container'>
