@@ -14,7 +14,6 @@ export class AuthStore extends React.Component {
 
     signup = async user => {
       const data = await service.post('/auth/signup', user)
-      console.log(data)
       return data
     }
 

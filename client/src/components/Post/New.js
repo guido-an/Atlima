@@ -38,6 +38,7 @@ class Post extends React.Component {
   render () {
     return (
       <div>
+  
         <form onSubmit={this.onSubmit}>
             <input onChange={this.onInputChange} type="text" placeholder="content" name="content"/>
             <button>Create post</button>

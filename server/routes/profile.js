@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/User')
 
+/* GET USER */
 router.get('/:id', async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id })
@@ -11,6 +12,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+/* EDIT USER */
 router.post('/edit/:id', async (req, res) => {
   const { mediaArray, firstName, lastName, team, country, hometown } = req.body
   try {
@@ -39,7 +41,6 @@ router.post('/add-sports', async (req, res) => {
   try {
     const filter = { _id: req.session.currentUser._id }
     const update = { sports: sports }
-    console.log(filter, update, 'eddaje')
     await User.findOneAndUpdate(filter, update, { new: true })
     res.status(200).json({ message: 'Sports added to user. 5000 - /add-sports' })
   } catch (err) {

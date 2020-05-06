@@ -16,7 +16,8 @@ const userSchema = new Schema({
   sports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sport' }],
   achievements: Array,
   provider: String,
-  facebookId: String
+  facebookId: String,
+  notifications: Array
 }, {
   timestamps: {
     createdAt: 'created_at',

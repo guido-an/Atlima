@@ -19,5 +19,4 @@ export const EDIT_USER = async (userId, mediaArray, firstName, lastName, team, c
 
 export const ADD_SPORTS = async sports => {
   await service.post('/profile/add-sports', { sports })
-  console.log('sports from api', sports)
 }

@@ -38,13 +38,11 @@ class EditProfile extends React.Component {
         this.setState({
           [name]: value,
         });
-        console.log(e.targe, 'data')
     }
 
 
     getMediaArray = url => {
       this.setState({ mediaArray: [...this.state.mediaArray, url]})
-      console.log(this.state.mediaArray, 'url from array ')
     }
 
   render () {

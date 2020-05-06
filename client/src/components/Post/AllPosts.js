@@ -35,7 +35,6 @@ class AllPosts extends React.Component {
    commentPost = async (postId, content) => {
     try {
         await COMMENT_A_POST(postId, content)
-        console.log('commented')
     } catch(err){
         console.log(err)
     }
