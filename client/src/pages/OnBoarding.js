@@ -51,7 +51,6 @@ removeSport = (name) => {
     e.preventDefault();
       try {
         await ADD_SPORTS(this.state.selectedSportsIds)
-        console.log('sport added', this.state.selectedSportsIds)
         this.props.history.push(`/profile/edit/${userId}`)
     }  catch(err){
           console.log(err)

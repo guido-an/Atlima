@@ -3,7 +3,6 @@ const Post = require('../models/Post')
 
 async function likeAPost (postId, userId, like) {
   const likeToPost = like ? { $addToSet: { likes: { likedBy: userId } } } : { $pull: { likes: { likedBy: userId } } }
-
   try {
     const newPost = await Post.findOneAndUpdate({ _id: postId }, likeToPost, { new: true })
     const likeToUser = like ? { $addToSet: { likedPosts: newPost._id } } : { $pull: { likedPosts: newPost._id } }
@@ -20,7 +19,7 @@ async function checkIfLike (post, user) {
       if (user._id == element.likedBy.toString()) {
         likeIsPresent = true
       } else {
-        likeIsPresent = false
+        likeIsPresent ? likeIsPresent = true : likeIsPresent = false
       }
     })
   } catch (err) {

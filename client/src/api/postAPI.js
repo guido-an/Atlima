@@ -38,5 +38,4 @@ export const LIKE_A_POST = async postId => {
 
 export const COMMENT_A_POST = async (postId, content) => {
   await service.post(`/post/${postId}/comment`, { content })
-  console.log('commment added')
 }

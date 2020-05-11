@@ -2,15 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import AuthContext from '../contexts/AuthContext'
 
-
-const ProtectedRoute = ({ component: Component, loggedInUser, auth, ...rest  }) => {
+const ProtectedRoute = ({ component: Component, loggedInUser, auth, ...rest }) => {
   const context = useContext(AuthContext)
 
   useEffect(() => {
     context.fetchUser()
-    console.log(context);
-   
-  });
+  })
 
   return (
     <Route

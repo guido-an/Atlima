@@ -13,7 +13,6 @@ class UserProfile extends React.Component {
   
 
   render () {
-    console.log(this, 'user')
     return (
       <div className='profile-body'>
         <Link to={`/profile/edit/${this.context.loggedInUser && this.context.loggedInUser._id}`} className="item">

@@ -3,15 +3,16 @@ const router = express.Router()
 var ObjectId = require('mongodb').ObjectID
 const Post = require('../models/Post')
 const defineUser = require('../helpers/defineUser')
+const myNotifications = require('../helpers/notifications')
 const myFunctions = require('../helpers/postLikes')
 
 // NEW POST
 router.post('/new', async (req, res) => {
   const { content, mediaArray } = req.body
-
+  const user = await defineUser(req.session.currentUser)
   const newPost = new Post({
     content,
-    user: req.session.currentUser._id,
+    user: user._id,
     mediaArray
   })
 
@@ -29,7 +30,6 @@ router.get('/all', async (req, res) => {
   try {
     const posts = await Post.find().sort({ created_at: -1 })
       .populate('user')
-    console.log(posts, 'posts')
     res.status(200).send(posts)
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong' })
@@ -76,6 +76,8 @@ router.post('/like/:id', async (req, res) => {
     const likeIsPresent = await myFunctions.checkIfLike(post, user)
     if (!likeIsPresent) {
       myFunctions.likeAPost(postId, user._id, true)
+      myNotifications.notificationLike(user._id, post, 'like', 'had like your post', false)
+
       res.status(200).send({ message: 'post liked' })
     } else {
       myFunctions.likeAPost(postId, user._id, false)
@@ -91,7 +93,9 @@ router.post('/:id/comment', async (req, res) => {
   const { content } = req.body
   try {
     const user = await defineUser(req.session.currentUser)
-    const myPost = await Post.findOneAndUpdate({ _id: postId }, { $addToSet: { comments: { user: user._id, content } } })
+    const myPost = await Post.findOneAndUpdate({ _id: postId }, { $push: { comments: { user: user._id, content } } }).populate('user')
+
+   myNotifications.notificationComments(user._id, myPost, 'comment', 'had commented your post')
     res.status(200).send({ myPost })
   } catch (err) {
     console.log(err)

@@ -19,10 +19,12 @@ async function (accessToken, refreshToken, profile, done) {
     facebookId: id
   }
   const user = await User.findOne({ facebookId: id })
+  console.log(user)
   if (user) {
     done(null, profile)
+  } else {
+    new User(userData).save()
+    done(null, profile)
   }
-  new User(userData).save()
-  done(null, profile)
 }
 ))
