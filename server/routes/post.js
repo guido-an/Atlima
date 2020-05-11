@@ -76,7 +76,7 @@ router.post('/like/:id', async (req, res) => {
     const likeIsPresent = await myFunctions.checkIfLike(post, user)
     if (!likeIsPresent) {
       myFunctions.likeAPost(postId, user._id, true)
-      myNotifications.notificationsHelper(user._id, post, 'like', 'had like your post', false)
+      myNotifications.notificationLike(user._id, post, 'like', 'had like your post', false)
 
       res.status(200).send({ message: 'post liked' })
     } else {
@@ -93,8 +93,9 @@ router.post('/:id/comment', async (req, res) => {
   const { content } = req.body
   try {
     const user = await defineUser(req.session.currentUser)
-    const myPost = await Post.findOneAndUpdate({ _id: postId }, { $addToSet: { comments: { user: user._id, content } } })
-    myNotifications.notificationsCommentHelper(user._id, myPost, 'comment', 'had commented your post')
+    const myPost = await Post.findOneAndUpdate({ _id: postId }, { $push: { comments: { user: user._id, content } } }).populate('user')
+
+   myNotifications.notificationComments(user._id, myPost, 'comment', 'had commented your post')
     res.status(200).send({ myPost })
   } catch (err) {
     console.log(err)

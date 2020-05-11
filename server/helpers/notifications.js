@@ -1,14 +1,10 @@
 const User = require('../models/User')
+const Post = require('../models/Post')
 var ObjectId = require('mongodb').ObjectID
 
-const notificationsHelper = async (currentUserId, post, type, message, commentUser) => {
+const notificationLike = async (currentUserId, post, type, message) => {
   try {
-    let filter
-    if (commentUser) {
-      filter = { _id: commentUser }
-    } else {
-      filter = { _id: post.user }
-    }
+    const filter = post.user
     const postId = post._id
     const userId = ObjectId(currentUserId)
     const update = { $addToSet: { notifications: { userId, postId, type, message } } }
@@ -18,24 +14,38 @@ const notificationsHelper = async (currentUserId, post, type, message, commentUs
   }
 }
 
-const notificationsCommentHelper = async (currentUserId, post, type, message) => {
-  console.log('users=', currentUserId, post.user)
-  if (currentUserId != post.user) {
-    notificationsHelper(currentUserId, post, 'comment', 'had commented your post', false)
-  }
-  if (type == 'comment') {
-    post.comments.forEach(async comment => {
-      console.log('coment user=', comment.user)
-      if (comment.user != currentUserId && comment.user != post.user) {
-        const user = await User.findOne({ _id: comment.user })
-        console.log('in the if: ', user)
-        notificationsHelper(currentUserId, user, 'comment', 'had also commented a post', comment.User)
-      }
-    })
-  }
+const notificationComments = async (currentUserId, post) => {
+  const myUserId = ObjectId(currentUserId).toString()
+  const postUserId = ObjectId(post.user._id).toString()
+
+  let today = new Date();
+  let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+     
+       try {
+        let usersToSendNotification = []
+        post.comments.forEach(comment => {
+          let userIdInComments = ObjectId(comment.user).toString()
+          if( !usersToSendNotification.includes(userIdInComments) ) {
+            usersToSendNotification.push(userIdInComments)
+          }
+        })
+        
+        usersToSendNotification.forEach(async userId => {
+          let commentInPostUserId = ObjectId(userId).toString()
+          if( commentInPostUserId != myUserId ) {
+            console.log('SEND NOTIFICATION TO: ', userId)
+            message = commentInPostUserId == postUserId ?  'had commented your post' : 'had also commented a post' 
+            await User.findOneAndUpdate({ _id: commentInPostUserId },{ $addToSet: { notifications: { userId: ObjectId(myUserId), postId: ObjectId(post._id), postUserId, type:'comment', message, date: `${date} - ${time}` } } } )
+          } 
+        });
+       } catch(err) {
+         console.log(err, 'Err:')
+       }  
 }
 
+
 module.exports = {
-  notificationsHelper,
-  notificationsCommentHelper
+  notificationLike,
+  notificationComments
 }
