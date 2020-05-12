@@ -8,12 +8,14 @@ const myFunctions = require('../helpers/postLikes')
 
 // NEW POST
 router.post('/new', async (req, res) => {
-  const { content, mediaArray } = req.body
+  console.log(req.body)
+  const { content, mediaArray, location } = req.body
   const user = await defineUser(req.session.currentUser)
   const newPost = new Post({
     content,
     user: user._id,
-    mediaArray
+    mediaArray,
+    location
   })
 
   try {
