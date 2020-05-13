@@ -4,19 +4,13 @@ import { GET_POSTS } from '../../api/postAPI'
 
 class MapContainer extends React.Component {
 
-  
   state = { 
     posts: [],
      lat: null,
      lng: null,
      errorMessage: ''
      }
-  // centerMoved(mapProps, map){
-  //   console.log(mapProps, map, 'test')
-  // }
-
-
-
+ 
   getSports = async () => {
     try {
       let postsFromDb = await GET_POSTS()
@@ -46,11 +40,11 @@ class MapContainer extends React.Component {
     if(this.state.errorMessage){
       return <div>Error message: {this.state.errorMessage}</div>
     } 
-    
+
     if(!this.state.errorMessage && this.state.lat && this.state.lng) {
         return <Map 
         google={this.props.google} 
-        zoom={4} onDragend={this.centerMoved}
+        zoom={4}
         initialCenter={{
             lat: this.state.lat,
             lng: this.state.lng
@@ -67,9 +61,29 @@ class MapContainer extends React.Component {
     return <p>Loading..</p>
   }
 
+  renderPosts(){
+     if(this.state.posts){
+       return <div>
+         {this.state.posts.map(post => {
+           return <div>
+             <p>{post.content}</p>
+           </div>
+         })}
+       </div>
+     }
+  }
+
   render(){
     return (
-      <div> { this.renderMap() }</div>
+      <div>
+        <div>
+        { this.renderMap() }
+        </div>
+        <div>
+        { this.renderPosts() }
+        </div>
+  
+        </div>
       );
   }
 }
