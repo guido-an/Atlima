@@ -85,7 +85,7 @@ class Post extends React.Component {
       <div>
         <form onSubmit={this.onSubmit}>
             <input onChange={this.onInputChange} type="text" placeholder="content" name="content"/>
-            <Places getLocation={this.getLocation}/>
+            <Places getLocation={this.getLocation} />
             {this.state.sports.map(sport => {
                  return (
                    <div key={sport._id}>
