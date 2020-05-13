@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import OnBoarding from './pages/OnBoarding';
+import SpotsMap from './pages/SpotsMap';
 
 import Navbar from './components/Navbar'; 
 import EditProfile from './components/Profile/EditProfile';
@@ -62,6 +63,11 @@ class App extends React.Component {
           <Route
             path="/profile/edit/:id"
             component={EditProfile} />
+          /> 
+        
+          <Route
+            path="/spots-map"
+            component={SpotsMap} />
           /> 
 
           <ProtectedRoute
