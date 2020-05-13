@@ -13,6 +13,7 @@ export const CREATE_POST = async (content, mediaArray, location, sports) => {
     sports
   })
 }
+
 export const GET_POSTS = async () => {
   const allPosts = await service.get('/post/all')
   return allPosts.data
@@ -28,9 +29,8 @@ export const GET_USER_POSTS = async userId => {
   return userPosts.data
 }
 
-export const GET_SINGLE_POST = async userId => {
-  const post = await service.get(`/post/${userId}`)
-  console.log(post.data, 'post test')
+export const GET_SINGLE_POST = async postId => {
+  const post = await service.get(`/post/${postId}`)
   return post.data
 }
 

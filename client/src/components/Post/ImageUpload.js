@@ -10,9 +10,6 @@ class ImageUpload extends Component {
       mediaArray: []
     };
 
-
-
-
   handleUpload = e => {
     if (e.target.files[0]) {
       const image = e.target.files[0];
