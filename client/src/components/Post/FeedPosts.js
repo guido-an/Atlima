@@ -1,8 +1,7 @@
 import React from 'react'
 import { GET_POSTS, LIKE_A_POST, COMMENT_A_POST } from '../../api/postAPI'
 
-import PostCard from './PostCard'
-import CreateComment from './CreateComment'
+import DisplayPosts from './DisplayPosts'
 
 class AllPosts extends React.Component {
   state = { 
@@ -48,14 +47,11 @@ class AllPosts extends React.Component {
   render () {
     return (
       <div>   
-       {this.state.posts && this.state.posts.map(post => {
-           return (
-             <div key={post._id}>
-            <PostCard post={post} likePost={this.likePost} />
-            <CreateComment postId={post._id} commentPost={this.commentPost}/>
-            </div>
-           )
-       })}
+        <DisplayPosts 
+           posts={this.state.posts} 
+           likePost={this.likePost}
+           commentPost={this.commentPost}
+        />
       </div>
     )
   }

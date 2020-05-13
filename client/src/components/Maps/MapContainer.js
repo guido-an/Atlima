@@ -2,6 +2,7 @@ import React from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import { GET_POSTS } from '../../api/postAPI'
 
+
 class MapContainer extends React.Component {
 
   state = { 
@@ -10,7 +11,8 @@ class MapContainer extends React.Component {
      lng: null,
      errorMessage: ''
      }
- 
+
+    
   getSports = async () => {
     try {
       let postsFromDb = await GET_POSTS()
@@ -37,6 +39,17 @@ class MapContainer extends React.Component {
   }
 
   renderMap(){
+
+    const style = {
+      width: '100%',
+      height: '100%'
+    }
+    const containerStyle = {
+      position: 'relative',  
+      width: '100%',
+      height: '300px'
+    }
+
     if(this.state.errorMessage){
       return <div>Error message: {this.state.errorMessage}</div>
     } 
@@ -44,6 +57,8 @@ class MapContainer extends React.Component {
     if(!this.state.errorMessage && this.state.lat && this.state.lng) {
         return <Map 
         google={this.props.google} 
+        containerStyle={containerStyle}
+        style={style}
         zoom={4}
         initialCenter={{
             lat: this.state.lat,
@@ -53,7 +68,7 @@ class MapContainer extends React.Component {
             return  <Marker 
             title={'The marker`s title will appear as a tooltip.'}
             key={post._id}  
-            position={{lat: post.location.coordinates.lat, lng: post.location.coordinates.lng}} />
+            position={{ lat: post.location.coordinates.lat, lng: post.location.coordinates.lng }} />
           })}
         </Map>
     } 

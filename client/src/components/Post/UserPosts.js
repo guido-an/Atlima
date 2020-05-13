@@ -3,6 +3,7 @@ import { GET_USER_POSTS } from '../../api/postAPI'
 import AuthContext  from '../../contexts/AuthContext'
 
 import PostCard from './PostCard'
+import DisplayPosts from './DisplayPosts'
 
 
 class UserPosts extends React.Component {
@@ -29,9 +30,9 @@ class UserPosts extends React.Component {
     }
 
   render () {
-    console.log(this.state.posts, 'posts user')
     return (
       <div>
+        <DisplayPosts />
       {this.state.posts && this.state.posts.map(post => {
            return (
             <PostCard key={post._id} post={post} />
