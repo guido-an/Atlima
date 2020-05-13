@@ -13,7 +13,7 @@ class MapContainer extends React.Component {
      }
 
     
-  getSports = async () => {
+  getSpots = async () => {
     try {
       let postsFromDb = await GET_POSTS()
       console.log(postsFromDb, 'postsFromDb')
@@ -24,7 +24,7 @@ class MapContainer extends React.Component {
   }
 
   componentDidMount(){
-    this.getSports()
+    this.getSpots()
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({ 
@@ -80,7 +80,7 @@ class MapContainer extends React.Component {
      if(this.state.posts){
        return <div>
          {this.state.posts.map(post => {
-           return <div>
+           return <div key={post._id} >
              <p>{post.content}</p>
            </div>
          })}
