@@ -9,22 +9,40 @@ class MapContainer extends React.Component {
     posts: [],
      lat: null,
      lng: null,
+     showingInfoWindow: false,
+     activeMarker: {},
+     selectedSpot: {},
      errorMessage: ''
      }
 
     
-  getSports = async () => {
+  getSpots = async () => {
     try {
       let postsFromDb = await GET_POSTS()
-      console.log(postsFromDb, 'postsFromDb')
       this.setState({ posts: postsFromDb })
     } catch(err) {
       console.log(err)
     }
   }
 
+  onMarkerClick = (props, marker, e) =>
+    this.setState({
+      selectedSpot: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+ 
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  };
+
   componentDidMount(){
-    this.getSports()
+    this.getSpots()
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
         this.setState({ 
@@ -54,8 +72,10 @@ class MapContainer extends React.Component {
       return <div>Error message: {this.state.errorMessage}</div>
     } 
 
-    if(!this.state.errorMessage && this.state.lat && this.state.lng) {
+    if(!this.state.errorMessage && this.state.lat && this.state.lng && this.state.selectedSpot) {
+      console.log('Spot', this.state.selectedSpot)
         return <Map 
+        onClick={this.onMapClicked}
         google={this.props.google} 
         containerStyle={containerStyle}
         style={style}
@@ -66,10 +86,20 @@ class MapContainer extends React.Component {
           }}>
           {this.state.posts && this.state.posts.map(post => {
             return  <Marker 
+            onClick={this.onMarkerClick}
             title={'The marker`s title will appear as a tooltip.'}
+            description={post.location.description}  
             key={post._id}  
             position={{ lat: post.location.coordinates.lat, lng: post.location.coordinates.lng }} />
+
           })}
+          <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}>
+            <div>
+              <h1>{this.state.selectedSpot.description}</h1>
+            </div>
+        </InfoWindow>
         </Map>
     } 
 
@@ -80,7 +110,7 @@ class MapContainer extends React.Component {
      if(this.state.posts){
        return <div>
          {this.state.posts.map(post => {
-           return <div>
+           return <div key={post._id} >
              <p>{post.content}</p>
            </div>
          })}
