@@ -3,10 +3,19 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import { GET_POSTS } from '../../api/postAPI'
 
 class MapContainer extends React.Component {
-  state = { posts: [] }
+
+  
+  state = { 
+    posts: [],
+     lat: null,
+     lng: null,
+     errorMessage: ''
+     }
   // centerMoved(mapProps, map){
   //   console.log(mapProps, map, 'test')
   // }
+
+
 
   getSports = async () => {
     try {
@@ -20,19 +29,47 @@ class MapContainer extends React.Component {
 
   componentDidMount(){
     this.getSports()
+    window.navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({ 
+          lat: position.coords.latitude,
+          lng: position.coords.longitude 
+      })
+      },
+       err => {
+         this.setState({ errorMessage: err.message })
+       }
+    )
+  }
+
+  renderMap(){
+    if(this.state.errorMessage){
+      return <div>Error message: {this.state.errorMessage}</div>
+    } 
+    
+    if(!this.state.errorMessage && this.state.lat && this.state.lng) {
+        return <Map 
+        google={this.props.google} 
+        zoom={4} onDragend={this.centerMoved}
+        initialCenter={{
+            lat: this.state.lat,
+            lng: this.state.lng
+          }}>
+          {this.state.posts && this.state.posts.map(post => {
+            return  <Marker 
+            title={'The marker`s title will appear as a tooltip.'}
+            key={post._id}  
+            position={{lat: post.location.coordinates.lat, lng: post.location.coordinates.lng}} />
+          })}
+        </Map>
+    } 
+
+    return <p>Loading..</p>
   }
 
   render(){
-    console.log(this.state.posts, 'from map')
     return (
-        <Map google={this.props.google} zoom={6} onDragend={this.centerMoved}>
-   
-          <Marker/>
-          <InfoWindow onClose={this.onInfoWindowClose}>
-              <div>
-              </div>
-          </InfoWindow>
-        </Map>
+      <div> { this.renderMap() }</div>
       );
   }
 }

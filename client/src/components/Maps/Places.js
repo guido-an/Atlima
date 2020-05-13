@@ -1,8 +1,6 @@
 import React from 'react';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-
 import {geocodeByAddress, getLatLng} from 'react-google-places-autocomplete';
-
 import {GoogleApiWrapper} from 'google-maps-react';
 // If you want to use the provided css
 import 'react-google-places-autocomplete/dist/index.min.css';
