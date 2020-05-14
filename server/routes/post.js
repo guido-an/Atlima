@@ -2,13 +2,14 @@ const express = require('express')
 const router = express.Router()
 var ObjectId = require('mongodb').ObjectID
 const Post = require('../models/Post')
+const Spot = require('../models/Spot')
 const defineUser = require('../helpers/defineUser')
 const myNotifications = require('../helpers/notifications')
 const myFunctions = require('../helpers/postLikes')
 
 // NEW POST
 router.post('/new', async (req, res) => {
-  console.log(req.body)
+  let newSpot
   const { content, mediaArray, location, sports } = req.body
   const user = await defineUser(req.session.currentUser)
   const newPost = new Post({
@@ -19,6 +20,34 @@ router.post('/new', async (req, res) => {
     sports
   })
 
+  // Creating or Updating Spots when the Post is created
+  if (newPost.location) {
+    const isThereASpot = await Spot.findOne({ placeId: location.id})
+    if (isThereASpot){
+      try {
+        await Spot.findOneAndUpdate({ placeId: location.id }, { $push:  { posts: newPost._id } } )
+        res.status(200).json(spot)
+      } catch (err) {
+        console.log(err)
+        res.json('something went wrong with the spot update: ' + err)
+      }
+    }else{
+      newSpot = new Spot({
+        location,
+        placeId: location.id,
+        posts: newPost._id
+      })
+      try {
+        const spot = await newSpot.save()
+        res.status(200).json(spot)
+      } catch (err) {
+        console.log(err)
+        res.json('something went wrong with the spot: ' + err)
+      }
+    }
+  }
+
+  // Save new post
   try {
     const post = await newPost.save()
     res.status(200).json(post)
