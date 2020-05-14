@@ -1,6 +1,6 @@
 import React from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import { GET_POSTS } from '../../api/postAPI'
+// import { GET_POSTS } from '../../api/postAPI'
 
 
 class MapContainer extends React.Component {
@@ -13,15 +13,15 @@ class MapContainer extends React.Component {
      }
 
     
-  getSports = async () => {
-    try {
-      let postsFromDb = await GET_POSTS()
-      console.log(postsFromDb, 'postsFromDb')
-      this.setState({ posts: postsFromDb })
-    } catch(err) {
-      console.log(err)
-    }
-  }
+  // getSports = async () => {
+  //   try {
+  //     let postsFromDb = await GET_POSTS()
+  //     console.log(postsFromDb, 'postsFromDb')
+  //     this.setState({ posts: postsFromDb })
+  //   } catch(err) {
+  //     console.log(err)
+  //   }
+  // }
 
   componentDidMount(){
     this.getSports()
@@ -76,17 +76,17 @@ class MapContainer extends React.Component {
     return <p>Loading..</p>
   }
 
-  renderPosts(){
-     if(this.state.posts){
-       return <div>
-         {this.state.posts.map(post => {
-           return <div>
-             <p>{post.content}</p>
-           </div>
-         })}
-       </div>
-     }
-  }
+  // renderPosts(){
+  //    if(this.state.posts){
+  //      return <div>
+  //        {this.state.posts.map(post => {
+  //          return <div>
+  //            <p>{post.content}</p>
+  //          </div>
+  //        })}
+  //      </div>
+  //    }
+  // }
 
   render(){
     return (

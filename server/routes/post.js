@@ -8,7 +8,6 @@ const myFunctions = require('../helpers/postLikes')
 
 // NEW POST
 router.post('/new', async (req, res) => {
-  console.log(req.body)
   const { content, mediaArray, location, sports } = req.body
   const user = await defineUser(req.session.currentUser)
   const newPost = new Post({
@@ -43,6 +42,7 @@ router.get('/all', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const post = await Post.findOne({ _id: req.params.id })
+    .populate('user')
     res.status(200).send(post)
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong' })
@@ -80,13 +80,13 @@ router.post('/like/:id', async (req, res) => {
     if (!likeIsPresent) {
       myFunctions.likeAPost(postId, user._id, true)
       myNotifications.notificationLike(user._id, post, 'like', 'had like your post', false)
-
       res.status(200).send({ message: 'post liked' })
     } else {
       myFunctions.likeAPost(postId, user._id, false)
       res.status(200).send({ message: 'post unliked' })
     }
   } catch (err) {
+    console.log('err')
     res.json({ message: 'Something went wrong' })
   }
 })
