@@ -1,9 +1,26 @@
 import '../scss/PostCard.scss'
 import React from 'react'
 
+import PostContext  from '../../contexts/PostContext'
+
 class PostCard extends React.Component {
+  static contextType = PostContext
+  
+  state = { post: this.props.post }
+
+  likePostAndUpdateIt = async postId => {
+    postId = this.state.post._id
+   
+    try {
+      await this.props.likePost(postId)
+      const postUpdated = await this.context.getSinglePost(postId)
+      this.setState({ post: postUpdated })
+    } catch(err){
+      console.log(err, 'err')
+    }
+  }
+
   render () {
-    const { post } = this.props
     return (
       <div className='post-card-container'>
         <div className='post-card-header'>
@@ -11,7 +28,7 @@ class PostCard extends React.Component {
             <img className='ui avatar image circular' src='https://picsum.photos/250' />
           </div>
           <div className='post-card-header-content'>
-            <p><strong>{post.user.firstName}</strong></p>
+            <p><strong>{this.state.post.user.firstName}</strong></p>
             <span>Amsterdam</span>
           </div>
         </div>
@@ -21,9 +38,10 @@ class PostCard extends React.Component {
         </div>
 
         <div className='post-card-icons'>
-          <div onClick={() => this.props.likePost(post._id)}>
+          <div onClick={this.likePostAndUpdateIt}>
             <i className='heart icon outline' />
           </div>
+          
           <div>
             <i className='comment outline icon' />
           </div>
@@ -31,8 +49,8 @@ class PostCard extends React.Component {
 
         <div className='post-card-bottom'>
           <div>
-            <p><strong>{post.likes.length} likes</strong></p>
-            <p><strong>{post.user.firstName}</strong><span> {post.content}</span></p>
+            <p><strong>{this.state.post.likes.length} likes</strong></p>
+            <p><strong>{this.state.post.user.firstName}</strong><span> {this.state.post.content}</span></p>
           </div>
         </div>
       </div>

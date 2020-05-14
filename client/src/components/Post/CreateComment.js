@@ -2,7 +2,7 @@ import React from 'react'
 
 
 class CreateComment extends React.Component {
-
+ 
   state = { 
       content: '',
     }

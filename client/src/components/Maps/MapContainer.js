@@ -1,6 +1,6 @@
 import React from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import { GET_POSTS } from '../../api/postAPI'
+// import { GET_POSTS } from '../../api/postAPI'
 
 
 class MapContainer extends React.Component {
@@ -16,6 +16,7 @@ class MapContainer extends React.Component {
      }
 
     
+
   getSpots = async () => {
     try {
       let postsFromDb = await GET_POSTS()
@@ -105,6 +106,7 @@ class MapContainer extends React.Component {
 
     return <p>Loading..</p>
   }
+
 
   renderPosts(){
      if(this.state.posts){

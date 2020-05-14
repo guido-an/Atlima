@@ -8,7 +8,6 @@ class Profile extends React.Component {
     const userId = this.props.match.params.id
     return (
       <div>
-
         <UserProfile />
         <UserPosts userId={userId} />
       </div>

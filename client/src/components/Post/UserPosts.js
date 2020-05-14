@@ -1,44 +1,27 @@
 import React from 'react'
-import { GET_USER_POSTS } from '../../api/postAPI'
-import AuthContext  from '../../contexts/AuthContext'
+import PostContext  from '../../contexts/PostContext'
 
 import PostCard from './PostCard'
 import DisplayPosts from './DisplayPosts'
 
 
 class UserPosts extends React.Component {
-  static contextType = AuthContext
-
-     state = { 
-      posts: '',
-    }
+  static contextType = PostContext
   
     componentDidMount() {
-      this.getPosts()
-    }
-
-
-    getPosts = async userId => {
-        try {
-          userId = this.props.userId
-            const userPosts = await GET_USER_POSTS(userId)
-            this.setState({ posts: userPosts })
-        }
-        catch(err){
-            console.log(err)
-        }
+      const { userId } = this.props
+      this.context.getUserPosts(userId)
     }
 
   render () {
     return (
       <div>
-        <DisplayPosts />
-      {this.state.posts && this.state.posts.map(post => {
-           return (
-            <PostCard key={post._id} post={post} />
-           )
-       })}
-      </div>
+         <DisplayPosts 
+             posts={this.context.userPosts} 
+             likePost={this.context.likePost}
+             commentPost={this.context.commentPost}
+          />
+      </div> 
     )
   }
 }
