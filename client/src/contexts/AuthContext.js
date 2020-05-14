@@ -9,9 +9,8 @@ const service = axios.create({
 })
 
 export class AuthStore extends React.Component {
-   
     state = { loggedInUser: null };
-
+    
     signup = async user => {
       const data = await service.post('/auth/signup', user)
       return data

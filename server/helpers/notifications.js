@@ -3,15 +3,21 @@ const Post = require('../models/Post')
 var ObjectId = require('mongodb').ObjectID
 
 const notificationLike = async (currentUserId, post, type, message) => {
-  try {
-    const filter = post.user
-    const postId = post._id
-    const userId = ObjectId(currentUserId)
-    const update = { $addToSet: { notifications: { userId, postId, type, message } } }
-    await User.findOneAndUpdate(filter, update, { new: true })
-  } catch (err) {
-    console.log(err)
-  }
+
+  if(currentUserId == post.user){
+   return 
+  } 
+  
+  else {
+    try {
+      const filter = { _id: post.user }
+      const postId = post._id
+      const userId = currentUserId
+      const update = { $addToSet: { notifications: { userId, postId, type, message } } }
+    } catch (err) {
+      console.log(err)
+    }
+  } 
 }
 
 const notificationComments = async (currentUserId, post) => {

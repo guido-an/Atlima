@@ -1,6 +1,6 @@
 import React from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import { GET_POSTS } from '../../api/postAPI'
+// import { GET_POSTS } from '../../api/postAPI'
 
 
 class MapContainer extends React.Component {
@@ -117,6 +117,7 @@ class MapContainer extends React.Component {
        </div>
      }
   }
+
 
   render(){
     return (

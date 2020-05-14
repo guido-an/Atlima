@@ -1,11 +1,14 @@
 import React from 'react'
 import ImageUpload from './ImageUpload'
 import Places from '../Maps/Places'
-import { CREATE_POST } from '../../api/postAPI'
+// import { CREATE_POST } from '../../api/postAPI'
 import { GET_SPORTS } from '../../api/sportAPI'
+import PostContext  from '../../contexts/PostContext'
+
 
 class Post extends React.Component {
-  
+  static contextType = PostContext
+
   state = { 
       content: '',
       mediaArray: [],
@@ -50,14 +53,13 @@ class Post extends React.Component {
   
   onSubmit = async e => {
     e.preventDefault();
-    
       try {
-      await CREATE_POST(
-        this.state.content,
-        this.state.mediaArray,
-        this.state.location,
-        this.state.selectedSportsIds
-      )
+        await this.context.createPost(
+          this.state.content,
+          this.state.mediaArray,
+          this.state.location,
+          this.state.selectedSportsIds
+        )
       this.props.history.push('/')
     }  catch(err){
           console.log(err)
