@@ -18,10 +18,6 @@ export class PostContext extends React.Component {
         mapPosts: [],
       };
 
-      componentDidMount(){
-        console.log(this.context, 'from post')
-      }
-
       getFeedPosts = async () => {
            try {
             const feedPosts = await service.get('/post/all')

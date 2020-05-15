@@ -3,14 +3,15 @@ const router = express.Router()
 var ObjectId = require('mongodb').ObjectID
 const Post = require('../models/Post')
 const Spot = require('../models/Spot')
+const Sport = require('../models/Sport')
 const defineUser = require('../helpers/defineUser')
 const myNotifications = require('../helpers/notifications')
 const myFunctions = require('../helpers/postLikes')
+const newPostHelper = require('../helpers/newPostHelper')
 
 // NEW POST
 router.post('/new', async (req, res) => {
   let newSpot
-
   const { content, mediaArray, location, sports } = req.body
   const user = await defineUser(req.session.currentUser)
   const newPost = new Post({
@@ -20,17 +21,17 @@ router.post('/new', async (req, res) => {
     location,
     sports
   })
-
+ 
   // Creating or Updating Spots when the Post is created
   if (newPost.location) {
     const isThereASpot = await Spot.findOne({ placeId: location.id})
     if (isThereASpot){
       try {
-        await Spot.findOneAndUpdate({ placeId: location.id }, { $push:  { posts: newPost._id } } )
-        res.status(200).json(spot)
+        newSpot = await Spot.findOneAndUpdate({ placeId: location.id }, { $push:  { posts: newPost._id } } )
+        // add location to newPost
+        newPost.location = newSpot._id
       } catch (err) {
         console.log(err)
-        res.json('something went wrong with the spot update: ' + err)
       }
     }else{
       newSpot = new Spot({
@@ -39,19 +40,21 @@ router.post('/new', async (req, res) => {
         posts: newPost._id
       })
       try {
-        const spot = await newSpot.save()
-        res.status(200).json(spot)
+        newSpot = await newSpot.save()
+        // add location to newPost
+        newPost.location = newSpot._id
       } catch (err) {
         console.log(err)
-        res.json('something went wrong with the spot: ' + err)
       }
     }
   }
 
+  
   // Save new post
-  try {
-    const post = await newPost.save()
-    res.status(200).json(post)
+  try {  
+   const post = await newPost.save()
+    newPostHelper.addPostToSport(sports, post)
+    res.status(200).json({Message: `New post created ${post}`})
   } catch (err) {
     console.log(err)
     res.json('something went wrong: ' + err)

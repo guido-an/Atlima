@@ -1,12 +1,12 @@
 import React from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-// import { GET_POSTS } from '../../api/postAPI'
-
+import { GET_ALL_SPOTS } from '../../api/spotAPI'
 
 class MapContainer extends React.Component {
 
   state = { 
-    posts: [],
+     spots: [],
+     posts: [],
      lat: null,
      lng: null,
      showingInfoWindow: false,
@@ -15,49 +15,60 @@ class MapContainer extends React.Component {
      errorMessage: ''
      }
 
+
+     componentDidMount(){
+      this.getUserLocation()
+      this.getSpots()
+     }
+
     
-  getSpots = async () => {
-    try {
-      let postsFromDb = await GET_POSTS()
-      this.setState({ posts: postsFromDb })
-    } catch(err) {
-      console.log(err)
+    getSpots = async () => {
+        let myPosts = []
+      try {
+        const allSpots = await GET_ALL_SPOTS()
+        // iterating over array posts inside posts
+        for(let i = 0; i < allSpots.length; i++) { 
+           allSpots[i].posts.forEach(post => myPosts = [...myPosts, post])
+        }
+         this.setState({ spots: allSpots, posts: myPosts})
+      } catch(err) {
+        console.log(err)
+      }
     }
-  }
 
-  onMarkerClick = (props, marker, e) =>
-    this.setState({
-      selectedSpot: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    });
- 
-  onMapClicked = (props) => {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
-      })
-    }
-  };
+   
 
-  componentDidMount(){
-    this.getSpots()
-    window.navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.setState({ 
-          lat: position.coords.latitude,
-          lng: position.coords.longitude 
-      })
-      },
-       err => {
-         this.setState({ errorMessage: err.message })
-       }
-    )
-  }
-
+      onMarkerClick = (props, marker, e) =>
+        this.setState({
+          selectedSpot: props,
+          activeMarker: marker,
+          showingInfoWindow: true
+        });
+     
+      onMapClicked = (props) => {
+        if (this.state.showingInfoWindow) {
+          this.setState({
+            showingInfoWindow: false,
+            activeMarker: null
+          })
+        }
+      };
+    
+      getUserLocation = () => {
+        window.navigator.geolocation.getCurrentPosition(
+          (position) => {
+            this.setState({ 
+              lat: position.coords.latitude,
+              lng: position.coords.longitude 
+          })
+          },
+           err => {
+             this.setState({ errorMessage: err.message })
+           }
+         )
+      }
+    
   renderMap(){
-
     const style = {
       width: '100%',
       height: '100%'
@@ -84,51 +95,44 @@ class MapContainer extends React.Component {
             lat: this.state.lat,
             lng: this.state.lng
           }}>
-          {this.state.posts && this.state.posts.map(post => {
+          {this.state.spots && this.state.spots.map(spot => {
             return  <Marker 
             onClick={this.onMarkerClick}
             title={'The marker`s title will appear as a tooltip.'}
-            description={post.location.description}  
-            key={post._id}  
-            position={{ lat: post.location.coordinates.lat, lng: post.location.coordinates.lng }} />
+            description={spot.location.description}  
+            key={spot._id}  
+            position={{ lat: spot.location.coordinates.lat, lng: spot.location.coordinates.lng }} />
 
           })}
-          <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}>
-            <div>
-              <h1>{this.state.selectedSpot.description}</h1>
-            </div>
-        </InfoWindow>
+             <InfoWindow
+             marker={this.state.activeMarker}
+             visible={this.state.showingInfoWindow}>
+               <div>
+                 <h1>{this.state.selectedSpot.description}</h1>
+                 
+               </div>
+           </InfoWindow>
         </Map>
     } 
 
     return <p>Loading..</p>
   }
 
-  renderPosts(){
-     if(this.state.posts){
-       return <div>
-         {this.state.posts.map(post => {
-           return <div key={post._id} >
-             <p>{post.content}</p>
-           </div>
-         })}
-       </div>
-     }
-  }
 
 
   render(){
+    console.log(this.state.spots, 'TEST')
     return (
       <div>
         <div>
         { this.renderMap() }
         </div>
         <div>
-        { this.renderPosts() }
+          {this.state.posts && this.state.posts.map(post => {
+            return <p key={post._id}>{post.content}</p>
+          }) }
         </div>
-  
+      
         </div>
       );
   }
