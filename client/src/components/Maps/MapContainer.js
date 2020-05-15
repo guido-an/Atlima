@@ -36,8 +36,6 @@ class MapContainer extends React.Component {
       }
     }
 
-   
-
       onMarkerClick = (props, marker, e) =>
         this.setState({
           selectedSpot: props,
