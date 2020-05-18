@@ -17,6 +17,6 @@ export const EDIT_USER = async (userId, mediaArray, firstName, lastName, team, c
   return editUser.data
 }
 
-export const ADD_SPORTS = async sports => {
-  await service.post('/profile/add-sports', { sports })
+export const ADD_CATEGORIES= async categories => {
+  await service.post('/profile/add-categories', { categories })
 }

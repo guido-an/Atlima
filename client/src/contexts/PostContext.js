@@ -15,17 +15,20 @@ export class PostContext extends React.Component {
     state = {
         feedPosts: [],
         userPosts: [],
-        mapPosts: [],
+        mapsPost: [],
+        mapsPostCopy: []
       };
-
-      componentDidMount(){
-        console.log(this.context, 'from post')
-      }
 
       getFeedPosts = async () => {
            try {
             const feedPosts = await service.get('/post/all')
-            this.setState({ feedPosts: feedPosts.data })
+            console.log(feedPosts.data)
+            this.setState({ 
+                feedPosts: feedPosts.data, 
+                mapsPost: feedPosts.data,
+                mapsPostCopy: feedPosts.data
+             })
+            return feedPosts.data
            } catch(err){
                console.log(err)
            }
@@ -41,13 +44,14 @@ export class PostContext extends React.Component {
         }
     }
       
-    createPost = async (content, mediaArray, location, sports) => {
+    createPost = async (content, mediaArray, location, categories) => {
+
         try {
             await service.post('/post/new', {
                 content,
                 mediaArray,
                 location,
-                sports
+                categories
               })
         } catch(err){
             console.log(err)
@@ -79,22 +83,36 @@ export class PostContext extends React.Component {
         }
     }
 
+    filterOnMarkerClick = id => {
+        console.log(id)
+        const filteredPosts = this.state.mapsPostCopy.filter(post => {
+          if(post.spot && post.spot.placeId == id){ 
+           return post
+          }
+        })
+        this.setState({ mapsPost: filteredPosts })
+        // return filteredPosts
+     }
+
   render(){
-    const { feedPosts, userPosts, mapPosts } = this.state
-    const { getFeedPosts, getUserPosts, createPost, likePost, commentPost, getSinglePost } = this
+    const { feedPosts, userPosts, mapsPost, mapsPostCopy } = this.state
+    const { getFeedPosts, getUserPosts, createPost, likePost, commentPost, getSinglePost, filterOnMarkerClick } = this
       return(
           <Context.Provider 
               value={{ 
                   ...this.state, 
                   feedPosts, 
                   userPosts, 
-                  mapPosts,
+                  mapsPost,
+                  mapsPostCopy,
                   getFeedPosts, 
                   getUserPosts, 
                   createPost, 
                   likePost, 
                   commentPost,
-                  getSinglePost  }}>
+                  getSinglePost,
+                  filterOnMarkerClick  }}>
+
               {this.props.children}
           </Context.Provider>
       )

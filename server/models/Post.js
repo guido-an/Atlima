@@ -4,10 +4,10 @@ const Schema = mongoose.Schema
 const postSchema = new Schema({
   mediaArray: Array,
   content: String,
-  location: Object,
+  spot: { type: mongoose.Schema.Types.ObjectId, ref: 'Spot' },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   tag_users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  sports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sport' }],
+  categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
   likes: [{
     _id: false,
     likedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }

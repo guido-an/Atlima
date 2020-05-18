@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const sportSchema = new Schema({
+const categorySchema = new Schema({
   name: String,
   description: String,
   picture: String,
@@ -9,5 +9,5 @@ const sportSchema = new Schema({
 
 })
 
-const Sport = mongoose.model('Sport', sportSchema)
-module.exports = Sport
+const Category = mongoose.model('Category', categorySchema)
+module.exports = Category
