@@ -2,7 +2,7 @@ import React from 'react'
 import ImageUpload from './ImageUpload'
 import Places from '../Maps/Places'
 // import { CREATE_POST } from '../../api/postAPI'
-import { GET_SPORTS } from '../../api/sportAPI'
+import { GET_CATEGORIES } from '../../api/categoryAPI'
 import PostContext  from '../../contexts/PostContext'
 
 
@@ -13,14 +13,14 @@ class Post extends React.Component {
       content: '',
       mediaArray: [],
       location: null,
-      sports: [],
-      selectedSportsIds: []
+      categories: [],
+      selectedCategoriesIds: []
     }
 
-    getSports = async () => {
+    getCategories= async () => {
       try{
-        const sportsFromDb = await GET_SPORTS()
-        this.setState({ sports: sportsFromDb })
+        const categoriesFromDb = await GET_CATEGORIES()
+        this.setState({ categories: categoriesFromDb })
       } catch(err) {
         console.log(err)
       }
@@ -30,25 +30,25 @@ class Post extends React.Component {
       const { name } = e.target;
       if(e.target.checked){
         this.setState({
-          selectedSportsIds: [...this.state.selectedSportsIds, name],
+          selectedCategoriesIds: [...this.state.selectedCategoriesIds, name],
         })
       } else {
-        this.removeSport(name)
+        this.removeCategory(name)
       }
     }
     
-    removeSport = (name) => {
-      let myArray = [...this.state.selectedSportsIds]
+    removeCategory = (name) => {
+      let myArray = [...this.state.selectedCategoriesIds]
         if(myArray.includes(name)){
-          const newArray = myArray.filter(sport => {
-            return sport !== name
+          const newArray = myArray.filter(category => {
+            return category !== name
           })
-          this.setState({ selectedSportsIds: newArray })
+          this.setState({ selectedCategoriesIds: newArray })
         }
       }
 
     componentDidMount(){
-      this.getSports()
+      this.getCategories()
     }
   
   onSubmit = async e => {
@@ -58,7 +58,7 @@ class Post extends React.Component {
           this.state.content,
           this.state.mediaArray,
           this.state.location,
-          this.state.selectedSportsIds
+          this.state.selectedCategoriesIds
         )
       this.props.history.push('/')
     }  catch(err){
@@ -88,11 +88,11 @@ class Post extends React.Component {
         <form onSubmit={this.onSubmit}>
             <input onChange={this.onInputChange} type="text" placeholder="content" name="content"/>
             <Places getLocation={this.getLocation} />
-            {this.state.sports.map(sport => {
+            {this.state.categories.map(category => {
                  return (
-                   <div key={sport._id}>
-                   <span>{sport.name}</span>
-                   <input onChange={this.onSelect} type="checkbox" name={sport._id}/>
+                   <div key={category._id}>
+                   <span>{category.name}</span>
+                   <input onChange={this.onSelect} type="checkbox" name={category._id}/>
                  </div>
                  )
                })}

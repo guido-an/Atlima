@@ -14,14 +14,14 @@ export class PostContext extends React.Component {
    
     state = {
         feedPosts: [],
-        userPosts: [],
-        mapPosts: [],
+        userPosts: []
       };
 
       getFeedPosts = async () => {
            try {
             const feedPosts = await service.get('/post/all')
             this.setState({ feedPosts: feedPosts.data })
+            return feedPosts.data
            } catch(err){
                console.log(err)
            }
@@ -37,13 +37,13 @@ export class PostContext extends React.Component {
         }
     }
       
-    createPost = async (content, mediaArray, location, sports) => {
+    createPost = async (content, mediaArray, location, categories) => {
         try {
             await service.post('/post/new', {
                 content,
                 mediaArray,
                 location,
-                sports
+                categories
               })
         } catch(err){
             console.log(err)
@@ -76,7 +76,7 @@ export class PostContext extends React.Component {
     }
 
   render(){
-    const { feedPosts, userPosts, mapPosts } = this.state
+    const { feedPosts, userPosts } = this.state
     const { getFeedPosts, getUserPosts, createPost, likePost, commentPost, getSinglePost } = this
       return(
           <Context.Provider 
@@ -84,7 +84,6 @@ export class PostContext extends React.Component {
                   ...this.state, 
                   feedPosts, 
                   userPosts, 
-                  mapPosts,
                   getFeedPosts, 
                   getUserPosts, 
                   createPost, 

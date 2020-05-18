@@ -1,10 +1,10 @@
 const Spot = require('../models/Spot')
-const Sport = require('../models/Sport')
+const Category = require('../models/Category')
 
-async function addPostToSport (array, post) {
+async function addPostToCategory (array, post) {
   array.forEach(async idInsideArray => {
     try{
-     await Sport.findOneAndUpdate({ _id: idInsideArray }, { $push: { posts: post } } )
+     await Category.findOneAndUpdate({ _id: idInsideArray }, { $push: { posts: post } } )
     } catch(err){
       console.log(err)
     }
@@ -13,5 +13,5 @@ async function addPostToSport (array, post) {
 
 
 module.exports = {
-  addPostToSport
+  addPostToCategory
 }

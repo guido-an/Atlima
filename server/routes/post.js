@@ -3,7 +3,6 @@ const router = express.Router()
 var ObjectId = require('mongodb').ObjectID
 const Post = require('../models/Post')
 const Spot = require('../models/Spot')
-const Sport = require('../models/Sport')
 const defineUser = require('../helpers/defineUser')
 const myNotifications = require('../helpers/notifications')
 const myFunctions = require('../helpers/postLikes')
@@ -12,28 +11,28 @@ const newPostHelper = require('../helpers/newPostHelper')
 // NEW POST
 router.post('/new', async (req, res) => {
   let newSpot
-  const { content, mediaArray, location, sports } = req.body
+  const { content, mediaArray, location, categories } = req.body
   const user = await defineUser(req.session.currentUser)
   const newPost = new Post({
     content,
     user: user._id,
     mediaArray,
     location,
-    sports
+    categories
   })
- 
+  console.log(newPost.location, 'newPost.location')
   // Creating or Updating Spots when the Post is created
   if (newPost.location) {
-    const isThereASpot = await Spot.findOne({ placeId: location.id})
-    if (isThereASpot){
+    const isThereASpot = await Spot.findOne({ placeId: location.id })
+    if (isThereASpot) {
       try {
-        newSpot = await Spot.findOneAndUpdate({ placeId: location.id }, { $push:  { posts: newPost._id } } )
+        newSpot = await Spot.findOneAndUpdate({ placeId: location.id }, { $push: { posts: newPost._id } })
         // add location to newPost
-        newPost.location = newSpot._id
+        newPost.location = newPost._id
       } catch (err) {
         console.log(err)
       }
-    }else{
+    } else {
       newSpot = new Spot({
         location,
         placeId: location.id,
@@ -49,12 +48,11 @@ router.post('/new', async (req, res) => {
     }
   }
 
-  
   // Save new post
-  try {  
-   const post = await newPost.save()
-    newPostHelper.addPostToSport(sports, post)
-    res.status(200).json({Message: `New post created ${post}`})
+  try {
+    const post = await newPost.save()
+    newPostHelper.addPostToCategories(categories, post)
+    res.status(200).json({ Message: `New post created ${post}` })
   } catch (err) {
     console.log(err)
     res.json('something went wrong: ' + err)
@@ -76,7 +74,7 @@ router.get('/all', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const post = await Post.findOne({ _id: req.params.id })
-    .populate('user')
+      .populate('user')
     res.status(200).send(post)
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong' })
@@ -132,7 +130,7 @@ router.post('/:id/comment', async (req, res) => {
     const user = await defineUser(req.session.currentUser)
     const myPost = await Post.findOneAndUpdate({ _id: postId }, { $push: { comments: { user: user._id, content } } }).populate('user')
 
-   myNotifications.notificationComments(user._id, myPost, 'comment', 'had commented your post')
+    myNotifications.notificationComments(user._id, myPost, 'comment', 'had commented your post')
     res.status(200).send({ myPost })
   } catch (err) {
     console.log(err)

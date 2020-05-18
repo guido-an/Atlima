@@ -5,7 +5,7 @@ const service = axios.create({
   withCredentials: true
 })
 
-export const GET_SPORTS = async () => {
-  const sports = await service.get('/sport/all')
-  return sports.data
+export const GET_CATEGORIES = async () => {
+  const categories = await service.get('/categories/all')
+  return categories.data
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import { GET_ALL_SPOTS } from '../../api/spotAPI'
+import PostContext  from '../../contexts/PostContext'
 
 class MapContainer extends React.Component {
+  static contextType = PostContext
 
   state = { 
-     spots: [],
      posts: [],
      lat: null,
      lng: null,
@@ -18,19 +18,13 @@ class MapContainer extends React.Component {
 
      componentDidMount(){
       this.getUserLocation()
-      this.getSpots()
+      this.getPosts()
      }
 
     
-    getSpots = async () => {
-        let myPosts = []
+    getPosts = async () => {
       try {
-        const allSpots = await GET_ALL_SPOTS()
-        // iterating over array posts inside posts
-        for(let i = 0; i < allSpots.length; i++) { 
-           allSpots[i].posts.forEach(post => myPosts = [...myPosts, post])
-        }
-         this.setState({ spots: allSpots, posts: myPosts})
+        await this.context.getFeedPosts()
       } catch(err) {
         console.log(err)
       }
@@ -93,15 +87,15 @@ class MapContainer extends React.Component {
             lat: this.state.lat,
             lng: this.state.lng
           }}>
-          {this.state.spots && this.state.spots.map(spot => {
+          {/* {this.context.posts && this.context.posts.map(post => {
             return  <Marker 
             onClick={this.onMarkerClick}
             title={'The marker`s title will appear as a tooltip.'}
-            description={spot.location.description}  
-            key={spot._id}  
-            position={{ lat: spot.location.coordinates.lat, lng: spot.location.coordinates.lng }} />
+            description={post.location.description}  
+            key={post._id}  
+            position={{ lat: post.location.coordinates.lat, lng: post.location.coordinates.lng }} />
 
-          })}
+          })} */}
              <InfoWindow
              marker={this.state.activeMarker}
              visible={this.state.showingInfoWindow}>
@@ -119,7 +113,7 @@ class MapContainer extends React.Component {
 
 
   render(){
-    console.log(this.state.spots, 'TEST')
+    console.log(this.context.feedPosts)
     return (
       <div>
         <div>

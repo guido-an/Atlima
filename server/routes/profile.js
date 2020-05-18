@@ -35,17 +35,17 @@ router.post('/edit/:id', async (req, res) => {
   }
 })
 
-/* ADD SPORTS */
-router.post('/add-sports', async (req, res) => {
-  const { sports } = req.body
+/* ADD CATEGORIES */
+router.post('/add-categories', async (req, res) => {
+  const { categories } = req.body
   try {
     const filter = { _id: req.session.currentUser._id }
-    const update = { sports: sports }
+    const update = { categories: categories }
     await User.findOneAndUpdate(filter, update, { new: true })
-    res.status(200).json({ message: 'Sports added to user. 5000 - /add-sports' })
+    res.status(200).json({ message: 'categories added to user. 5000 - /add-categories' })
   } catch (err) {
     console.log(err)
-    res.json('something went wrong: 5000 - /add-sports ' + err)
+    res.json('something went wrong: 5000 - /add-categories' + err)
   }
 })
 

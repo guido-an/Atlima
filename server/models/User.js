@@ -13,7 +13,7 @@ const userSchema = new Schema({
   country: String,
   tour: Array,
   sponsors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sponsor' }],
-  sports: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sport' }],
+  categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
   achievements: Array,
   provider: String,
   facebookId: String,

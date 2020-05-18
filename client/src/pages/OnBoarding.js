@@ -1,6 +1,6 @@
 import React from 'react'
-import { GET_SPORTS } from '../api/sportAPI'
-import { ADD_SPORTS } from '../api/userAPI'
+import { GET_CATEGORIES } from '../api/categoryAPI'
+import { ADD_CATEGORIES } from '../api/userAPI'
 import AuthContext  from '../contexts/AuthContext'
 
 
@@ -8,17 +8,17 @@ class OnBoarding extends React.Component {
   static contextType = AuthContext
 
   state = {
-    sports: [],
-    selectedSportsIds: []
+    categories: [],
+    selectedCategoriesIds: []
   }
   async componentDidMount(){
-    this.getSports()
+    this.getCategories()
  }
 
-getSports = async () => {
+getCategories = async () => {
   try {
-      const sports = await GET_SPORTS()
-      this.setState({ sports: sports })
+      const categories = await GET_CATEGORIES()
+      this.setState({ categories: categories })
      } 
       catch(err){
         console.log(err)
@@ -29,20 +29,20 @@ getSports = async () => {
   const { name } = e.target;
   if(e.target.checked){
     this.setState({
-      selectedSportsIds: [...this.state.selectedSportsIds, name],
+      selectedCategoriesIds: [...this.state.selectedCategoriesIds, name],
     })
   } else {
-    this.removeSport(name)
+    this.removeCategory(name)
   }
 }
 
-removeSport = (name) => {
-  let myArray = [...this.state.selectedSportsIds]
+removeCategory = (name) => {
+  let myArray = [...this.state.selectedCategoriesIds]
     if(myArray.includes(name)){
-      const newArray = myArray.filter(sport => {
-        return sport !== name
+      const newArray = myArray.filter(category => {
+        return category !== name
       })
-      this.setState({ selectedSportsIds: newArray })
+      this.setState({ selectedCategoriesIds: newArray })
     }
   }
 
@@ -50,7 +50,7 @@ removeSport = (name) => {
     const userId = this.context.loggedInUser._id
     e.preventDefault();
       try {
-        await ADD_SPORTS(this.state.selectedSportsIds)
+        await ADD_CATEGORIES(this.state.selectedCategoriesIds)
         this.props.history.push(`/profile/edit/${userId}`)
     }  catch(err){
           console.log(err)
@@ -62,11 +62,11 @@ removeSport = (name) => {
     return (
       <div>
         <h1>OnBoarding</h1>
-      {this.state.sports.map(sport => {
+      {this.state.categories.map(category => {
         return (
-          <div key={sport._id}>
-          <span>{sport.name}</span>
-          <input onChange={this.onSelect} type="checkbox" name={sport._id}/>
+          <div key={category._id}>
+          <span>{category.name}</span>
+          <input onChange={this.onSelect} type="checkbox" name={category._id}/>
         </div>
         )
       })}

@@ -4,7 +4,7 @@
 // $ node bin/seeds.js
 
 const mongoose = require('mongoose')
-const Sport = require('../models/Sport')
+const Category = require('../models/Category')
 
 mongoose
   .connect('mongodb://localhost/server', { useNewUrlParser: true })
@@ -15,7 +15,7 @@ mongoose
     console.error('Error connecting to mongo', err)
   })
 
-const sports = [
+const categories = [
   {
     name: 'Muay Thai'
   },
@@ -27,13 +27,13 @@ const sports = [
   }
 ]
 
-Sport.deleteMany()
+Category.deleteMany()
   .then(() => {
-    return Sport.create(sports)
+    return Category.create(categories)
   })
-  .then(sportsCreated => {
-    console.log(`${sportsCreated.length} users created with the following id:`)
-    console.log(sportsCreated.map(u => u._id))
+  .then(categoriesCreated => {
+    console.log(`${categoriesCreated.length} users created with the following id:`)
+    console.log(categoriesCreated.map(u => u._id))
   })
   .then(() => {
   // Close properly the connection to Mongoose
