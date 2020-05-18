@@ -60,6 +60,7 @@ class Post extends React.Component {
           this.state.location,
           this.state.selectedCategoriesIds
         )
+        console.log( this.state.location, ' this.state.location')
       this.props.history.push('/')
     }  catch(err){
           console.log(err)

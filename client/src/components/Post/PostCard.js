@@ -29,7 +29,7 @@ class PostCard extends React.Component {
           </div>
           <div className='post-card-header-content'>
             <p><strong>{this.state.post.user.firstName}</strong></p>
-            <span>Amsterdam</span>
+            <span>{(this.state.post.spot && this.state.post.spot.location) && this.state.post.spot.location.description}</span>
           </div>
         </div>
 
