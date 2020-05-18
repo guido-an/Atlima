@@ -2,7 +2,9 @@ import React from 'react'
 import ImageUpload from './ImageUpload'
 import Places from '../Maps/Places'
 // import { CREATE_POST } from '../../api/postAPI'
+
 import { GET_CATEGORIES } from '../../api/categoryAPI'
+
 import PostContext  from '../../contexts/PostContext'
 
 
@@ -60,7 +62,8 @@ class Post extends React.Component {
           this.state.location,
           this.state.selectedCategoriesIds
         )
-        console.log( this.state.location, ' this.state.location')
+       
+
       this.props.history.push('/')
     }  catch(err){
           console.log(err)

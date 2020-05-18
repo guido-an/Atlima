@@ -45,6 +45,7 @@ export class PostContext extends React.Component {
     }
       
     createPost = async (content, mediaArray, location, categories) => {
+
         try {
             await service.post('/post/new', {
                 content,
@@ -111,6 +112,7 @@ export class PostContext extends React.Component {
                   commentPost,
                   getSinglePost,
                   filterOnMarkerClick  }}>
+
               {this.props.children}
           </Context.Provider>
       )

@@ -1,6 +1,8 @@
 import React from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
 import PostContext  from '../../contexts/PostContext'
+
 
 import DisplayPosts from '../../components/Post/DisplayPosts'
 
