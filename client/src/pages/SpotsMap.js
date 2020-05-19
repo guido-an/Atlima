@@ -3,10 +3,9 @@ import MapContainer from '../components/Maps/MapContainer'
 
 class SpotsMap extends React.Component {
   render () {
-    
     return (
       <div>
-        <MapContainer/>
+        <MapContainer />
       </div>
     )
   }

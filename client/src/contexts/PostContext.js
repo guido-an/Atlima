@@ -57,7 +57,6 @@ export class PostContext extends React.Component {
 
       
     createPost = async (content, mediaArray, location, categories) => {
-
         try {
             await service.post('/post/new', {
                 content,
@@ -104,13 +103,10 @@ export class PostContext extends React.Component {
         this.setState({ mapsPost: filteredPosts })
      }
 
-     filterMapCategories = categories => {
-         console.log(categories)
-     }
-
+  
   render(){
     const { feedPosts, userPosts, mapsPost, mapsPostCopy } = this.state
-    const { getFeedPosts, getUserPosts, getMapPosts, createPost, likePost, commentPost, getSinglePost, filterOnMarkerClick, filterMapCategories } = this
+    const { getFeedPosts, getUserPosts, getMapPosts, createPost, likePost, commentPost, getSinglePost, filterOnMarkerClick } = this
       return(
           <Context.Provider 
               value={{ 
@@ -126,8 +122,8 @@ export class PostContext extends React.Component {
                   likePost, 
                   commentPost,
                   getSinglePost,
-                  filterOnMarkerClick,
-                  filterMapCategories  }}>
+                  filterOnMarkerClick
+                }}>
 
               {this.props.children}
           </Context.Provider>

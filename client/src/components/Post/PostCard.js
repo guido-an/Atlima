@@ -10,7 +10,6 @@ class PostCard extends React.Component {
 
   likePostAndUpdateIt = async postId => {
     postId = this.state.post._id
-   
     try {
       await this.props.likePost(postId)
       const postUpdated = await this.context.getSinglePost(postId)
