@@ -23,11 +23,7 @@ export class PostContext extends React.Component {
            try {
             const feedPosts = await service.get('/post/all')
             console.log(feedPosts.data)
-            this.setState({ 
-                feedPosts: feedPosts.data, 
-                mapsPost: feedPosts.data,
-                mapsPostCopy: feedPosts.data
-             })
+            this.setState({ feedPosts: feedPosts.data })
             return feedPosts.data
            } catch(err){
                console.log(err)
@@ -43,6 +39,21 @@ export class PostContext extends React.Component {
             console.log(err)
         }
     }
+
+    getMapPosts = async () => {
+        try {
+         const mapPosts = await service.get('/post/all/spot')
+         console.log(mapPosts.data)
+         this.setState({ 
+             mapsPost: mapPosts.data,
+             mapsPostCopy: mapPosts.data
+          })
+         return mapPosts.data
+        } catch(err){
+            console.log(err)
+        }
+   }
+
       
     createPost = async (content, mediaArray, location, categories) => {
 
@@ -84,19 +95,18 @@ export class PostContext extends React.Component {
     }
 
     filterOnMarkerClick = id => {
-        console.log(id)
         const filteredPosts = this.state.mapsPostCopy.filter(post => {
           if(post.spot && post.spot.placeId == id){ 
            return post
           }
         })
         this.setState({ mapsPost: filteredPosts })
-        // return filteredPosts
      }
+
 
   render(){
     const { feedPosts, userPosts, mapsPost, mapsPostCopy } = this.state
-    const { getFeedPosts, getUserPosts, createPost, likePost, commentPost, getSinglePost, filterOnMarkerClick } = this
+    const { getFeedPosts, getUserPosts, getMapPosts, createPost, likePost, commentPost, getSinglePost, filterOnMarkerClick } = this
       return(
           <Context.Provider 
               value={{ 
@@ -106,7 +116,8 @@ export class PostContext extends React.Component {
                   mapsPost,
                   mapsPostCopy,
                   getFeedPosts, 
-                  getUserPosts, 
+                  getUserPosts,
+                  getMapPosts, 
                   createPost, 
                   likePost, 
                   commentPost,

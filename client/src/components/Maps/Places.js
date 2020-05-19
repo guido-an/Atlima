@@ -8,16 +8,16 @@ import 'react-google-places-autocomplete/dist/index.min.css';
 class PlacesAutocomplete extends React.Component {
 
     onInputSelect = spotLocation => {
+        
         geocodeByAddress(spotLocation.description)
         .then(results => getLatLng(results[0]))
-        .then(({ lat, lng }) =>
-          spotLocation.coordinates = { lat, lng }
-        )
-        this.props.getLocation(spotLocation)
+        .then(({ lat, lng }) => {
+          spotLocation.coordinates = { lat, lng } 
+          this.props.getLocation(spotLocation)
+        })
     }
 
-   
-
+    
   render(){
       return(
         <div>

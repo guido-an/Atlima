@@ -1,9 +1,10 @@
 import React from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 import PostContext  from '../../contexts/PostContext'
 
 
+import Places from '../Maps/Places'
 import DisplayPosts from '../../components/Post/DisplayPosts'
 
 class MapContainer extends React.Component {
@@ -22,21 +23,29 @@ class MapContainer extends React.Component {
 
      componentDidMount(){
       this.getUserLocation()
-      this.getPosts()
      }
 
     
     getPosts = async () => {
-      try {
-        await this.context.getFeedPosts()
-      } catch(err) {
-        console.log(err)
-      }
+       try {
+         await this.context.getMapPosts()
+       } catch(err) {
+         console.log(err)
+       }
     }
 
     
-
-      onMarkerClick = (props, marker, e) => {
+    getLocation = spotLocation => {
+       this.context.filterOnMarkerClick(spotLocation.place_id)
+       const { lat, lng } = spotLocation.coordinates
+          this.setState({ 
+            selectedSpot: spotLocation,
+            lat,
+            lng
+           })        
+      }
+  
+    onMarkerClick = (props, marker, e) => {
         this.context.filterOnMarkerClick(props.placeId)
         this.setState({
           selectedSpot: props,
@@ -47,9 +56,11 @@ class MapContainer extends React.Component {
      
       onMapClicked = (props) => {
         if (this.state.showingInfoWindow) {
+          // display all the posts again on map click 
+          this.context.mapsPost = this.context.mapsPostCopy
           this.setState({
             showingInfoWindow: false,
-            activeMarker: null
+            activeMarker: null,
           })
         }
       };
@@ -60,7 +71,7 @@ class MapContainer extends React.Component {
             this.setState({ 
               lat: position.coords.latitude,
               lng: position.coords.longitude 
-          })
+           })
           },
            err => {
              this.setState({ errorMessage: err.message })
@@ -86,11 +97,12 @@ class MapContainer extends React.Component {
     if(!this.state.errorMessage && this.state.lat && this.state.lng && this.state.selectedSpot) {
         return <Map 
         onClick={this.onMapClicked}
+        onReady={this.getPosts}
         google={this.props.google} 
         containerStyle={containerStyle}
         style={style}
         zoom={4}
-        initialCenter={{
+        center={{
             lat: this.state.lat,
             lng: this.state.lng
           }}>
@@ -98,7 +110,6 @@ class MapContainer extends React.Component {
             if(post.spot){
               return  <Marker 
               onClick={this.onMarkerClick}
-              title={'The marker`s title will appear as a tooltip.'}
               description={post.spot.location.description}  
               placeId={post.spot.location.place_id} 
               key={index}  
@@ -118,9 +129,10 @@ class MapContainer extends React.Component {
   }
 
   render(){
-    console.log(this.context.mapsPost)
+    console.log(this.state.selectedSpot, 'this.state.selectedSpot')
     return (
       <div>
+      <Places getLocation={this.getLocation} />
         <div>
         { this.renderMap() }
         </div>

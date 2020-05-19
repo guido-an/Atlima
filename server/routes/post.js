@@ -9,57 +9,6 @@ const myFunctions = require('../helpers/postLikes')
 const newPostHelper = require('../helpers/newPostHelper')
 
 // NEW POST
-// router.post('/new', async (req, res) => {
-//   let mySpot
-//   const { content, mediaArray, location, categories } = req.body
-//   const user = await defineUser(req.session.currentUser)
-//   const newPost = new Post({
-//     content,
-//     user: user._id,
-//     mediaArray,
-//     location,
-//     categories
-//   })
-
-//   // Creating or Updating Spots when the Post is created
-//   if (newPost.location) {
-//     const isThereASpot = await Spot.findOne({ placeId: location.id })
-//     if (isThereASpot) {
-//       try {
-//         mySpot = await Spot.findOneAndUpdate({ placeId: location.id }, { $push: { posts: newPost._id } })
-//         console.log(mySpot._id, 'mySpot')
-//         // add location to newPost
-//         newPost.location = mySpot._id
-//       } catch (err) {
-//         console.log(err)
-//       }
-//     } else {
-//       mySpot = new Spot({
-//         location,
-//         placeId: location.id,
-//         posts: newPost._id
-//       })
-//       try {
-//         mySpot = await mySpot.save()
-//         // add location to newPost
-//         newPost.location = mySpot._id
-//       } catch (err) {
-//         console.log(err)
-//       }
-//     }
-//   }
-
-//   // Save new post
-//   try {
-//     const post = await newPost.save()
-//     // newPostHelper.addPostToCategories(categories, post)
-//     res.status(200).json({ Message: `New post created ${post}` })
-//   } catch (err) {
-//     console.log(err)
-//     res.json('something went wrong: ' + err)
-//   }
-// })
-
 router.post('/new', async (req, res) => {
   let mySpot
   const { content, mediaArray, location, categories } = req.body
@@ -119,6 +68,17 @@ router.get('/all', async (req, res) => {
     const posts = await Post.find().sort({ created_at: -1 })
       .populate('spot').populate('user')
     res.status(200).send(posts)
+  } catch (err) {
+    res.status(400).send({ message: 'Something went wrong' })
+  }
+})
+
+// GET POSTS WITH SPOT
+router.get('/all/spot', async (req, res) => {
+  try {
+    const postsWithSpot = await Post.find({ spot: { $exists: true } }).sort({ created_at: -1 })
+      .populate('spot').populate('user')
+    res.status(200).send(postsWithSpot)
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong' })
   }
