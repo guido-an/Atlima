@@ -3,7 +3,6 @@ import { GET_CATEGORIES } from '../api/categoryAPI'
 import { ADD_CATEGORIES } from '../api/userAPI'
 import AuthContext  from '../contexts/AuthContext'
 
-
 class OnBoarding extends React.Component {
   static contextType = AuthContext
 
@@ -56,7 +55,6 @@ removeCategory = (name) => {
           console.log(err)
      }
   };
-
 
   render () {
     return (
