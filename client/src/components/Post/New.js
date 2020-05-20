@@ -16,9 +16,16 @@ class Post extends React.Component {
       mediaArray: [],
       location: null
     }
+
+    async componentDidMount(){
+      console.log( this.context.selectedCategoriesIds,  "before mounted")
+      await this.context.cleanSelectedCategoriesIds()
+      console.log( this.context.selectedCategoriesIds,  "after mounted")
+    }
   
   onSubmit = async e => {
     e.preventDefault();
+    console.log( this.context.selectedCategoriesIds,  "on submit")
       try {
         await this.props.postContext.createPost(
           this.state.content,
@@ -26,6 +33,7 @@ class Post extends React.Component {
           this.state.location,
           this.context.selectedCategoriesIds
         )
+
       // this.props.history.push('/')
  
     }  catch(err){

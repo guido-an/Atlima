@@ -16,7 +16,7 @@ class SelectCategoriesPost extends React.Component {
                  return (
                    <div key={category._id}>
                    <span>{category.name}</span>
-                   <input onChange={this.context.onSelectUserCategories} type="checkbox" name={category._id}/>
+                   <input onChange={this.context.onSelectCategories} type="checkbox" name={category._id}/>
             </div>
             )
         })}

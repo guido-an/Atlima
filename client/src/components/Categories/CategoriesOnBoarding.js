@@ -2,6 +2,7 @@ import React from 'react'
 
 class CategoriesOnBoarding extends React.Component {
   componentDidMount () {
+    this.props.categoryContext.cleanSelectedCategoriesIds()
     this.props.categoryContext.getCategories()
   }
 
@@ -12,7 +13,7 @@ class CategoriesOnBoarding extends React.Component {
           return (
             <div key={category._id}>
               <span>{category.name}</span>
-              <input onChange={this.props.categoryContext.onSelectUserCategories} type='checkbox' name={category._id} />
+              <input onChange={this.props.categoryContext.onSelectCategories} type='checkbox' name={category._id} />
             </div>
           )
         })}

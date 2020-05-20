@@ -9,7 +9,7 @@ import { PostContext } from './contexts/PostContext'
 import { CategoryContext } from './contexts/CategoryContext'
 import './App.scss'
 
-ReactDOM.render(<AuthStore><PostContext><CategoryContext><BrowserRouter><App /></BrowserRouter></CategoryContext></PostContext></AuthStore>, document.getElementById('root'))
+ReactDOM.render(<AuthStore><CategoryContext><PostContext><BrowserRouter><App /></BrowserRouter></PostContext></CategoryContext></AuthStore>, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
