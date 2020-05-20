@@ -3,7 +3,7 @@ import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 import PostContext  from '../../contexts/PostContext'
 
-
+import { geocodeByAddress } from 'react-google-places-autocomplete';
 import Places from '../Maps/Places'
 import DisplayPosts from '../../components/Post/DisplayPosts'
 
@@ -17,7 +17,8 @@ class MapContainer extends React.Component {
      showingInfoWindow: false,
      activeMarker: {},
      selectedSpot: {},
-     errorMessage: ''
+     errorMessage: '',
+     areaCoordinates: {}
      }
 
 
@@ -36,13 +37,24 @@ class MapContainer extends React.Component {
 
     
     getLocation = spotLocation => {
-       this.context.filterOnMarkerClick(spotLocation.place_id)
-       const { lat, lng } = spotLocation.coordinates
+       geocodeByAddress(spotLocation.description)
+        .then(results => {
+          this.setState({ 
+            areaCoordinates: results[0]
+           })   
+           if (this.state.areaCoordinates.geometry.bounds){
+            this.context.filterOnBoundsSearch(this.state.areaCoordinates)
+           }else{
+            this.context.filterOnMarkerClick(spotLocation.place_id)
+           }
+           const { lat, lng } = spotLocation.coordinates
           this.setState({ 
             selectedSpot: spotLocation,
             lat,
             lng
-           })        
+           })      
+        })
+        .catch(error => console.error(error));
       }
   
     onMarkerClick = (props, marker, e) => {
@@ -57,7 +69,7 @@ class MapContainer extends React.Component {
       onMapClicked = (props) => {
         if (this.state.showingInfoWindow) {
           // display all the posts again on map click 
-          this.context.mapsPost = this.context.mapsPostCopy
+          this.context.resetMapsFeed()
           this.setState({
             showingInfoWindow: false,
             activeMarker: null,
@@ -129,7 +141,6 @@ class MapContainer extends React.Component {
   }
 
   render(){
-    console.log(this.state.selectedSpot, 'this.state.selectedSpot')
     return (
       <div>
       <Places getLocation={this.getLocation} />

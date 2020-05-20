@@ -23,7 +23,6 @@ router.post('/new', async (req, res) => {
 
   // Creating or Updating Spots when the Post is created
   if (req.body.location) {
-    console.log('We have req.body.location')
     const isThereASpot = await Spot.findOne({ placeId: location.place_id })
     if (isThereASpot) {
       try {

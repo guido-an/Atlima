@@ -23,7 +23,6 @@ export class PostContext extends React.Component {
       getFeedPosts = async () => {
            try {
             const feedPosts = await service.get('/post/all')
-            console.log(feedPosts.data)
             this.setState({ feedPosts: feedPosts.data, feedPostsCopy: feedPosts.data })
             return feedPosts.data
            } catch(err){
@@ -44,7 +43,6 @@ export class PostContext extends React.Component {
     getMapPosts = async () => {
         try {
          const mapPosts = await service.get('/post/all/spot')
-         console.log(mapPosts.data)
          this.setState({ 
              mapsPost: mapPosts.data,
              mapsPostCopy: mapPosts.data
@@ -93,7 +91,18 @@ export class PostContext extends React.Component {
         }
     }
 
-    filterOnMarkerClick = id => {
+    filterOnBoundsSearch = areaSpot => {
+            let insideSpot = [] 
+            this.state.mapsPostCopy.forEach(post => {
+            if(post.spot.placeId == areaSpot.place_id || post.spot.location.coordinates.lat >= areaSpot.geometry.bounds.Ya.g && post.spot.location.coordinates.lat <= areaSpot.geometry.bounds.Ya.i && post.spot.location.coordinates.lng >= areaSpot.geometry.bounds.Ta.g && post.spot.location.coordinates.lng <= areaSpot.geometry.bounds.Ta.i){
+                insideSpot.push(post)
+            }
+            
+        })
+        this.setState({ mapsPost: insideSpot })
+     }
+
+     filterOnMarkerClick = id => {
         const filteredPosts = this.state.mapsPostCopy.filter(post => {
           if(post.spot && post.spot.placeId == id){ 
            return post
@@ -117,11 +126,13 @@ export class PostContext extends React.Component {
             this.setState({ feedPosts: this.state.feedPostsCopy })
         }
 
-     }
-     
+     resetMapsFeed = async => {
+        this.setState({ mapsPost: this.state.mapsPostCopy })
+    }
+
   render(){
     const { feedPosts, userPosts, mapsPost, mapsPostCopy } = this.state
-    const { getFeedPosts, getUserPosts, getMapPosts, createPost, likePost, commentPost, getSinglePost, filterOnMarkerClick, filterPostsOnCategory } = this
+    const { getFeedPosts, getUserPosts, getMapPosts, createPost, likePost, commentPost, getSinglePost, filterOnBoundsSearch, filterOnMarkerClick, filterMapCategories, resetMapsFeed, filterPostsOnCategory } = this
       return(
           <Context.Provider 
               value={{ 
@@ -137,9 +148,13 @@ export class PostContext extends React.Component {
                   likePost, 
                   commentPost,
                   getSinglePost,
+                  filterOnBoundsSearch,
                   filterOnMarkerClick,
+                  filterMapCategories,
+                  resetMapsFeed,
                   filterPostsOnCategory
                 }}>
+
 
               {this.props.children}
           </Context.Provider>
