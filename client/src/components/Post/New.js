@@ -1,70 +1,41 @@
 import React from 'react'
+import  { useHistory } from 'react-router-dom'
 import ImageUpload from './ImageUpload'
 import Places from '../Maps/Places'
-// import { CREATE_POST } from '../../api/postAPI'
 
-import { GET_CATEGORIES } from '../../api/categoryAPI'
+import CategoryContext  from '../../contexts/CategoryContext'
 
-import PostContext  from '../../contexts/PostContext'
+import SelectCategoriesPost from '../../components/Categories/SelectCategoriesPost'
 
 
 class Post extends React.Component {
-  static contextType = PostContext
+   static contextType = CategoryContext
 
   state = { 
       content: '',
       mediaArray: [],
-      location: null,
-      categories: [],
-      selectedCategoriesIds: []
+      location: null
     }
 
-    getCategories= async () => {
-      try{
-        const categoriesFromDb = await GET_CATEGORIES()
-        this.setState({ categories: categoriesFromDb })
-      } catch(err) {
-        console.log(err)
-      }
-    }
-
-    onSelect = e => {
-      const { name } = e.target;
-      if(e.target.checked){
-        this.setState({
-          selectedCategoriesIds: [...this.state.selectedCategoriesIds, name],
-        })
-      } else {
-        this.removeCategory(name)
-      }
-    }
-    
-    removeCategory = (name) => {
-      let myArray = [...this.state.selectedCategoriesIds]
-        if(myArray.includes(name)){
-          const newArray = myArray.filter(category => {
-            return category !== name
-          })
-          this.setState({ selectedCategoriesIds: newArray })
-        }
-      }
-
-    componentDidMount(){
-      this.getCategories()
+    async componentDidMount(){
+      console.log( this.context.selectedCategoriesIds,  "before mounted")
+      await this.context.cleanSelectedCategoriesIds()
+      console.log( this.context.selectedCategoriesIds,  "after mounted")
     }
   
   onSubmit = async e => {
     e.preventDefault();
+    console.log( this.context.selectedCategoriesIds,  "on submit")
       try {
-        await this.context.createPost(
+        await this.props.postContext.createPost(
           this.state.content,
           this.state.mediaArray,
           this.state.location,
-          this.state.selectedCategoriesIds
+          this.context.selectedCategoriesIds
         )
-       
 
-      this.props.history.push('/')
+      // this.props.history.push('/')
+ 
     }  catch(err){
           console.log(err)
      }
@@ -87,19 +58,13 @@ class Post extends React.Component {
     }
 
   render () {
+    
     return (
       <div>
         <form onSubmit={this.onSubmit}>
             <input onChange={this.onInputChange} type="text" placeholder="content" name="content"/>
             <Places getLocation={this.getLocation} />
-            {this.state.categories.map(category => {
-                 return (
-                   <div key={category._id}>
-                   <span>{category.name}</span>
-                   <input onChange={this.onSelect} type="checkbox" name={category._id}/>
-                 </div>
-                 )
-               })}
+              <SelectCategoriesPost/>
             <button>Create post</button>
         </form>
         <ImageUpload getMediaArray={this.getMediaArray}/>
