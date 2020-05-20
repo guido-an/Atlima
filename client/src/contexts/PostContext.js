@@ -125,6 +125,7 @@ export class PostContext extends React.Component {
         if(categoriesSelected.length == 0){
             this.setState({ feedPosts: this.state.feedPostsCopy })
         }
+    }
 
      resetMapsFeed = async => {
         this.setState({ mapsPost: this.state.mapsPostCopy })
