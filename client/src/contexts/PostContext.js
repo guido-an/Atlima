@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import AuthContext from './AuthContext'
+import CategoryContext from './CategoryContext'
 
 const Context = React.createContext()
 
@@ -10,21 +10,21 @@ const service = axios.create({
 })
 
 export class PostContext extends React.Component {
-    static contextType = AuthContext
+    static contextType = CategoryContext
    
     state = {
         feedPosts: [],
+        feedPostsCopy: [],
         userPosts: [],
         mapsPost: [],
-        mapsPostCopy: [],
-        mapActiveCategories: [],
+        mapsPostCopy: []
       };
 
       getFeedPosts = async () => {
            try {
             const feedPosts = await service.get('/post/all')
             console.log(feedPosts.data)
-            this.setState({ feedPosts: feedPosts.data })
+            this.setState({ feedPosts: feedPosts.data, feedPostsCopy: feedPosts.data })
             return feedPosts.data
            } catch(err){
                console.log(err)
@@ -55,7 +55,6 @@ export class PostContext extends React.Component {
         }
    }
 
-      
     createPost = async (content, mediaArray, location, categories) => {
         try {
             await service.post('/post/new', {
@@ -102,11 +101,27 @@ export class PostContext extends React.Component {
         })
         this.setState({ mapsPost: filteredPosts })
      }
+   
+     filterPostsOnCategory = categoriesSelected => {
+        let filteredFeedPosts = []
+        categoriesSelected = this.context.selectedCategoriesIds
+       this.state.feedPostsCopy.forEach(post => {
+           const found = post.categories.some(element => categoriesSelected.includes(element))
+           if(found){
+            filteredFeedPosts = [...filteredFeedPosts, post]
+           }
+        }) 
+        this.setState({ feedPosts: filteredFeedPosts })
 
-  
+        if(categoriesSelected.length == 0){
+            this.setState({ feedPosts: this.state.feedPostsCopy })
+        }
+
+     }
+     
   render(){
     const { feedPosts, userPosts, mapsPost, mapsPostCopy } = this.state
-    const { getFeedPosts, getUserPosts, getMapPosts, createPost, likePost, commentPost, getSinglePost, filterOnMarkerClick } = this
+    const { getFeedPosts, getUserPosts, getMapPosts, createPost, likePost, commentPost, getSinglePost, filterOnMarkerClick, filterPostsOnCategory } = this
       return(
           <Context.Provider 
               value={{ 
@@ -122,7 +137,8 @@ export class PostContext extends React.Component {
                   likePost, 
                   commentPost,
                   getSinglePost,
-                  filterOnMarkerClick
+                  filterOnMarkerClick,
+                  filterPostsOnCategory
                 }}>
 
               {this.props.children}

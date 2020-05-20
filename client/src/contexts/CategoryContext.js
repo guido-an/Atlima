@@ -25,15 +25,22 @@ export class CategoryContext extends React.Component {
         }
      }
 
-     onSelectUserCategories = e => {
+    
+     onSelectCategories = e => {
         const { name } = e.target;
         if(e.target.checked){
           this.setState({
             selectedCategoriesIds: [...this.state.selectedCategoriesIds, name],
           })
+          
         } else {
           this.removeUserCategory(name)
         }
+      }
+
+      cleanSelectedCategoriesIds = () => {
+        this.setState({ selectedCategoriesIds: [] })
+        console.log('call me')
       }
 
       removeUserCategory = (name) => {
@@ -59,15 +66,16 @@ export class CategoryContext extends React.Component {
 
 
   render(){
-      const { getCategories, onSelectUserCategories, removeUserCategory, onSubmitUserCategories } = this
+      const { getCategories, onSelectCategories, removeUserCategory, onSubmitUserCategories, cleanSelectedCategoriesIds } = this
       return(
           <Context.Provider 
               value={{ 
                   ...this.state,
                   getCategories,
-                  onSelectUserCategories,
+                  onSelectCategories,
                   removeUserCategory,
-                  onSubmitUserCategories
+                  onSubmitUserCategories,
+                  cleanSelectedCategoriesIds
                    }}>
               {this.props.children}
           </Context.Provider>
