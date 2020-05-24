@@ -19,7 +19,6 @@ class App extends React.Component {
 
   componentDidMount(){
     this.context.fetchUser(); 
-    console.log('app mounting')
   }
   
   render() {
@@ -30,7 +29,6 @@ class App extends React.Component {
       {this.context.loggedInUser && <Navbar /> }    
       
         <Switch>      
-
         <ProtectedRoute
             exact path="/"
             user={this.context.loggedInUser}

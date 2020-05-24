@@ -18,7 +18,6 @@ export class AuthStore extends React.Component {
 
    login = async user => {
       const { data } = await service.post('/auth/login', user)
-      console.log(data, 'data from auth context')
       return data
     }
    
@@ -43,10 +42,9 @@ export class AuthStore extends React.Component {
           const res = await this.loggedin();
           this.setState({
             loggedInUser: res,
-            loadingUser: false
+            isLoadingUser: false
           });
         } catch(err) {
-          console.log(err, 'err from context')
           this.setState({
             loggedInUser: null,
           });
