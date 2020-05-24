@@ -18,7 +18,7 @@ class NavBar extends React.Component {
     return (
       <nav className='absolute-bot'>
         <div className="ui secondary fluid five item menu">
-          <NavLink to="/" className="item" activeClassName="active"><i className="home icon" ></i></NavLink>
+          <NavLink to="/" className="item" activeClassName="active" exact><i className="home icon" ></i></NavLink>
           <NavLink to="/spots-map" className="item" activeClassName="active">
             <i className="fas fa-map-marked-alt"></i>
           </NavLink>
