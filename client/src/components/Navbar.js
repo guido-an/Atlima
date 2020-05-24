@@ -18,14 +18,14 @@ class NavBar extends React.Component {
     return (
       <nav className='absolute-bot'>
         <div className="ui secondary fluid five item menu">
-          <NavLink to="/" className="item" activeClassName="active" exact><i className="home icon" ></i></NavLink>
+          <NavLink to="/" className="item" activeClassName="active" exact><i className="home icon"></i></NavLink>
           <NavLink to="/spots-map" className="item" activeClassName="active">
             <i className="fas fa-map-marked-alt"></i>
           </NavLink>
           <NavLink to="/create-post" className="item" activeClassName="active">
             <i className="fas fa-plus-circle"></i>
           </NavLink>
-          <NavLink to="/logout" onClick={this.logoutUser} className="item" activeClassName="active">
+          <NavLink to="/login" onClick={this.logoutUser} className="item" activeClassName="active" exact>
             <i className="fas fa-bell"></i>
           </NavLink>
           <NavLink to={`/profile/${this.context.loggedInUser._id}`} className="item" activeClassName="active">
