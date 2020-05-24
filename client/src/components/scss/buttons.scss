@@ -1,0 +1,63 @@
+.facebook-btn{
+    position: absolute;
+    width: 90vw;
+    height: 48px;
+    left: 5vw;
+    right: 5vw;
+    top: 150px;
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 25px;
+    align-items: center;
+    text-align: center;
+    background: #31518A;
+    border-radius: 4px;
+    color: #FFFFFF;
+    padding-top: 12px;
+    padding-bottom: 5px;
+    .fa-facebook{
+        position: absolute;
+        font-size: 24px;
+        left: 16px;
+        top: 12px;
+        color: #FFFFFF;
+    }
+    
+}
+.login, .signup{
+    input{
+        border: 1px solid #D9D9D9;
+        box-sizing: border-box;
+        border-radius: 4px;
+        width: 90vw;
+        height: 50px;
+    }
+}
+
+.primary-btn{
+    width: 90vw;
+    height: 48px;
+    background: #FF7700;
+    margin-left: 5vw;
+    border-radius: 4px;
+    font-family: Avenir;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 25px;
+    align-items: center;
+    text-align: center;
+    margin-top: 41px;
+    color: #FFFFFF;
+}
+
+.left{
+    float: left;
+    margin-left: 5vw;
+}
+.right{
+    float: right;
+    margin-right: 5vw;
+}

@@ -1,7 +1,8 @@
 import './scss/navbar.scss'
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import AuthContext  from '../contexts/AuthContext'
+
 
 class NavBar extends React.Component {
   static contextType = AuthContext
@@ -16,17 +17,20 @@ class NavBar extends React.Component {
   render() {
     return (
       <nav className='absolute-bot'>
-        <div className="ui secondary fluid four item menu">
-          <Link to="/" className="item"><i className="home icon"></i></Link>
-          <Link to="#" onClick={this.logoutUser} className="item">
-            <i className="search icon"></i>
-          </Link>
-          <Link to="/create-post" className="item">
-            <i className="plus icon"></i>
-          </Link>
-          <Link to={`/profile/${this.context.loggedInUser._id}`} className="item">
+        <div className="ui secondary fluid five item menu">
+          <NavLink to="/" className="item" activeClassName="active" exact><i className="home icon" ></i></NavLink>
+          <NavLink to="/spots-map" className="item" activeClassName="active">
+            <i className="fas fa-map-marked-alt"></i>
+          </NavLink>
+          <NavLink to="/create-post" className="item" activeClassName="active">
+            <i className="fas fa-plus-circle"></i>
+          </NavLink>
+          <NavLink to="/logout" onClick={this.logoutUser} className="item" activeClassName="active">
+            <i className="fas fa-bell"></i>
+          </NavLink>
+          <NavLink to={`/profile/${this.context.loggedInUser._id}`} className="item" activeClassName="active">
             <i className="user icon"></i>
-          </Link>
+          </NavLink>
         </div>
       </nav>
     );
