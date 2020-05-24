@@ -1,12 +1,23 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 
 class CategoriesOnBoarding extends React.Component {
+  state = { redirect: false }
+
   componentDidMount () {
     this.props.categoryContext.cleanSelectedCategoriesIds()
     this.props.categoryContext.getCategories()
   }
 
+ onSubmitUserCategories = (e) => {
+  this.props.categoryContext.onSubmitUserCategories(e)
+  this.setState({ redirect: true })
+ }
+
   render () {
+    if (this.state.redirect) {
+      return <Redirect to='/'/>;
+    }
     return (
       <div>
         {this.props.categoryContext.allCategories.map(category => {
@@ -17,7 +28,7 @@ class CategoriesOnBoarding extends React.Component {
             </div>
           )
         })}
-        <form onSubmit={this.props.categoryContext.onSubmitUserCategories}>
+        <form onSubmit={this.onSubmitUserCategories}>
           <button>Next</button>
         </form>
       </div>
