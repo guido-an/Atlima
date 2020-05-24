@@ -1,5 +1,4 @@
 import React from 'react'
-import { Redirect } from "react-router-dom";
 import axios from 'axios'
 
 import { ADD_CATEGORIES } from '../api/userAPI'
@@ -14,7 +13,7 @@ const service = axios.create({
 export class CategoryContext extends React.Component {
     state = { 
         allCategories: [],
-        selectedCategoriesIds: [],
+        selectedCategoriesIds: []
     };
 
     getCategories = async () => {
@@ -52,7 +51,6 @@ export class CategoryContext extends React.Component {
             this.setState({ selectedCategoriesIds: newArray })
           }
         }
-
 
         
         onSubmitUserCategories = async e => {

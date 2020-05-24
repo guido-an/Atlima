@@ -1,5 +1,5 @@
 import React from 'react'
-import  { useHistory } from 'react-router-dom'
+import  { Redirect } from 'react-router-dom'
 import ImageUpload from './ImageUpload'
 import Places from '../Maps/Places'
 
@@ -14,7 +14,8 @@ class Post extends React.Component {
   state = { 
       content: '',
       mediaArray: [],
-      location: null
+      location: null,
+      redirect: false
     }
 
     async componentDidMount(){
@@ -34,6 +35,7 @@ class Post extends React.Component {
           this.context.selectedCategoriesIds
         )
 
+      this.setState({ redirect: true })
       // this.props.history.push('/')
  
     }  catch(err){
@@ -58,7 +60,9 @@ class Post extends React.Component {
     }
 
   render () {
-    
+    if(this.state.redirect){
+      return <Redirect to="/" />
+    }
     return (
       <div>
         <form onSubmit={this.onSubmit}>
