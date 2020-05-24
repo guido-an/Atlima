@@ -1,42 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import AuthContext from '../contexts/AuthContext'
 
-const ProtectedRoute = ({ component: Component, loggedInUser, auth, ...rest }) => {
-  const context = useContext(AuthContext)
-
-  useEffect(() => {
-    context.fetchUser()
-  })
-
+const ProtectedRoute = ({ component: Component, user, ...rest }) => {
+  console.log('checking in private')
   return (
     <Route
       {...rest}
       render={props => {
-        if (context.loggedInUser) {
-          return <Component {...props} loggedInUser={loggedInUser} />
+        if (user) {
+          return <Component {...props} user={user} {...rest} />
         } else {
-          return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+          return <Redirect to='/login' />
         }
       }}
     />
   )
 }
-// const ProtectedRoute = ({ component: Component, user, ...rest }) => {
-//   const myUser = useContext(AuthContext)
-//   console.log(myUser, 'protecetdroute')
-//   return (
-//     <Route
-//       {...rest}
-//       render={props => {
-//         if (user) {
-//           return <Component {...props} loggedInUser={user} />
-//         } else {
-//           return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
-//         }
-//       }}
-//     />
-//   )
-// }
-
 export default ProtectedRoute

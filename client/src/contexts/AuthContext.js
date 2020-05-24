@@ -9,7 +9,7 @@ const service = axios.create({
 })
 
 export class AuthStore extends React.Component {
-    state = { loggedInUser: null };
+    state = { loggedInUser: null, isLoadingUser: true };
     
     signup = async user => {
       const data = await service.post('/auth/signup', user)
@@ -18,14 +18,15 @@ export class AuthStore extends React.Component {
 
    login = async user => {
       const { data } = await service.post('/auth/login', user)
+      console.log(data, 'data from auth context')
       return data
     }
    
    logout = async () => {
       const { data } = await service.get('/auth/logout')
+      localStorage.removeItem('userId');
       return data
     }
- 
 
    loggedin = async () => {
     const { data } = await service.get('/auth/loggedin')
@@ -34,7 +35,7 @@ export class AuthStore extends React.Component {
 
     setUser = user => {
         this.setState({
-          loggedInUser: user,
+          loggedInUser: user
         });
       };
 
@@ -43,7 +44,11 @@ export class AuthStore extends React.Component {
           const res = await this.loggedin();
           this.setState({
             loggedInUser: res,
+            isLoadingUser: false
           });
+          
+          // for handling facebook auth
+          window.localStorage.setItem("userId", JSON.stringify(this.state.loggedInUser._id));
         } catch(err) {
           console.log(err, 'err from context')
           this.setState({

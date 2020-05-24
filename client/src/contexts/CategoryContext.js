@@ -40,7 +40,6 @@ export class CategoryContext extends React.Component {
 
       cleanSelectedCategoriesIds = () => {
         this.setState({ selectedCategoriesIds: [] })
-        console.log('call me')
       }
 
       removeUserCategory = (name) => {
