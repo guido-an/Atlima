@@ -4,7 +4,20 @@
     bottom: 0rem;
     align-self: flex-end;
     background-color: white;
+    border-top: 1px solid #9999993d;
+    z-index: 99999;
 
+}
+
+.fas, .icon{
+    color: #777;
+}
+
+.active{
+    background: none !important;
+    i{
+        color: #FF7700;
+    }
 }
 
 @media screen and (min-width: 1024px) {

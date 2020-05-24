@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom'
 import AuthContext  from '../contexts/AuthContext'
+import '../components/scss/signup.scss'
+import '../components/scss/buttons.scss'
 
 
 export default class Signup extends Component {
@@ -35,14 +38,19 @@ export default class Signup extends Component {
   render() {
 
     return (
-      <div>
-          <h1>Signup</h1>
+      <div className='signup'>
+          <h1>Altima</h1>
         <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChange} type="text" placeholder="First name" name="firstName" />
-          <input onChange={this.handleChange} type="text" placeholder="Last name" name="lastName" />
-          <input onChange={this.handleChange} type="email" placeholder="Email" name="email" />
-          <input onChange={this.handleChange} type="password" placeholder="******" name="password" />
-          <button>Signup</button>
+          <label>First Name</label>
+          <input onChange={this.handleChange} type="text" name="firstName" />
+          <label>Last Name</label>
+          <input onChange={this.handleChange} type="text" name="lastName" />
+          <label>Email</label>
+          <input onChange={this.handleChange} type="email" name="email" />
+          <label>Password</label>
+          <input onChange={this.handleChange} type="password"  name="password" />
+          <button className='primary-btn'>Signup</button>          
+          <p>Already have an acount? <Link to="/login">Login</Link></p>
         </form>
       </div>
     );
