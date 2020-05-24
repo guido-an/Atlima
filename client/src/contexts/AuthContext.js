@@ -24,7 +24,6 @@ export class AuthStore extends React.Component {
    
    logout = async () => {
       const { data } = await service.get('/auth/logout')
-      localStorage.removeItem('userId');
       return data
     }
 
@@ -44,11 +43,8 @@ export class AuthStore extends React.Component {
           const res = await this.loggedin();
           this.setState({
             loggedInUser: res,
-            isLoadingUser: false
+            loadingUser: false
           });
-          
-          // for handling facebook auth
-          window.localStorage.setItem("userId", JSON.stringify(this.state.loggedInUser._id));
         } catch(err) {
           console.log(err, 'err from context')
           this.setState({
