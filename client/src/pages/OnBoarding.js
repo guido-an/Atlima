@@ -1,4 +1,5 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 import CategoryContext from '../contexts/CategoryContext'
 
 import CategoriesOnBoarding from '../components/Categories/CategoriesOnBoarding'

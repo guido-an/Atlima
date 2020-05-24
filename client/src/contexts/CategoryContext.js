@@ -1,4 +1,5 @@
 import React from 'react'
+import { Redirect } from "react-router-dom";
 import axios from 'axios'
 
 import { ADD_CATEGORIES } from '../api/userAPI'
@@ -13,9 +14,9 @@ const service = axios.create({
 export class CategoryContext extends React.Component {
     state = { 
         allCategories: [],
-        selectedCategoriesIds: []
+        selectedCategoriesIds: [],
     };
-    
+
     getCategories = async () => {
         try {
          const categoriesFromDb = await service.get('/categories/all')
@@ -52,6 +53,8 @@ export class CategoryContext extends React.Component {
           }
         }
 
+
+        
         onSubmitUserCategories = async e => {
             //const userId = this.context.loggedInUser._id
             e.preventDefault();
