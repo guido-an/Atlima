@@ -98,12 +98,14 @@ router.get('/facebook/callback', (req, res, next) => {
       const message = 'Invalid credentials'
       return res.send(message)
     }
-    req.logIn(user, (err) => {
+    req.logIn(user, async (err) => {
       if (err) {
         return next(err)
       }
       req.session.currentUser = user
-      res.redirect(process.env.CLIENT_URL)
+      // if user didn't choose categories (first time login) redirect to onboarding
+      const myUser = await defineUser(req.session.currentUser)
+      myUser.categories.length >= 1 ? res.redirect(process.env.CLIENT_URL) : res.redirect(`${process.env.CLIENT_URL}/onboarding`)
     })
   })(req, res, next)
 })
