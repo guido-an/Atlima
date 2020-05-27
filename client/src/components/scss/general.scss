@@ -1,0 +1,26 @@
+$font-family: Avenir;
+$primary-color: #FF7700;
+$base-margin: 0 5vw;
+$color-primary-button: #fff;
+$dark: #404040;
+$dark-grey: #737373;
+$light-grey: #bfbfbf;
+$border-radius-btn: 4px;
+
+h1 {
+    font-family: $font-family;
+    font-size: 24px;
+    color: $dark;
+}
+p {
+    font-family: $font-family;
+    font-size: 16px;
+    color: $dark;
+}
+
+h6 {
+    font-family: $font-family;
+    font-size: 14px;
+    color: $light-grey;
+}
+

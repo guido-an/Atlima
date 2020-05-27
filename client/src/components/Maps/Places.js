@@ -23,7 +23,7 @@ class PlacesAutocomplete extends React.Component {
         <div>
         <GooglePlacesAutocomplete
           onSelect={this.onInputSelect}
-          placeholder='Spot location...'
+          placeholder='Search cities, places and more...'
         />
       </div>
       )

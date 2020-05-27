@@ -29,49 +29,46 @@ class App extends React.Component {
       {this.context.loggedInUser && <Navbar /> }    
       
         <Switch>      
-        <ProtectedRoute
-            exact path="/"
-            user={this.context.loggedInUser}
-            component={Home}
-          />
-          
-          <Route
-            path="/login"
-            component={Login} />
-          />  
-
-          <Route
-            path="/signup"
-            component={Signup} />
-          /> 
-
-          <Route
-            path="/onboarding"
-            component={OnBoarding} />
-          /> 
-
-          <Route
-            exact path="/profile/:id"
-            component={Profile} />
-          />
-      
-          <Route
-            path="/create-post"
-            component={CreatePost} />
-          />   
-
-          <Route
-            path="/profile/edit/:id"
-            component={EditProfile} />
-          /> 
+          <ProtectedRoute
+              exact path="/"
+              user={this.context.loggedInUser}
+              component={Home}
+            />
+            
+            <Route
+              path="/login"
+              component={Login} />
+            />  
+  
+            <Route
+              path="/signup"
+              component={Signup} />
+            /> 
+  
+            <Route
+              path="/onboarding"
+              component={OnBoarding} />
+            /> 
+  
+            <Route
+              exact path="/profile/:id"
+              component={Profile} />
+            />
         
-          <Route
-            path="/spots-map"
-            component={SpotsMap} />
-          /> 
-
-      
+            <Route
+              path="/create-post"
+              component={CreatePost} />
+            />   
+  
+            <Route
+              path="/profile/edit/:id"
+              component={EditProfile} />
+            /> 
           
+            <Route
+              path="/spots-map"
+              component={SpotsMap} />
+            /> 
         </Switch>
       </div>
     );

@@ -1,11 +1,15 @@
+import '../../components/scss/Map.scss'
 import React from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { geocodeByAddress } from 'react-google-places-autocomplete';
 
 import PostContext  from '../../contexts/PostContext'
-
-import { geocodeByAddress } from 'react-google-places-autocomplete';
 import Places from '../Maps/Places'
+import SpotHeader from './SpotHeader'
 import DisplayPosts from '../../components/Post/DisplayPosts'
+import iconActive from '../../images/icon-google-maps.png'
+import iconNormal from '../../images/icon-google-maps2.png'
+//import iconUser from '../../images/icon-user-location.png'
 
 class MapContainer extends React.Component {
   static contextType = PostContext
@@ -15,15 +19,16 @@ class MapContainer extends React.Component {
      lat: null,
      lng: null,
      showingInfoWindow: false,
-     activeMarker: {},
+     activeMarker: null,
      selectedSpot: {},
      errorMessage: '',
-     areaCoordinates: {}
+     areaCoordinates: null
      }
-
 
      componentDidMount(){
       this.getUserLocation()
+      this.props.categoryContext.cleanSelectedCategoriesIds()
+      this.props.categoryContext.getCategories()
      }
 
     
@@ -58,6 +63,7 @@ class MapContainer extends React.Component {
       }
   
     onMarkerClick = (props, marker, e) => {
+      console.log(props, marker, 'marker click')
         this.context.filterOnMarkerClick(props.placeId)
         this.setState({
           selectedSpot: props,
@@ -72,7 +78,7 @@ class MapContainer extends React.Component {
           this.context.resetMapsFeed()
           this.setState({
             showingInfoWindow: false,
-            activeMarker: null,
+            activeMarker: null
           })
         }
       };
@@ -95,13 +101,8 @@ class MapContainer extends React.Component {
     const style = {
       width: '100%',
       height: '100%'
-    }
-    const containerStyle = {
-      position: 'relative',  
-      width: '100%',
-      height: '300px'
-    }
-
+    }    
+   
     if(this.state.errorMessage){
       return <div>Error message: {this.state.errorMessage}</div>
     } 
@@ -111,9 +112,8 @@ class MapContainer extends React.Component {
         onClick={this.onMapClicked}
         onReady={this.getPosts}
         google={this.props.google} 
-        containerStyle={containerStyle}
         style={style}
-        zoom={4}
+        zoom={12}
         center={{
             lat: this.state.lat,
             lng: this.state.lng
@@ -121,38 +121,46 @@ class MapContainer extends React.Component {
           {this.context.mapsPostCopy && this.context.mapsPostCopy.map((post, index) => {
             if(post.spot){
               return  <Marker 
-              onClick={this.onMarkerClick}
-              description={post.spot.location.description}  
+              onClick={this.onMarkerClick} 
               placeId={post.spot.location.place_id} 
+              location={post.spot.location}
               key={index}  
+              icon={
+                this.state.activeMarker && this.state.activeMarker.placeId == post.spot.location.place_id ? iconActive : iconNormal
+                  }
               position={{ lat: post.spot.location.coordinates.lat, lng: post.spot.location.coordinates.lng }} /> 
             }})}
-             <InfoWindow
-             marker={this.state.activeMarker}
-             visible={this.state.showingInfoWindow}>
-               <div>
-                 <h1>{this.state.selectedSpot.description}</h1>
-               </div>
-           </InfoWindow>
+            {/* <Marker   
+              icon={iconUser}
+              position={{ lat: this.state.lat, lng: this.state.lng  }} />  */}
         </Map>
     } 
-
     return <p>Loading..</p>
   }
 
   render(){
+ //sconsole.log('active marker', this.state.activeMarker )
+   // console.log('selected active marker', this.state.activeMarker )
     return (
-      <div>
-      <Places getLocation={this.getLocation} />
-        <div>
+      <div className="map-wrapper">
+        
+        <div className="places-container">
+          <Places getLocation={this.getLocation} />
+       </div>
+        <div id="map">
         { this.renderMap() }
         </div>
-        <DisplayPosts 
-           posts={this.context.mapsPost} 
-           likePost={this.context.likePost}
-           commentPost={this.context.commentPost}
-        />
-      
+        <div className="map-feed" >
+          {this.state.activeMarker && 
+          <div>
+             <SpotHeader activeMarker={this.state.activeMarker}/>
+             <DisplayPosts 
+             posts={this.context.mapsPost} 
+             likePost={this.context.likePost}
+             commentPost={this.context.commentPost}
+             /> 
+          </div>}
+        </div>
         </div>
       );
   }
