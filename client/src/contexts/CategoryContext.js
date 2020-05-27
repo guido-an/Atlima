@@ -32,7 +32,6 @@ export class CategoryContext extends React.Component {
           this.setState({
             selectedCategoriesIds: [...this.state.selectedCategoriesIds, name],
           })
-          
         } else {
           this.removeUserCategory(name)
         }
@@ -52,7 +51,6 @@ export class CategoryContext extends React.Component {
           }
         }
 
-        
         onSubmitUserCategories = async e => {
             //const userId = this.context.loggedInUser._id
             e.preventDefault();

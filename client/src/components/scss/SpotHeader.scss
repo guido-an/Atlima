@@ -1,0 +1,28 @@
+@import "general.scss";
+
+.spot-header-section{
+    margin: $base-margin;
+    .spot-header-container{
+        display: flex;
+        justify-content: space-between;
+    }
+    .title-spot{
+        display: flex;
+        img{
+            width: 22px;
+            height: 30px;
+            margin-right: 12px;
+            position: relative;
+            top: 22px;
+        }
+    }
+    h1 {
+        font-weight: 800;
+        color: $dark-grey
+    }
+    button{
+        background-color: $primary-color;
+        color: $color-primary-button;
+        border-radius: $border-radius-btn;
+    }
+}
