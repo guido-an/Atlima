@@ -1,0 +1,138 @@
+/* The container */
+.onb-title{
+    margin-left: 5vw;
+    margin-top: 10px !important;
+}
+.category{
+    .onboarding{
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 90vw;
+        margin-left: 5vw;
+        margin-bottom: 30px;
+    }    
+    .item{
+        padding: 2%;
+        flex-grow: 1;
+        flex-basis: 30%;
+        margin-bottom: 35px;
+        display: flex;
+
+        .cat-name{
+            position: absolute;
+            bottom: -125px;
+            font-size: 14px;
+            font-family: avenir;
+            font-style: Roman;
+            width: 100px;
+            text-align: center;
+        }
+    }
+    .container {
+        display: block;
+        position: relative;
+        margin-bottom: 100px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    /* Hide the browser's default checkbox */
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+    
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        border-radius: 5px;
+        top: 0;
+        left: 0;
+        height: 100px;
+        width: 100px;
+        background-image: url('../../images/Sport\ Image-1.png') ;
+    }
+
+    .Rolling{
+        background-image: url('../../images/Sport\ Image-1.png') ;   
+    }
+
+    .Martial{
+        background-image: url('../../images/Sport\ Image-5.png') ;   
+    }
+
+    .Running{
+        background-image: url('../../images/Sport\ Image-4.png') ;   
+    }
+    
+    .Surfing{
+        background-image: url('../../images/Sport\ Image-2.png') ;   
+    }
+
+    .Cycling{
+        background-image: url('../../images/Sport\ Image-3.png') ;   
+    }
+
+    .Fitness{
+        background-image: url('../../images/Sport\ Image.png') ;   
+    }
+    /* When the checkbox is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+        filter: grayscale(80%);
+    }
+    
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+    
+    /* Show the checkmark when checked */
+    .container input:checked ~ .checkmark:after {
+        display: block;
+    }
+    
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+        left: 45px;
+        top: 30px;
+        width: 15px;
+        height: 30px;
+        border-radius: 1px;
+        border: solid white;
+        border-width: 0 5px 5px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    button{
+        position: absolute;
+        left: 35%;
+        right: 35%;
+        top: 85%;
+        bottom: 10%;
+        width: 120px;
+        height: 40px;
+        font-family: Avenir;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 25px;
+        align-items: center;
+        text-align: center;
+
+        color: #FFFFFF;
+
+        background: #FF7700;
+        border-radius: 4px;
+    }
+}

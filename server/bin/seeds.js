@@ -17,13 +17,22 @@ mongoose
 
 const categories = [
   {
-    name: 'Muay Thai'
+    name: 'Martial Arts'
   },
   {
     name: 'Roller Skating'
   },
   {
     name: 'Running'
+  },
+  {
+    name: 'Cycling'
+  },
+  {
+    name: 'Fitness'
+  },
+  {
+    name: 'Surfing'
   }
 ]
 
