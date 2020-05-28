@@ -9,7 +9,7 @@ class OnBoarding extends React.Component {
   render () {
     return (
       <div>
-        <h1>OnBoarding</h1>
+        <h1 className="onb-title">Choose the sports you enjoy</h1>
         <CategoriesOnBoarding categoryContext={this.context} />
       </div>
     )
