@@ -2,27 +2,76 @@
 
 .spot-header-section{
     margin: $base-margin;
+    margin-bottom: 40px;
     .spot-header-container{
         display: flex;
         justify-content: space-between;
+    }
+    .divider{
+        width: 32px;
+        height: 4px;
+        border-radius: 4px;
+        background-color: $light-grey;
+        text-align: center;
+        margin: 0 auto;
+        position: relative;
+        top: 6px
     }
     .title-spot{
         display: flex;
         img{
             width: 22px;
             height: 30px;
-            margin-right: 12px;
+            margin-right: 10px;
             position: relative;
-            top: 22px;
+            top: 20px;
         }
     }
     h1 {
-        font-weight: 800;
-        color: $dark-grey
+        font-weight: 600 !important;
+        color: $dark-grey;
+        font-size: 22px;
     }
-    button{
+    .follow-btn,
+    .unfollow-btn{
+        border-radius: $border-radius-btn;
+        font-family: $font-family;
+        font-size: 14px;
+        font-weight: 600;
+        height: 40px;
+        width: 110px;
+        position: relative;
+        top: 18px;
+        outline: none
+    }
+    .follow-btn{
         background-color: $primary-color;
         color: $color-primary-button;
-        border-radius: $border-radius-btn;
+    }
+    .unfollow-btn{
+        background-color: #fff;
+        color: $primary-color;
+        border: 1px solid $primary-color
+    }
+    button:hover{
+        cursor: pointer;
+    }
+    .spot-info{
+        margin-top: 10px;
+        color: $light-grey;
+        span{
+            display: inline-block;
+            font-size: 14px
+        }
+        .dot {
+            height: 2px;
+            width: 2px;
+            margin: 0 10px;
+            background-color: $light-grey !important;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            bottom: 3px
+          }
     }
 }

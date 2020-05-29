@@ -17,7 +17,8 @@ const userSchema = new Schema({
   achievements: Array,
   provider: String,
   facebookId: String,
-  notifications: Array
+  notifications: Array,
+  followedSpots: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Spot' }]
 }, {
   timestamps: {
     createdAt: 'created_at',

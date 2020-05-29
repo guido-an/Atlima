@@ -10,3 +10,12 @@ export const GET_ALL_SPOTS = async () => {
   console.log(spots.data, 'spots.data')
   return spots.data
 }
+
+export const GET_SINGLE_SPOT = async (spotId) => {
+  const spot = await service.get(`/spot/${spotId}`)
+  return spot.data
+}
+
+export const FOLLOW_SPOT = async (spotId) => {
+  await service.post(`/spot/follow/${spotId}`)
+}
