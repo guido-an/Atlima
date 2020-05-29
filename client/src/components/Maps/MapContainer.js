@@ -15,20 +15,17 @@ class MapContainer extends React.Component {
   static contextType = PostContext
 
   state = { 
-     posts: [],
      lat: null,
      lng: null,
-     showingInfoWindow: false,
      activeMarker: null,
-     selectedSpot: {},
      errorMessage: '',
      areaCoordinates: null
      }
 
      componentDidMount(){
       this.getUserLocation()
-      this.props.categoryContext.cleanSelectedCategoriesIds()
-      this.props.categoryContext.getCategories()
+     // this.props.categoryContext.cleanSelectedCategoriesIds()
+     // this.props.categoryContext.getCategories()
      }
 
     
@@ -40,49 +37,38 @@ class MapContainer extends React.Component {
        }
     }
 
-    
     getLocation = spotLocation => {
-       geocodeByAddress(spotLocation.description)
-        .then(results => {
-          this.setState({ 
-            areaCoordinates: results[0]
-           })   
-           if (this.state.areaCoordinates.geometry.bounds){
-            this.context.filterOnBoundsSearch(this.state.areaCoordinates)
-           }else{
-            this.context.filterOnMarkerClick(spotLocation.place_id)
-           }
-           const { lat, lng } = spotLocation.coordinates
-          this.setState({ 
-            selectedSpot: spotLocation,
+     const description = spotLocation.description ? spotLocation.description : spotLocation.location.description
+     const { lat, lng } = spotLocation.coordinates || spotLocation.location.coordinates
+      geocodeByAddress(description)
+       .then(results => {
+         this.setState({ 
+           areaCoordinates: results[0]
+          })   
+          if (this.state.areaCoordinates.geometry.bounds){
+           this.context.filterOnBoundsSearch(this.state.areaCoordinates)
+          }else{
+           this.context.filterOnSpotClick(spotLocation.place_id)
+          }
+           this.setState({ 
+            activeMarker: spotLocation,
             lat,
             lng
-           })      
-        })
-        .catch(error => console.error(error));
+           }) 
+       })
+       .catch(error => console.error(error));
+     }
+    
+      onMarkerClick = props => {
+      this.getLocation(props)
       }
-  
-    onMarkerClick = (props, marker, e) => {
-      console.log(props, marker, 'marker click')
-        this.context.filterOnMarkerClick(props.placeId)
-        this.setState({
-          selectedSpot: props,
-          activeMarker: marker,
-          showingInfoWindow: true
-        });
-      }
-     
+
       onMapClicked = (props) => {
-        if (this.state.showingInfoWindow) {
-          // display all the posts again on map click 
-          this.context.resetMapsFeed()
           this.setState({
-            showingInfoWindow: false,
             activeMarker: null
           })
-        }
       };
-    
+      
       getUserLocation = () => {
         window.navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -107,10 +93,11 @@ class MapContainer extends React.Component {
       return <div>Error message: {this.state.errorMessage}</div>
     } 
 
-    if(!this.state.errorMessage && this.state.lat && this.state.lng && this.state.selectedSpot) {
+    if(!this.state.errorMessage && this.state.lat && this.state.lng) {
         return <Map 
         onClick={this.onMapClicked}
         onReady={this.getPosts}
+        onDragend={this.centerMoved}
         google={this.props.google} 
         style={style}
         zoom={12}
@@ -122,11 +109,12 @@ class MapContainer extends React.Component {
             if(post.spot){
               return  <Marker 
               onClick={this.onMarkerClick} 
-              placeId={post.spot.location.place_id} 
+              place_id={post.spot.location.place_id} 
               location={post.spot.location}
+              postsNumber={post.spot.posts.length}
               key={index}  
               icon={
-                this.state.activeMarker && this.state.activeMarker.placeId == post.spot.location.place_id ? iconActive : iconNormal
+                this.state.activeMarker && this.state.activeMarker.place_id == post.spot.location.place_id ? iconActive : iconNormal
                   }
               position={{ lat: post.spot.location.coordinates.lat, lng: post.spot.location.coordinates.lng }} /> 
             }})}
@@ -139,27 +127,27 @@ class MapContainer extends React.Component {
   }
 
   render(){
- //sconsole.log('active marker', this.state.activeMarker )
-   // console.log('selected active marker', this.state.activeMarker )
     return (
       <div className="map-wrapper">
-        
-        <div className="places-container">
-          <Places getLocation={this.getLocation} />
-       </div>
-        <div id="map">
-        { this.renderMap() }
-        </div>
-        <div className="map-feed" >
-          {this.state.activeMarker && 
-          <div>
-             <SpotHeader activeMarker={this.state.activeMarker}/>
-             <DisplayPosts 
-             posts={this.context.mapsPost} 
-             likePost={this.context.likePost}
-             commentPost={this.context.commentPost}
-             /> 
-          </div>}
+          <div className="places-container">
+            <Places getLocation={this.getLocation} />
+          </div>
+          <div id="map">
+            { this.renderMap() }
+          </div>
+          <div className="map-feed" >
+            {this.state.activeMarker && 
+            <div>
+               <SpotHeader 
+               activeMarker={this.state.activeMarker}
+               mapsPost={this.context.mapsPost}
+                />
+               <DisplayPosts 
+               posts={this.context.mapsPost} 
+               likePost={this.context.likePost}
+               commentPost={this.context.commentPost}
+               /> 
+            </div>}
         </div>
         </div>
       );
@@ -169,4 +157,5 @@ class MapContainer extends React.Component {
 export default GoogleApiWrapper({
   apiKey: process.env.REACT_APP_GOOGLE_MAPS_API
 })(MapContainer)
+
 

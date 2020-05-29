@@ -8,7 +8,6 @@ import 'react-google-places-autocomplete/dist/index.min.css';
 class PlacesAutocomplete extends React.Component {
 
     onInputSelect = spotLocation => {
-        
         geocodeByAddress(spotLocation.description)
         .then(results => getLatLng(results[0]))
         .then(({ lat, lng }) => {
@@ -18,12 +17,15 @@ class PlacesAutocomplete extends React.Component {
     }
 
     
+// Log error status and clear dropdown when Google Maps API returns an error.
+   
   render(){
       return(
         <div>
         <GooglePlacesAutocomplete
           onSelect={this.onInputSelect}
           placeholder='Search cities, places and more...'
+          onError={this.onError}
         />
       </div>
       )

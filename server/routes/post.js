@@ -37,7 +37,8 @@ router.post('/new', async (req, res) => {
       mySpot = new Spot({
         location,
         placeId: location.place_id,
-        posts: newPost._id
+        posts: newPost._id,
+        followedBy: []
       })
       try {
         // CREATE the spot

@@ -87,6 +87,33 @@ router.get('/loggedin', async (req, res) => {
   }
 })
 
+// // FACEBOOK
+// router.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }))
+// router.get('/facebook/callback', (req, res, next) => {
+//   passport.authenticate('facebook', (err, user, info) => {
+//     if (err) {
+//       return next(err)
+//     }
+//     if (!user) {
+//       const message = 'Invalid credentials'
+//       return res.send(message)
+//     }
+//     req.logIn(user, async (err) => {
+//       if (err) {
+//         return next(err)
+//       }
+//       req.session.currentUser = user
+//       try {
+//         // if user didn't choose categories (first time login) redirect to onboarding
+//         const myUser = await defineUser(req.session.currentUser)
+//         myUser.categories.length >= 1 ? res.redirect(process.env.CLIENT_URL) : res.redirect(`${process.env.CLIENT_URL}/onboarding`)
+//       } catch (err) {
+//         console.log(err)
+//       }
+//     })
+//   })(req, res, next)
+// })
+
 // FACEBOOK
 router.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }))
 router.get('/facebook/callback', (req, res, next) => {
@@ -103,9 +130,17 @@ router.get('/facebook/callback', (req, res, next) => {
         return next(err)
       }
       req.session.currentUser = user
-      // if user didn't choose categories (first time login) redirect to onboarding
-      const myUser = await defineUser(req.session.currentUser)
-      myUser.categories.length >= 1 ? res.redirect(process.env.CLIENT_URL) : res.redirect(`${process.env.CLIENT_URL}/onboarding`)
+      try {
+        // if user didn't choose categories (first time login) redirect to onboarding
+        const myUser = await defineUser(req.session.currentUser)
+        if (!myUser) {
+          res.redirect(`${process.env.CLIENT_URL}/onboarding`)
+        } else {
+          myUser.categories.length >= 1 ? res.redirect(process.env.CLIENT_URL) : res.redirect(`${process.env.CLIENT_URL}/onboarding`)
+        }
+      } catch (err) {
+        console.log(err)
+      }
     })
   })(req, res, next)
 })

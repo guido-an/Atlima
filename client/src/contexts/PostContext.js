@@ -94,7 +94,7 @@ export class PostContext extends React.Component {
     filterOnBoundsSearch = areaSpot => {
             let insideSpot = [] 
             this.state.mapsPostCopy.forEach(post => {
-            if(post.spot.placeId == areaSpot.place_id || post.spot.location.coordinates.lat >= areaSpot.geometry.bounds.Ya.g && post.spot.location.coordinates.lat <= areaSpot.geometry.bounds.Ya.i && post.spot.location.coordinates.lng >= areaSpot.geometry.bounds.Ta.g && post.spot.location.coordinates.lng <= areaSpot.geometry.bounds.Ta.i){
+            if(post.spot.placeId == areaSpot.place_id || post.spot.location.coordinates.lat >= areaSpot.geometry.bounds.Ya.i && post.spot.location.coordinates.lat <= areaSpot.geometry.bounds.Ya.j && post.spot.location.coordinates.lng >= areaSpot.geometry.bounds.Ua.i && post.spot.location.coordinates.lng <= areaSpot.geometry.bounds.Ua.j){
                 insideSpot.push(post)
             }
             
@@ -102,7 +102,7 @@ export class PostContext extends React.Component {
         this.setState({ mapsPost: insideSpot })
      }
 
-     filterOnMarkerClick = id => {
+     filterOnSpotClick = id => {
         const filteredPosts = this.state.mapsPostCopy.filter(post => {
           if(post.spot && post.spot.placeId == id){ 
            return post
@@ -127,13 +127,11 @@ export class PostContext extends React.Component {
         }
     }
 
-     resetMapsFeed = async => {
-        this.setState({ mapsPost: this.state.mapsPostCopy })
-    }
+    
 
   render(){
     const { feedPosts, userPosts, mapsPost, mapsPostCopy } = this.state
-    const { getFeedPosts, getUserPosts, getMapPosts, createPost, likePost, commentPost, getSinglePost, filterOnBoundsSearch, filterOnMarkerClick, filterMapCategories, resetMapsFeed, filterPostsOnCategory } = this
+    const { getFeedPosts, getUserPosts, getMapPosts, createPost, likePost, commentPost, getSinglePost, filterOnBoundsSearch, filterOnSpotClick, filterMapCategories, filterPostsOnCategory } = this
       return(
           <Context.Provider 
               value={{ 
@@ -150,10 +148,9 @@ export class PostContext extends React.Component {
                   commentPost,
                   getSinglePost,
                   filterOnBoundsSearch,
-                  filterOnMarkerClick,
+                  filterOnSpotClick,
                   filterMapCategories,
-                  resetMapsFeed,
-                  filterPostsOnCategory
+                                    filterPostsOnCategory
                 }}>
 
 
