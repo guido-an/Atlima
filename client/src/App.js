@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import OnBoarding from './pages/OnBoarding';
 import SpotsMap from './pages/SpotsMap';
 import CreatePost from './pages/CreatePost';
+import Landing from './pages/Landing';
 
 import Navbar from './components/Navbar'; 
 import EditProfile from './components/Profile/EditProfile';
@@ -29,12 +30,15 @@ class App extends React.Component {
       {this.context.loggedInUser && <Navbar /> }    
       
         <Switch>      
+          { this.context.loggedInUser ?
           <ProtectedRoute
               exact path="/"
               user={this.context.loggedInUser}
               component={Home}
-            />
-            
+            /> : 
+            <Route exact path="/" component={Landing}/>
+          }
+
             <Route
               path="/login"
               component={Login} />
