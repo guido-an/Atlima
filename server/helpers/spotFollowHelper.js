@@ -16,6 +16,20 @@ async function checkIfFollow (spot, user) {
   return followIsPresent
 }
 
+async function createSpotWithFirstFollower(user, reqBody){
+  try {
+    mySpot = new Spot({
+      location: reqBody.location,
+      placeId: reqBody.spotPlaceId,
+      followedBy: [user._id]
+    })
+    mySpot = await mySpot.save()
+  } catch(err){
+    console.log(err)
+  }
+}
+
 module.exports = {
-  checkIfFollow
+  checkIfFollow,
+  createSpotWithFirstFollower
 }

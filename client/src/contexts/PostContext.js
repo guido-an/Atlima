@@ -92,12 +92,16 @@ export class PostContext extends React.Component {
     }
 
     filterOnBoundsSearch = areaSpot => {
+        console.log(areaSpot, 'areaspot')
             let insideSpot = [] 
             this.state.mapsPostCopy.forEach(post => {
-            if(post.spot.placeId == areaSpot.place_id || post.spot.location.coordinates.lat >= areaSpot.geometry.bounds.Ya.i && post.spot.location.coordinates.lat <= areaSpot.geometry.bounds.Ya.j && post.spot.location.coordinates.lng >= areaSpot.geometry.bounds.Ua.i && post.spot.location.coordinates.lng <= areaSpot.geometry.bounds.Ua.j){
-                insideSpot.push(post)
+            if(!post.spot) {
+               return 
+            } else {
+                if(post.spot.placeId == areaSpot.place_id || post.spot.location.coordinates.lat >= areaSpot.geometry.bounds.Ya.i && post.spot.location.coordinates.lat <= areaSpot.geometry.bounds.Ya.j && post.spot.location.coordinates.lng >= areaSpot.geometry.bounds.Ua.i && post.spot.location.coordinates.lng <= areaSpot.geometry.bounds.Ua.j){
+                    insideSpot.push(post)
+                }
             }
-            
         })
         this.setState({ mapsPost: insideSpot })
      }

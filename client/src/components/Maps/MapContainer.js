@@ -21,13 +21,12 @@ class MapContainer extends React.Component {
      errorMessage: '',
      areaCoordinates: null
      }
-
+ 
      componentDidMount(){
       this.getUserLocation()
      // this.props.categoryContext.cleanSelectedCategoriesIds()
      // this.props.categoryContext.getCategories()
      }
-
     
     getPosts = async () => {
        try {
@@ -46,8 +45,8 @@ class MapContainer extends React.Component {
            areaCoordinates: results[0]
           })   
           if (this.state.areaCoordinates.geometry.bounds){
-           this.context.filterOnBoundsSearch(this.state.areaCoordinates)
-          }else{
+            this.context.filterOnBoundsSearch(this.state.areaCoordinates)
+          } else{
            this.context.filterOnSpotClick(spotLocation.place_id)
           }
            this.setState({ 
@@ -60,7 +59,7 @@ class MapContainer extends React.Component {
      }
     
       onMarkerClick = props => {
-      this.getLocation(props)
+        this.getLocation(props.location)
       }
 
       onMapClicked = (props) => {
