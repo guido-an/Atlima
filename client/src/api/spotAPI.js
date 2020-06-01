@@ -16,6 +16,16 @@ export const GET_SINGLE_SPOT = async (spotId) => {
   return spot.data
 }
 
-export const FOLLOW_SPOT = async (spotId) => {
-  await service.post(`/spot/follow/${spotId}`)
+export const FOLLOW_SPOT = async (spotPlaceId, location) => {
+  await service.post(`/spot/follow`, {
+    spotPlaceId,
+    location
+  })
 }
+
+// export const CREATE_SPOT = async (spotPlaceId, location) => {
+//   await service.post('/spot/create', {
+//     spotPlaceId,
+//     location
+//   })
+// }

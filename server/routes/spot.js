@@ -15,44 +15,50 @@ router.get('/all', async (req, res) => {
   }
 })
 
-// // SINGLE SPOT
-// router.get('/:id', async (req, res) => {
-//   try {
-//     const spot = await Spot.find({ _id: req.params.id })
-//     res.status(200).send(spot)
-//   } catch (err) {
-//     res.status(400).send({ message: 'Something went wrong with categories 5000/all' })
-//   }
-// })
-
 // SINGLE SPOT
 router.get('/:id', async (req, res) => {
   try {
     const spot = await Spot.find({ placeId: req.params.id })
-    console.log(spot)
     res.status(200).send(spot)
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong with categories 5000/all' })
   }
 })
 
-router.post('/follow/:placeId', async (req, res) => {
+
+// FOLLOW SPOT
+router.post('/follow', async (req, res) => {
+  let update;
   try {
     const user = await defineUser(req.session.currentUser)
-    const filter = { placeId: req.params.placeId }
-    let update
+    const filter = { placeId: req.body.spotPlaceId }
     const spot = await Spot.findOne(filter)
-    const followIsPresent = await spotHelper.checkIfFollow(spot, user)
-    if (!followIsPresent) {
-      update = { $addToSet: { followedBy: user._id }, new: true }
-    } else {
-      update = { $pull: { followedBy: user._id }, new: true }
+    if(!spot){
+      // create spot
+      spotHelper.createSpotWithFirstFollower(user, req.body)
+      res.status(200).send({ message: `Spot created` })
+     }  else {
+          const followIsPresent = await spotHelper.checkIfFollow(spot, user)
+          if (!followIsPresent) {
+            // start to follow
+            update = { $addToSet: { followedBy: user._id } }
+            const updatedSpot = await Spot.findOneAndUpdate(filter, update)
+            res.status(200).send({ message: `Follow the spot ${updatedSpot}` })
+          } else {
+            // unfollow
+            update = { $pull: { followedBy: user._id } }
+            const updatedSpot = await Spot.findOneAndUpdate(filter, update, { new: true } )
+            // delete if no followers and posts
+            if(updatedSpot.posts.length === 0 && updatedSpot.followedBy.length === 0 ){
+              updatedSpot.delete()
+            } 
+            res.status(200).send({ message: `Unfollow the spot ${updatedSpot}` })
+          }
+       }
     }
-    const updatedSpot = await Spot.findOneAndUpdate(filter, update)
-    res.status(200).send({ message: `Follow/unfollow the spot ${updatedSpot}` })
-  } catch (err) {
-    res.status(400).send({ message: 'Something went wrong with following the spot 5000 /follow/:id' })
-  }
+     catch(err){
+      res.status(400).send({ message: 'Something went wrong in finding a spot 5000 /follow' })
+    }
 })
 
 module.exports = router
