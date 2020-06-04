@@ -9,6 +9,7 @@ import OnBoarding from './pages/OnBoarding';
 import SpotsMap from './pages/SpotsMap';
 import CreatePost from './pages/CreatePost';
 import Landing from './pages/Landing';
+import Notifications from './pages/Notifications';
 
 import Navbar from './components/Navbar'; 
 import EditProfile from './components/Profile/EditProfile';
@@ -20,6 +21,7 @@ class App extends React.Component {
 
   componentDidMount(){
     this.context.fetchUser(); 
+    this.context.getUnreadNotifications()
   }
   
   render() {
@@ -73,6 +75,12 @@ class App extends React.Component {
               path="/spots-map"
               component={SpotsMap} />
             /> 
+
+            <Route
+              path={`/:id/notifications`}
+              component={Notifications} />
+            /> 
+
         </Switch>
       </div>
     );

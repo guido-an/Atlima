@@ -59,24 +59,16 @@ class SpotHeader extends React.Component {
        <div className='spot-header-section'>
         <div className='divider' />
         <div className='spot-header-container'>
-          <div className='title-spot'>
-            <img src={iconActive} alt='icon-active-spot' />
             <h1>{description}</h1>
-          </div>
           <form onSubmit={this.followSpot}>
               {this.state.isFollowingSpot === true  ?  <button className="unfollow-btn">Unfollow</button> :  <button className="follow-btn">Follow</button>}
           </form> 
         </div>
-        {this.props.mapsPost.length >= 1 ?
             <div className="spot-info">
               <span>{this.state.spot && this.state.spot.followedBy.length || 0 } Followers</span>
                <span className="dot"></span>
                <span>{this.props.mapsPost && this.props.mapsPost.length} Posts</span>
-            </div> :
-            <div>
-              <p>no posts yet</p>
             </div> 
-         }
       </div>
     )
   }

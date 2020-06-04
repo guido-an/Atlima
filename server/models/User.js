@@ -7,17 +7,13 @@ const userSchema = new Schema({
   password: String,
   email: { type: String, unique: true },
   mediaArray: Array,
-  likedPosts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  team: String,
-  hometown: String,
-  country: String,
-  tour: Array,
+  likedPosts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
   sponsors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sponsor' }],
   categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
-  achievements: Array,
   provider: String,
   facebookId: String,
   notifications: Array,
+  unreadNotifications: { type: Number, default: 0 },
   followedSpots: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Spot' }]
 }, {
   timestamps: {

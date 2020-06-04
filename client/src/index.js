@@ -1,3 +1,4 @@
+import './App.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
@@ -7,7 +8,10 @@ import { BrowserRouter } from 'react-router-dom'
 import { AuthStore } from './contexts/AuthContext'
 import { PostContext } from './contexts/PostContext'
 import { CategoryContext } from './contexts/CategoryContext'
-import './App.scss'
+// Time ago
+import JavascriptTimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+JavascriptTimeAgo.locale(en)
 
 ReactDOM.render(<AuthStore><CategoryContext><PostContext><BrowserRouter><App /></BrowserRouter></PostContext></CategoryContext></AuthStore>, document.getElementById('root'))
 

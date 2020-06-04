@@ -20,3 +20,8 @@ export const EDIT_USER = async (userId, mediaArray, firstName, lastName, team, c
 export const ADD_CATEGORIES = async categories => {
   await service.post('/profile/add-categories', { categories })
 }
+
+export const GET_NOTIFICATIONS = async userId => {
+  const notifications = await service.get(`/profile/notifications/${userId}`)
+  return notifications.data
+}

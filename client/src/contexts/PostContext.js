@@ -92,7 +92,6 @@ export class PostContext extends React.Component {
     }
 
     filterOnBoundsSearch = areaSpot => {
-        console.log(areaSpot, 'areaspot')
             let insideSpot = [] 
             this.state.mapsPostCopy.forEach(post => {
             if(!post.spot) {
@@ -134,16 +133,11 @@ export class PostContext extends React.Component {
     
 
   render(){
-    const { feedPosts, userPosts, mapsPost, mapsPostCopy } = this.state
     const { getFeedPosts, getUserPosts, getMapPosts, createPost, likePost, commentPost, getSinglePost, filterOnBoundsSearch, filterOnSpotClick, filterMapCategories, filterPostsOnCategory } = this
       return(
           <Context.Provider 
               value={{ 
                   ...this.state, 
-                  feedPosts, 
-                  userPosts, 
-                  mapsPost,
-                  mapsPostCopy,
                   getFeedPosts, 
                   getUserPosts,
                   getMapPosts, 

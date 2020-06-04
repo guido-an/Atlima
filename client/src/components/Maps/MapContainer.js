@@ -6,6 +6,7 @@ import { geocodeByAddress } from 'react-google-places-autocomplete';
 import PostContext  from '../../contexts/PostContext'
 import Places from '../Maps/Places'
 import SpotHeader from './SpotHeader'
+import NoPostsOnMap from './NoPostsOnMap'
 import DisplayPosts from '../../components/Post/DisplayPosts'
 import iconActive from '../../images/icon-google-maps.png'
 import iconNormal from '../../images/icon-google-maps2.png'
@@ -135,19 +136,23 @@ class MapContainer extends React.Component {
             { this.renderMap() }
           </div>
           <div className="map-feed" >
-            {this.state.activeMarker && 
-            <div>
-               <SpotHeader 
-               activeMarker={this.state.activeMarker}
-               mapsPost={this.context.mapsPost}
-                />
-               <DisplayPosts 
-               posts={this.context.mapsPost} 
-               likePost={this.context.likePost}
-               commentPost={this.context.commentPost}
-               /> 
-            </div>}
-        </div>
+            {this.state.activeMarker &&  
+                 <SpotHeader 
+                 activeMarker={this.state.activeMarker}
+                 mapsPost={this.context.mapsPost}
+                 />
+            }
+            {(this.state.activeMarker && this.context.mapsPost.length >= 1) &&
+                 <DisplayPosts 
+                  posts={this.context.mapsPost} 
+                  likePost={this.context.likePost}
+                  commentPost={this.context.commentPost}
+                  />  
+            }
+            {(this.state.activeMarker && this.context.mapsPost.length === 0) &&
+                <NoPostsOnMap activeMarker={this.state.activeMarker}/>
+            }
+         </div>
         </div>
       );
   }
