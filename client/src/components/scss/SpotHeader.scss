@@ -17,20 +17,13 @@
         position: relative;
         top: 6px
     }
-    .title-spot{
-        display: flex;
-        img{
-            width: 22px;
-            height: 30px;
-            margin-right: 10px;
-            position: relative;
-            top: 20px;
-        }
-    }
+   
     h1 {
         font-weight: 600 !important;
         color: $dark-grey;
         font-size: 22px;
+        position: relative;
+        top: 20px
     }
     .follow-btn,
     .unfollow-btn{
@@ -41,7 +34,7 @@
         height: 40px;
         width: 110px;
         position: relative;
-        top: 18px;
+        top: 20px;
         outline: none
     }
     .follow-btn{
@@ -74,4 +67,10 @@
             bottom: 3px
           }
     }
+}
+
+.no-spots-yet{
+    margin-top: 80px;
+    text-align: center;
+    color: $light-grey;
 }

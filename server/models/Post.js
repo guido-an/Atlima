@@ -8,10 +8,7 @@ const postSchema = new Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   tag_users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
-  likes: [{
-    _id: false,
-    likedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
-  }],
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   comments: [{
     _id: false,
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

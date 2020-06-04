@@ -24,6 +24,7 @@ async function createSpotWithFirstFollower(user, reqBody){
       followedBy: [user._id]
     })
     mySpot = await mySpot.save()
+    return mySpot
   } catch(err){
     console.log(err)
   }

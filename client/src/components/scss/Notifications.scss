@@ -1,0 +1,35 @@
+@import "general.scss";
+
+.notifications-section{
+    margin: $base-margin;
+    h1 {
+        margin: 20px 0 40px;
+        text-align: center;
+    }
+    .container{
+     display: flex;
+     justify-content: space-between;
+     margin-bottom: 30px;
+     .text {
+         display: flex;
+     }
+     .time-ago{
+         color: $dark-grey;
+         position: relative;
+         left: 32px
+     }
+
+     .orange-dot{
+         position: relative;
+         top: 5px;
+         height: 12px;
+         width: 12px;
+         margin: 0 10px;
+         background-color: $primary-color !important;
+         border-radius: 50%;
+         display: inline-block;
+         position: relative;
+         bottom: 3px
+     }
+    }
+}
