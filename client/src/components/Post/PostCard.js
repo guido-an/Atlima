@@ -4,11 +4,12 @@ import ReactPlayer from 'react-player'
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import PostContext  from '../../contexts/PostContext'
+import TimeAgo from '../../components/TimeAgo'
 
 class PostCard extends React.Component {
   static contextType = PostContext
   
-  state = { post: this.props.post }
+  state = { post: this.props.post}
 
   likePostAndUpdateIt = async postId => {
     postId = this.state.post._id
@@ -31,8 +32,8 @@ class PostCard extends React.Component {
             <img className='ui avatar image circular' src='https://picsum.photos/250' />
           </div>
           <div className='post-card-header-content'>
-            <p><strong>{this.state.post.user.firstName}</strong></p>
-            <span>{(this.state.post.spot && this.state.post.spot.location) && this.state.post.spot.location.description}</span>
+            <p><strong>{this.state.post.user.firstName} {this.state.post.user.lastName}</strong></p>
+            <span> <TimeAgo date={Date.parse(this.state.post.created_at)} /> - {this.state.post.spot.location ? this.state.post.spot.location.terms[0].value : "s"}</span>
 
           </div>
         </div>
