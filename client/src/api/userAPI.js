@@ -5,9 +5,9 @@ const service = axios.create({
   withCredentials: true
 })
 
-export const EDIT_USER = async (userId, mediaArray, firstName, lastName, team, country, hometown) => {
+export const EDIT_USER = async (userId, mediaFile, firstName, lastName, team, country, hometown) => {
   const editUser = await service.post(`/profile/edit/${userId}`, {
-    mediaArray,
+    mediaFile,
     firstName,
     lastName,
     team,

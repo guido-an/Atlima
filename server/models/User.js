@@ -6,7 +6,7 @@ const userSchema = new Schema({
   lastName: String,
   password: String,
   email: { type: String, unique: true },
-  mediaArray: Array,
+  mediaFile: Array,
   likedPosts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
   sponsors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sponsor' }],
   categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
