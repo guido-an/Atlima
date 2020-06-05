@@ -8,7 +8,7 @@ class UserProfile extends React.Component {
 
   state = { 
       content: '',
-      mediaArray: []
+      mediaFile: []
     }
   
 

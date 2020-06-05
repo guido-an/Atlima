@@ -13,28 +13,24 @@ class Post extends React.Component {
 
   state = { 
       content: '',
-      mediaArray: [],
+      mediaFile: [],
       location: null,
       redirect: false
     }
 
     async componentDidMount(){
-      console.log( this.context.selectedCategoriesIds,  "before mounted")
       await this.context.cleanSelectedCategoriesIds()
-      console.log( this.context.selectedCategoriesIds,  "after mounted")
     }
   
   onSubmit = async e => {
     e.preventDefault();
-    console.log( this.context.selectedCategoriesIds,  "on submit")
       try {
         await this.props.postContext.createPost(
           this.state.content,
-          this.state.mediaArray,
+          this.state.mediaFile,
           this.state.location,
           this.context.selectedCategoriesIds
         )
-
       this.setState({ redirect: true })
       // this.props.history.push('/')
  
@@ -51,8 +47,8 @@ class Post extends React.Component {
     }
 
 
-    getMediaArray = url => {
-      this.setState({ mediaArray: [...this.state.mediaArray, url]})
+    getMediaFile = file => {
+      this.setState({ mediaFile: [...this.state.mediaFile, file]})
     }
 
     getLocation = spotLocation => {
@@ -63,6 +59,7 @@ class Post extends React.Component {
     if(this.state.redirect){
       return <Redirect to="/" />
     }
+    console.log('midia' , this.state.mediaFile)
     return (
       <div>
         <form onSubmit={this.onSubmit}>
@@ -71,7 +68,7 @@ class Post extends React.Component {
               <SelectCategoriesPost/>
             <button>Create post</button>
         </form>
-        <ImageUpload getMediaArray={this.getMediaArray}/>
+        <ImageUpload getMediaFile={this.getMediaFile}/>
       </div>
     )
   }

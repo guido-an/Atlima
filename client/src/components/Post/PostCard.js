@@ -1,6 +1,8 @@
 import '../scss/PostCard.scss'
 import React from 'react'
-
+import ReactPlayer from 'react-player'
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import PostContext  from '../../contexts/PostContext'
 
 class PostCard extends React.Component {
@@ -20,6 +22,8 @@ class PostCard extends React.Component {
   }
 
   render () {
+    console.log(this.state.post)
+    debugger
     return (
       <div className='post-card-container'>
         <div className='post-card-header'>
@@ -32,16 +36,39 @@ class PostCard extends React.Component {
 
           </div>
         </div>
-
         <div>
-          <img src='https://picsum.photos/400' style={{ maxWidth: '100vw', left: '0px' }} />
+          <Carousel showArrows={false} showThumbs={false} showStatus={false} infiniteLoop={true} dynamicHeight={true} cancelable={false}>
+            {this.state.post.mediaFile && this.state.post.mediaFile.map(media => {
+              if (media.type[0] == "v"){
+              return (
+                <div>
+                  <ReactPlayer
+                  className='react-player'
+                  playing={false}
+                  loop={true}
+                  controls={true}
+                  playIcon=""
+                  url= {media.url}
+                  width='100%'
+                  height='100%'
+                />
+              </div>
+              )}
+              else if(media.type[0] == "i" ){
+                return (
+                <img src={media.url} style={{ maxWidth: '100vw', left: '0px' }} />
+                )}
+              else{
+                
+              }
+            })}
+          </Carousel>
         </div>
 
         <div className='post-card-icons'>
           <div onClick={this.likePostAndUpdateIt}>
             <i className='heart icon outline' />
           </div>
-          
           <div>
             <i className='comment outline icon' />
           </div>
