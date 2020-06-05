@@ -12,6 +12,7 @@ class Post extends React.Component {
    static contextType = CategoryContext
 
   state = { 
+      title: '',
       content: '',
       mediaFile: [],
       location: null,
@@ -26,6 +27,7 @@ class Post extends React.Component {
     e.preventDefault();
       try {
         await this.props.postContext.createPost(
+          this.state.title,
           this.state.content,
           this.state.mediaFile,
           this.state.location,
@@ -63,6 +65,7 @@ class Post extends React.Component {
     return (
       <div>
         <form onSubmit={this.onSubmit}>
+            <input onChange={this.onInputChange} type="text" placeholder="title" name="title"/>
             <input onChange={this.onInputChange} type="text" placeholder="content" name="content"/>
             <Places getLocation={this.getLocation} />
               <SelectCategoriesPost/>
