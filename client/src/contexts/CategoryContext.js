@@ -13,7 +13,7 @@ const service = axios.create({
 export class CategoryContext extends React.Component {
     state = { 
         allCategories: [],
-        selectedCategoriesIds: []
+        selectedCategoriesIds: [],
     };
 
     getCategories = async () => {
@@ -25,7 +25,6 @@ export class CategoryContext extends React.Component {
         }
      }
 
-    
      onSelectCategories = e => {
         const { name } = e.target;
         if(e.target.checked){
@@ -52,16 +51,13 @@ export class CategoryContext extends React.Component {
         }
 
         onSubmitUserCategories = async e => {
-            //const userId = this.context.loggedInUser._id
             e.preventDefault();
               try {
                 await ADD_CATEGORIES(this.state.selectedCategoriesIds)
-                // this.props.history.push(`/profile/edit/${userId}`)
             }  catch(err){
                   console.log(err)
              }
           };
-
 
   render(){
       const { getCategories, onSelectCategories, removeUserCategory, onSubmitUserCategories, cleanSelectedCategoriesIds } = this

@@ -17,7 +17,7 @@ export const GET_SINGLE_SPOT = async (spotId) => {
 }
 
 export const FOLLOW_SPOT = async (spotPlaceId, location) => {
-  await service.post(`/spot/follow`, {
+  await service.post('/spot/follow', {
     spotPlaceId,
     location
   })

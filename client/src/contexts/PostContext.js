@@ -17,7 +17,8 @@ export class PostContext extends React.Component {
         feedPostsCopy: [],
         userPosts: [],
         mapsPost: [],
-        mapsPostCopy: []
+        mapsMarkers: [],
+        mapsPostCopy: [],
       };
 
       getFeedPosts = async () => {
@@ -45,7 +46,8 @@ export class PostContext extends React.Component {
          const mapPosts = await service.get('/post/all/spot')
          this.setState({ 
              mapsPost: mapPosts.data,
-             mapsPostCopy: mapPosts.data
+             mapsPostCopy: mapPosts.data,
+             mapsMarkers: mapPosts.data
           })
          return mapPosts.data
         } catch(err){
@@ -95,7 +97,7 @@ export class PostContext extends React.Component {
 
     filterOnBoundsSearch = areaSpot => {
             let insideSpot = [] 
-            this.state.mapsPostCopy.forEach(post => {
+            this.state.mapsMarkers.forEach(post => {
             if(!post.spot) {
                return 
             } else {
@@ -104,38 +106,62 @@ export class PostContext extends React.Component {
                 }
             }
         })
+        console.log(insideSpot, 'inside spot')
         this.setState({ mapsPost: insideSpot })
      }
 
-     filterOnSpotClick = id => {
-        const filteredPosts = this.state.mapsPostCopy.filter(post => {
+    
+
+    //  filterPostsOnCategory = (stateArrayCopy) => {
+    //     let filteredFeedPosts = []
+    //     const categoriesSelected = this.context.selectedCategoriesIds
+    //      stateArrayCopy.forEach(post => {
+    //        const found = post.categories.some(element => categoriesSelected.includes(element))
+    //        if(found){
+    //         filteredFeedPosts = [...filteredFeedPosts, post]
+    //        }
+    //     }) 
+    //     return filteredFeedPosts
+    //  }
+
+     filterPostsOnCategoryHome = () => {
+       const filteredPosts = this.filterPostsOnCategory(this.state.feedPostsCopy)
+        this.setState({ feedPosts: filteredPosts })
+        if(this.context.selectedCategoriesIds.length == 0){
+            this.setState({ feedPosts: this.state.feedPostsCopy })
+        }
+    }
+
+    filterOnSpotClick = id => {
+         const filteredPosts = this.state.mapsMarkers.filter(post => {
           if(post.spot && post.spot.placeId == id){ 
            return post
           }
         })
         this.setState({ mapsPost: filteredPosts })
      }
-   
-     filterPostsOnCategory = categoriesSelected => {
-        let filteredFeedPosts = []
-        categoriesSelected = this.context.selectedCategoriesIds
-       this.state.feedPostsCopy.forEach(post => {
-           const found = post.categories.some(element => categoriesSelected.includes(element))
-           if(found){
-            filteredFeedPosts = [...filteredFeedPosts, post]
-           }
-        }) 
-        this.setState({ feedPosts: filteredFeedPosts })
 
-        if(categoriesSelected.length == 0){
-            this.setState({ feedPosts: this.state.feedPostsCopy })
+
+    filterMarkersOnMap = () => {
+        let postsByCategory = []
+        const categoriesSelected = this.context.selectedCategoriesIds
+        this.state.mapsPostCopy.forEach(post => {
+            const found = post.categories.some(element => categoriesSelected.includes(element))
+            if(found){
+                postsByCategory = [...postsByCategory, post]
+            }
+         }) 
+         this.setState({ 
+             mapsMarkers: postsByCategory,
+        })
+       
+        if(categoriesSelected.length === 0) {
+            this.setState({ mapsMarkers: this.state.mapsPostCopy})
         }
     }
 
-    
-
   render(){
-    const { getFeedPosts, getUserPosts, getMapPosts, createPost, likePost, commentPost, getSinglePost, filterOnBoundsSearch, filterOnSpotClick, filterMapCategories, filterPostsOnCategory } = this
+    const { getFeedPosts, getUserPosts, getMapPosts, createPost, likePost, commentPost, getSinglePost, filterOnBoundsSearch, filterOnSpotClick, filterMarkersOnMap, filterPostsOnCategoryHome } = this
       return(
           <Context.Provider 
               value={{ 
@@ -149,8 +175,8 @@ export class PostContext extends React.Component {
                   getSinglePost,
                   filterOnBoundsSearch,
                   filterOnSpotClick,
-                  filterMapCategories,
-                                    filterPostsOnCategory
+                  filterMarkersOnMap,
+                  filterPostsOnCategoryHome
                 }}>
 
 

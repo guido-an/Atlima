@@ -8,6 +8,7 @@ import Places from '../Maps/Places'
 import SpotHeader from './SpotHeader'
 import NoPostsOnMap from './NoPostsOnMap'
 import DisplayPosts from '../../components/Post/DisplayPosts'
+import CategoriesOnMap from '../../components/Categories/CategoriesOnMap'
 import iconActive from '../../images/icon-google-maps.png'
 import iconNormal from '../../images/icon-google-maps2.png'
 //import iconUser from '../../images/icon-user-location.png'
@@ -55,6 +56,10 @@ class MapContainer extends React.Component {
             lat,
             lng
            }) 
+
+          //  if(this.state.activeMarker){
+          //    this.context.filterMarkersOnCategories(this.state.activeMarker.place_id)
+          // }
        })
        .catch(error => console.error(error));
      }
@@ -100,12 +105,12 @@ class MapContainer extends React.Component {
         onDragend={this.centerMoved}
         google={this.props.google} 
         style={style}
-        zoom={12}
+        zoom={6}
         center={{
             lat: this.state.lat,
             lng: this.state.lng
           }}>
-          {this.context.mapsPostCopy && this.context.mapsPostCopy.map((post, index) => {
+          {this.context.mapsMarkers && this.context.mapsMarkers.map((post, index) => {
             if(post.spot){
               return  <Marker 
               onClick={this.onMarkerClick} 
@@ -132,6 +137,12 @@ class MapContainer extends React.Component {
           <div className="places-container">
             <Places getLocation={this.getLocation} />
           </div>
+            <CategoriesOnMap 
+            getLocation={this.getLocation}
+            categoryContext={this.props.categoryContext}
+            postContext={this.context}
+            activeMarker={this.state.activeMarker}
+             />
           <div id="map">
             { this.renderMap() }
           </div>

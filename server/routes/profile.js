@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/User')
-var ObjectId = require('mongodb').ObjectID
+const Category = require('../models/Category')
 const defineUser = require('../helpers/defineUser')
 
 /* GET USER */
@@ -42,9 +42,13 @@ router.post('/add-categories', async (req, res) => {
   const { categories } = req.body
   try {
     const user = await defineUser(req.session.currentUser)
-    const filter = user._id
+    const filter = { _id: user._id }
     const update = { categories: categories }
-    await User.findOneAndUpdate(filter, update, { new: true })
+    const userUpdated = await User.findOneAndUpdate(filter, update, { new: true })
+    req.session.currentUser = userUpdated
+    categories.forEach(async categoryId => {
+      await Category.findByIdAndUpdate({ _id: categoryId }, { $addToSet: { usersFollowing: user._id } })
+    })
     res.status(200).json({ message: 'categories added to user. 5000 - /add-categories' })
   } catch (err) {
     console.log(err)

@@ -3,7 +3,7 @@ import React from 'react'
 import CategoryContext from '../../contexts/CategoryContext'
 
 class FilterByCategories extends React.Component {
-    static contextType = CategoryContext
+   static contextType = CategoryContext
 
   componentDidMount () {
     this.context.cleanSelectedCategoriesIds()
@@ -12,7 +12,7 @@ class FilterByCategories extends React.Component {
 
   onFilterCategoryChange = async e => {
     await this.context.onSelectCategories(e)
-    this.props.postContext.filterPostsOnCategory()
+    this.props.postContext.filterPostsOnCategoryHome()
   }
 
   render () {

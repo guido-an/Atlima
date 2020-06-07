@@ -5,7 +5,8 @@ const categorySchema = new Schema({
   name: String,
   description: String,
   picture: String,
-  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
+  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+  usersFollowing: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 
 })
 
