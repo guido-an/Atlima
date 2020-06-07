@@ -29,9 +29,25 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
+// app.use(cors({
+//   origin: [process.env.CLIENT_URL, 'https://altima-app.herokuapp.com/'],
+//   credentials: true
+// }))
+
+var allowedOrigins = [process.env.CLIENT_URL,
+  'https://altima-app.herokuapp.com/']
 app.use(cors({
-  origin: [process.env.CLIENT_URL],
-  credentials: true
+  origin: function (origin, callback) {
+    // allow requests with no origin
+    // (like mobile apps or curl requests)
+    if (!origin) return callback(null, true)
+    if (allowedOrigins.indexOf(origin) === -1) {
+      var msg = 'The CORS policy for this site does not ' +
+                'allow access from the specified Origin.'
+      return callback(new Error(msg), false)
+    }
+    return callback(null, true)
+  }
 }))
 
 // Passport Facebook Strategy
