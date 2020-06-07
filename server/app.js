@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const logger = require('morgan')
 const session = require('express-session')
 const passport = require('passport')
+const path = require('path')
 const MongoStore = require('connect-mongo')(session)
 const flash = require('connect-flash')
 const cors = require('cors')
@@ -69,5 +70,11 @@ app.use('/categories', categoryRoutes)
 
 const spotsRoutes = require('./routes/spot')
 app.use('/spot', spotsRoutes)
+
+app.use(express.static(path.join(__dirname, 'build')))
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
 
 module.exports = app
