@@ -45,7 +45,7 @@ class PostCard extends React.Component {
             <div className="spot-info">
               <span> <TimeAgo date={Date.parse(this.state.post.created_at)} /> </span>
                <span className="dot-location"></span>
-               <span className="location-name"><RoomRoundedIcon /> {this.state.post.spot ? this.state.post.spot.location.terms[0].value : "Its a mistery :o"}</span>
+               <span className="location-name"><RoomRoundedIcon /> {this.state.post.spot && this.state.post.spot.location.terms ? this.state.post.spot.location.terms[0].value : "Its a mistery :o"}</span>
             </div> 
           </div>
         </div>
@@ -92,13 +92,14 @@ class PostCard extends React.Component {
             <ReplyRoundedIcon />
           </div>
         </div> 
-        <p className="description"><ReadMoreReact 
-                                      text={this.state.post.content}  
-                                      min={70}
-                                      ideal={75}
-                                      max={85}
-                                      readMoreText={"...READ MORE"}
-                                      /></p>
+        <p className="description">
+          <ReadMoreReact 
+            text={this.state.post.content}  
+            min={70}
+            ideal={75}
+            max={85}
+            readMoreText={"...READ MORE"}
+            /></p>
         <div className="spacer"></div>
       </div>
     )

@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 const postSchema = new Schema({
   mediaFile: Array,
   content: String,
+  title: String,
   spot: { type: mongoose.Schema.Types.ObjectId, ref: 'Spot' },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   tag_users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],

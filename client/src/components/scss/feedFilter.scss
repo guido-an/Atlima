@@ -4,11 +4,31 @@
         white-space: nowrap;
         margin-left: 5vw;
         margin-right: 5vw;
-    }    
+    }  
+
+    button{
+        width: 180px;
+        height: 60px;
+        background: #FFFFFF;
+        border: 2px solid #FF7700;
+        box-sizing: border-box;
+        border-radius: 8px;
+        color: #FF7700;
+        font-size: 22px;
+        font-weight: bold;
+        display: block;
+        position: relative;
+        bottom: 32px;
+        cursor: pointer;
+    }
+    .onboarding::-webkit-scrollbar {
+        display: none;
+      }  
     .item{
         display: inline-block;
         color: white;
         text-align: center;
+        font-weight: bold;
         width: 200px;
         height: 70px;
         text-decoration: none;
@@ -38,41 +58,45 @@
     .checkmark {
         position: absolute;
         border-radius: 5px;
+        text-align: center;
+        padding-top: 15px;
         top: 0;
         left: 0;
         height: 60px;
         width: 180px;
-        background-image: url('../../images/Sport\ Image-1.png') ;
+        background-color: #0000006c;
+        padding-top: 20px;
+        background-blend-mode: soft-light;
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Do not repeat the image */
     }
 
-    .Rolling{
-        background-image: url('../../images/Sport\ Image-1.png') ;   
+    .Roller{
+        background-image: url('../../images/rollerskating.jpeg') ;   
     }
 
     .Martial{
-        background-image: url('../../images/Sport\ Image-5.png') ;   
+        background-image: url('../../images/boxing.jpg') ;   
     }
 
     .Running{
-        background-image: url('../../images/Sport\ Image-4.png') ;   
+        background-image: url('../../images/running.jpg') ;   
     }
     
     .Surfing{
-        background-image: url('../../images/Sport\ Image-2.png') ;   
+        background-image: url('../../images/surfing.jpg') ;   
     }
 
     .Cycling{
-        background-image: url('../../images/Sport\ Image-3.png') ;   
+        background-image: url('../../images/cycling.jpg') ;   
     }
 
     .Fitness{
-        background-image: url('../../images/Sport\ Image.png') ;   
+        background-image: url('../../images/fitness.jpg') ;   
     }
     /* When the checkbox is checked, add a blue background */
     .container input:checked ~ .checkmark {
-        filter: grayscale(80%);
+        background-color: #ff92336e;
     }
     
     /* Create the checkmark/indicator (hidden when not checked) */
@@ -89,16 +113,38 @@
     
     /* Style the checkmark/indicator */
     .container .checkmark:after {
-        left: 45px;
-        top: 30px;
-        width: 15px;
-        height: 30px;
+        left: 160px;
+        top: 43px;
+        width: 6px;
+        height: 12px;
         border-radius: 1px;
         border: solid white;
-        border-width: 0 5px 5px 0;
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
+        border-width: 0 3px 3px 0;
         transform: rotate(45deg);
     }
 }
-
+.feed-header{
+    background: #FFFFFF;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+    height: 60px;
+    padding-left: 5vw;
+    padding-top: 16px;
+    margin-bottom: 16px;
+    h1{
+        height: 24px;
+        font-family: Bebas Neue;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 32px;
+        line-height: 24px;
+        color: #FF7700;
+        text-transform: capitalize;
+    }
+    .MuiSvgIcon-root{
+        position: absolute;
+        right: 5vw;
+        top: 10px;
+        color: #bfbfbf;
+        font-size: 35px !important;
+    }
+}

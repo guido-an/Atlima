@@ -12,11 +12,11 @@ const newPostHelper = require('../helpers/newPostHelper')
 router.post('/new', async (req, res) => {
   console.log(req.body, 'body')
   let mySpot
-  const { content, mediaFile, location, categories } = req.body
-  console.log('before breate', mediaFile)
+  const { content, title, mediaFile, location, categories } = req.body
   const user = await defineUser(req.session.currentUser)
   const newPost = new Post({
     content,
+    title,
     user: user._id,
     mediaFile,
     // location,
