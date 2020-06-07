@@ -6,7 +6,7 @@ import CategoryContext from '../contexts/CategoryContext'
 
 class SpotsMap extends React.Component {
   static contextType = CategoryContext
-
+  
   render () {
     return (
       <div>

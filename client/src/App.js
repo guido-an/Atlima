@@ -19,12 +19,13 @@ import Login from './components/Login';
 class App extends React.Component {
   static contextType = AuthContext
 
-  componentDidMount(){
+  componentDidMount() {
     this.context.fetchUser(); 
     this.context.getUnreadNotifications()
   }
   
   render() {
+    console.log(this.context.loggedInUser, 'user')
     if (this.context.isLoadingUser)
       return <p>Loading...</p>
     return (

@@ -29,7 +29,6 @@ class Notifications extends React.Component {
   }
 
   render () {
-    console.log(this.state.notifications)
     return (
       <div className="notifications-section">
         <h1>Notifications</h1>

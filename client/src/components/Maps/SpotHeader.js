@@ -8,6 +8,7 @@ class SpotHeader extends React.Component {
   static contextType = AuthContext
 
   state = { spot: null, isFollowingSpot: null }
+  
     async componentDidMount(){
       await this.getSingleSpot()
     }
@@ -67,7 +68,7 @@ class SpotHeader extends React.Component {
             <div className="spot-info">
               <span>{this.state.spot && this.state.spot.followedBy.length || 0 } Followers</span>
                <span className="dot"></span>
-               <span>{this.props.mapsPost && this.props.mapsPost.length} Posts</span>
+               <span>{this.state.spot && this.state.spot.posts.length} Posts</span>
             </div> 
       </div>
     )

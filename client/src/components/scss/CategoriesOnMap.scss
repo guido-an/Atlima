@@ -1,0 +1,90 @@
+@import "general.scss";
+
+
+.categories-on-map{
+        margin: $base-margin;
+        position: fixed;
+        top: 60px;
+        width: 90vw;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 9fr 1fr;
+        grid-template-rows: 1fr;
+
+        
+        .item{
+            display: inline-block;
+            text-align: center;
+            width: 30%;
+            margin-right: 10px;
+        }
+        .container {
+            display: block;
+            position: relative;
+            bottom: 15px;
+            cursor: pointer;
+            font-size: 22px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        /* Hide the browser's default checkbox */
+        .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        /* Create a custom checkbox */
+        .checkmark {
+            position: absolute;
+            border-radius: 4px;
+            text-align: center;
+            padding: 8px 0;
+            top: 0;
+            left: 0;
+            height: auto;
+            width: 100%;
+            font-size: 11px;
+            font-weight: 500;
+            color: $dark-grey;
+            background-color: #fff;
+            border: 1px solid #F2F2F2;
+            word-wrap: break-word
+        }
+        /* When the checkbox is checked, add a blue background */
+        .container input:checked ~ .checkmark {
+            background-color: #FFEBD9;
+            color: #FF7700
+        }
+        /* Create the checkmark/indicator (hidden when not checked) */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        /* Show the checkmark when checked */
+        .container input:checked ~ .checkmark:after {
+            display: block;
+        }
+        .all-categories {
+           background-color: #fff;
+           border-radius: 4px;
+           text-align: center;
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+           height: 36px;
+           span{
+                   display: block;
+                   color: $dark-grey;
+                   line-height: 4px;
+                   position: relative;
+                   bottom: 4px;
+
+           }
+        }
+    }

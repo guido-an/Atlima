@@ -35,7 +35,7 @@ class CategoriesOnBoarding extends React.Component {
           })}
         </div>
         <form onSubmit={this.onSubmitUserCategories}>
-        {this.props.categoryContext.selectedCategoriesIds.length >= 1 ? <button>Next</button> : ''}
+        {this.props.categoryContext.selectedCategoriesIds.length >= 1 && <button>Next</button>}
         </form>
       </div>
     )
