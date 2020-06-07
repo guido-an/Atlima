@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 const Category = require('../models/Category')
 
 mongoose
-  .connect('mongodb://localhost/server', { useNewUrlParser: true })
+  .connect('mongodb+srv://carucciguido:Mongo2019!@backenddb-4fty3.mongodb.net/altima', { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
