@@ -16,11 +16,11 @@ const defineUser = require('../helpers/defineUser')
 
 /* EDIT USER */
 router.post('/edit/:id', async (req, res) => {
-  const { mediaArray, firstName, lastName, team, country, hometown } = req.body
+  const { mediaFile, firstName, lastName, team, country, hometown } = req.body
   try {
     const filter = { _id: req.params.id }
     const update = {
-      mediaArray,
+      mediaFile,
       firstName,
       lastName,
       team,

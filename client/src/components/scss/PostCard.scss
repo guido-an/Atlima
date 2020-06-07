@@ -1,3 +1,4 @@
+@import "general.scss";
 $margin-left: 10px;
 
 
@@ -10,14 +11,42 @@ $margin-left: 10px;
     display: flex;
     position: relative;
     top: 10px;
-    margin-left: $margin-left;
+    margin: $base-margin;
+    margin-bottom: 5px;
 }
+
+.share{
+    -moz-transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+    margin-left: 21px;
+    margin-top: -5px;
+
+    .MuiSvgIcon-root{
+        font-size: 35px !important;
+    }
+}
+
+.coment{
+    svg{
+        margin-top: 3px;
+    }
+
+    p {
+        margin-top: -8px !important;
+    }
+}
+
 
 .post-card-header-content{
     margin-left: 5px;
     font-size: 12px;
 
     p {
+        font-size: 12px;
+        margin-top: 5px;
         position: relative;
         bottom: 2px
     }
@@ -27,20 +56,105 @@ $margin-left: 10px;
     }
 }
 
+.ui.avatar.image{
+    width: 40px;
+    height: 40px;
+
+}
+
 // PostCard icons
 .post-card-icons{
+    padding-top: 20px;
+    padding-left: 5px;
     display: flex;
-    margin-left: $margin-left;
-
+    margin: $base-margin;
+    color: #BFBFBF;
+    text-align: center;
     div:nth-child(2) {
-        margin-left: $margin-left;
+        margin-left: 26px;
+    }
+    p{
+        color: #BFBFBF !important; 
+        font-size: 12px; 
+        margin-top: -5px;
+    }
+    
+}
+
+.like{
+    color: #FF9233;
+}
+
+.MuiSvgIcon-root {
+    font-size: 25px !important;
+}
+
+.spot-info{
+    margin-top: 18px;
+    color: $light-grey;
+    span{
+        display: inline-block;
+        font-size: 12px
+    }
+    .dot-location {
+        height: 2px;
+        width: 2px;
+        margin: 0 2px 0 7px;
+        background-color: $light-grey !important;
+        border-radius: 50%;
+        display: inline-block;
+        position: relative;
+        bottom: 21px
+      }
+}
+
+.location-name{
+    svg{
+        width: 17px;
+        height: 13px;
+        margin-bottom: -2px;
+        margin-right: -5px;
     }
 }
 
+.description{
+    margin: $base-margin;
+    margin-top: 15px;
+    scroll-margin-bottom: 30px;
+    border-bottom: 1px #BFBFBF;
+    padding-left: 4px;
+}
+
+.spacer{
+    margin-top: 30px;
+    background-color: #99999936;
+    width: 90vw;
+    margin-left: 5vw;
+    height: 1px;
+}
+.read-more-button{
+    position: relative;
+    left: -40px;
+    text-align: left;
+    float: right;
+    color: #FF9233;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.slider-wrapper{
+    border-radius: 8px;
+}
+
+.carousel-root{
+    margin-left: 5vw;
+    width: 90vw;
+    margin: $base-margin;
+}
 // PostCard bottom
 .post-card-bottom {
     margin-top: 10px;
-    margin-left: $margin-left;
+    margin: $base-margin;
 
     p:nth-child(2) {
        position: relative;

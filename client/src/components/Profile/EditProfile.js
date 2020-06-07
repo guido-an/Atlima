@@ -7,7 +7,7 @@ class EditProfile extends React.Component {
   static contextType = AuthContext
 
   state = { 
-    mediaArray: [],
+    mediaFile: [],
     firstName: "",
     lastName: "",
     team: "",
@@ -20,7 +20,7 @@ class EditProfile extends React.Component {
       try {
       await EDIT_USER(
         this.context.loggedInUser._id,
-        this.state.mediaArray,
+        this.state.mediaFile,
         this.state.firstName,
         this.state.lastName,
         this.state.team,
@@ -41,15 +41,15 @@ class EditProfile extends React.Component {
     }
 
 
-    getMediaArray = url => {
-      this.setState({ mediaArray: [...this.state.mediaArray, url]})
+    getMediaFile = url => {
+      this.setState({ mediaFile: [...this.state.mediaFile, url]})
     }
 
   render () {
     return (
       <div>
         <form onSubmit={this.onSubmit}>
-            <ImageUpload getMediaArray={this.getMediaArray}/>
+            <ImageUpload getMediaFile={this.getMediaFile}/>
             <input onChange={this.onInputChange} placeholder={this.context.loggedInUser && this.context.loggedInUser.firstName} type="text" name="firstName"/>
             <input onChange={this.onInputChange} placeholder={this.context.loggedInUser && this.context.loggedInUser.lastName} type="text" name="lastName"/>
             <input onChange={this.onInputChange} placeholder={this.context.loggedInUser && this.context.loggedInUser.team} type="text" name="team"/>

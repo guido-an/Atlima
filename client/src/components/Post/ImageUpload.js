@@ -7,11 +7,10 @@ class ImageUpload extends Component {
       image: null,
       url: "",
       progress: 0,
-      mediaArray: []
     };
 
   handleUpload = e => {
-    if (e.target.files[0]) {
+    if (e.target.files[0]) {      
       const image = e.target.files[0];
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       uploadTask.on(
@@ -34,10 +33,13 @@ class ImageUpload extends Component {
             .child(image.name)
             .getDownloadURL()
             .then(url => {
-              this.props.getMediaArray(url)
+              let file = {}
+              console.log(image, 'image')
+              file.type = image.type
+              file.url = url
+              this.props.getMediaFile(file)
               this.setState({ 
-                url,
-                mediaArray: [...this.state.mediaArray, url]
+                url
               });
               
             });

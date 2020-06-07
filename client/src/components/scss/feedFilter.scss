@@ -1,33 +1,17 @@
-/* The container */
-.onb-title{
-    margin-left: 5vw;
-    margin-top: 10px !important;
-    align-items: center;
-}
-.category{
+.feed-cat{
     .onboarding{
-        display: flex;
-        flex-wrap: wrap;
-        max-width: 90vw;
+        overflow: auto;
+        white-space: nowrap;
         margin-left: 5vw;
-        margin-bottom: 30px;
+        margin-right: 5vw;
     }    
     .item{
-        padding: 2%;
-        flex-grow: 1;
-        flex-basis: 30%;
-        margin-bottom: 35px;
-        display: flex;
-
-        .cat-name{
-            position: absolute;
-            bottom: -125px;
-            font-size: 14px;
-            font-family: avenir;
-            font-style: Roman;
-            width: 100px;
-            text-align: center;
-        }
+        display: inline-block;
+        color: white;
+        text-align: center;
+        width: 200px;
+        height: 70px;
+        text-decoration: none;
     }
     .container {
         display: block;
@@ -56,9 +40,11 @@
         border-radius: 5px;
         top: 0;
         left: 0;
-        height: 100px;
-        width: 100px;
+        height: 60px;
+        width: 180px;
         background-image: url('../../images/Sport\ Image-1.png') ;
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
     }
 
     .Rolling{
@@ -114,33 +100,5 @@
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
-
-    button{
-        position: absolute;
-        left: 35%;
-        right: 35%;
-        top: 85%;
-        bottom: 10%;
-        width: 120px;
-        height: 40px;
-        font-family: Avenir;
-        font-style: normal;
-        font-weight: 800;
-        font-size: 15px;
-        line-height: 25px;
-        align-items: center;
-        text-align: center;
-        border: 1px;
-        color: #FFFFFF;
-
-        background: #FF7700;
-        border-radius: 4px;
-    }
 }
 
-@media screen and (max-width: 350px) {
-    .checkmark {
-        height: 90px !important;
-        width: 90px !important;
-    }
-}
