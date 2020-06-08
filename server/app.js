@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 app.use(cors({
-  origin: [process.env.CLIENT_URL],
+  origin: [process.env.CLIENT_URL, 'https://altima-app.herokuapp.com/'],
   credentials: true
 }))
 
@@ -69,5 +69,11 @@ app.use('/categories', categoryRoutes)
 
 const spotsRoutes = require('./routes/spot')
 app.use('/spot', spotsRoutes)
+
+app.use(express.static(path.join(__dirname, "build")));
+
+app.get("/*", function(req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 module.exports = app
