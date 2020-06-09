@@ -131,6 +131,22 @@ class MapContainer extends React.Component {
     return <p>Loading..</p>
   }
 
+  // mapContainerStyle = {
+  //   position: 'fixed',
+  //   width: '100%',
+  //   height: '100vh',
+  //   background: '#eee',
+  //   zIndex: '1'
+  // }
+
+  // mapContainerStyle = {
+  //   position: 'fixed',
+  //   width: '100%',
+  //   height: {this.state.activeMarker ? '80vh' : '100vh'},
+  //   background: '#eee',
+  //   zIndex: '1'
+  // }
+
   render(){
     return (
       <div className="map-wrapper">
@@ -143,10 +159,10 @@ class MapContainer extends React.Component {
             postContext={this.context}
             activeMarker={this.state.activeMarker}
              />
-          <div id="map">
+          <div id="map" className={this.state.activeMarker ? 'height-with-spot' : 'full-height'}>
             { this.renderMap() }
           </div>
-          <div className="map-feed" >
+          <div className={this.state.activeMarker ? 'show-map-feed map-feed' : 'hide-map-feed map-feed'}>
             {this.state.activeMarker &&  
                  <SpotHeader 
                  activeMarker={this.state.activeMarker}

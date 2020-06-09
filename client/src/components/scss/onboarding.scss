@@ -139,8 +139,10 @@
 }
 
 @media screen and (max-width: 350px) {
+    .category{
     .checkmark {
         height: 90px !important;
         width: 90px !important;
     }
+  }
 }
