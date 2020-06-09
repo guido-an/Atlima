@@ -4,6 +4,7 @@ import {geocodeByAddress, getLatLng} from 'react-google-places-autocomplete';
 import {GoogleApiWrapper} from 'google-maps-react';
 // If you want to use the provided css
 import 'react-google-places-autocomplete/dist/index.min.css';
+import searchIcon from '../../images/search-icon.png'
  
 class PlacesAutocomplete extends React.Component {
 

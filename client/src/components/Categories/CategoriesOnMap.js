@@ -42,18 +42,13 @@ class CategoriesOnMap extends React.Component {
       {this.state.categoriesLikedByUser.map((category, i) => {
             return (
               <div key={i} className='item'>
-                <label className='container '>
+                <label className='container'>
                   <input onChange={this.onFilterCategoryChange} type='checkbox' name={category._id} />
                   <span className="checkmark">{category.name}</span>
                  </label>
               </div>
             )
           })}
-          </div>
-          <div className="all-categories">
-           <span>.</span>
-           <span>.</span>
-           <span>.</span>
           </div>
       </div>
     )

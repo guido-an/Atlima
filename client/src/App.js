@@ -25,7 +25,6 @@ class App extends React.Component {
   }
   
   render() {
-    console.log(this.context.loggedInUser, 'user')
     if (this.context.isLoadingUser)
       return <p>Loading...</p>
     return (
