@@ -12,8 +12,8 @@ const bcryptSalt = 10
 router.post('/signup', (req, res, next) => {
   const { firstName, lastName, email, password } = req.body
 
-  if (email === '' || password === '') {
-    res.status(400).json({ message: 'Please provide credentials' })
+  if (firstName === '' || lastName === '' || email === '' || password === '') {
+    res.status(400).json({ message: 'Please fill in all the' })
     return
   }
   User.findOne({ email }, 'email', (err, user) => {
@@ -51,7 +51,7 @@ router.post('/login', (req, res) => {
     .then(user => {
       if (!user) {
         res.status(401).json({
-          errorMessage: "The email doesn't exist."
+          errorMessage: "The email doesn't exist"
         })
         return
       }

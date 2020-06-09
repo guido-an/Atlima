@@ -21,7 +21,9 @@ class App extends React.Component {
 
   componentDidMount() {
     this.context.fetchUser(); 
-    this.context.getUnreadNotifications()
+    if(this.context.loggedInUser){
+      this.context.getUnreadNotifications()
+    }
   }
   
   render() {
