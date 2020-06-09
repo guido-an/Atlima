@@ -13,6 +13,7 @@ export default class Signup extends Component {
     lastName:'',
     email: '',
     password: '',
+    errorMessage: null
   };
 
   handleChange = e => {
@@ -20,6 +21,7 @@ export default class Signup extends Component {
     this.setState({
       [name]: value
     });
+    this.setState({ errorMessage: null })
   };
 
   handleSubmit = async e => {
@@ -31,12 +33,11 @@ export default class Signup extends Component {
     this.props.history.push('/onboarding')
     }
     catch(err){
-      console.log(err)
+      this.setState({ errorMessage: err.response.data.message })
     }
   };
   
   render() {
-
     return (
       <div className='signup'>
           <h1>Altima</h1>
@@ -49,6 +50,7 @@ export default class Signup extends Component {
           <input onChange={this.handleChange} type="email" name="email" />
           <label>Password</label>
           <input onChange={this.handleChange} type="password"  name="password" />
+         <p style={{ margin: '0'}}>{this.state.errorMessage}</p> 
           <button className='primary-btn'>Signup</button>          
           <p>Already have an acount? <Link to="/login">Login</Link></p>
         </form>
