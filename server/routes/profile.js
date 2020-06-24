@@ -60,7 +60,7 @@ router.post('/add-categories', async (req, res) => {
 router.get('/notifications/:id', async (req, res) => {
   try {
     const userFromDB = await User.findById({ _id: req.params.id })
-    const notifications = userFromDB.notifications
+    const notifications = userFromDB.notifications.reverse()
     res.status(200).send(notifications)
   } catch (err) {
     res.json('something went wrong: 5000 - /:id/notifications' + err)
