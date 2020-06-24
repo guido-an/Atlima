@@ -148,6 +148,7 @@ class MapContainer extends React.Component {
   // }
 
   render(){
+    console.log(this.props.categoryContext, 'categoryContext')
     return (
       <div className="map-wrapper">
           <div className="places-container">
@@ -158,7 +159,7 @@ class MapContainer extends React.Component {
             categoryContext={this.props.categoryContext}
             postContext={this.context}
             activeMarker={this.state.activeMarker}
-             />
+             /> 
           <div id="map" className={this.state.activeMarker ? 'height-with-spot' : 'full-height'}>
             { this.renderMap() }
           </div>

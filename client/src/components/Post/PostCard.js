@@ -45,7 +45,7 @@ class PostCard extends React.Component {
             <div className="spot-info">
               <span> <TimeAgo date={Date.parse(this.state.post.created_at)} /> </span>
                <span className="dot-location"></span>
-               <span className="location-name"><RoomRoundedIcon /> {this.state.post.spot && this.state.post.spot.location.terms ? this.state.post.spot.location.terms[0].value : "Its a mistery :o"}</span>
+               <span className="location-name"><RoomRoundedIcon /> {this.state.post.spot.location ? this.state.post.spot.location.terms[0].value : "Its a mistery :o"}</span>
             </div> 
           </div>
         </div>

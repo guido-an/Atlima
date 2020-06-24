@@ -19,10 +19,10 @@ import Login from './components/Login';
 class App extends React.Component {
   static contextType = AuthContext
 
-  componentDidMount() {
-    this.context.fetchUser(); 
+  async componentDidMount() {
+   await this.context.fetchUser(); 
     if(this.context.loggedInUser){
-      this.context.getUnreadNotifications()
+      await this.context.getUnreadNotifications()
     }
   }
   

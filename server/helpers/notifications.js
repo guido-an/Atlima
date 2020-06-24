@@ -6,6 +6,7 @@ const notificationLike = async (currentUser, post, type, message) => {
 
   } else {
     try {
+      const url = post.mediaFile[0] ? post.mediaFile[0].url : ''
       const filter = { _id: post.user }
       const update = {
         $addToSet: {
@@ -13,6 +14,7 @@ const notificationLike = async (currentUser, post, type, message) => {
             name: `${currentUser.firstName} ${currentUser.lastName}`,
             action: 'had liked your post',
             postUrl: `/post/${post._id}/`,
+            mediaFile: url,
             date: Date.now()
           }
         },
