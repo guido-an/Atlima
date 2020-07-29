@@ -42,7 +42,6 @@ export class AuthStore extends React.Component {
       };
 
     fetchUser = async () => {
-      console.log('fetching user')
         try {
           const res = await this.loggedin();
           this.setState({
