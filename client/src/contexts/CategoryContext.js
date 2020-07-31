@@ -59,8 +59,12 @@ export class CategoryContext extends React.Component {
              }
           };
 
+          fillSelectedCategoriesIds = (array) => {
+              this.setState({ selectedCategoriesIds: [...this.state.selectedCategoriesIds, ...array]})
+          }
+
   render(){
-      const { getCategories, onSelectCategories, removeUserCategory, onSubmitUserCategories, cleanSelectedCategoriesIds } = this
+      const { getCategories, onSelectCategories, removeUserCategory, onSubmitUserCategories, cleanSelectedCategoriesIds, fillSelectedCategoriesIds } = this
       return(
           <Context.Provider 
               value={{ 
@@ -69,7 +73,8 @@ export class CategoryContext extends React.Component {
                   onSelectCategories,
                   removeUserCategory,
                   onSubmitUserCategories,
-                  cleanSelectedCategoriesIds
+                  cleanSelectedCategoriesIds,
+                  fillSelectedCategoriesIds
                    }}>
               {this.props.children}
           </Context.Provider>

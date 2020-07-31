@@ -38,14 +38,14 @@ class PostCard extends React.Component {
       <div className='post-card-container'>
         <div className='post-card-header'>
           <div>
-            <img className='ui avatar image circular' src={this.state.post.user.mediaFile.url ? this.state.post.user.mediaFile.url : Discobolo } />
+            {/* <img className='ui avatar image circular' src={this.state.post.user.mediaFile.url ? this.state.post.user.mediaFile.url : Discobolo } /> */}
           </div>
           <div className='post-card-header-content'>
-            <p><strong>{this.state.post.user.firstName} {this.state.post.user.lastName}</strong></p>
+            {/* <p><strong>{this.state.post.user.firstName} {this.state.post.user.lastName}</strong></p> */}
             <div className="spot-info">
               <span> <TimeAgo date={Date.parse(this.state.post.created_at)} /> </span>
                <span className="dot-location"></span>
-               <span className="location-name"><RoomRoundedIcon /> {this.state.post.spot.location ? this.state.post.spot.location.terms[0].value : "Its a mistery :o"}</span>
+               {/* <span className="location-name"><RoomRoundedIcon /> {this.state.post.spot.location ? this.state.post.spot.location.terms[0].value : "Its a mistery :o"}</span> */}
             </div> 
           </div>
         </div>

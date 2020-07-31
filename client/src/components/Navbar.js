@@ -20,7 +20,6 @@ class NavBar extends React.Component {
   
 
   render() {
-    console.log(this.context.unreadNotifications, 'this.context.unreadNotifications')
     return (
       <nav className='absolute-bot'>
         <div className="ui secondary fluid five item menu">

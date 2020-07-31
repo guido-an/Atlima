@@ -5,11 +5,11 @@ import UserPosts from '../components/Post/UserPosts'
 
 class Profile extends React.Component {
   render () {
-    const userId = this.props.match.params.id
+    const profilePageId = this.props.match.params.id
     return (
       <div>
-        <UserProfile />
-        <UserPosts userId={userId} />
+        <UserProfile profilePageId={profilePageId} />
+        {/* <UserPosts /> */}
       </div>
     )
   }

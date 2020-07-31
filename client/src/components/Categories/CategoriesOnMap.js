@@ -35,8 +35,6 @@ class CategoriesOnMap extends React.Component {
   }
 
   render () {
-    console.log(this.props.categoryContext.allCategories, 'this.props.categoryContext.allCategories')
-    console.log(this.state.categoriesLikedByUser, 'this.state.categoriesLikedByUser')
     return (
       <div className='categories-on-map'>
         <div className="wrapper-categories">

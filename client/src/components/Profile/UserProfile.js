@@ -1,58 +1,87 @@
+import '../scss/UserProfile.scss'
 import React from 'react'
 import {Link} from 'react-router-dom';
 import AuthContext  from '../../contexts/AuthContext'
+import { FOLLOW_USER, GET_USER } from '../../api/userAPI'
+import editPencil from '../../images/edit-pencil.png'
 
 class UserProfile extends React.Component {
   static contextType = AuthContext
   
-
   state = { 
       content: '',
-      mediaFile: []
+      mediaFile: [],
+      pageUser: null,
+      pageUserIsFollowed: null
     }
   
+    async componentDidMount(){
+      try {
+        await this.getUser()
+      } catch(err){
+        console.log(err)
+      }
+    }
+
+    checkIfPageUserIsFollowed = () => {
+      const user = this.state.pageUser
+        if(user && user.followedBy.includes(this.context.loggedInUser._id)){
+          this.setState({ pageUserIsFollowed: true })
+        } 
+      else {
+        this.setState({ pageUserIsFollowed: false })
+      }
+    }
+
+    getUser = async () => {
+      try {
+        const user = await GET_USER(this.props.profilePageId)
+        this.setState({ pageUser: user })
+        this.checkIfPageUserIsFollowed()
+      } catch(err){
+        console.log(err)
+      }
+    }
+    onSubmitHandler = async e => {
+      e.preventDefault()
+      try {
+        await FOLLOW_USER(this.props.profilePageId)
+        await this.getUser()
+      } catch(err){
+        console.log(err)
+      }
+    }
 
   render () {
-    return (
-      <div className='profile-body'>
-        <Link to={`/profile/edit/${this.context.loggedInUser && this.context.loggedInUser._id}`} className="item">
-            <i className="user icon"></i>
-          </Link>
-  <h4 className='header'>Federico Barriola</h4>
-        <div className='content right floated profile-basics'>
-        <div className='ui horizontal list'>
-          <div className='item'>
-            <div className='content'>
-              <div className='header'>Posts</div>
-              <p>50</p>
-            </div>
-          </div>
-          <div className='item'>
-            <div className='content'>
-              <div className='header'>Followers</div>
-              <p>440</p>
-            </div>
-          </div>
-          <div className='item'>
-            <div className='content'>
-              <div className='header'>Following</div>
-              <p>500</p>
-            </div>
-          </div>
-        </div>
+    const loggedInUser = this.context.loggedInUser
+    const pageUser = this.state.pageUser
+    const backgroundImage = this.context.loggedInUser && this.context.loggedInUser.backgroundPicture ? this.context.loggedInUser.backgroundPicture.url : "https://via.placeholder.com/500"
+    const profileImage = this.context.loggedInUser && this.context.loggedInUser.profilePicture ? this.context.loggedInUser.profilePicture.url : "https://vignette.wikia.nocookie.net/simpsons/images/b/bd/Homer_Simpson.png/revision/latest?cb=20140126234206"
+
+   return (
+      <div className="user-profile">
+             <div className="edit-profile-icon">
+               {(this.context.loggedInUser && this.props.profilePageId === this.context.loggedInUser._id) ?  
+               <Link to={`/profile/edit/${this.props.profilePageId}`}><img src={editPencil} /></Link> :
+                  <form onSubmit={this.onSubmitHandler}>
+                    {this.state.pageUserIsFollowed ? 
+                      <button className='unfollow-btn'>Unfollow</button> :
+                      <button className='follow-btn'>Follow</button> 
+                      }
+                 </form> 
+               }
+             </div>
+             {pageUser && 
+             <div className="user-profile-header">
+                   <div className="user-info ">
+                    <h1>{pageUser.firstName} {pageUser.lastName}</h1>
+                    <p>{pageUser.bio}</p>
+                   </div>
+             </div>
+             }
       </div>
-      <button className='ui primary fluid button'>Follow</button>
-      <div className='block'>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-             Lorem Ipsum has been the industry's.
-        </p>
-      </div>
-      <div className='ui two item profile-menu'>
-        <a className='item active'>Posts</a>
-        <a className='item'>liked</a>
-      </div>
-      {/* <UserPosts userId={userId} /> */}
-    </div>
+
+    
     )
   }
 }
