@@ -13,6 +13,7 @@ router.post('/new', async (req, res) => {
   let mySpot
   const { content, title, mediaFile, location, categories } = req.body
   const user = await defineUser(req.session.currentUser)
+  console.log(user, 'user')
   const newPost = new Post({
     content,
     title,

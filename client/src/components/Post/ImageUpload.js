@@ -40,7 +40,7 @@ class ImageUpload extends Component {
               file.url = url
               this.props.getProfilePicture && this.props.getProfilePicture(file)
               this.props.getBackgroundPicture && this.props.getBackgroundPicture(file)
-              
+              this.props.getMediaFile && this.props.getMediaFile(file)
               this.setState({ 
                 url
               });

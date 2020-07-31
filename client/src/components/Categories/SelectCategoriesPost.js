@@ -12,11 +12,11 @@ class SelectCategoriesPost extends React.Component {
     return (
       <div className="categories-on-create">
         <div className="wrapper-categories">
-      {this.context.allCategories.map((category, i) => {
+         {this.context.allCategories.map((category, i) => {
             return (
               <div key={i} className='item'>
                 <label className='container '>
-                  <input onChange={this.onFilterCategoryChange} type='checkbox' name={category._id} />
+                  <input onChange={this.context.onSelectCategories} type='checkbox' name={category._id} />
                   <span className="checkmark">{category.name}</span>
                  </label>
               </div>

@@ -24,7 +24,6 @@ export default class Login extends Component {
   };
 
   handleSubmit = async e => {
-    console.log('submit')
     e.preventDefault()
     try {
       const loggedInUser = await this.context.login(this.state);
