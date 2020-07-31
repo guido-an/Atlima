@@ -131,6 +131,7 @@ class MapContainer extends React.Component {
     return <p>Loading..</p>
   }
 
+
   render(){
     return (
       <div className="map-wrapper">
@@ -142,11 +143,11 @@ class MapContainer extends React.Component {
             categoryContext={this.props.categoryContext}
             postContext={this.context}
             activeMarker={this.state.activeMarker}
-             />
-          <div id="map">
+             /> 
+          <div id="map" className={this.state.activeMarker ? 'height-with-spot' : 'full-height'}>
             { this.renderMap() }
           </div>
-          <div className="map-feed" >
+          <div className={this.state.activeMarker ? 'show-map-feed map-feed' : 'hide-map-feed map-feed'}>
             {this.state.activeMarker &&  
                  <SpotHeader 
                  activeMarker={this.state.activeMarker}

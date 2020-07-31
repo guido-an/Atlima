@@ -33,8 +33,10 @@ export class PostContext extends React.Component {
 
       getUserPosts = async userId => {
         try {
-            const userPosts = await service.get(`/post/user/${userId}`)
+           const userPosts = await service.get(`/post/user/${userId}`)
+           if(!userPosts.length === 0){
             this.setState({ userPosts: userPosts.data })
+           }
         }
         catch(err){
             console.log(err)
@@ -56,7 +58,6 @@ export class PostContext extends React.Component {
    }
 
     createPost = async (title, content, mediaFile, location, categories) => {
-        console.log(mediaFile, 'media con context')
         try {
             await service.post('/post/new', {
                 title,
@@ -106,10 +107,8 @@ export class PostContext extends React.Component {
                 }
             }
         })
-        console.log(insideSpot, 'inside spot')
         this.setState({ mapsPost: insideSpot })
      }
-
     
 
       filterPostsOnCategory = (stateArrayCopy) => {
@@ -123,6 +122,7 @@ export class PostContext extends React.Component {
          }) 
          return filteredFeedPosts
       }
+
 
      filterPostsOnCategoryHome = () => {
        const filteredPosts = this.filterPostsOnCategory(this.state.feedPostsCopy)

@@ -12,6 +12,7 @@ export default class Login extends Component {
   state = {
     username: '',
     password: '',
+    errorMessage: null
   };
 
   handleChange = e => {
@@ -19,16 +20,20 @@ export default class Login extends Component {
     this.setState({
       [name]: value,
     });
+    this.setState({ errorMessage: null })
   };
 
   handleSubmit = async e => {
+    console.log('submit')
     e.preventDefault()
     try {
       const loggedInUser = await this.context.login(this.state);
       this.context.setUser(loggedInUser.currentUser);
+      await this.context.getUnreadNotifications()
       this.props.history.push('/');
     } catch (err) {
-      console.log(err, "message");
+      console.log(err, 'from login')  
+      this.setState({ errorMessage: err.response.data.errorMessage })
     }
   };
 
@@ -54,6 +59,7 @@ export default class Login extends Component {
             type="password"
             name="password"
           />
+          <p style={{ margin: '0'}}>{this.state.errorMessage}</p> 
           <button className='primary-btn'>Login</button>
           <p>Don't you have an acount? <Link to="/signup">Signup</Link></p>
         </form>

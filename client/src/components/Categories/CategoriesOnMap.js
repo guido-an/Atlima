@@ -35,25 +35,19 @@ class CategoriesOnMap extends React.Component {
   }
 
   render () {
-    console.log(this.props.categoryContext.allCategories, 'this.props.categoryContext.allCategories')
     return (
       <div className='categories-on-map'>
         <div className="wrapper-categories">
-      {this.state.categoriesLikedByUser.map((category, i) => {
+      {this.props.categoryContext.allCategories.map((category, i) => {
             return (
               <div key={i} className='item'>
-                <label className='container '>
+                <label className='container'>
                   <input onChange={this.onFilterCategoryChange} type='checkbox' name={category._id} />
                   <span className="checkmark">{category.name}</span>
                  </label>
               </div>
             )
           })}
-          </div>
-          <div className="all-categories">
-           <span>.</span>
-           <span>.</span>
-           <span>.</span>
           </div>
       </div>
     )

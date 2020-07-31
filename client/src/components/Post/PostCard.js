@@ -46,6 +46,7 @@ class PostCard extends React.Component {
           </div>
           <div className='post-card-header-content'>
             <p><strong>{this.props.post.user.firstName} {this.props.post.user.lastName}</strong></p>
+
             <div className="spot-info">
               <span> <TimeAgo date={Date.parse(this.props.post.created_at)} /> </span>
                <span className="dot-location"></span>

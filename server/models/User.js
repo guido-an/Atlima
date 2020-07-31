@@ -6,15 +6,19 @@ const userSchema = new Schema({
   lastName: String,
   password: String,
   email: { type: String, unique: true },
-  mediaFile: Array,
   likedPosts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
-  sponsors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sponsor' }],
   categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
   provider: String,
   facebookId: String,
   notifications: Array,
   unreadNotifications: { type: Number, default: 0 },
-  followedSpots: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Spot' }]
+  followedSpots: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Spot' }],
+  location: String,
+  bio: String,
+  profilePicture: Object,
+  backgroundPicture: Object,
+  followedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  followedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 }, {
   timestamps: {
     createdAt: 'created_at',

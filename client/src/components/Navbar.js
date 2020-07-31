@@ -34,7 +34,7 @@ class NavBar extends React.Component {
           </NavLink>
           <NavLink to={`/${this.context.loggedInUser._id}/notifications`} className="item" activeClassName="active" exact>
             <NotificationsIcon className="icon-navbar" />
-            {this.context.unreadNotifications >= 1 && 
+            {(this.context.unreadNotifications >= 1 && this.context.unreadNotifications < 10 ) && 
               <div className="notification-number-1"><span>{this.context.unreadNotifications}</span></div>
             }
             {this.context.unreadNotifications >= 10 && 

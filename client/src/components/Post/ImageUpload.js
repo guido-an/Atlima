@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import storage from "../../Firebase/index";
+import editProfileIcon from '../../images/edit-profile-icon.png'
+
 
 class ImageUpload extends Component {
     
@@ -34,19 +36,20 @@ class ImageUpload extends Component {
             .getDownloadURL()
             .then(url => {
               let file = {}
-              console.log(image, 'image')
               file.type = image.type
               file.url = url
-              this.props.getMediaFile(file)
+              this.props.getProfilePicture && this.props.getProfilePicture(file)
+              this.props.getBackgroundPicture && this.props.getBackgroundPicture(file)
+              
               this.setState({ 
                 url
               });
-              
             });
         }
       );
     }
   };
+
 
   render() {
     return (
@@ -55,13 +58,16 @@ class ImageUpload extends Component {
           <progress value={this.state.progress} max="100" className="progress" />
         </div>
           <div>
-            <input className="img-file" id="fileUpload" type="file" onChange={this.handleUpload} />
+          <label htmlFor={this.props.id} className="custom-file-upload">
+              <img src={editProfileIcon}/>
+          </label>
+            <input id={this.props.id} type="file" onChange={this.handleUpload} />
           </div>
-          <img
-          src={this.state.url || "https://via.placeholder.com/400x300.png"}
-          alt="Uploaded Images"
-          htmlFor="fileUpload"
-        />
+             <img
+             className="image-upload"
+             src={this.state.url}
+             alt="Uploaded Images"
+            />
       </div>
     );
   }

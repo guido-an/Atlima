@@ -5,29 +5,32 @@ const Category = require('../models/Category')
 const defineUser = require('../helpers/defineUser')
 
 /* GET USER */
-// router.get('/:id', async (req, res) => {
-//   try {
-//     const user = await User.findOne({ _id: req.params.id })
-//     res.status(200).send(user)
-//   } catch (err) {
-//     res.status(400).send({ message: 'Something went wrong' })
-//   }
-// })
+router.get('/user/:id', async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id })
+    res.status(200).send(user)
+  } catch (err) {
+    res.status(400).send({ message: 'Something went wrong with getting the user 5000/profile/:id' })
+  }
+})
 
 /* EDIT USER */
 router.post('/edit/:id', async (req, res) => {
-  const { mediaFile, firstName, lastName, team, country, hometown } = req.body
+  const { backgroundPicture, profilePicture, firstName, lastName, location, bio } = req.body
   try {
-    const filter = { _id: req.params.id }
+    const user = await defineUser(req.session.currentUser)
+    console.log(user, 'user')
+
+    const filter = { _id: user._id }
     const update = {
-      mediaFile,
-      firstName,
-      lastName,
-      team,
-      country,
-      hometown
+      backgroundPicture: backgroundPicture || user.backgroundPicture,
+      profilePicture: profilePicture || user.profilePicture,
+      firstName: firstName || user.firstName,
+      lastName: lastName || user.lastName,
+      location: location || user.location,
+      bio: bio || user.bio
     }
-    await User.findOneAndUpdate(filter, update, {
+    const updatedUser = await User.findOneAndUpdate(filter, update, {
       new: true
     })
     res.status(200).send({ message: 'user updated' })
@@ -60,7 +63,7 @@ router.post('/add-categories', async (req, res) => {
 router.get('/notifications/:id', async (req, res) => {
   try {
     const userFromDB = await User.findById({ _id: req.params.id })
-    const notifications = userFromDB.notifications
+    const notifications = userFromDB.notifications.reverse()
     res.status(200).send(notifications)
   } catch (err) {
     res.json('something went wrong: 5000 - /:id/notifications' + err)
@@ -87,7 +90,27 @@ router.get('/reset-unread-notifications', async (req, res) => {
     await User.findOneAndUpdate({ _id: user._id }, { unreadNotifications: 0 })
     res.status(200).send({ message: 'Notifications reset' })
   } catch (err) {
-    res.json('something went wrong: 5000 - /:id/reset-unread-notifications' + err)
+    res.json('something went wrong: 5000 - /reset-unread-notifications' + err)
+  }
+})
+
+router.post('/follow/:id', async (req, res) => {
+  try {
+    const currentUser = await defineUser(req.session.currentUser)
+    const userToFollow = await User.findOne({ _id: req.params.id })
+
+    if (!userToFollow.followedBy.includes(currentUser._id)) {
+      const userToFollow = await User.findOneAndUpdate({ _id: req.params.id }, { $set: { followedBy: currentUser._id } })
+      const userWhichFollows = await User.findOneAndUpdate({ _id: currentUser._id }, { $addToSet: { followedUsers: userToFollow._id } })
+      res.status(200).send({ message: `Follow the spot ${userWhichFollows}` })
+    } else {
+      const userToFollow = await User.findOneAndUpdate({ _id: req.params.id }, { $pull: { followedBy: currentUser._id } })
+      const userWhichFollows = await User.findOneAndUpdate({ _id: currentUser._id }, { $pull: { followedUsers: userToFollow._id } })
+      res.status(200).send({ message: `Unfollow the spot ${userWhichFollows}` })
+    }
+  } catch (err) {
+    console.log(err)
+    res.json('something went wrong: 5000 - /follow/:id' + err)
   }
 })
 

@@ -47,18 +47,28 @@
     #map {
         position: fixed;
         width: 100%;
-        height: 80vh;
         background: #eee;
         z-index: 1;
+    }
+    .full-height {
+        height: 100vh;
+    }
+    .height-with-spot{
+        height: 80vh;
     }
     .map-feed{
         position: absolute;
         z-index: 1000;
-        top: 78vh;
         background-color: #fff;
         width: 100vw;
         border-radius: 16px;
         min-height: 80vh;
+    }
+    .hide-map-feed{
+        top: 100vh
+    }
+    .show-map-feed{
+        top: 75vh
     }
 
 }

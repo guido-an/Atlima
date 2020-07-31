@@ -20,13 +20,14 @@ import Login from './components/Login';
 class App extends React.Component {
   static contextType = AuthContext
 
-  componentDidMount() {
-    this.context.fetchUser(); 
-    this.context.getUnreadNotifications()
+  async componentDidMount() {
+   await this.context.fetchUser(); 
+    if(this.context.loggedInUser){
+      await this.context.getUnreadNotifications()
+    }
   }
   
   render() {
-    console.log(this.context.loggedInUser, 'user')
     if (this.context.isLoadingUser)
       return <p>Loading...</p>
     return (
@@ -46,22 +47,22 @@ class App extends React.Component {
             <Route
               path="/login"
               component={Login} />
-            />  
+            
   
             <Route
               path="/signup"
               component={Signup} />
-            /> 
+            
   
             <Route
               path="/onboarding"
               component={OnBoarding} />
-            /> 
+            
   
             <Route
               exact path="/profile/:id"
               component={Profile} />
-            />
+          
         
             <Route
               path="/create-post"
@@ -73,20 +74,25 @@ class App extends React.Component {
               component={Post} />
             />  
   
-            <Route
+            {/* <Route
               path="/profile/edit/:id"
-              component={EditProfile} />
-            /> 
-          
+              component={EditProfile} /> */}
+
+              <Route
+                 path="/profile/edit/:id"
+                 render={props => <EditProfile {...props} loggedInUser={this.context.loggedInUser} />}
+                />     
+                          
+    
             <Route
               path="/spots-map"
               component={SpotsMap} />
-            /> 
+            
 
             <Route
               path={`/:id/notifications`}
               component={Notifications} />
-            /> 
+            
 
         </Switch>
       </div>
