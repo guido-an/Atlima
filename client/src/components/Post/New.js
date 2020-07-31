@@ -2,6 +2,8 @@ import React from 'react'
 import  { Redirect } from 'react-router-dom'
 import ImageUpload from './ImageUpload'
 import Places from '../Maps/Places'
+import '../../components/scss/buttons.scss'
+import '../../components/scss/createPost.scss'
 
 import CategoryContext  from '../../contexts/CategoryContext'
 
@@ -63,15 +65,21 @@ class Post extends React.Component {
     }
     console.log('midia' , this.state.mediaFile)
     return (
-      <div>
-        <form onSubmit={this.onSubmit}>
-            <input onChange={this.onInputChange} type="text" placeholder="title" name="title"/>
-            <input onChange={this.onInputChange} type="text" placeholder="content" name="content"/>
-            <Places getLocation={this.getLocation} />
-              <SelectCategoriesPost/>
-            <button>Create post</button>
-        </form>
+      <div className="create-post">
         <ImageUpload getMediaFile={this.getMediaFile}/>
+        <form onSubmit={this.onSubmit}>        
+            <label>Title</label>
+            <input onChange={this.onInputChange} type="text" placeholder="title" name="title"/>
+            <label>Description</label>
+            <textarea onChange={this.onInputChange} rows="4" type="textarea" placeholder="description" name="content"/>
+            <label>Tag Other Athlets</label>
+            <input onChange={this.onInputChange} type="text" placeholder="Users" name="content"/>
+            <label>Location</label>
+            <Places getLocation={this.getLocation} />
+            <label>Categories</label>
+              <SelectCategoriesPost/>
+            <button className="primary-btn">Create post</button>
+        </form>
       </div>
     )
   }

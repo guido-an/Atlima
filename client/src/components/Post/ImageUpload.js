@@ -55,13 +55,12 @@ class ImageUpload extends Component {
           <progress value={this.state.progress} max="100" className="progress" />
         </div>
           <div>
-            <input type="file" onChange={this.handleUpload} />
+            <input className="img-file" id="fileUpload" type="file" onChange={this.handleUpload} />
           </div>
           <img
-          src={this.state.url}
+          src={this.state.url || "https://via.placeholder.com/400x300.png"}
           alt="Uploaded Images"
-          height="300"
-          width="400"
+          htmlFor="fileUpload"
         />
       </div>
     );

@@ -9,7 +9,6 @@ class CreatePost extends React.Component {
   render () {
     return (
       <div>
-        <h1>new post page</h1>
         <New postContext={this.context} />
       </div>
     )

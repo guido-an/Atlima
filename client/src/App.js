@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import OnBoarding from './pages/OnBoarding';
 import SpotsMap from './pages/SpotsMap';
 import CreatePost from './pages/CreatePost';
+import Post from './pages/Post';
 import Landing from './pages/Landing';
 import Notifications from './pages/Notifications';
 
@@ -65,7 +66,12 @@ class App extends React.Component {
             <Route
               path="/create-post"
               component={CreatePost} />
-            />   
+            />  
+
+            <Route
+              path="/post/:id"
+              component={Post} />
+            />  
   
             <Route
               path="/profile/edit/:id"

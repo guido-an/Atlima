@@ -112,17 +112,17 @@ export class PostContext extends React.Component {
 
     
 
-    //  filterPostsOnCategory = (stateArrayCopy) => {
-    //     let filteredFeedPosts = []
-    //     const categoriesSelected = this.context.selectedCategoriesIds
-    //      stateArrayCopy.forEach(post => {
-    //        const found = post.categories.some(element => categoriesSelected.includes(element))
-    //        if(found){
-    //         filteredFeedPosts = [...filteredFeedPosts, post]
-    //        }
-    //     }) 
-    //     return filteredFeedPosts
-    //  }
+      filterPostsOnCategory = (stateArrayCopy) => {
+         let filteredFeedPosts = []
+         const categoriesSelected = this.context.selectedCategoriesIds
+          stateArrayCopy.forEach(post => {
+            const found = post.categories.some(element => categoriesSelected.includes(element))
+            if(found){
+             filteredFeedPosts = [...filteredFeedPosts, post]
+            }
+         }) 
+         return filteredFeedPosts
+      }
 
      filterPostsOnCategoryHome = () => {
        const filteredPosts = this.filterPostsOnCategory(this.state.feedPostsCopy)

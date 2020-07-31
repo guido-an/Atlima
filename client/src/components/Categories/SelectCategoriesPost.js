@@ -10,16 +10,20 @@ class SelectCategoriesPost extends React.Component {
   }
   render () {
     return (
-      <div>
-      {this.context.allCategories.map(category => {
-                 return (
-            <div key={category._id}>
-                   <span>{category.name}</span>
-                   <input onChange={this.context.onSelectCategories} type="checkbox" name={category._id}/>
-            </div>
+      <div className="categories-on-create">
+        <div className="wrapper-categories">
+      {this.context.allCategories.map((category, i) => {
+            return (
+              <div key={i} className='item'>
+                <label className='container '>
+                  <input onChange={this.onFilterCategoryChange} type='checkbox' name={category._id} />
+                  <span className="checkmark">{category.name}</span>
+                 </label>
+              </div>
             )
-        })}
-      </div>
+          })}
+          </div>
+        </div>
     )
   }
 }
