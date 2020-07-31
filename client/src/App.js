@@ -46,42 +46,47 @@ class App extends React.Component {
             <Route
               path="/login"
               component={Login} />
-            />  
+            
   
             <Route
               path="/signup"
               component={Signup} />
-            /> 
+            
   
             <Route
               path="/onboarding"
               component={OnBoarding} />
-            /> 
+            
   
             <Route
               exact path="/profile/:id"
               component={Profile} />
-            />
+          
         
             <Route
               path="/create-post"
               component={CreatePost} />
-            />   
+            
   
-            <Route
+            {/* <Route
               path="/profile/edit/:id"
-              component={EditProfile} />
-            /> 
-          
+              component={EditProfile} /> */}
+
+              <Route
+                 path="/profile/edit/:id"
+                 render={props => <EditProfile {...props} loggedInUser={this.context.loggedInUser} />}
+                />     
+                          
+    
             <Route
               path="/spots-map"
               component={SpotsMap} />
-            /> 
+            
 
             <Route
               path={`/:id/notifications`}
               component={Notifications} />
-            /> 
+            
 
         </Switch>
       </div>

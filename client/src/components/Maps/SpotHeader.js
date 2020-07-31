@@ -33,11 +33,9 @@ class SpotHeader extends React.Component {
     checkIfAlreadyFollowing = () => {
       const spot = this.state.spot
         if(spot && spot.followedBy.includes(this.context.loggedInUser._id)){
-          console.log('following')
           this.setState({ isFollowingSpot: true })
         } 
       else {
-        console.log('not following')
         this.setState({ isFollowingSpot: false })
       }
     }

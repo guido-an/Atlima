@@ -131,24 +131,8 @@ class MapContainer extends React.Component {
     return <p>Loading..</p>
   }
 
-  // mapContainerStyle = {
-  //   position: 'fixed',
-  //   width: '100%',
-  //   height: '100vh',
-  //   background: '#eee',
-  //   zIndex: '1'
-  // }
-
-  // mapContainerStyle = {
-  //   position: 'fixed',
-  //   width: '100%',
-  //   height: {this.state.activeMarker ? '80vh' : '100vh'},
-  //   background: '#eee',
-  //   zIndex: '1'
-  // }
 
   render(){
-    console.log(this.props.categoryContext, 'categoryContext')
     return (
       <div className="map-wrapper">
           <div className="places-container">
