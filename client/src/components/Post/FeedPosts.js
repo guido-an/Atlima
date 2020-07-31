@@ -5,8 +5,8 @@ import DisplayPosts from './DisplayPosts'
 
 class FeedPosts extends React.Component {
   static contextType = PostContext
-    componentDidMount(){
-      this.context.getFeedPosts()
+    async componentDidMount(){
+      await this.context.getFeedPosts()
    }
   render () {
     return (

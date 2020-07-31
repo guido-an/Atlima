@@ -64,6 +64,7 @@ export class CategoryContext extends React.Component {
           }
 
   render(){
+    
       const { getCategories, onSelectCategories, removeUserCategory, onSubmitUserCategories, cleanSelectedCategoriesIds, fillSelectedCategoriesIds } = this
       return(
           <Context.Provider 
