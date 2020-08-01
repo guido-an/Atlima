@@ -19,7 +19,7 @@ class Post extends React.Component {
       console.log(this.state.post, 'post')
     return (
       <div>
-        <PostCard post={this.state.post} />
+        <PostCard post={this.state.post._id} />
         
       </div>
     )

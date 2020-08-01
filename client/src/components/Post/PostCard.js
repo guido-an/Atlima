@@ -15,6 +15,16 @@ import ReadMoreReact from 'read-more-react';
 class PostCard extends React.Component {
   static contextType = PostContext
 
+  state = {
+    post: null,
+  };
+
+
+  async componentDidMount(){
+    const post = await this.context.getSinglePost(this.props.postId)
+    this.setState({post})
+ }
+
   likePostAndUpdateIt = async postId => {
     postId = this.state.post._id
     try {
@@ -32,9 +42,9 @@ class PostCard extends React.Component {
   }
 
   render () {
-    console.log(this.props.post)
-    console.log(this.props.post)
-    if(!this.props.post){
+    console.log(this.state.post)
+    console.log(this.state.post)
+    if(!this.state.post){
 
       return <p>loading</p>
     }
@@ -42,21 +52,23 @@ class PostCard extends React.Component {
       <div className='post-card-container'>
         <div className='post-card-header'>
           <div>
-            <img className='ui avatar image circular' src={this.props.post.user.mediaFile.url ? this.props.post.user.mediaFile.url : Discobolo } />
+            <img className='ui avatar image circular' src={this.state.post.user.profilePicture
+              .url ? this.state.post.user.profilePicture
+              .url : Discobolo } />
           </div>
           <div className='post-card-header-content'>
-            <p><strong>{this.props.post.user.firstName} {this.props.post.user.lastName}</strong></p>
+            <p><strong>{this.state.post.user.firstName} {this.state.post.user.lastName}</strong></p>
 
             <div className="spot-info">
-              <span> <TimeAgo date={Date.parse(this.props.post.created_at)} /> </span>
+              <span> <TimeAgo date={Date.parse(this.state.post.created_at)} /> </span>
                <span className="dot-location"></span>
-               <span className="location-name"><RoomRoundedIcon /> {this.props.post.spot && this.props.post.spot.location ? this.props.post.spot.location.terms[0].value : "Its a mistery :o"}</span>
+               <span className="location-name"><RoomRoundedIcon /> {this.state.post.spot && this.state.post.spot.location ? this.state.post.spot.location.terms[0].value : "Its a mistery :o"}</span>
             </div> 
           </div>
         </div>
         <div>
-          <Carousel showArrows={false} showThumbs={false} showStatus={false} infiniteLoop={this.props.post.mediaFile.length >= 2? true : false } dynamicHeight={true} cancelable={false}>
-            {this.props.post.mediaFile && this.props.post.mediaFile.map(media => {
+          <Carousel showArrows={false} showThumbs={false} showStatus={false} infiniteLoop={this.state.post.mediaFile.length >= 2? true : false } dynamicHeight={true} cancelable={false}>
+            {this.state.post.mediaFile && this.state.post.mediaFile.map(media => {
               if (media.type[0] == "v"){
               return (
                 <div>
@@ -84,14 +96,14 @@ class PostCard extends React.Component {
         </div>
 
         <div className='post-card-icons'>
-          <div className={this.isInclude(this.props.post.likes)? "like" : "" } onClick={this.likePostAndUpdateIt}>
+          <div className={this.isInclude(this.state.post.likes)? "like" : "" } onClick={this.likePostAndUpdateIt}>
             <ThumbUpAltRoundedIcon />
             <br/>
-            <p>{this.props.post.likes.length}</p>
+            <p>{this.state.post.likes.length}</p>
           </div>
           <div className="coment">
             <ChatBubbleRoundedIcon />
-            <p>{this.props.post.comments.length}</p>
+            <p>{this.state.post.comments.length}</p>
           </div>
           <div className="share">
             <ReplyRoundedIcon />
@@ -99,7 +111,7 @@ class PostCard extends React.Component {
         </div> 
         <p className="description">
           <ReadMoreReact 
-            text={this.props.post.content}  
+            text={this.state.post.content}  
             min={70}
             ideal={75}
             max={85}
