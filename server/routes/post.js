@@ -7,6 +7,7 @@ const defineUser = require('../helpers/defineUser')
 const myNotifications = require('../helpers/notifications')
 const myFunctions = require('../helpers/postLikes')
 const newPostHelper = require('../helpers/newPostHelper')
+const User = require('../models/User')
 
 // NEW POST
 router.post('/new', async (req, res) => {
@@ -56,6 +57,7 @@ router.post('/new', async (req, res) => {
   try {
     // CREATE the post
     const post = await newPost.save()
+    await User.findOneAndUpdate({ _id: user._id }, { $push: { posts: post._id } })
     newPostHelper.addPostToCategory(categories, post)
     res.status(200).json({ Message: `New post created ${post}` })
   } catch (err) {

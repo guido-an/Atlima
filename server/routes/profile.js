@@ -8,6 +8,15 @@ const defineUser = require('../helpers/defineUser')
 router.get('/user/:id', async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id })
+      .populate('categories')
+      .populate('followedSpots')
+      .populate({
+        path: 'posts',
+        populate: {
+          path: 'user'
+        }
+      })
+    console.log(user.posts)
     res.status(200).send(user)
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong with getting the user 5000/profile/:id' })
