@@ -23,15 +23,11 @@ class EditProfile extends React.Component {
     async componentDidMount(){
       await this.getUser()
       this.context.cleanSelectedCategoriesIds()
-      this.context.fillSelectedCategoriesIds(this.state.loggedInUser.categories)
+      const userCategoriesIds = this.state.loggedInUser.categories.map(category => category._id)
+      this.context.fillSelectedCategoriesIds(userCategoriesIds)
       await this.context.getCategories()
     }
-    // componentDidMount () {
-    //   this.context.cleanSelectedCategoriesIds()
-    //   this.props.loggedInUser && this.context.fillSelectedCategoriesIds(this.props.loggedInUser.categories)
-    //   this.context.getCategories()
-    // }
-
+  
     getUser = async () => {
       try {
         const user = await GET_USER(this.props.loggedInUser._id)
@@ -56,8 +52,9 @@ class EditProfile extends React.Component {
         this.state.bio
       )
         this.context.onSubmitUserCategories(e)     
-       // window.location.reload();
-        await this.getUser()
+        window.location.reload();
+        // const userUpdated = await this.getUser()
+        // this.setState({loggedInUser: userUpdated})
     }  catch(err){
       alert('err')
           console.log(err)
@@ -84,8 +81,8 @@ class EditProfile extends React.Component {
   render () {
     if(!this.state.loggedInUser)
     return <p></p>
-  const backgroundImageBeforeUpdate = this.props.loggedInUser && this.props.loggedInUser.backgroundPicture || "https://vignette.wikia.nocookie.net/simpsons/images/b/bd/Homer_Simpson.png/revision/latest?cb=20140126234206"
-  const profileImageBeforeUpdate =  this.props.loggedInUser && this.props.loggedInUser.profilePicture || "https://vignette.wikia.nocookie.net/simpsons/images/b/bd/Homer_Simpson.png/revision/latest?cb=20140126234206"
+  const backgroundImageBeforeUpdate = this.state.loggedInUser.backgroundPicture || "https://vignette.wikia.nocookie.net/simpsons/images/b/bd/Homer_Simpson.png/revision/latest?cb=20140126234206"
+  const profileImageBeforeUpdate =  this.state.loggedInUser.profilePicture || "https://vignette.wikia.nocookie.net/simpsons/images/b/bd/Homer_Simpson.png/revision/latest?cb=20140126234206"
     return (
     <div className="edit-profile">
         <form onSubmit={this.onSubmit}>
@@ -109,7 +106,6 @@ class EditProfile extends React.Component {
                    bottom: "90px",
                    left: "20px"
                   }} /> 
-           
              <div className="edit-profile-picture">
                <ImageUpload id={2} getProfilePicture={this.getProfilePicture} />
              </div>
