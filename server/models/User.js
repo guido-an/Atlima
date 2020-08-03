@@ -18,7 +18,8 @@ const userSchema = new Schema({
   profilePicture: Object,
   backgroundPicture: Object,
   followedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  followedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+  followedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
 }, {
   timestamps: {
     createdAt: 'created_at',
