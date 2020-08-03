@@ -101,6 +101,7 @@ router.get('/reset-unread-notifications', async (req, res) => {
   }
 })
 
+/* FOLLOW USER */
 router.post('/follow/:id', async (req, res) => {
   try {
     const currentUser = await defineUser(req.session.currentUser)
@@ -121,4 +122,18 @@ router.post('/follow/:id', async (req, res) => {
   }
 })
 
+/* SEARCH FOR USERS */
+router.get('/search', async (req, res) => {
+  try {
+    console.log(req.query, 'HERE')
+    // TO BE IMPROVED, shouldn't call all the users but use Mongo query
+    const usersFromDB = await User.find()
+    const users = usersFromDB.filter(user => {
+      return user.firstName.toUpperCase().includes(req.query.term.toUpperCase()) || user.lastName.toUpperCase().includes(req.query.term.toUpperCase())
+    })
+    res.status(200).send({ users })
+  } catch (err) {
+    res.status(400).send('something went wrong: 5000 - /search' + err)
+  }
+})
 module.exports = router

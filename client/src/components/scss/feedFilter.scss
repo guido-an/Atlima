@@ -128,10 +128,39 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
     height: 60px;
     padding-left: 5vw;
+    padding-right: 5vw;
     padding-top: 16px;
     margin-bottom: 16px;
     display: flex;
     justify-content: space-between;
+    input {
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        outline: none;
+        height: 30px;
+        width: 220px;
+        padding: 10px
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        min-width: 220px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+        border: 1px solid #e5e5e5;
+        border-radius: 0 0 4px 4px;
+      }
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+      .user {
+          margin-bottom: 10px;
+      }
+    input::placeholder{
+        font-size: 12px;
+    }
     h1{
         height: 24px;
         font-family: Bebas Neue;
