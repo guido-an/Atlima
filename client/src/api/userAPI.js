@@ -34,3 +34,13 @@ export const GET_USER = async pageUserId => {
   const user = await service.get(`/profile/user/${pageUserId}`)
   return user.data
 }
+
+export const SEARCH_FOR_USERS = async term => {
+  const users = await service.get('/profile/search', {
+    params: {
+      term
+    }
+  })
+
+  return users.data.users
+}
