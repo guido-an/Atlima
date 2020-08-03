@@ -27,18 +27,22 @@ class Post extends React.Component {
   
   onSubmit = async e => {
     e.preventDefault();
-      try {
-        await this.props.postContext.createPost(
-          this.state.title,
-          this.state.content,
-          this.state.mediaFile,
-          this.state.location,
-          this.context.selectedCategoriesIds
-        )
-      this.setState({ redirect: true })
-    }  catch(err){
-          console.log(err)
-     }
+    if (this.state.mediaFile.length != [] ){     
+        try {
+          await this.props.postContext.createPost(
+            this.state.title,
+            this.state.content,
+            this.state.mediaFile,
+            this.state.location,
+            this.context.selectedCategoriesIds
+          )
+        this.setState({ redirect: true })
+      }  catch(err){
+            console.log(err)
+      }
+    }else{
+      alert('Post need img')
+    }
   };
     
     onInputChange = e => {

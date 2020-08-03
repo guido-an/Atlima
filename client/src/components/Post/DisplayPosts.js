@@ -9,7 +9,7 @@ class DisplayPosts extends React.Component {
     {this.props.posts && this.props.posts.map(post => {
       return (
         <div key={post._id}>
-          <PostCard post={post} postUser={this.context.loggedInUser} likePost={this.props.likePost} loggedInUser={this.context.loggedInUser}/>
+          <PostCard postId={post._id} likePost={this.props.likePost} loggedInUser={this.context.loggedInUser}/>
         </div>
       )
     })}

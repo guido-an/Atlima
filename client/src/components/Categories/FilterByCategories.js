@@ -11,15 +11,25 @@ class FilterByCategories extends React.Component {
   }
 
   onFilterCategoryChange = async e => {
+    if(this.context.myFeedActive) {
+      this.context.cleanSelectedCategoriesIds()
+      
+    
+    }
     await this.context.onSelectCategories(e)
     this.props.postContext.filterPostsOnCategoryHome()
-  }
-
-  onMyFeed = async e => {
 
   }
+
+  onMyFeed =  e => {
+     this.context.onMyFeedCategories(this.props.user.categories)
+     this.props.postContext.filterPostsOnCategoryHome()
+  }
+
+
 
   render () {
+    console.log(this.context.myFeedActive)
     return (
       <div className='feed-cat'>
         <div className='onboarding'>

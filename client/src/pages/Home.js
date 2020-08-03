@@ -15,7 +15,7 @@ class Home extends React.Component {
           <h1 >altima</h1>
           <SearchRoundedIcon />
         </div>
-        <FilterByCategories postContext={this.context} />
+        <FilterByCategories postContext={this.context} user={this.props.user}/>
         <FeedPosts />
       </div>
     )

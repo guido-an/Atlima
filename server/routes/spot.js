@@ -50,6 +50,7 @@ router.post('/follow', async (req, res) => {
         // unfollow
         update = { $pull: { followedBy: user._id } }
         const updatedSpot = await Spot.findOneAndUpdate(filter, update, { new: true })
+        res.status(200).send({ message: `Follow the spot ${updatedSpot}` })
         await User.findOneAndUpdate({ _id: user._id }, { $pull: { followedSpots: spot._id } })
         // delete if no followers and posts
         if (updatedSpot.posts.length === 0 && updatedSpot.followedBy.length === 0) {
