@@ -14,6 +14,7 @@ export class CategoryContext extends React.Component {
     state = { 
         allCategories: [],
         selectedCategoriesIds: [],
+        myFeedActive: false
     };
 
     getCategories = async () => {
@@ -25,20 +26,37 @@ export class CategoryContext extends React.Component {
         }
      }
 
-     onSelectCategories = e => {
-        const { name } = e.target;
-        if(e.target.checked){
-          this.setState({
-            selectedCategoriesIds: [...this.state.selectedCategoriesIds, name],
-          })
-        } else {
-          this.removeUserCategory(name)
-        }
+      onMyFeedCategories = userCategories => {
+        console.log('cats', userCategories)
+        /* this.setState({ selecteduserCategoriesIds: [] }) */
+        
+       /*  if(userCategories != []){     
+          const categoriesIds = userCategories.map(category => category._id)
+          this.setState({ selectedCategoriesIds: categoriesIds, myFeed: true })
+        }  */
+             
+          const categoriesIds = userCategories.map(category => category._id)
+          this.setState({ selectedCategoriesIds: categoriesIds, myFeedActive: true })
+          console.log(categoriesIds, 'user categoriues')
+         
+        
       }
 
       cleanSelectedCategoriesIds = () => {
+        // not worrking for the feed
         this.setState({ selectedCategoriesIds: [] })
       }
+
+      onSelectCategories = e => {
+         const { name } = e.target;
+         if(e.target.checked){
+           this.setState({
+             selectedCategoriesIds: [...this.state.selectedCategoriesIds, name],
+           })
+         } else {
+           this.removeUserCategory(name)
+         }
+       }
 
       removeUserCategory = (name) => {
         let myArray = [...this.state.selectedCategoriesIds]
@@ -64,8 +82,8 @@ export class CategoryContext extends React.Component {
           }
 
   render(){
-    
-      const { getCategories, onSelectCategories, removeUserCategory, onSubmitUserCategories, cleanSelectedCategoriesIds, fillSelectedCategoriesIds } = this
+    console.log(this.state.selectedCategoriesIds, 'selectedCategoriesIds')
+      const { getCategories, onSelectCategories, removeUserCategory, onSubmitUserCategories, cleanSelectedCategoriesIds, onMyFeedCategories, fillSelectedCategoriesIds } = this
       return(
           <Context.Provider 
               value={{ 
@@ -75,6 +93,7 @@ export class CategoryContext extends React.Component {
                   removeUserCategory,
                   onSubmitUserCategories,
                   cleanSelectedCategoriesIds,
+                  onMyFeedCategories,
                   fillSelectedCategoriesIds
                    }}>
               {this.props.children}

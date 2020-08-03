@@ -41,7 +41,7 @@ class App extends React.Component {
               user={this.context.loggedInUser}
               component={Home}
             /> : 
-            <Route exact path="/" component={Landing}/>
+            <Route exact path="/" component={Landing} user={this.context.loggedInUser}/>
           }
 
             <Route

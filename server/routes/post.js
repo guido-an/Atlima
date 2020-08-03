@@ -90,7 +90,7 @@ router.get('/all/spot', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const post = await Post.findOne({ _id: req.params.id })
-      .populate('user').populate('comments.user')
+      .populate('user').populate('comments.user').populate('spot')
       
     res.status(200).send(post)
   } catch (err) {

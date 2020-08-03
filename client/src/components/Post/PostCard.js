@@ -11,6 +11,7 @@ import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
 import ReplyRoundedIcon from '@material-ui/icons/ReplyRounded';
 import RoomRoundedIcon from '@material-ui/icons/RoomRounded';
 import ReadMoreReact from 'read-more-react';
+import Follow from '../../components/Post/Follow'
 
 class PostCard extends React.Component {
   static contextType = PostContext
@@ -40,27 +41,27 @@ class PostCard extends React.Component {
   }
 
   render () {
-    console.log(this.state.post)
-    console.log(this.props.loggedInUser._id)
     if(!this.state.post){
       return <p>loading</p>
     }
     return (
       <div className='post-card-container'>
-        <div className='post-card-header'>
-          <div>
-            <img className='ui avatar image circular' src={this.state.post.user.profilePicture ? this.state.post.user.profilePicture.url : Discobolo } />
-          </div>
-          <div className='post-card-header-content'>
-            <p><strong>{this.state.post.user.firstName} {this.state.post.user.lastName}</strong></p>
+        { !this.props.onePost && 
+          <div className='post-card-header'>
+            <div>
+              <img className='ui avatar image circular' src={this.state.post.user.profilePicture ? this.state.post.user.profilePicture.url : Discobolo } />
+            </div>
+            <div className='post-card-header-content'>
+              <p><strong>{this.state.post.user.firstName} {this.state.post.user.lastName}</strong></p>
 
-            <div className="spot-info">
-              <span> <TimeAgo date={Date.parse(this.state.post.created_at)} /> </span>
-               <span className="dot-location"></span>
-               <span className="location-name"><RoomRoundedIcon /> {this.state.post.spot && this.state.post.spot.location ? this.state.post.spot.location.terms[0].value : "Its a mistery :o"}</span>
-            </div> 
+              <div className="spot-info">
+                <span> <TimeAgo date={Date.parse(this.state.post.created_at)} /> </span>
+                <span className="dot-location"></span>
+                <span className="location-name"><RoomRoundedIcon /> {this.state.post.spot && this.state.post.spot.location ? this.state.post.spot.location.terms[0].value : "Its a mistery :o"}</span>
+              </div> 
+            </div>
           </div>
-        </div>
+        }
         <div>
           <Carousel showArrows={false} showThumbs={false} showStatus={false} infiniteLoop={this.state.post.mediaFile.length >= 2? true : false } dynamicHeight={true} cancelable={false}>
             {this.state.post.mediaFile && this.state.post.mediaFile.map((media, i) => {
@@ -114,6 +115,9 @@ class PostCard extends React.Component {
             />
         </div>
         <div className="spacer"></div>
+        { this.props.onePost && 
+          <Follow post={this.state.post} loggedInUser={this.context.loggedInUser} />
+        }
       </div>
     )
   }

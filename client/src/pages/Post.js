@@ -14,7 +14,7 @@ class Post extends React.Component {
       console.log(this.state.post, 'post')
     return (
       <div>
-        <PostCard postId={this.props.match.params.id} loggedInUser={this.context.loggedInUser} />
+        <PostCard postId={this.props.match.params.id} loggedInUser={this.context.loggedInUser} onePost="0"/>
         <CreateComment postId={this.props.match.params.id} loggedInUser={this.context.loggedInUser} />
         
       </div>
