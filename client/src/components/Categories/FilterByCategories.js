@@ -13,8 +13,6 @@ class FilterByCategories extends React.Component {
   onFilterCategoryChange = async e => {
     if(this.context.myFeedActive) {
       this.context.cleanSelectedCategoriesIds()
-      
-    
     }
     await this.context.onSelectCategories(e)
     this.props.postContext.filterPostsOnCategoryHome()
@@ -23,7 +21,7 @@ class FilterByCategories extends React.Component {
 
   onMyFeed =  e => {
      this.context.onMyFeedCategories(this.props.user.categories)
-     this.props.postContext.filterPostsOnCategoryHome()
+     this.props.postContext.filterPostsOnCategoryHome() 
   }
 
 
@@ -40,7 +38,7 @@ class FilterByCategories extends React.Component {
           return (
               <div key={category._id} className='item'>
                 <label className='container'>
-                <input onChange={this.onFilterCategoryChange} type='checkbox' name={category._id} />
+                <input className="checkbox" onChange={this.onFilterCategoryChange} type='checkbox' name={category._id} checked={this.context.selectedCategoriesIds.includes(category._id) && true} />
                 <span className={`checkmark  ${category.name}`}>{category.name}</span>
                 </label>
               </div>

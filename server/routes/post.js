@@ -11,10 +11,11 @@ const User = require('../models/User')
 
 // NEW POST
 router.post('/new', async (req, res) => {
+  console.log(req.session.currentUser, 'req.session.currentUser 1')
   let mySpot
   const { content, title, mediaFile, location, categories } = req.body
   const user = await defineUser(req.session.currentUser)
-  console.log(user, 'user')
+  console.log(user, 'user 2')
   const newPost = new Post({
     content,
     title,
@@ -93,7 +94,7 @@ router.get('/:id', async (req, res) => {
   try {
     const post = await Post.findOne({ _id: req.params.id })
       .populate('user').populate('comments.user').populate('spot')
-      
+
     res.status(200).send(post)
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong' })

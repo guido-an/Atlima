@@ -26,25 +26,18 @@ export class CategoryContext extends React.Component {
         }
      }
 
-      onMyFeedCategories = userCategories => {
-        console.log('cats', userCategories)
-        /* this.setState({ selecteduserCategoriesIds: [] }) */
-        
-       /*  if(userCategories != []){     
+      onMyFeedCategories = userCategories => {          
           const categoriesIds = userCategories.map(category => category._id)
-          this.setState({ selectedCategoriesIds: categoriesIds, myFeed: true })
-        }  */
-             
-          const categoriesIds = userCategories.map(category => category._id)
-          this.setState({ selectedCategoriesIds: categoriesIds, myFeedActive: true })
-          console.log(categoriesIds, 'user categoriues')
-         
-        
+          this.setState({ selectedCategoriesIds: categoriesIds, myFeedActive: true })   
       }
 
       cleanSelectedCategoriesIds = () => {
-        // not worrking for the feed
-        this.setState({ selectedCategoriesIds: [] })
+        this.setState({ selectedCategoriesIds: [], myFeedActive: false })
+        // TO BE CHANGED - PATCH
+        // if (this.state.selectedCategoriesIds != []){ 
+        //   this.state.selectedCategoriesIds = []
+        //   console.log("entro a la cerdada", this.state.myFeedActive)
+        // }
       }
 
       onSelectCategories = e => {

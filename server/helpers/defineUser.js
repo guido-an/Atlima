@@ -1,12 +1,35 @@
+// const User = require('../models/User')
+
+// const defineUser = async myUser => {
+//   console.log(myUser, 'myUser BEFORE')
+//   let user
+//   if (myUser && myUser.provider === 'facebook') {
+//     console.log(myUser, 'FACEBOOK')
+
+//     const userFromDB = await User.findOne({ facebookId: myUser.id }).populate('categories')
+//     user = userFromDB
+//   } else {
+//     user = myUser
+//   }
+//   return user
+// }
+// module.exports = defineUser
+
 const User = require('../models/User')
 
 const defineUser = async myUser => {
+  console.log(myUser, 'myUser BEFORE')
   let user
   if (myUser && myUser.provider === 'facebook') {
     const userFromDB = await User.findOne({ facebookId: myUser.id }).populate('categories')
-    user = userFromDB
+    if (userFromDB === null) {
+      const myUserFromDb = await User.findOne({ _id: myUser._id }).populate('categories')
+      user = myUserFromDb
+    } else {
+      user = userFromDB
+    }
   } else {
-    user = myUser
+    user = await User.findOne({ _id: myUser._id }).populate('categories')
   }
   return user
 }

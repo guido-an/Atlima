@@ -3,8 +3,6 @@ import '../scss/onboarding.scss'
 
 class SelectionCategories extends React.Component {
   render () {
-    console.log(this.props.categoryContext.selectedCategoriesIds, 'selectedCategoriesIds')
-
     return (
       <div className='category ui secondary fluid three item'>
         <div className='onboarding'>

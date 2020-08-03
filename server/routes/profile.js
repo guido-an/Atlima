@@ -28,8 +28,6 @@ router.post('/edit/:id', async (req, res) => {
   const { backgroundPicture, profilePicture, firstName, lastName, location, bio } = req.body
   try {
     const user = await defineUser(req.session.currentUser)
-    console.log(user, 'user')
-
     const filter = { _id: user._id }
     const update = {
       backgroundPicture: backgroundPicture || user.backgroundPicture,
@@ -39,7 +37,7 @@ router.post('/edit/:id', async (req, res) => {
       location: location || user.location,
       bio: bio || user.bio
     }
-    const updatedUser = await User.findOneAndUpdate(filter, update, {
+    await User.findOneAndUpdate(filter, update, {
       new: true
     })
     res.status(200).send({ message: 'user updated' })

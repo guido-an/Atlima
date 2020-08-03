@@ -1,5 +1,6 @@
 import '../scss/PostCard.scss'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import ReactPlayer from 'react-player'
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -11,7 +12,7 @@ import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
 import ReplyRoundedIcon from '@material-ui/icons/ReplyRounded';
 import RoomRoundedIcon from '@material-ui/icons/RoomRounded';
 import ReadMoreReact from 'read-more-react';
-import Follow from '../../components/Post/Follow'
+import Follow from '../Post/follow'
 
 class PostCard extends React.Component {
   static contextType = PostContext
@@ -98,7 +99,7 @@ class PostCard extends React.Component {
             <p>{this.state.post.likes.length}</p>
           </div>
           <div className="coment">
-            <ChatBubbleRoundedIcon />
+            <Link to={`/post/${this.state.post._id}`}><ChatBubbleRoundedIcon /></Link>
             <p>{this.state.post.comments.length}</p>
           </div>
           <div className="share">
