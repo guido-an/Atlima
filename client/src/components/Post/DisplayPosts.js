@@ -2,9 +2,6 @@ import React from 'react'
 import AuthContext  from '../../contexts/AuthContext'
 import PostCard from './PostCard'
 
-
-
-
 class DisplayPosts extends React.Component {
   static contextType = AuthContext
   render(){

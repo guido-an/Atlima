@@ -36,8 +36,6 @@ class Post extends React.Component {
           this.context.selectedCategoriesIds
         )
       this.setState({ redirect: true })
-      // this.props.history.push('/')
- 
     }  catch(err){
           console.log(err)
      }
@@ -49,7 +47,6 @@ class Post extends React.Component {
           [name]: value,
         });
     }
-
 
     getMediaFile = file => {
       this.setState({ mediaFile: [...this.state.mediaFile, file]})
@@ -63,7 +60,7 @@ class Post extends React.Component {
     if(this.state.redirect){
       return <Redirect to="/" />
     }
-    console.log('midia' , this.state.mediaFile)
+    
     return (
       <div className="create-post">
         <ImageUpload getMediaFile={this.getMediaFile}/>

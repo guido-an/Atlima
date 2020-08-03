@@ -7,7 +7,6 @@ const service = axios.create({
 
 export const GET_ALL_SPOTS = async () => {
   const spots = await service.get('/spot/all')
-  console.log(spots.data, 'spots.data')
   return spots.data
 }
 

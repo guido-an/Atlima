@@ -1,25 +1,21 @@
 import React from 'react'
-import PostContext from '../contexts/PostContext'
+import AuthContext from '../contexts/AuthContext'
 
 import PostCard from '../components/Post/PostCard'
+import CreateComment from '../components/Post/CreateComment'
 
 class Post extends React.Component {
- static contextType = PostContext
+ static contextType = AuthContext
  state = { 
    post : null
   }
-
- async componentDidMount(){
-    const post = await this.context.getSinglePost(this.props.match.params.id)
-    this.setState({post})
- }
-
 
   render () {
       console.log(this.state.post, 'post')
     return (
       <div>
-        <PostCard post={this.state.post._id} />
+        <PostCard postId={this.props.match.params.id} loggedInUser={this.context.loggedInUser} />
+        <CreateComment postId={this.props.match.params.id} loggedInUser={this.context.loggedInUser} />
         
       </div>
     )

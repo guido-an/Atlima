@@ -14,23 +14,21 @@ import ReadMoreReact from 'read-more-react';
 
 class PostCard extends React.Component {
   static contextType = PostContext
-
   state = {
     post: null,
   };
-
-
+  
   async componentDidMount(){
     const post = await this.context.getSinglePost(this.props.postId)
     this.setState({post})
  }
 
   likePostAndUpdateIt = async postId => {
-    postId = this.state.post._id
+    postId = this.props.postId
     try {
       await this.props.likePost(postId)
-      const postUpdated = await this.context.getSinglePost(postId)
-      this.setState({ post: postUpdated })
+       const postUpdated = await this.context.getSinglePost(postId)
+       this.setState({ post: postUpdated })
     } catch(err){
       console.log(err, 'err')
     }
@@ -43,18 +41,15 @@ class PostCard extends React.Component {
 
   render () {
     console.log(this.state.post)
-    console.log(this.state.post)
+    console.log(this.props.loggedInUser._id)
     if(!this.state.post){
-
       return <p>loading</p>
     }
     return (
       <div className='post-card-container'>
         <div className='post-card-header'>
           <div>
-            <img className='ui avatar image circular' src={this.state.post.user.profilePicture
-              .url ? this.state.post.user.profilePicture
-              .url : Discobolo } />
+            <img className='ui avatar image circular' src={this.state.post.user.profilePicture ? this.state.post.user.profilePicture.url : Discobolo } />
           </div>
           <div className='post-card-header-content'>
             <p><strong>{this.state.post.user.firstName} {this.state.post.user.lastName}</strong></p>
@@ -68,7 +63,7 @@ class PostCard extends React.Component {
         </div>
         <div>
           <Carousel showArrows={false} showThumbs={false} showStatus={false} infiniteLoop={this.state.post.mediaFile.length >= 2? true : false } dynamicHeight={true} cancelable={false}>
-            {this.state.post.mediaFile && this.state.post.mediaFile.map(media => {
+            {this.state.post.mediaFile && this.state.post.mediaFile.map((media, i) => {
               if (media.type[0] == "v"){
               return (
                 <div>
@@ -86,7 +81,7 @@ class PostCard extends React.Component {
               )}
               else if(media.type[0] == "i" ){
                 return (
-                <img src={media.url} style={{ maxWidth: '100vw', left: '0px' }} />
+                <img key={i} src={media.url} style={{ maxWidth: '100vw', left: '0px' }} />
                 )}
               else{
                 
@@ -94,9 +89,9 @@ class PostCard extends React.Component {
             })}
           </Carousel>
         </div>
-
+        {this.state.post.title ? <h4 className="title">{this.state.post.title}</h4> : "" } 
         <div className='post-card-icons'>
-          <div className={this.isInclude(this.state.post.likes)? "like" : "" } onClick={this.likePostAndUpdateIt}>
+          <div className={this.isInclude(this.state.post.likes ) ? "like" : "" } onClick={this.likePostAndUpdateIt}>
             <ThumbUpAltRoundedIcon />
             <br/>
             <p>{this.state.post.likes.length}</p>
@@ -109,14 +104,15 @@ class PostCard extends React.Component {
             <ReplyRoundedIcon />
           </div>
         </div> 
-        <p className="description">
+        <div className="description">
           <ReadMoreReact 
             text={this.state.post.content}  
             min={70}
             ideal={75}
             max={85}
             readMoreText={"...READ MORE"}
-            /></p>
+            />
+        </div>
         <div className="spacer"></div>
       </div>
     )

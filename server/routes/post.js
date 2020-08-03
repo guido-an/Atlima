@@ -13,6 +13,7 @@ router.post('/new', async (req, res) => {
   let mySpot
   const { content, title, mediaFile, location, categories } = req.body
   const user = await defineUser(req.session.currentUser)
+  console.log(user, 'user')
   const newPost = new Post({
     content,
     title,
@@ -89,7 +90,8 @@ router.get('/all/spot', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const post = await Post.findOne({ _id: req.params.id })
-      .populate('user')
+      .populate('user').populate('comments.user')
+      
     res.status(200).send(post)
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong' })
