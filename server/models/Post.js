@@ -7,7 +7,7 @@ const postSchema = new Schema({
   title: String,
   spot: { type: mongoose.Schema.Types.ObjectId, ref: 'Spot' },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  tag_users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  taggedAthletes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   comments: [{

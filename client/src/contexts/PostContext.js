@@ -57,15 +57,15 @@ export class PostContext extends React.Component {
         }
    }
 
-    createPost = async (title, content, mediaFile, location, categories) => {
+    createPost = async (title, content, mediaFile, location, categories, taggedAthletes) => {
         try {
-           
             await service.post('/post/new', {
                 title,
                 content,
                 mediaFile,
                 location,
-                categories
+                categories,
+                taggedAthletes
               })
         } catch(err){
             console.log(err)

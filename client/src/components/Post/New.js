@@ -2,6 +2,7 @@ import React from 'react'
 import  { Redirect } from 'react-router-dom'
 import ImageUpload from './ImageUpload'
 import Places from '../Maps/Places'
+import TagUsersBar from '../Post/TagUsersBar'
 import '../../components/scss/buttons.scss'
 import '../../components/scss/createPost.scss'
 
@@ -16,6 +17,7 @@ class Post extends React.Component {
   state = { 
       title: '',
       content: '',
+      athletes: [],
       mediaFile: [],
       location: null,
       redirect: false
@@ -27,6 +29,9 @@ class Post extends React.Component {
   
   onSubmit = async e => {
     e.preventDefault();
+    const taggedUsersIds = this.state.athletes.map(athlete => {
+      return athlete._id
+    })
     if (this.state.mediaFile.length != [] ){     
         try {
           await this.props.postContext.createPost(
@@ -34,14 +39,15 @@ class Post extends React.Component {
             this.state.content,
             this.state.mediaFile,
             this.state.location,
-            this.context.selectedCategoriesIds
+            this.context.selectedCategoriesIds,
+            taggedUsersIds
           )
         this.setState({ redirect: true })
       }  catch(err){
             console.log(err)
       }
     }else{
-      alert('Post need img')
+      alert('Please choose an image :)')
     }
   };
     
@@ -60,6 +66,10 @@ class Post extends React.Component {
       this.setState({location: spotLocation})
     }
 
+    getAthletesToTag = athletes => {
+      this.setState({ athletes })
+    }
+
   render () {
     if(this.state.redirect){
       return <Redirect to="/" />
@@ -70,11 +80,12 @@ class Post extends React.Component {
         <ImageUpload getMediaFile={this.getMediaFile}/>
         <form onSubmit={this.onSubmit}>        
             <label>Title</label>
-            <input onChange={this.onInputChange} type="text" placeholder="title" name="title"/>
+            <input onChange={this.onInputChange} type="text" placeholder="Title" name="title"/>
             <label>Description</label>
-            <textarea onChange={this.onInputChange} rows="4" type="textarea" placeholder="description" name="content"/>
+            <textarea onChange={this.onInputChange} rows="4" type="textarea" placeholder="Description" name="content"/>
             <label>Tag Other Athlets</label>
-            <input onChange={this.onInputChange} type="text" placeholder="Users" name="content"/>
+            <TagUsersBar getAthletesToTag={this.getAthletesToTag}/>
+            {/* <input onChange={this.onInputChange} type="text" placeholder="Users" name="athletes"/> */}
             <label>Location</label>
             <Places getLocation={this.getLocation} />
             <label>Categories</label>

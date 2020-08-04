@@ -11,18 +11,17 @@ const User = require('../models/User')
 
 // NEW POST
 router.post('/new', async (req, res) => {
-  console.log(req.session.currentUser, 'req.session.currentUser 1')
   let mySpot
-  const { content, title, mediaFile, location, categories } = req.body
+  const { content, title, mediaFile, location, categories, taggedAthletes } = req.body
   const user = await defineUser(req.session.currentUser)
-  console.log(user, 'user 2')
   const newPost = new Post({
     content,
     title,
     user: user._id,
     mediaFile,
     // location,
-    categories
+    categories,
+    taggedAthletes
   })
 
   // Creating or Updating Spots when the Post is created
@@ -59,6 +58,12 @@ router.post('/new', async (req, res) => {
     // CREATE the post
     const post = await newPost.save()
     await User.findOneAndUpdate({ _id: user._id }, { $push: { posts: post._id } })
+    // ADD IN TAGGED USER POSTS
+    taggedAthletes.forEach(async athleteId => {
+      console.log(athleteId, 'athleteId')
+      console.log(post._id, 'post._id')
+      await User.findOneAndUpdate({ _id: athleteId }, { $push: { taggedPosts: post._id } })
+    })
     newPostHelper.addPostToCategory(categories, post)
     res.status(200).json({ Message: `New post created ${post}` })
   } catch (err) {
@@ -132,7 +137,6 @@ router.post('/like/:id', async (req, res) => {
     if (!likeIsPresent) {
       myFunctions.likeAPost(postId, user._id, true)
       myNotifications.notificationLike(user, post, false)
-      // console.log(user._id, post.user)
       res.status(200).send({ message: 'post liked' })
     } else {
       myFunctions.likeAPost(postId, user._id, false)

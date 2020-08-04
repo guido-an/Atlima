@@ -16,7 +16,6 @@ router.get('/user/:id', async (req, res) => {
           path: 'user'
         }
       })
-    console.log(user.posts)
     res.status(200).send(user)
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong with getting the user 5000/profile/:id' })
@@ -125,7 +124,6 @@ router.post('/follow/:id', async (req, res) => {
 /* SEARCH FOR USERS */
 router.get('/search', async (req, res) => {
   try {
-    console.log(req.query, 'HERE')
     // TO BE IMPROVED, shouldn't call all the users but use Mongo query
     const usersFromDB = await User.find()
     const users = usersFromDB.filter(user => {

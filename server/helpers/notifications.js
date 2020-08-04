@@ -1,7 +1,7 @@
 const User = require('../models/User')
 var ObjectId = require('mongodb').ObjectID
 
-const notificationLike = async (currentUser, post, type, message) => {
+const notificationLike = async (currentUser, post) => {
   if (currentUser._id.toString() == post.user.toString()) {
 
   } else {
@@ -30,10 +30,6 @@ const notificationLike = async (currentUser, post, type, message) => {
 const notificationComments = async (currentUser, post) => {
   const myUserId = ObjectId(currentUser._id).toString()
   const postUserId = ObjectId(post.user._id).toString()
-  // const today = new Date()
-  // const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
-  // const time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
-
   try {
     if (myUserId == postUserId) {
       console.log('same user')
