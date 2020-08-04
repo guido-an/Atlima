@@ -26,8 +26,8 @@ export class CategoryContext extends React.Component {
         }
      }
 
-      onMyFeedCategories = userCategories => {          
-          const categoriesIds = userCategories.map(category => category._id)
+      onMyFeedCategories = userCategories => {      
+          const categoriesIds = userCategories.map(category => category._id) 
           this.setState({ selectedCategoriesIds: categoriesIds, myFeedActive: true })   
       }
 

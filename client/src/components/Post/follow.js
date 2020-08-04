@@ -1,8 +1,9 @@
 import React from 'react'
 import AuthContext from '../../contexts/AuthContext'
 import { FOLLOW_USER , GET_USER } from '../../api/userAPI'
-import SpotHeader from '../../components/Maps/SpotHeader'
 import '../scss/PostCard.scss'
+import '../scss/Comments.scss'
+import Discobolo  from '../../images/discobolo.jpg'
 
 class Follow extends React.Component {
  static contextType = AuthContext
@@ -55,8 +56,9 @@ class Follow extends React.Component {
   render () {
       console.log(this.state.spot, "props" , this.state.isFollowingSpot)
     return (
-      <div>
+      <div className="follow">
         <form onSubmit={this.onSubmitHandler}>
+            <img className='ui avatar image circular' src={this.props.post.user.profilePicture ? this.props.post.user.profilePicture.url : Discobolo } />
             <p>{this.props.post.user.firstName} {this.props.post.user.lastName}</p>
             {this.state.pageUserIsFollowed ? 
             <button className='unfollow-btn'>Unfollow</button> :

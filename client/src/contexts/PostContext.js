@@ -91,6 +91,7 @@ export class PostContext extends React.Component {
     getSinglePost = async postId => {
         try {
             const post = await service.get(`/post/${postId}`)
+            post.data.comments = post.data.comments.reverse()
             return post.data
         } catch(err){
             console.log(err)
