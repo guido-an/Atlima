@@ -149,7 +149,7 @@ router.post('/:id/comment', async (req, res) => {
   const { content } = req.body
   try {
     const user = await defineUser(req.session.currentUser)
-    const myPost = await Post.findOneAndUpdate({ _id: postId }, { $push: { comments: { user: user._id, content } } }).populate('user')
+    const myPost = await Post.findOneAndUpdate({ _id: postId }, { $push: { comments: { user: user._id, content, date: Date.now() } } }).populate('user')
     myNotifications.notificationComments(user, myPost, 'comment', 'had commented your post')
     res.status(200).send({ myPost })
   } catch (err) {

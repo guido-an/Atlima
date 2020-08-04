@@ -1,3 +1,142 @@
+@import "general.scss";
+
 .comments{
     margin-bottom: 80px;
+    margin-left: 5vw;
+
+    p{
+        margin-top: 25px;
+        margin-left: 55px;
+        font-family: Avenir;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 14px;
+        line-height: 140%;
+    }
+
+    input{
+        border: 1px solid #D9D9D9;
+        box-sizing: border-box;
+        border-radius: 4px;
+        width: 80vw;
+        padding: 12px 10px ;
+        float: left;
+    }
+
+    .comment-form{
+        height: 50px;
+    }
+
+
+
+    .comments-number{
+        font-family: Avenir;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 22px;
+        margin-left: 0px;
+    }
+
+    .spacer{
+        margin-left: 0px;
+        margin-top: 25px;
+    }
+
+    .avatar{
+        position: relative;
+        float: left;
+        top: 0px;
+    }
+
+    .coment-text{
+        margin-top: -14px;
+        font-family: Avenir;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 150%;
+        word-wrap: break-word;
+        max-width: 61vw;
+    }
+
+    .time-ago{
+        text-align: left;
+        position: relative;
+        float: right;
+        top: 1px;
+        margin-right: 5vw;
+        font-family: Avenir;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 10px;
+        line-height: 140%;
+    }
+}
+
+.follow{
+    margin-left: 5vw;
+    margin-right: 5vw;
+    
+
+    button{
+        text-align: left;
+        position: relative;
+        float: right;
+        top: -44px;
+
+    }
+
+    .sports-section{
+        position: relative;
+        bottom: -20px;
+    } 
+
+
+    .categories{
+        margin: $base-margin;
+        padding-top: 20px;
+        position: relative;
+        .wrapper-categories {
+            overflow: auto;
+            white-space: nowrap;
+            height: 80px;
+        }
+        .wrapper-categories::-webkit-scrollbar {
+            display: none;
+          }  
+        .item{
+            display: inline-block;
+            text-align: center;
+            width: 30%;
+            margin-right: 10px;
+            margin-bottom: 15px;
+        }
+        .container {
+            display: block;
+            position: relative;
+            bottom: 15px;
+            font-size: 22px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        } 
+    }
+
+    p{
+        margin-top: 30px;
+        margin-left: 55px;
+    }
+
+    .spacer{
+        margin-left: 0px;
+    }
+
+    .avatar{
+        position: relative;
+        float: left;
+        top: -10px;
+    }
+    
 }

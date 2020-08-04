@@ -1,7 +1,8 @@
 import React from 'react'
 import PostContext  from '../../contexts/PostContext'
 import '../scss/Comments.scss'
-
+import TimeAgo from '../TimeAgo'
+import Discobolo  from '../../images/discobolo.jpg'
 
 class CreateComment extends React.Component {
   static contextType = PostContext
@@ -36,18 +37,23 @@ class CreateComment extends React.Component {
     }
     return (
       <div className="comments">
+        <p className="comments-number">Comments {this.state.post.comments.length}</p>
+        <form className="comment-form" onSubmit={this.onSubmit}>
+            <img className='ui avatar image circular' src={this.props.loggedInUser.profilePicture ? this.props.loggedInUser.profilePicture.url : Discobolo } />
+            <input onChange={this.onInputChange} id="commentInput" ref={(ref) => this.commentInput= ref} type="text" placeholder="content" name="content"/>
+        </form>
+        <div className="spacer"></div>
         {this.state.post.comments && this.state.post.comments.map((comment, i )=> {
         return (
           <div key={i}>
-            <p>{comment.user.firstName}</p>
-            <p>{comment.content}</p>
+             <TimeAgo date={Date.parse(comment.date)} />
+            <img className='ui avatar image circular' src={comment.user.profilePicture ? comment.user.profilePicture.url : Discobolo } />
+            <p>{comment.user.firstName} {comment.user.lastName}</p>
+            <p className="coment-text">{comment.content}</p>
+            <div className="spacer"></div>
           </div>
         )
       })}
-        <form onSubmit={this.onSubmit}>
-            <input onChange={this.onInputChange} id="commentInput" ref={(ref) => this.commentInput= ref} type="text" placeholder="content" name="content"/>
-            <button>Create comment</button>
-        </form>
       </div>
     )
   }

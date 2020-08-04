@@ -64,7 +64,7 @@ class PostCard extends React.Component {
           </div>
         }
         <div>
-          <Carousel showArrows={false} showThumbs={false} showStatus={false} infiniteLoop={this.state.post.mediaFile.length >= 2? true : false } dynamicHeight={true} cancelable={false}>
+          <Carousel showArrows={false} showThumbs={false} showIndicators={this.state.post.mediaFile.length >= 2? true : false } showStatus={false} infiniteLoop={this.state.post.mediaFile.length >= 2? true : false } dynamicHeight={true} cancelable={false}>
             {this.state.post.mediaFile && this.state.post.mediaFile.map((media, i) => {
               if (media.type[0] == "v"){
               return (
