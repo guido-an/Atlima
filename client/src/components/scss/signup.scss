@@ -1,3 +1,5 @@
+@import "general.scss";
+
 .signup{
     h1{
         height: 24px;
@@ -9,7 +11,7 @@
         line-height: 24px;
         align-items: center;
         text-align: center;
-        color: #FF7700;
+        color: $primary-color;
         margin-bottom: 30px;
     }
     

@@ -1,3 +1,5 @@
+@import "general.scss";
+
 .feed-cat{
     .onboarding{
         overflow: auto;
@@ -10,10 +12,10 @@
         width: 180px;
         height: 60px;
         background: #FFFFFF;
-        border: 2px solid #FF7700;
+        border: 2px solid $primary-color;
         box-sizing: border-box;
         border-radius: 8px;
-        color: #FF7700;
+        color: $primary-color;
         font-size: 22px;
         font-weight: bold;
         display: block;
@@ -133,6 +135,10 @@
     margin-bottom: 16px;
     display: flex;
     justify-content: space-between;
+    img {
+        display: block;
+        width: 28vw;
+    }
     input {
         border: 1px solid #e5e5e5;
         border-radius: 4px;
@@ -169,7 +175,7 @@
         font-weight: bold;
         font-size: 32px;
         line-height: 24px;
-        color: #FF7700;
+        color: $primary-color;
         text-transform: capitalize;
     }
     .MuiSvgIcon-root{

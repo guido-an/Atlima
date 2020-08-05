@@ -153,11 +153,11 @@ class UserProfile extends React.Component {
              }
              <div className="divider"/>
                  <div className="posts-header">
-                   <h3 onClick={() => this.switchPostsToShow('user-posts')} className={this.state.whichPostsToShow === 'user-posts' && "border-bottom"}>
+                   <h3 onClick={() => this.switchPostsToShow('user-posts')} className={this.state.whichPostsToShow === 'user-posts' ? "border-bottom" : undefined}>
                      POSTS
                   </h3>
                   {pageUser && pageUser.taggedPosts.length >= 1 &&
-                    <h3 onClick={() => this.switchPostsToShow('tags-posts')} className={this.state.whichPostsToShow === 'tags-posts' && "border-bottom"}>TAGS</h3>
+                    <h3 onClick={() => this.switchPostsToShow('tags-posts')} className={this.state.whichPostsToShow === 'tags-posts' ? "border-bottom" : undefined}>TAGS</h3>
                   }
                  </div>
                 {pageUser && 

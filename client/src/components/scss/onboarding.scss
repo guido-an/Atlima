@@ -1,3 +1,5 @@
+@import "general.scss";
+
 /* The container */
 .onb-title{
     margin-left: 5vw;
@@ -133,7 +135,7 @@
         border: 1px;
         color: #FFFFFF;
 
-        background: #FF7700;
+        background: $primary-color;
         border-radius: 4px;
     }
 }

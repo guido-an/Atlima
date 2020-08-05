@@ -1,3 +1,5 @@
+@import "general.scss";
+
 .facebook-btn{
     position: absolute;
     width: 90vw;
@@ -39,7 +41,7 @@
 .primary-btn{
     width: 90vw;
     height: 48px;
-    background: #FF7700;
+    background: $primary-color;
     margin-left: 5vw;
     border-radius: 4px;
     font-family: Avenir;

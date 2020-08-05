@@ -1,3 +1,4 @@
+@import "general.scss";
 .absolute-bot {
     width: 100vw;
     position: fixed;
@@ -22,7 +23,7 @@
 .active{
     background: none !important;
     .icon-navbar{
-        color: #FF7700;
+        color: $primary-color;
     }
 }
 .notification-number-1 {

@@ -8,18 +8,8 @@ import landingImg1 from '../images/landing.jpeg'
 import landingImg2 from '../images/landing2.gif'
 import landingImg3 from '../images/landing3.jpeg'
 import landingImg4 from '../images/landing4.jpeg'
+import logo from '../images/altima-logo.png'
 
-/* const Landing = () => {
-  return (
-    <div>
-      <h1>Landing</h1>
-      <Link to='/login'>Login</Link>
-      <Link to='/signup'>Signup</Link>
-    </div>
-  )
-}
-
-export default Landing */
 
 export default class Landing extends Component {
   static contextType = AuthContext
@@ -34,7 +24,9 @@ export default class Landing extends Component {
           <img className='landing-img-4' src={landingImg4}  />
         </div>
         <div className="landing-body">
-          <h1 >ALTIMA</h1>
+          <img src={logo} alt="altima-logo"
+            style={{ display: 'block', margin: '0 auto', width: '120px'}}
+          />
           <p>Join the communuity of athletes from all over the world, get inspired and achieve your goals</p>
           <FacebookLogin/>
           <Link to='/signup'><button className='primary-btn'>Signup</button></Link>
