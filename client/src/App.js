@@ -67,12 +67,12 @@ class App extends React.Component {
             <Route
               path="/create-post"
               component={CreatePost} />
-            />  
+            
 
             <Route
               path="/post/:id"
               component={Post} />
-            />  
+            
   
             {/* <Route
               path="/profile/edit/:id"
