@@ -85,7 +85,6 @@ class Post extends React.Component {
             <textarea onChange={this.onInputChange} rows="4" type="textarea" placeholder="Description" name="content"/>
             <label>Tag Other Athlets</label>
             <TagUsersBar getAthletesToTag={this.getAthletesToTag}/>
-            {/* <input onChange={this.onInputChange} type="text" placeholder="Users" name="athletes"/> */}
             <label>Location</label>
             <Places getLocation={this.getLocation} />
             <label>Categories</label>

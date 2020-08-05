@@ -10,6 +10,7 @@ router.get('/user/:id', async (req, res) => {
     const user = await User.findOne({ _id: req.params.id })
       .populate('categories')
       .populate('followedSpots')
+      .populate('taggedPosts')
       .populate({
         path: 'posts',
         populate: {

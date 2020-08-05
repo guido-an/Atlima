@@ -58,11 +58,10 @@ router.post('/new', async (req, res) => {
     // CREATE the post
     const post = await newPost.save()
     await User.findOneAndUpdate({ _id: user._id }, { $push: { posts: post._id } })
-    // ADD IN TAGGED USER POSTS
+    // ADD POST WHERE THE USER IS TAGGED
     taggedAthletes.forEach(async athleteId => {
-      console.log(athleteId, 'athleteId')
-      console.log(post._id, 'post._id')
       await User.findOneAndUpdate({ _id: athleteId }, { $push: { taggedPosts: post._id } })
+      await myNotifications.notificationUserTagged(user, athleteId, post)
     })
     newPostHelper.addPostToCategory(categories, post)
     res.status(200).json({ Message: `New post created ${post}` })
