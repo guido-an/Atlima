@@ -160,12 +160,8 @@
             }
         }
     }
-    .posts {
-        position: relative;
-        bottom: 40px;
-    }
-    .posts h3 {
-      margin-bottom: 20px;
+    .posts-to-show {
+      margin-top: 40px;
     }
     .divider{
         height: 1px;
@@ -173,6 +169,19 @@
         position: relative;
         bottom: 100px;
         margin: $base-margin;
+      }
+
+      .posts-header {
+          display: flex;
+      }
+
+      .create-first-post{
+          text-align: center;
+          margin-top: 40px;
+      }
+
+      .border-bottom {
+          border-bottom: 2px solid $primary-color;
       }
   
 }

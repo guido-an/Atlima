@@ -19,7 +19,8 @@ const userSchema = new Schema({
   backgroundPicture: Object,
   followedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   followedBy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
+  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+  taggedPosts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
 }, {
   timestamps: {
     createdAt: 'created_at',

@@ -14,12 +14,14 @@ class UserProfile extends React.Component {
       content: '',
       mediaFile: [],
       pageUser: null,
-      pageUserIsFollowed: null
+      pageUserIsFollowed: null,
+      whichPostsToShow: 'user-posts'
     }
   
     async componentDidMount(){
       try {
-        await this.getUser()
+       const user =  await this.getUser()
+       
       } catch(err){
         console.log(err)
       }
@@ -55,8 +57,12 @@ class UserProfile extends React.Component {
       }
     }
 
-  render () {
+    switchPostsToShow = (string) => {
+      this.setState({ whichPostsToShow: string})
+    }
 
+  render () {
+    console.log(this.state.whichPostsToShow, 'whichPostsToShow')
     const loggedInUser = this.context.loggedInUser
     const pageUser = this.state.pageUser
     const backgroundImage = loggedInUser && loggedInUser.backgroundPicture ? loggedInUser.backgroundPicture.url : "https://via.placeholder.com/500"
@@ -96,10 +102,12 @@ class UserProfile extends React.Component {
                   }} /> 
                   <div className="user-info">
                      <h1>{pageUser.firstName} {pageUser.lastName}</h1>
-                     <div className="user-location-info">
-                        <img src={locationIcon}/>
-                        <p className="location">{pageUser.location}</p>
-                     </div>
+                    {pageUser.location &&  
+                        <div className="user-location-info">
+                           <img src={locationIcon}/>
+                           <p className="location">{pageUser.location}</p>
+                        </div>
+                    }
                      <p className="followers">Following: {pageUser.followedUsers.length} Followers: {pageUser.followedBy.length}</p>
                      <p className="bio">{pageUser.bio}</p>
                   </div>
@@ -121,7 +129,7 @@ class UserProfile extends React.Component {
                        </div>
                     </div>
                   </div>}
-                 
+                  
                  {pageUser.followedSpots.length >= 1 && 
                   <div className="locations">
                      <h3>LOCATIONS</h3>
@@ -139,14 +147,38 @@ class UserProfile extends React.Component {
                            })}
                        </div>
                     </div>
-                  </div>}
+                  </div>
+                  }
               </div>
              }
              <div className="divider"/>
-                <div className="posts">
-                  <h3>POSTS</h3>
-                   {pageUser && <DisplayPosts posts={pageUser.posts.reverse()}/>}
-                </div>
+                 <div className="posts-header">
+                   <h3 onClick={() => this.switchPostsToShow('user-posts')} className={this.state.whichPostsToShow === 'user-posts' && "border-bottom"}>
+                     POSTS
+                  </h3>
+                  {pageUser && pageUser.taggedPosts.length >= 1 &&
+                    <h3 onClick={() => this.switchPostsToShow('tags-posts')} className={this.state.whichPostsToShow === 'tags-posts' && "border-bottom"}>TAGS</h3>
+                  }
+                 </div>
+                {pageUser && 
+                  <div className="posts-to-show">
+                    {this.state.whichPostsToShow === 'user-posts' &&
+                        <DisplayPosts 
+                           posts={pageUser.posts.reverse()}
+                         />
+                      }
+                      {this.state.whichPostsToShow === 'tags-posts' &&
+                       <DisplayPosts 
+                           posts={pageUser.taggedPosts.reverse()}
+                         />
+                      }
+                      {pageUser && pageUser.posts.length === 0 && 
+                        <div className="create-first-post">
+                           <Link to="/create-post"><p>Create your first post :)</p></Link>
+                        </div>
+                      }
+                  </div>
+                }
            </div>
     )
   }
