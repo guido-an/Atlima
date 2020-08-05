@@ -1,0 +1,28 @@
+@import "general.scss";
+.newPostUploader{
+    .custom-file-upload{
+        position: absolute;
+        top: 30px;
+        right: 7vw;
+        width: 20vw;
+        z-index: 9999;
+        color: $primary-color;
+    }
+
+    .newPostInput{
+        display: none;
+    }
+
+    .image-base{
+        min-height: 40vh;
+        background: url("https://support.hostgator.com/img/articles/weebly_image_sample.png") no-repeat center;
+        margin-bottom: 20px;
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+
+    .carousel-root {
+        margin-left: 0vw ;
+        width: 90vw;
+    }
+}

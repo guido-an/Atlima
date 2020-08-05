@@ -46,19 +46,26 @@ import '../components/scss/feedFilter.scss'
 import FeedPosts from '../components/Post/FeedPosts'
 import FilterByCategories from '../components/Categories/FilterByCategories'
 import SearchBar from '../components/SearchBar'
-
+import SearchIcon from '@material-ui/icons/Search';
 
 
 class Home extends React.Component {
   static contextType = PostContext
+  state = {
+        hideShowSearch: false,
+    }
+
+  ShowSearchInput = () => {
+        this.setState({ hideShowSearch: !this.state.hideShowSearch })          
+    }
 
   render () {
     return (
       <div>
         <div className="feed-header">
           <h1 >altima</h1>
-          <SearchBar />
-          
+          {this.state.hideShowSearch && <SearchBar/>}
+          <SearchIcon onClick={this.ShowSearchInput}/>
         </div>
         <FilterByCategories postContext={this.context} user={this.props.user}/>
         <FeedPosts />
