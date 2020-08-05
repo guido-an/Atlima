@@ -54,7 +54,6 @@ class Follow extends React.Component {
   
 
   render () {
-      console.log(this.state.spot, "props" , this.state.isFollowingSpot)
     return (
       <div className="follow">
         <form onSubmit={this.onSubmitHandler}>

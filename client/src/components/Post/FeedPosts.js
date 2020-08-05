@@ -12,7 +12,6 @@ class FeedPosts extends React.Component {
     return (
         <DisplayPosts 
            posts={this.context.feedPosts} 
-           likePost={this.context.likePost}
            commentPost={this.context.commentPost}
         />
     )

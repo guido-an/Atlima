@@ -28,13 +28,18 @@ class PostCard extends React.Component {
   likePostAndUpdateIt = async postId => {
     postId = this.props.postId
     try {
-      await this.props.likePost(postId)
+      await this.context.likePost(postId)
        const postUpdated = await this.context.getSinglePost(postId)
        this.setState({ post: postUpdated })
     } catch(err){
       console.log(err, 'err')
     }
   }
+
+  copyToClipboard = (e) => {
+    const link = `localhost::3000/post/${this.state.post._id}`
+    navigator.clipboard.writeText(link)
+  };
 
   isInclude = likeUsers => {
       const isThere = likeUsers.includes(this.props.loggedInUser._id)
@@ -68,7 +73,7 @@ class PostCard extends React.Component {
             {this.state.post.mediaFile && this.state.post.mediaFile.map((media, i) => {
               if (media.type[0] == "v"){
               return (
-                <div>
+                <div key={i + this.state.post._id}>
                   <ReactPlayer
                   className='react-player'
                   playing={false}
@@ -83,7 +88,7 @@ class PostCard extends React.Component {
               )}
               else if(media.type[0] == "i" ){
                 return (
-                <img key={i} src={media.url} style={{ maxWidth: '100vw', left: '0px' }} />
+                <img key={i + this.state.post._id} src={media.url} style={{ maxWidth: '100vw', left: '0px' }} />
                 )}
               else{
                 
@@ -91,7 +96,7 @@ class PostCard extends React.Component {
             })}
           </Carousel>
         </div>
-        {this.state.post.title ? <h4 className="title">{this.state.post.title}</h4> : "" } 
+        {this.state.post.title ? <Link to={`/post/${this.state.post._id}`}><h4 className="title">{this.state.post.title}</h4></Link> : "" } 
         <div className='post-card-icons'>
           <div className={this.isInclude(this.state.post.likes ) ? "like" : "" } onClick={this.likePostAndUpdateIt}>
             <ThumbUpAltRoundedIcon />
@@ -103,7 +108,7 @@ class PostCard extends React.Component {
             <p>{this.state.post.comments.length}</p>
           </div>
           <div className="share">
-            <ReplyRoundedIcon />
+            <ReplyRoundedIcon onClick={this.copyToClipboard} />
           </div>
         </div> 
         <div className="description">
