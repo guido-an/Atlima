@@ -3,6 +3,7 @@ import PostContext  from '../../contexts/PostContext'
 import '../scss/Comments.scss'
 import TimeAgo from '../TimeAgo'
 import Discobolo  from '../../images/discobolo.jpg'
+import Spinner from '../../components/Spinner'
 
 class CreateComment extends React.Component {
   static contextType = PostContext
@@ -31,9 +32,8 @@ class CreateComment extends React.Component {
     }
 
   render () {
-    console.log(this.state.post, this.props.postId)
     if(!this.state.post){
-      return <p>loading</p>
+      return <Spinner/>
     }
     return (
       <div className="comments">

@@ -11,6 +11,7 @@ import DisplayPosts from '../../components/Post/DisplayPosts'
 import CategoriesOnMap from '../../components/Categories/CategoriesOnMap'
 import iconActive from '../../images/icon-google-maps.png'
 import iconNormal from '../../images/icon-google-maps2.png'
+import Spinner from '../../components/Spinner'
 //import iconUser from '../../images/icon-user-location.png'
 
 class MapContainer extends React.Component {
@@ -128,7 +129,7 @@ class MapContainer extends React.Component {
               position={{ lat: this.state.lat, lng: this.state.lng  }} />  */}
         </Map>
     } 
-    return <p>Loading..</p>
+    return <Spinner/>
   }
 
 

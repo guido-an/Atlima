@@ -28,28 +28,32 @@ class Notifications extends React.Component {
     }
   }
 
-  render () {
+ showNotifications = () => {
+  return this.state.notifications.map((notification, i) => {
+    return <div key={i}>
+      <div className="container">
+        <div>
+          <div className="text">
+             <span className="orange-dot"></span>
+             <Link to={notification.postUrl}>
+               <p><strong>{notification.name}</strong> {notification.action}  </p>
+             </Link>
+           </div>
+           <TimeAgo date={notification.date} />
+        </div>
+        <Link to={notification.postUrl}>
+          <img className="media-file" src={notification.mediaFile} />
+        </Link>
+      </div>
+    </div>
+   })
+  }
+
+  render () {  
     return (
       <div className="notifications-section">
         <h1>Notifications</h1>
-        {this.state.notifications.map((notification, i) => {
-          return <div key={i}>
-            <div className="container">
-              <div>
-                <div className="text">
-                   <span className="orange-dot"></span>
-                   <Link to={notification.postUrl}>
-                     <p><strong>{notification.name}</strong> {notification.action}  </p>
-                   </Link>
-                 </div>
-                 <TimeAgo date={notification.date} />
-              </div>
-              <Link to={notification.postUrl}>
-                <img className="media-file" src={notification.mediaFile} />
-              </Link>
-            </div>
-          </div>
-        })}
+        {this.state.notifications.length >= 1 && this.showNotifications()}
       </div>
     )
   }

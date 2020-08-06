@@ -44,7 +44,7 @@ class NavBar extends React.Component {
           <NavLink to={`/profile/${this.context.loggedInUser._id}`} className="item" activeClassName="active">
             <PersonIcon className="icon-navbar" />
           </NavLink>
-          <NavLink onClick={this.logoutUser} to="/">Logout</NavLink>
+          {/* <NavLink onClick={this.logoutUser} to="/">Logout</NavLink> */}
         </div>
       </nav>
     );

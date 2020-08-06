@@ -16,6 +16,7 @@ import Navbar from './components/Navbar';
 import EditProfile from './components/Profile/EditProfile';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Spinner from './components/Spinner.js'
 
 class App extends React.Component {
   static contextType = AuthContext
@@ -29,7 +30,7 @@ class App extends React.Component {
   
   render() {
     if (this.context.isLoadingUser)
-      return <p>Loading...</p>
+      return <Spinner/>
     return (
       <div>
       {this.context.loggedInUser && <Navbar /> }    

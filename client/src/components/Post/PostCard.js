@@ -48,7 +48,7 @@ class PostCard extends React.Component {
 
   render () {
     if(!this.state.post){
-      return <p>loading</p>
+      return <p></p>
     }
     return (
       <div className='post-card-container'>

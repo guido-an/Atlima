@@ -65,6 +65,7 @@ export class CategoryContext extends React.Component {
             e.preventDefault();
               try {
                 await ADD_CATEGORIES(this.state.selectedCategoriesIds)
+                window.location.reload()
             }  catch(err){
                   console.log(err)
              }
