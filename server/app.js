@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const bodyParser = require('body-parser')
+const path = require('path')
 const cookieParser = require('cookie-parser')
 const express = require('express')
 const mongoose = require('mongoose')
