@@ -4,6 +4,7 @@ import { FOLLOW_USER , GET_USER } from '../../api/userAPI'
 import '../scss/PostCard.scss'
 import '../scss/Comments.scss'
 import Discobolo  from '../../images/discobolo.jpg'
+import {Link} from 'react-router-dom';
 
 class Follow extends React.Component {
  static contextType = AuthContext
@@ -16,14 +17,14 @@ class Follow extends React.Component {
   async componentDidMount(){
     const user = this.props.post.user
     this.setState({ user})
+    this.checkIfPageUserIsFollowed(user)
     try {
         await this.getUser()
       } catch(err){
         console.log(err)
       }
   }
-  checkIfPageUserIsFollowed = () => {
-    const user = this.state.pageUser
+  checkIfPageUserIsFollowed = (user) => {
       if(user && user.followedBy.includes(this.context.loggedInUser._id)){
         this.setState({ pageUserIsFollowed: true })
       } 
@@ -36,7 +37,7 @@ class Follow extends React.Component {
     try {
       const user = await GET_USER(this.state.user._id)
       this.setState({ pageUser: user })
-      this.checkIfPageUserIsFollowed()
+      this.checkIfPageUserIsFollowed(user)
     } catch(err){
       console.log(err)
     }
@@ -58,7 +59,7 @@ class Follow extends React.Component {
       <div className="follow">
         <form onSubmit={this.onSubmitHandler}>
             <img className='ui avatar image circular' src={this.props.post.user.profilePicture ? this.props.post.user.profilePicture.url : Discobolo } />
-            <p>{this.props.post.user.firstName} {this.props.post.user.lastName}</p>
+            <Link to={`/profile/${this.props.post.user._id}`}>{this.props.post.user.firstName} {this.props.post.user.lastName}</Link>
             {this.state.pageUserIsFollowed ? 
             <button className='unfollow-btn'>Unfollow</button> :
             <button className='follow-btn'>Follow</button> 

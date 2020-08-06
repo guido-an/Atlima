@@ -1,10 +1,12 @@
+import '../scss/newPostInput.scss'
 import React, { Component } from "react";
 import storage from "../../Firebase/index";
 import editProfileIcon from '../../images/edit-profile-icon.png'
-import AddIcon from '@material-ui/icons/Add';
 import ReactPlayer from 'react-player'
 import { Carousel } from 'react-responsive-carousel';
-import '../scss/newPostInput.scss'
+import AddIcon from '@material-ui/icons/Add';
+import ClearIcon from '@material-ui/icons/Clear';
+
 
 class ImageUpload extends Component {
     
@@ -42,7 +44,7 @@ class ImageUpload extends Component {
               let file = {}
               file.type = image.type
               file.url = url
-              this.props.getMediaFile(file)
+              this.props.getMidiaFile && this.props.getMediaFile(file)
               this.props.getProfilePicture && this.props.getProfilePicture(file)
               this.props.getBackgroundPicture && this.props.getBackgroundPicture(file)
               
@@ -61,12 +63,15 @@ class ImageUpload extends Component {
       return(
         <div className="newPostUploader">
           <div>
-          <label htmlFor="newPostInput" className="custom-file-upload">
-              <img src={editProfileIcon}/>
-          </label>
+            <label htmlFor="newPostInput" className="custom-file-remove">
+              <ClearIcon/>
+            </label>
+            <label htmlFor="newPostInput" className="custom-file-upload">
+                <AddIcon/>
+            </label>
             <input id="newPostInput" type="file" onChange={this.handleUpload} className="newPostInput" />
           </div>
-          <div className="image-base">
+          <div className={this.state.url != "" ? "margin-left" : "image-base"}>
             <Carousel showArrows={false} showThumbs={false} showIndicators={this.state.mediaFiles && this.state.mediaFiles.length >= 2? true : false } showStatus={false} infiniteLoop={this.state.mediaFiles && this.state.mediaFiles.length >= 2? true : false } dynamicHeight={true} cancelable={false}>
               {this.state.url && this.state.mediaFiles && this.state.mediaFiles.map((media, i) => {
                 if (media.type[0] == "v"){
