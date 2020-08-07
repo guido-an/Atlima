@@ -56,9 +56,9 @@ class ImageUpload extends Component {
               let file = {}
               file.type = image.type
               file.url = url
-              if (this.props.id = 1){
+              if (this.props.id == 1){
                 this.props.getBackgroundPicture && this.props.getBackgroundPicture(file)
-              }else if(this.props.id = 2){
+              }else if(this.props.id == 2){
                 this.props.getProfilePicture && this.props.getProfilePicture(file)
               }else{
                 this.props.getMidiaFile && this.props.getMediaFile(file)
