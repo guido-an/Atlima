@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/User')
 const defineUser = require('../helpers/defineUser')
+const myNotifications = require('../helpers/notifications')
 
 // Bcrypt to encrypt passwords
 const bcrypt = require('bcrypt')
@@ -34,6 +35,7 @@ router.post('/signup', (req, res, next) => {
     newUser
       .save()
       .then(user => {
+        myNotifications.welcomeNotification(user)
         req.session.currentUser = user
         res.status(200).json(user)
       })
@@ -104,8 +106,8 @@ router.get('/facebook/callback', (req, res, next) => {
       }
       req.session.currentUser = user
       try {
-        // if user didn't choose categories (first time login) redirect to onboarding
         const myUser = await defineUser(req.session.currentUser)
+        // if user didn't choose categories redirect to onboarding (first time login)
         if (!myUser) {
           res.redirect(`${process.env.CLIENT_URL}/onboarding`)
         } else {

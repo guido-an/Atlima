@@ -1,6 +1,7 @@
 @import "general.scss";
 
 .feed-cat{
+    
     .onboarding{
         overflow: auto;
         white-space: nowrap;
@@ -22,6 +23,7 @@
         position: relative;
         bottom: 15px;
         cursor: pointer;
+        box-shadow: 0px 2px 2px rgba(46,41,51,0.08), 0px 2px 4px rgba(71,63,79,0.08);
     }
     .onboarding::-webkit-scrollbar {
         display: none;
@@ -135,17 +137,12 @@
     margin-bottom: 16px;
     display: flex;
     justify-content: space-between;
-    img {
-        display: block;
-        width: 25vw;
-    }
-
     input {
         border: 1px solid #e5e5e5;
         border-radius: 4px;
         outline: none;
         height: 34px;
-        width: 260px;
+        width: 200px;
         padding: 10px;
         margin-top: -5px;
         box-shadow: 0px 1px 2px rgba(46,41,51,0.08), 0px 2px 4px rgba(71,63,79,0.08);
@@ -191,15 +188,5 @@
      min-width: 70px;
      position: relative;
      bottom: 2px;
-    }
-}
-
-
-@media screen and (min-width: 426px) {
-    .feed-header{
-        img {
-            display: block;
-            width: 100px !important;
-        }
     }
 }

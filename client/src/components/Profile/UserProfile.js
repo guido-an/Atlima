@@ -3,8 +3,10 @@ import React from 'react'
 import {Link} from 'react-router-dom';
 import AuthContext  from '../../contexts/AuthContext'
 import { FOLLOW_USER, GET_USER } from '../../api/userAPI'
-import editPencil from '../../images/edit-pencil.png'
+// import editPencil from '../../images/edit-pencil.png'
+import editPencilWhite from '../../images/edit-pencil-white.png'
 import locationIcon from '../../images/location-icon.png'
+import locationIconWhite from '../../images/location-icon-white.png'
 import DisplayPosts from '../Post/DisplayPosts'
 
 class UserProfile extends React.Component {
@@ -62,17 +64,22 @@ class UserProfile extends React.Component {
     }
 
   render () {
-    console.log(this.state.whichPostsToShow, 'whichPostsToShow')
+    
     const loggedInUser = this.context.loggedInUser
-    const pageUser = this.state.pageUser
-    const backgroundImage = loggedInUser && loggedInUser.backgroundPicture ? loggedInUser.backgroundPicture.url : "https://via.placeholder.com/500"
-    const profileImage = loggedInUser && loggedInUser.profilePicture ? loggedInUser.profilePicture.url : "https://vignette.wikia.nocookie.net/simpsons/images/b/bd/Homer_Simpson.png/revision/latest?cb=20140126234206"
-     
+    const pageUser = this.state.pageUser    
+  
+    if(!pageUser) {
+      return <p></p>
+    }
    return (
+
+    
       <div className="user-profile">
              <div className="edit-profile-icon">
                {(loggedInUser && this.props.profilePageId === loggedInUser._id) ?  
-               <Link to={`/profile/edit/${this.props.profilePageId}`}><img src={editPencil} /></Link> :
+               <Link to={`/profile/edit/${this.props.profilePageId}`}>
+                    <img src={editPencilWhite}/> 
+                   </Link> :
                   <form onSubmit={this.onSubmitHandler}>
                     {this.state.pageUserIsFollowed ? 
                       <button className='unfollow-btn'>Unfollow</button> :
@@ -81,36 +88,61 @@ class UserProfile extends React.Component {
                  </form> 
                }
              </div>
-             {pageUser && 
+
              <div className="user-profile-header">
-             <div style={{
-               backgroundImage: `url('${backgroundImage}')`,
-               height: "70vh",
-               backgroundSize: "cover",
-               backroundPosition: "center"
-              }} />
+              {pageUser.backgroundPicture ? 
+                <div style={{
+                 background:`linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.75) 90%), url('${pageUser.backgroundPicture.url}')`, 
+                 height: "60vh",
+                 backgroundSize: "cover",
+                 backroundPosition: "center"
+                }} /> : 
+                <div style={{
+                 backgroundColor: '#737373',
+                 height: "60vh"
+                }} />
+              }
+              {pageUser.profilePicture ? 
               <div style={{ 
-                   backgroundImage: `url('${profileImage}')`,
+                   backgroundImage: `url('${pageUser.profilePicture.url}')`,
                    borderRadius: "50%",
-                   height: "150px",
-                   width: "150px",
+                   height: "100px",
+                   width: "100px",
                    backgroundSize: "cover",
                    backroundPosition: "center",
                    position: "relative",
-                   bottom: "90px",
-                   left: "20px"
-                  }} /> 
+                   bottom: "55px",
+                   left: "5vw"
+                  }} />  : 
+                  <div style={{ 
+                   backgroundColor: '#FF7700',
+                   borderRadius: "50%",
+                   height: "100px",
+                   width: "100px",
+                   position: "relative",
+                   bottom: "55px",
+                   left: "5vw"
+                  }}>
+                   <div style={{color:'#fff', fontSize: '48px', position: 'relative', top: '40px', textAlign: 'center', fontWeight: '700'}}>
+                     <span>{pageUser.firstName[0]}</span>
+                     <span>{pageUser.lastName[0]}</span>
+                    </div>
+                  </div> 
+              }
                   <div className="user-info">
                      <h1>{pageUser.firstName} {pageUser.lastName}</h1>
                     {pageUser.location &&  
                         <div className="user-location-info">
-                           <img src={locationIcon}/>
+                           <img src={locationIconWhite}/>
                            <p className="location">{pageUser.location}</p>
                         </div>
                     }
+                   </div>
+                   <div>
                      <p className="followers">Following: {pageUser.followedUsers.length} Followers: {pageUser.followedBy.length}</p>
                      <p className="bio">{pageUser.bio}</p>
-                  </div>
+                   </div>
+                  
                  {pageUser.categories.length >= 1 && 
                   <div className="sports-section">
                     <h3>SPORTS</h3>
@@ -150,7 +182,7 @@ class UserProfile extends React.Component {
                   </div>
                   }
               </div>
-             }
+             
              <div className="divider"/>
                  <div className="posts-header">
                    <h3 onClick={() => this.switchPostsToShow('user-posts')} className={this.state.whichPostsToShow === 'user-posts' ? "border-bottom" : undefined}>

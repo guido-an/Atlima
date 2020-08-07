@@ -45,32 +45,47 @@
 
     .user-info {
         position: relative;
-        left: 180px;
-        bottom: 130px;
+        left: 130px;
+        bottom: 160px;
        
+        h1 {
+            color: #fff;
+        }
         .user-location-info{
               display: flex;
               position: relative;
               bottom: 10px;
+             
             img {
                 width: 10px;
-                height: 15px;
+                height: 14px;
+                position: relative;
+                left: 3px;
             }
             .location {
                 font-size: 14px;
-                margin-left: 5px
+                position: relative;
+                left: 10px;
+                bottom: 2px;
+                color: #fff;
                }
         }
     }
+
     .followers {
         color: $dark-grey;
         position: relative;
-        top: 10px;
+        bottom: 150px;
+        left: 130px;
         font-size: 15px;
+       
     }
     .bio {
-        margin-top: 30px
+        position: relative;
+        bottom: 150px;
+        left: 130px;
     }
+  
     .sports-section{
         position: relative;
         bottom: 80px;
@@ -184,4 +199,11 @@
           border-bottom: 2px solid $primary-color;
       }
   
+}
+@media(min-width: 600px){
+    .user-profile{
+        .user-info, .followers, .bio {
+           left: 200px
+        }
+    }
 }
