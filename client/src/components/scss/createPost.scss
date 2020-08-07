@@ -168,3 +168,26 @@
     }
 }
 
+@media only screen and (min-width: 1348px) {
+    
+    .create-post{
+        margin: auto;
+        width: 698px;
+    
+        input,textarea{
+            width: 540px;
+        }
+    
+        .categories-on-create{
+            width: 540px;
+            
+        }
+
+        .primary-btn{
+            width: 540px;
+        }
+    }
+}
+
+
+
