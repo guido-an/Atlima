@@ -19,8 +19,8 @@ class FilterByCategories extends React.Component {
 
   }
 
-  onMyFeed =  e => {
-     this.context.onMyFeedCategories(this.props.user.categories)
+  onMyFeed = async  e => {
+     await this.context.onMyFeedCategories(this.props.user.categories)
      this.props.postContext.filterPostsOnCategoryHome() 
   }
 
@@ -32,7 +32,7 @@ class FilterByCategories extends React.Component {
       <div className='feed-cat'>
         <div className='onboarding'>
           <div className="item">
-            <button onClick={this.onMyFeed} >My Feed</button>
+            <button onClick={this.onMyFeed} className={this.context.myFeedActive ? "myFeedActive" : ""} >Feed</button>
           </div>
         {this.context.allCategories.map(category => {
           return (
