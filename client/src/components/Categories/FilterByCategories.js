@@ -20,8 +20,12 @@ class FilterByCategories extends React.Component {
   }
 
   onMyFeed = async  e => {
+    if(this.context.myFeedActive) {
+      this.context.cleanSelectedCategoriesIds()
+    }else{
      await this.context.onMyFeedCategories(this.props.user.categories)
      this.props.postContext.filterPostsOnCategoryHome() 
+    }
   }
 
 

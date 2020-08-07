@@ -200,8 +200,9 @@ a, .link{
 .carousel {
     .selected{
         div{ 
+            display: flex;
             a{
-                height: inherit !important;
+                height: 100% !important;
             }   
         }
     }
