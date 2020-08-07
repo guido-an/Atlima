@@ -17,6 +17,18 @@ class ImageUpload extends Component {
       mediaFiles: [],
     };
 
+  removeMedia = (media) => {
+      const updatedArray = this.state.mediaFiles.filter(arrayMedia => {
+          return arrayMedia !== media
+      })
+      this.setState({ mediaFiles: updatedArray });
+      
+      if (this.state.mediaFiles.length == 1){
+        this.setState({ url: "" });
+        console.log(this.state.url)
+      }
+     }
+
   handleUpload = e => {
     if (e.target.files[0]) {      
       const image = e.target.files[0];
@@ -44,9 +56,13 @@ class ImageUpload extends Component {
               let file = {}
               file.type = image.type
               file.url = url
-              this.props.getMidiaFile && this.props.getMediaFile(file)
-              this.props.getProfilePicture && this.props.getProfilePicture(file)
-              this.props.getBackgroundPicture && this.props.getBackgroundPicture(file)
+              if (this.props.id = 1){
+                this.props.getBackgroundPicture && this.props.getBackgroundPicture(file)
+              }else if(this.props.id = 2){
+                this.props.getProfilePicture && this.props.getProfilePicture(file)
+              }else{
+                this.props.getMidiaFile && this.props.getMediaFile(file)
+              }
               
               this.setState({ 
                 url, mediaFiles: [...this.state.mediaFiles, file]
@@ -59,13 +75,11 @@ class ImageUpload extends Component {
 
 
   render() {
+    console.log(this.state.mediaFiles.length, 'this.state.mediaFiles.length')
     if (this.props.newPost === true){
       return(
         <div className="newPostUploader">
           <div>
-            <label htmlFor="newPostInput" className="custom-file-remove">
-              <ClearIcon/>
-            </label>
             <label htmlFor="newPostInput" className="custom-file-upload">
                 <AddIcon/>
             </label>
@@ -77,6 +91,9 @@ class ImageUpload extends Component {
                 if (media.type[0] == "v"){
                 return (
                   <div>
+                    <label onClick={(e) => this.removeMedia(media)} id={media.url} className="custom-file-remove">
+                      <ClearIcon/>
+                    </label>
                     <ReactPlayer
                     key={i}
                     className='react-player'
@@ -92,7 +109,12 @@ class ImageUpload extends Component {
                 )}
                 else if(media.type[0] == "i" ){
                   return (
-                  <img key={i} src={media.url} style={{ maxWidth: '100vw', left: '0px' }} />
+                    <div>
+                      <label onClick={(e) => this.removeMedia(media)} className="custom-file-remove">
+                          <ClearIcon/>
+                        </label>
+                      <img key={i} src={media.url} style={{ maxWidth: '100vw', left: '0px' }} />
+                    </div>
                   )}
                 else{
                   
