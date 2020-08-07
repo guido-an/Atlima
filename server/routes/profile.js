@@ -3,7 +3,6 @@ const router = express.Router()
 const User = require('../models/User')
 const Category = require('../models/Category')
 const defineUser = require('../helpers/defineUser')
-const myNotifications = require('../helpers/notifications')
 
 /* GET USER */
 router.get('/user/:id', async (req, res) => {
@@ -57,7 +56,6 @@ router.post('/add-categories', async (req, res) => {
     const update = { categories: categories }
     const userUpdated = await User.findOneAndUpdate(filter, update, { new: true })
     req.session.currentUser = userUpdated
-    myNotifications.welcomeNotification(user)
     categories.forEach(async categoryId => {
       await Category.findByIdAndUpdate({ _id: categoryId }, { $addToSet: { usersFollowing: user._id } })
     })

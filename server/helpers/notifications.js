@@ -68,7 +68,7 @@ const notificationComments = async (currentUser, post) => {
 
 const notificationUserTagged = async (currentUser, taggedUserId, post) => {
   if (currentUser._id.toString() == taggedUserId) {
-       return 
+        
   } else {
     try {
        const url = post.mediaFile[0] ? post.mediaFile[0].url : ''
@@ -94,26 +94,26 @@ const notificationUserTagged = async (currentUser, taggedUserId, post) => {
 
 const welcomeNotification = async (currentUser) => {
   console.log('welcome notifications')
-    try {
-      // const url = post.mediaFile[0] ? post.mediaFile[0].url : ''
-      const url = ''
-       const filter = { _id: currentUser._id }
-       const update = {
-          $addToSet: {
-            notifications: {
-              name: `Welcome to Altima ${currentUser.firstName} :)`,
-              action: ' Happy to have you here, you can now start sharing your passion: create your first post',
-              postUrl: `/create-post`,
-              mediaFile: url,
-              date: Date.now()
-            }
-          },
-          $inc: { unreadNotifications: 1 }
+  try {
+    // const url = post.mediaFile[0] ? post.mediaFile[0].url : ''
+    const url = ''
+    const filter = { _id: currentUser._id }
+    const update = {
+      $addToSet: {
+        notifications: {
+          name: `Welcome to Altima ${currentUser.firstName} :)`,
+          action: ' Happy to have you here, you can now start sharing your passion: create your first post',
+          postUrl: '/create-post',
+          mediaFile: url,
+          date: Date.now()
         }
-      await User.findOneAndUpdate(filter, update)
-    } catch (err) {
-      console.log(err)
+      },
+      $inc: { unreadNotifications: 1 }
     }
+    await User.findOneAndUpdate(filter, update)
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 module.exports = {

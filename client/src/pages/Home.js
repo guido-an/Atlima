@@ -57,7 +57,7 @@ class Home extends React.Component {
           {this.state.hideShowSearch && <SearchBar/>}
           <img src={searchIcon} 
           style={{ 
-            width: this.state.searchIconSize + 'px',
+            width: this.state.searchIconSize + 'px !important',
             height: this.state.searchIconSize + 'px',
             position: 'absolute',
             right: this.state.rightMargin + 'vw',
