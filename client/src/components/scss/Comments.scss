@@ -78,12 +78,15 @@
     margin-left: 5vw;
     margin-right: 5vw;
     
+    form{
+        margin-top: 30px;
+    }
 
     button{
         text-align: left;
         position: relative;
         float: right;
-        top: -44px;
+        top: -8px;
 
     }
 
@@ -124,9 +127,15 @@
         } 
     }
 
-    p{
+    a{
         margin-top: 30px;
-        margin-left: 55px;
+        margin-left: 10px;
+        font-family: Avenir;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 14px;
+        line-height: 140%;
+        color: #000;
     }
 
     .spacer{

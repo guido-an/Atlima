@@ -2,15 +2,38 @@
 .newPostUploader{
     .custom-file-upload{
         position: absolute;
-        top: 30px;
-        right: 7vw;
+        top: 15px;
+        right: -7vw;
         width: 20vw;
         z-index: 9999;
         color: $primary-color;
+
+        svg{
+            background: #fff;
+            border-radius: 15px;
+        }
+    }
+
+    .custom-file-remove{
+        position: absolute;
+        top: 15px;
+        left: -10vw;
+        width: 20vw;
+        z-index: 9999;
+        color: $primary-color;
+
+        svg{
+            background: #fff;
+            border-radius: 15px;
+        }
     }
 
     .newPostInput{
         display: none;
+    }
+
+    .margin-left{
+        margin-left: 5vw;
     }
 
     .image-base{

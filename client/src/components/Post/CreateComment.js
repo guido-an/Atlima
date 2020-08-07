@@ -4,6 +4,7 @@ import '../scss/Comments.scss'
 import TimeAgo from '../TimeAgo'
 import Discobolo  from '../../images/discobolo.jpg'
 import Spinner from '../../components/Spinner'
+import {Link} from 'react-router-dom';
 
 class CreateComment extends React.Component {
   static contextType = PostContext
@@ -18,10 +19,12 @@ class CreateComment extends React.Component {
 
   onSubmit = async e => {
     e.preventDefault();
-    await this.context.commentPost(this.state.post._id, this.state.content)
-    const post = await this.context.getSinglePost(this.state.post._id)
-    this.setState({post})
-    this.commentInput.value = "";
+    if (this.state.content != ""){
+      await this.context.commentPost(this.state.post._id, this.state.content)
+      const post = await this.context.getSinglePost(this.state.post._id)
+      this.setState({post, content: ""})
+      this.commentInput.value = "";
+    }
   };
     
     onInputChange = e => {
@@ -48,7 +51,7 @@ class CreateComment extends React.Component {
           <div key={i}>
              <TimeAgo date={Date.parse(comment.date)} />
             <img className='ui avatar image circular' src={comment.user.profilePicture ? comment.user.profilePicture.url : Discobolo } />
-            <p>{comment.user.firstName} {comment.user.lastName}</p>
+            <p><Link to={`/profile/${comment.user._id}`}>{comment.user.firstName} {comment.user.lastName}</Link></p>
             <p className="coment-text">{comment.content}</p>
             <div className="spacer"></div>
           </div>

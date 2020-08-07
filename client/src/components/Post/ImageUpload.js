@@ -1,10 +1,12 @@
+import '../scss/newPostInput.scss'
 import React, { Component } from "react";
 import storage from "../../Firebase/index";
 import editProfileIcon from '../../images/edit-profile-icon.png'
-import AddIcon from '@material-ui/icons/Add';
 import ReactPlayer from 'react-player'
 import { Carousel } from 'react-responsive-carousel';
-import '../scss/newPostInput.scss'
+import AddIcon from '@material-ui/icons/Add';
+import ClearIcon from '@material-ui/icons/Clear';
+
 
 class ImageUpload extends Component {
     
@@ -14,6 +16,18 @@ class ImageUpload extends Component {
       progress: 0,
       mediaFiles: [],
     };
+
+  removeMedia = (media) => {
+      const updatedArray = this.state.mediaFiles.filter(arrayMedia => {
+          return arrayMedia !== media
+      })
+      this.setState({ mediaFiles: updatedArray });
+      
+      if (this.state.mediaFiles.length == 1){
+        this.setState({ url: "" });
+        console.log(this.state.url)
+      }
+     }
 
   handleUpload = e => {
     if (e.target.files[0]) {      
@@ -42,9 +56,14 @@ class ImageUpload extends Component {
               let file = {}
               file.type = image.type
               file.url = url
-              this.props.getMediaFile(file)
-              this.props.getProfilePicture && this.props.getProfilePicture(file)
-              this.props.getBackgroundPicture && this.props.getBackgroundPicture(file)
+              if (this.props.id = 1){
+                this.props.getBackgroundPicture && this.props.getBackgroundPicture(file)
+              }else if(this.props.id = 2){
+                this.props.getProfilePicture && this.props.getProfilePicture(file)
+              }else{
+                this.props.getMidiaFile && this.props.getMediaFile(file)
+              }
+              
               this.setState({ 
                 url, mediaFiles: [...this.state.mediaFiles, file]
               });
@@ -56,21 +75,25 @@ class ImageUpload extends Component {
 
 
   render() {
+    console.log(this.state.mediaFiles.length, 'this.state.mediaFiles.length')
     if (this.props.newPost === true){
       return(
         <div className="newPostUploader">
           <div>
-          <label htmlFor="newPostInput" className="custom-file-upload">
-              <img src={editProfileIcon}/>
-          </label>
+            <label htmlFor="newPostInput" className="custom-file-upload">
+                <AddIcon/>
+            </label>
             <input id="newPostInput" type="file" onChange={this.handleUpload} className="newPostInput" />
           </div>
-          <div className="image-base">
+          <div className={this.state.url != "" ? "margin-left" : "image-base"}>
             <Carousel showArrows={false} showThumbs={false} showIndicators={this.state.mediaFiles && this.state.mediaFiles.length >= 2? true : false } showStatus={false} infiniteLoop={this.state.mediaFiles && this.state.mediaFiles.length >= 2? true : false } dynamicHeight={true} cancelable={false}>
               {this.state.url && this.state.mediaFiles && this.state.mediaFiles.map((media, i) => {
                 if (media.type[0] == "v"){
                 return (
                   <div>
+                    <label onClick={(e) => this.removeMedia(media)} id={media.url} className="custom-file-remove">
+                      <ClearIcon/>
+                    </label>
                     <ReactPlayer
                     key={i}
                     className='react-player'
@@ -86,7 +109,12 @@ class ImageUpload extends Component {
                 )}
                 else if(media.type[0] == "i" ){
                   return (
-                  <img key={i} src={media.url} style={{ maxWidth: '100vw', left: '0px' }} />
+                    <div>
+                      <label onClick={(e) => this.removeMedia(media)} className="custom-file-remove">
+                          <ClearIcon/>
+                        </label>
+                      <img key={i} src={media.url} style={{ maxWidth: '100vw', left: '0px' }} />
+                    </div>
                   )}
                 else{
                   
