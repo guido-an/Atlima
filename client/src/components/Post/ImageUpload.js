@@ -61,7 +61,7 @@ class ImageUpload extends Component {
               }else if(this.props.id == 2){
                 this.props.getProfilePicture && this.props.getProfilePicture(file)
               }else if(this.props.id == 3){
-                this.props.getMidiaFile && this.props.getMediaFile(file)
+                this.props.getMediaFile(file)
               }
               
               this.setState({ 

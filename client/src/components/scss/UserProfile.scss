@@ -7,6 +7,48 @@
         color: $dark-grey;
         margin: $base-margin
     }
+    .settings-icon {
+        position: absolute;
+        z-index: 99;
+        top: 2vh;
+        left: 2vw;
+     }
+     .logout {
+        position: absolute;
+             z-index: 99;
+             top: 2vh;
+             left: 4vw;
+             
+             p {
+                 background-color: #fff;
+                 padding: 10px 20px;
+                 position: relative;
+                 top: 30px;
+                 cursor: pointer;
+                 border-radius: 4px;
+                 font-size: 14px;
+                 color: #737373
+                
+             }
+     }
+     // .dropdown {
+    //     position: relative;
+    //   }
+    //   .dropdown-content {
+    //     display: none;
+    //     position: absolute;
+    //     z-index: 99;
+    //     top: 2vh;
+    //     left: 2vw;
+    //    p {
+    //        position: relative;
+    //        padding: 10px;
+    //        background-color: #fff;
+    //    }
+     // }
+      .dropdown:hover .dropdown-content {
+        display: block !important;
+      }
     .edit-profile-icon{
         position: absolute;
         z-index: 10;

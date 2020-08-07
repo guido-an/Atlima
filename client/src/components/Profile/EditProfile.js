@@ -6,6 +6,9 @@ import { EDIT_USER, GET_USER } from '../../api/userAPI'
 import ImageUpload from '../Post/ImageUpload'
 import CategoriesOnBoarding from '../Categories/CategoriesOnBoarding'
 import SelectionCategories from '../Categories/SelectionCategories'
+import ProfilePictureDefault from './ProfilePictureDefault'
+import SectionIntroduction from '../SectionIntroduction'
+
 
 class EditProfile extends React.Component {
   static contextType = CategoryContext
@@ -53,8 +56,7 @@ class EditProfile extends React.Component {
       )
         this.context.onSubmitUserCategories(e)     
         window.location.reload();
-        // const userUpdated = await this.getUser()
-        // this.setState({loggedInUser: userUpdated})
+        
     }  catch(err){
       alert('err')
           console.log(err)
@@ -79,33 +81,45 @@ class EditProfile extends React.Component {
     
    
   render () {
+    console.log(this.props.location.state, 'this.props.location.state')
     if(!this.state.loggedInUser)
     return <p></p>
-  const backgroundImageBeforeUpdate = this.state.loggedInUser.backgroundPicture || "https://vignette.wikia.nocookie.net/simpsons/images/b/bd/Homer_Simpson.png/revision/latest?cb=20140126234206"
-  const profileImageBeforeUpdate =  this.state.loggedInUser.profilePicture || "https://vignette.wikia.nocookie.net/simpsons/images/b/bd/Homer_Simpson.png/revision/latest?cb=20140126234206"
+
     return (
+      <section>
+       <SectionIntroduction title='Edit Profile' saveEditProfile={this.onSubmit}/>
+    
     <div className="edit-profile">
         <form onSubmit={this.onSubmit}>
-           <div style={{
-               backgroundImage: this.state.backgroundPicture ? `url('${this.state.backgroundPicture.url}')` : `url('${backgroundImageBeforeUpdate}')`,
-               height: "70vh",
+           {this.state.backgroundPicture ? 
+            <div style={{
+               backgroundImage: `url('${this.state.backgroundPicture.url}')`,
+               height: "60vh",
                backgroundSize: "cover",
                backroundPosition: "center"
-             }} />
+             }} /> :
+              <div style={{
+                 backgroundColor: '#737373',
+                 height: "60vh"
+                }} />
+             }
             <div className="edit-background-picture">
                 <ImageUpload id={1} getBackgroundPicture={this.getBackgroundPicture}/>
             </div>
-            <div style={{ 
-                   backgroundImage: this.state.profilePicture ? `url('${this.state.profilePicture.url}')` : `url('${profileImageBeforeUpdate}')`,
+            {this.state.profilePicture ? 
+              <div style={{ 
+                   backgroundImage: `url('${this.state.profilePicture.url}')`,
                    borderRadius: "50%",
-                   height: "150px",
-                   width: "150px",
+                   height: "100px",
+                   width: "100px",
                    backgroundSize: "cover",
                    backroundPosition: "center",
                    position: "relative",
-                   bottom: "90px",
-                   left: "20px"
-                  }} /> 
+                   bottom: "55px",
+                   left: "5vw"
+                  }} /> : 
+                  <ProfilePictureDefault user={this.state.loggedInUser}/>
+                  }
              <div className="edit-profile-picture">
                <ImageUpload id={2} getProfilePicture={this.getProfilePicture} />
              </div>
@@ -125,6 +139,7 @@ class EditProfile extends React.Component {
             </div>
         </form>
       </div>
+    </section>
     )
   }
 }

@@ -1,11 +1,11 @@
 @import "general.scss";
 
 .edit-profile {
-    min-height: 150vh;
+    min-height: 220vh;
     .edit-background-picture{
         position: absolute;
         z-index: 10;
-        top: 2vh;
+        top: 10vh;
         right: 2vw;
         .row {
             display: none;
@@ -20,17 +20,19 @@
   }
 
   .edit-profile-picture{
-    position: relative;
-    left: 120px;
-    bottom: 135px;
+    position: absolute;
+    left: 5vw;
+    top: 70vh;
+    img {
+        position: relative;
+        left: 58px
+    }
     .row {
         display: none;
     }
   }
   .input-container {
       margin: $base-margin;
-      position: relative;
-      bottom: 120px;
       input, textarea{
         display: block;
         margin: 5px 0 20px 0;

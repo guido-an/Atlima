@@ -2,6 +2,7 @@ import React from 'react'
 import PostContext from '../contexts/PostContext'
 
 import New from '../components/Post/New'
+import SectionIntroduction from '../components/SectionIntroduction'
 
 class CreatePost extends React.Component {
  static contextType = PostContext
@@ -9,6 +10,7 @@ class CreatePost extends React.Component {
   render () {
     return (
       <div>
+        <SectionIntroduction title='Adding new post'/>
         <New postContext={this.context} />
       </div>
     )

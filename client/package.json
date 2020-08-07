@@ -16,6 +16,7 @@
     "react-player": "^2.1.0",
     "react-responsive-carousel": "^3.2.7",
     "react-router-dom": "^5.1.2",
+    "react-router-last-location": "^2.0.1",
     "react-scripts": "3.2.0",
     "react-time-ago": "^5.0.8",
     "read-more-react": "^1.0.10"
