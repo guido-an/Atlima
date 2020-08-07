@@ -18,6 +18,7 @@ class PostCard extends React.Component {
   static contextType = PostContext
   state = {
     post: null,
+    isCopyDone: false,
   };
   
   async componentDidMount(){
@@ -37,6 +38,9 @@ class PostCard extends React.Component {
   }
 
   copyToClipboard = (e) => {
+    e.preventDefault();
+    this.setState({ isCopyDone: true });
+    setTimeout(() => this.setState({ isCopyDone: false }), 300);
     const link = `localhost::3000/post/${this.state.post._id}`
     navigator.clipboard.writeText(link)
   };
@@ -55,10 +59,10 @@ class PostCard extends React.Component {
         { !this.props.onePost && 
           <div className='post-card-header'>
             <div>
-              <img className='ui avatar image circular' src={this.state.post.user.profilePicture ? this.state.post.user.profilePicture.url : Discobolo } />
+              <Link to={`/profile/${this.state.post.user._id}`}><img className='ui avatar image circular' src={this.state.post.user.profilePicture ? this.state.post.user.profilePicture.url : Discobolo } /></Link>
             </div>
             <div className='post-card-header-content'>
-              <p><strong>{this.state.post.user.firstName} {this.state.post.user.lastName}</strong></p>
+              <p><strong><Link to={`/profile/${this.state.post.user._id}`}>{this.state.post.user.firstName} {this.state.post.user.lastName}</Link></strong></p>
 
               <div className="spot-info">
                 <span> <TimeAgo date={Date.parse(this.state.post.created_at)} /> </span>
@@ -88,7 +92,11 @@ class PostCard extends React.Component {
               )}
               else if(media.type[0] == "i" ){
                 return (
-                <img key={i + this.state.post._id} src={media.url} style={{ maxWidth: '100vw', left: '0px' }} />
+                  <div>
+                    <Link to={`/post/${this.state.post._id}`}>
+                      <img key={i + this.state.post._id} src={media.url} style={{ maxWidth: '100vw', left: '0px' }} />
+                    </Link>
+                  </div>
                 )}
               else{
                 
@@ -108,7 +116,8 @@ class PostCard extends React.Component {
             <p>{this.state.post.comments.length}</p>
           </div>
           <div className="share">
-            <ReplyRoundedIcon onClick={this.copyToClipboard} />
+            <ReplyRoundedIcon onClick={this.copyToClipboard} className={this.state.isCopyDone === false ? "" : "light"} />
+            <p className={this.state.isCopyDone === false ? "d-none" : ""}>Link Copied</p>
           </div>
         </div> 
         <div className="description">
