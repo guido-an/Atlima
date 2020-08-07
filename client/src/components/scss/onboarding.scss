@@ -2,16 +2,17 @@
 
 /* The container */
 .onb-title{
-    margin-left: 5vw;
-    margin-top: 10px !important;
+    margin: 0 6vw;
+    margin-top: 20px !important;
     align-items: center;
 }
 .category{
+    margin-top: 20px;
     .onboarding{
         display: flex;
         flex-wrap: wrap;
         max-width: 90vw;
-        margin-left: 5vw;
+        margin: 0 5vw;
         margin-bottom: 30px;
     }    
     .item{
@@ -116,29 +117,18 @@
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
-
-    button{
-        position: absolute;
-        left: 35%;
-        right: 35%;
-        top: 85%;
-        bottom: 10%;
-        width: 120px;
-        height: 40px;
-        font-family: Avenir;
-        font-style: normal;
-        font-weight: 800;
-        font-size: 15px;
-        line-height: 25px;
-        align-items: center;
-        text-align: center;
-        border: 1px;
-        color: #FFFFFF;
-
-        background: $primary-color;
-        border-radius: 4px;
-    }
+  
 }
+
+   
+#button-onboarding {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: 20px;
+    width: 160px;
+}
+
 
 @media screen and (max-width: 350px) {
     .category{

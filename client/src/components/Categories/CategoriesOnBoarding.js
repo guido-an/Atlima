@@ -25,7 +25,9 @@ class CategoriesOnBoarding extends React.Component {
       <div>
         <SelectionCategories categoryContext={this.props.categoryContext}/>
         <form onSubmit={this.onSubmitUserCategories}>
-          {this.props.categoryContext.selectedCategoriesIds.length >= 1 ? <button>Done</button> : ''}
+          {this.props.categoryContext.selectedCategoriesIds.length >= 1 &&
+              <button id="button-onboarding">Done</button> 
+          }
         </form>
       </div>
     )
