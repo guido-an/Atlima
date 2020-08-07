@@ -204,3 +204,18 @@ a, .link{
        bottom: 12px;
     }
 }
+
+@media screen and (min-width: 1125px) {
+    .post-card-container{
+        width: 698px !important;
+        margin: auto;
+    }
+    .carousel-root {
+        width: auto;
+    }
+
+    .spacer{
+        width: 550px;
+    }
+    
+}

@@ -9,18 +9,18 @@
     }  
 
     button{
-        width: 180px;
-        height: 60px;
+        width: 120px;
+        height: 40px;
         background: #FFFFFF;
         border: 2px solid $primary-color;
         box-sizing: border-box;
         border-radius: 8px;
         color: $primary-color;
-        font-size: 22px;
+        font-size: 15px;
         font-weight: bold;
         display: block;
         position: relative;
-        bottom: 32px;
+        bottom: 15px;
         cursor: pointer;
     }
     .onboarding::-webkit-scrollbar {
@@ -31,8 +31,8 @@
         color: white;
         text-align: center;
         font-weight: bold;
-        width: 200px;
-        height: 70px;
+        width: 130px;
+        height: 40px;
         text-decoration: none;
     }
     .container {
@@ -40,7 +40,7 @@
         position: relative;
         margin-bottom: 100px;
         cursor: pointer;
-        font-size: 22px;
+        font-size: 15px;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -61,13 +61,13 @@
         position: absolute;
         border-radius: 5px;
         text-align: center;
-        padding-top: 15px;
         top: 0;
         left: 0;
-        height: 60px;
-        width: 180px;
+        height: 40px;
+        width: 120px;
         background-color: #0000006c;
-        padding-top: 20px;
+        padding-top: 11px;
+        font-size: 15px;
         background-blend-mode: soft-light;
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Do not repeat the image */
@@ -135,6 +135,11 @@
     margin-bottom: 16px;
     display: flex;
     justify-content: space-between;
+    img {
+        display: block;
+        width: 25vw;
+    }
+
     input {
         border: 1px solid #e5e5e5;
         border-radius: 4px;
@@ -186,5 +191,15 @@
      min-width: 70px;
      position: relative;
      bottom: 2px;
+    }
+}
+
+
+@media screen and (min-width: 426px) {
+    .feed-header{
+        img {
+            display: block;
+            width: 100px !important;
+        }
     }
 }

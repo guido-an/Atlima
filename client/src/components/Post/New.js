@@ -77,7 +77,7 @@ class Post extends React.Component {
     
     return (
       <div className="create-post">
-        <ImageUpload getMediaFile={this.getMediaFile} newPost={true} />
+        <ImageUpload getMediaFile={this.getMediaFile} newPost={true} id="3" />
         <form onSubmit={this.onSubmit}>        
             <label>Title</label>
             <input onChange={this.onInputChange} type="text" placeholder="Title" name="title"/>

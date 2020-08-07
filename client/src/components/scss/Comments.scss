@@ -149,3 +149,20 @@
     }
     
 }
+
+@media only screen and (min-width: 1025px) {
+    
+    .comments {
+        margin: auto;
+        width: 550px !important;
+        margin-bottom: 100px;
+
+        .ui.avatar.image{
+            margin-right: 10px;
+        }
+
+        input{
+            width: 500px !important;
+        }
+    }
+}

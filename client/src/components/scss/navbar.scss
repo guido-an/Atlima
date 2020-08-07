@@ -60,7 +60,8 @@
 }
 
 @media screen and (min-width: 1024px) {
-    .absolute-bot {
-        width: 75vw;
+    .ui.item.menu, .ui.item.menu .itemc {
+        width:60vw !important;
+        margin-left: 20vw !important;
     }
 }
