@@ -94,7 +94,7 @@ router.get('/all/spot', async (req, res) => {
 })
 
 // GET SINGLE POST
-router.get('/:id', async (req, res) => {
+router.get('/single/:id', async (req, res) => {
   try {
     const post = await Post.findOne({ _id: req.params.id })
       .populate('user').populate('comments.user').populate('spot')

@@ -135,18 +135,20 @@
     margin-bottom: 16px;
     display: flex;
     justify-content: space-between;
-    img {
-        display: block;
-        width: 28vw;
-    }
     input {
         border: 1px solid #e5e5e5;
         border-radius: 4px;
         outline: none;
         height: 34px;
-        width: 220px;
+        width: 260px;
         padding: 10px;
         margin-top: -5px;
+        box-shadow: 0px 1px 2px rgba(46,41,51,0.08), 0px 2px 4px rgba(71,63,79,0.08);
+        letter-spacing: 0.2px;
+    }
+    input::placeholder {
+        color: $light-grey;
+        font-size: 8px;
     }
     .dropdown-content {
         display: none;
@@ -178,11 +180,11 @@
         color: $primary-color;
         text-transform: capitalize;
     }
-    .MuiSvgIcon-root{
-        position: absolute;
-        right: 5vw;
-        top: 10px;
-        color: #bfbfbf;
-        font-size: 35px !important;
+
+    #logo-home {
+     width: 40%;
+     min-width: 70px;
+     position: relative;
+     bottom: 2px;
     }
 }
