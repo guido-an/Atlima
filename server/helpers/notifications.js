@@ -28,6 +28,7 @@ const notificationLike = async (currentUser, post) => {
 }
 
 const notificationComments = async (currentUser, post) => {
+  const url = post.mediaFile[0] ? post.mediaFile[0].url : ''
   const myUserId = ObjectId(currentUser._id).toString()
   const postUserId = ObjectId(post.user._id).toString()
   try {
@@ -53,6 +54,7 @@ const notificationComments = async (currentUser, post) => {
               name: `${currentUser.firstName} ${currentUser.lastName}`,
               action: commentInPostUserId == postUserId ? 'had commented your post' : 'had also commented the post',
               postUrl: `/post/${post._id}/`,
+              mediaFile: url,
               date: Date.now()
             }
           },
@@ -68,23 +70,23 @@ const notificationComments = async (currentUser, post) => {
 
 const notificationUserTagged = async (currentUser, taggedUserId, post) => {
   if (currentUser._id.toString() == taggedUserId) {
-        
+
   } else {
     try {
-       const url = post.mediaFile[0] ? post.mediaFile[0].url : ''
-       const filter = { _id: taggedUserId }
-       const update = {
-          $addToSet: {
-            notifications: {
-              name: `${currentUser.firstName} ${currentUser.lastName}`,
-              action: 'had tagged you in a post',
-              postUrl: `/post/${post._id}/`,
-              mediaFile: url,
-              date: Date.now()
-            }
-          },
-          $inc: { unreadNotifications: 1 }
-        }
+      const url = post.mediaFile[0] ? post.mediaFile[0].url : ''
+      const filter = { _id: taggedUserId }
+      const update = {
+        $addToSet: {
+          notifications: {
+            name: `${currentUser.firstName} ${currentUser.lastName}`,
+            action: 'had tagged you in a post',
+            postUrl: `/post/${post._id}/`,
+            mediaFile: url,
+            date: Date.now()
+          }
+        },
+        $inc: { unreadNotifications: 1 }
+      }
       await User.findOneAndUpdate(filter, update)
     } catch (err) {
       console.log(err)
@@ -93,7 +95,6 @@ const notificationUserTagged = async (currentUser, taggedUserId, post) => {
 }
 
 const welcomeNotification = async (currentUser) => {
-  console.log('welcome notifications')
   try {
     // const url = post.mediaFile[0] ? post.mediaFile[0].url : ''
     const url = ''
@@ -102,7 +103,7 @@ const welcomeNotification = async (currentUser) => {
       $addToSet: {
         notifications: {
           name: `Welcome to Altima ${currentUser.firstName} :)`,
-          action: ' Happy to have you here, you can now start sharing your passion: create your first post',
+          action: ' Happy to have you here, you can now start sharing your passion!',
           postUrl: '/create-post',
           mediaFile: url,
           date: Date.now()

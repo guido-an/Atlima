@@ -97,7 +97,7 @@ router.get('/all/spot', async (req, res) => {
 router.get('/single/:id', async (req, res) => {
   try {
     const post = await Post.findOne({ _id: req.params.id })
-      .populate('user').populate('comments.user').populate('spot')
+      .populate('user').populate('comments.user').populate('spot').populate('taggedAthletes')
 
     res.status(200).send(post)
   } catch (err) {

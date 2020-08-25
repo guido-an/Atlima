@@ -19,7 +19,7 @@ router.post('/signup', (req, res, next) => {
   }
   User.findOne({ email }, 'email', (err, user) => {
     if (user !== null) {
-      res.status(400).json({ message: 'The email already exists' })
+      res.status(400).json({ message: 'This email is already registered with us, try a different one or reset your password.' })
       return
     }
     const salt = bcrypt.genSaltSync(bcryptSalt)
