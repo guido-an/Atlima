@@ -41,9 +41,15 @@ class Notifications extends React.Component {
            </div>
            <TimeAgo date={notification.date} />
         </div>
-        <Link to={notification.postUrl}>
-          <img className="media-file" src={notification.mediaFile} />
-        </Link>
+        {notification.mediaFile.length > 0 ?
+             <Link to={notification.postUrl}>
+                 <img className="media-file" src={notification.mediaFile} />
+             </Link> : 
+             <Link to="/create-post">
+                <p style={{width: '110px', color: '#FF7700', fontWeight: '600'}}>> Create Post</p>
+             </Link>
+         }
+
       </div>
     </div>
    })

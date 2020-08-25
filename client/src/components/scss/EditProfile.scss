@@ -1,7 +1,7 @@
 @import "general.scss";
 
 .edit-profile {
-    min-height: 220vh;
+    margin-bottom: 120px;
     .edit-background-picture{
         position: absolute;
         z-index: 10;
@@ -25,7 +25,8 @@
     top: 70vh;
     img {
         position: relative;
-        left: 58px
+        left: 58px;
+        bottom: 52px;
     }
     .row {
         display: none;
@@ -46,14 +47,7 @@
         font-weight: 600;
         font-size: 16px
     }
-    button {
-        width: 100%;
-        border-radius: $border-radius-btn;
-        padding: 10px 0;
-        background-color: $primary-color;
-        color: #fff;
-        font-weight: 600;
-    }
+  
     textarea {
         min-height: 80px;
     }

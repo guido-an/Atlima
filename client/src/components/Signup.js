@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import AuthContext  from '../contexts/AuthContext'
 import '../components/scss/signup.scss'
 import '../components/scss/buttons.scss'
+import logo from '../images/altima-logo.png'
 
 
 export default class Signup extends Component {
@@ -40,7 +41,7 @@ export default class Signup extends Component {
   render() {
     return (
       <div className='signup'>
-          <h1>Altima</h1>
+        <h1>Sign up with Email</h1>
         <form onSubmit={this.handleSubmit}>
           <label>First Name</label>
           <input onChange={this.handleChange} type="text" name="firstName" />
@@ -50,9 +51,10 @@ export default class Signup extends Component {
           <input onChange={this.handleChange} type="email" name="email" />
           <label>Password</label>
           <input onChange={this.handleChange} type="password"  name="password" />
-         <p style={{ margin: '0'}}>{this.state.errorMessage}</p> 
-          <button className='primary-btn'>Signup</button>          
-          <p>Already have an acount? <Link to="/login">Login</Link></p>
+         <p style={{ margin: '0', color: 'red'}}>{this.state.errorMessage}</p> 
+          <button className='primary-btn'>Signup</button>  
+          <p>By signing up for Altima, you agree to the Terms of Service and Public Policy.</p>        
+          <p id="login-text">Already have an account? <Link id="login-link" to="/login">Login</Link></p>
         </form>
       </div>
     );

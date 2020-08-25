@@ -118,7 +118,14 @@ class EditProfile extends React.Component {
                    bottom: "55px",
                    left: "5vw"
                   }} /> : 
-                  <ProfilePictureDefault user={this.state.loggedInUser}/>
+                  <ProfilePictureDefault 
+                     user={this.state.loggedInUser}
+                     heightAndWidth="100px"
+                     bottom="55px"
+                     left="5vw"
+                     fontSize="48px"
+                     top="40px"
+                  />
                   }
              <div className="edit-profile-picture">
                <ImageUpload id={2} getProfilePicture={this.getProfilePicture} />
@@ -135,7 +142,6 @@ class EditProfile extends React.Component {
                <textarea onChange={this.onInputChange} placeholder={this.state.loggedInUser.bio} type="text" name="bio"/>
                <label>Choose the sports to follow</label>
                <SelectionCategories categoryContext={this.context} loggedInUser={this.state.loggedInUser}/>
-               <button>Update</button>
             </div>
         </form>
       </div>

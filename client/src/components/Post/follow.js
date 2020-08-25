@@ -3,8 +3,10 @@ import AuthContext from '../../contexts/AuthContext'
 import { FOLLOW_USER , GET_USER } from '../../api/userAPI'
 import '../scss/PostCard.scss'
 import '../scss/Comments.scss'
-import Discobolo  from '../../images/discobolo.jpg'
 import {Link} from 'react-router-dom';
+import ProfilePictureDefault from '../Profile/ProfilePictureDefault'
+                    
+            
 
 class Follow extends React.Component {
  static contextType = AuthContext
@@ -58,8 +60,19 @@ class Follow extends React.Component {
     return (
       <div className="follow">
         <form onSubmit={this.onSubmitHandler}>
-            <img className='ui avatar image circular' src={this.props.post.user.profilePicture ? this.props.post.user.profilePicture.url : Discobolo } />
-            <Link to={`/profile/${this.props.post.user._id}`}>{this.props.post.user.firstName} {this.props.post.user.lastName}</Link>
+          <div style={{ display: 'flex '}}>
+           {this.props.post.user.profilePicture ? 
+                <img className='ui avatar image circular' src={this.props.post.user.profilePicture} />
+                  :
+                  <ProfilePictureDefault 
+                         user={this.props.post.user}
+                         heightAndWidth="40px"
+                         fontSize="16px"
+                         top="10px"
+                    />
+                } 
+               <Link to={`/profile/${this.props.post.user._id}`}>{this.props.post.user.firstName} {this.props.post.user.lastName}</Link>
+            </div>
             {this.state.pageUserIsFollowed ? 
             <button className='unfollow-btn'>Unfollow</button> :
             <button className='follow-btn'>Follow</button> 

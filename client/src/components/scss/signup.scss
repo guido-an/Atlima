@@ -1,21 +1,16 @@
 @import "general.scss";
 
 .signup{
-    h1{
-        height: 24px;
-        margin-top: 60px;
-        font-family: Bebas Neue;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 32px;
-        line-height: 24px;
-        align-items: center;
-        text-align: center;
-        color: $primary-color;
-        margin-bottom: 30px;
-    }
-    
-    p{
+     h1 {
+        font-weight: 800;
+        font-size: 24px;
+        line-height: 140%;
+        color: $dark;
+        margin-left: 5vw;
+        margin-top: 40px;
+        margin-bottom: 20px;
+     }
+    p {
         text-align: center;
         margin-top: 20px;
         font-family: Avenir;
@@ -62,7 +57,14 @@
             border-top: 1px solid #C4C4C4;
             width: 40vw;
         }
+    }
 
+    #login-link {
+        color:#0133a0 !important;
+    }
+    #login-text {
+        position: relative;
+        top: 20px
     }
 }
 

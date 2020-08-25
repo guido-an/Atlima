@@ -6,13 +6,13 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import PostContext  from '../../contexts/PostContext'
 import TimeAgo from '../../components/TimeAgo'
-import Discobolo  from '../../images/discobolo.jpg'
 import ChatBubbleRoundedIcon from '@material-ui/icons/ChatBubbleRounded';
 import ThumbUpAltRoundedIcon from '@material-ui/icons/ThumbUpAltRounded';
 import ReplyRoundedIcon from '@material-ui/icons/ReplyRounded';
 import RoomRoundedIcon from '@material-ui/icons/RoomRounded';
 import ReadMoreReact from 'read-more-react';
-import Follow from '../Post/follow'
+import Follow from '../Post/Follow'
+import ProfilePictureDefault from '../Profile/ProfilePictureDefault'
 
 class PostCard extends React.Component {
   static contextType = PostContext
@@ -41,7 +41,7 @@ class PostCard extends React.Component {
     e.preventDefault();
     this.setState({ isCopyDone: true });
     setTimeout(() => this.setState({ isCopyDone: false }), 300);
-    const link = `localhost::3000/post/${this.state.post._id}`
+    const link = `www.altima.com/post/${this.state.post._id}`
     navigator.clipboard.writeText(link)
   };
 
@@ -59,7 +59,16 @@ class PostCard extends React.Component {
         { !this.props.onePost && 
           <div className='post-card-header'>
             <div>
-              <Link to={`/profile/${this.state.post.user._id}`}><img className='ui avatar image circular' src={this.state.post.user.profilePicture ? this.state.post.user.profilePicture.url : Discobolo } /></Link>
+             {this.state.post.user.profilePicture ?
+              <Link to={`/profile/${this.state.post.user._id}`}><img className='ui avatar image circular' src={this.state.post.user.profilePicture.url} /> </Link>
+              :
+              <ProfilePictureDefault 
+                     user={this.state.post.user}
+                     heightAndWidth="40px"
+                     fontSize="16px"
+                     top="10px"
+                  />
+              } 
             </div>
             <div className='post-card-header-content'>
               <p><strong><Link to={`/profile/${this.state.post.user._id}`}>{this.state.post.user.firstName} {this.state.post.user.lastName}</Link></strong></p>
@@ -67,7 +76,7 @@ class PostCard extends React.Component {
               <div className="spot-info">
                 <span> <TimeAgo date={Date.parse(this.state.post.created_at)} /> </span>
                 <span className="dot-location"></span>
-                <span className="location-name"><RoomRoundedIcon /> {this.state.post.spot && this.state.post.spot.location ? this.state.post.spot.location.terms[0].value : "Its a mistery :o"}</span>
+                <span className="location-name"><RoomRoundedIcon /> {this.state.post.spot && this.state.post.spot.location ? this.state.post.spot.location.terms[0].value : "Around the world"}</span>
               </div> 
             </div>
           </div>

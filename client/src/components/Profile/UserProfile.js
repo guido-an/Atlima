@@ -153,7 +153,14 @@ class UserProfile extends React.Component {
                    bottom: "55px",
                    left: "5vw"
                   }} />  : 
-                  <ProfilePictureDefault user={pageUser}/>
+                  <ProfilePictureDefault 
+                     user={pageUser}
+                     heightAndWidth="100px"
+                     bottom="55px"
+                     left="5vw"
+                     fontSize="48px"
+                     top="40px"
+                  />
               }
                   <div className="user-info">
                      <h1>{pageUser.firstName} {pageUser.lastName}</h1>
@@ -163,13 +170,13 @@ class UserProfile extends React.Component {
                            <p className="location">{pageUser.location}</p>
                         </div> :
                         <div className="user-location-info">
-                           <img src={locationIconWhite}/>
+                           <div><img src={locationIconWhite}/></div>
                            <p className="location">Around the world</p>
                         </div> 
                     }
                    </div>
                    <div>
-                     <p className="followers">Following: {pageUser.followedUsers.length} Followers: {pageUser.followedBy.length}</p>
+                     <p className="followers">Following {pageUser.followedUsers.length} Followers {pageUser.followedBy.length}</p>
                      <p className="bio">{pageUser.bio}</p>
                    </div>
                   
@@ -234,9 +241,9 @@ class UserProfile extends React.Component {
                            posts={pageUser.taggedPosts.reverse()}
                          />
                       }
-                      {pageUser && pageUser.posts.length === 0 && 
+                      {pageUser && pageUser.posts.length === 0 && pageUser._id === this.context.loggedInUser._id &&
                         <div className="create-first-post">
-                           <Link to="/create-post"><p>Create your first post :)</p></Link>
+                           <Link to="/create-post"><p>> Create your first Post :)</p></Link>
                         </div>
                       }
                   </div>

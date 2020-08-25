@@ -39,8 +39,10 @@ export default class Login extends Component {
 
   render() {
     return (
+
+  
       <div className='login'>
-        <h1 >altima</h1>
+         <h1 >Login</h1>
         <FacebookLogin/>
         <div className='or-line'>
           <hr className='left'></hr> <span>or</span> <hr className='right'></hr>
@@ -60,7 +62,7 @@ export default class Login extends Component {
           />
           <p style={{ margin: '0'}}>{this.state.errorMessage}</p> 
           <button className='primary-btn'>Login</button>
-          <p>Don't you have an acount? <Link to="/signup">Signup</Link></p>
+          <p>Don't you have an acount? <Link id="signup-link" to="/signup">Signup</Link></p>
         </form>
       </div>
     );

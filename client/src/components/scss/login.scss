@@ -1,40 +1,24 @@
 @import "general.scss";
 .login{
+    
+    
     h1{
-        height: 24px;
-        margin-top: 60px;
-        font-family: Bebas Neue;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 32px;
-        line-height: 24px;
-        align-items: center;
-        text-align: center;
-        color: $primary-color;
         margin-bottom: 150px;
+        margin-top: 40px;
+        margin-left: 5vw;
+        color: $dark;
     }
     
     p{
         text-align: center;
         margin-top: 20px;
-        font-family: Avenir;
-        font-style: normal;
-        font-weight: normal;
         font-size: 14px;
         line-height: 140%;
-        /* or 25px */
-
-
-        /* Black */
-
         color: #777;
     }
 
     label{
         margin-left: 5vw;
-        font-family: Avenir;
-        font-style: normal;
-        font-weight: normal;
         font-size: 15px;
         line-height: 140%;
         color: #777;
@@ -46,6 +30,11 @@
         margin-top: 5px;
         padding: 10px;
     }
+
+    #signup-link {
+        color:#0133a0 !important;
+    }
+    
 
     .or-line{
         color: #C4C4C4;
@@ -66,11 +55,9 @@
 }
 
 .landing{
-    
     .landing-header{
         height: 40vh;
     }
-
     h1{
         height: 24px;
         margin-top: 60px;
@@ -97,7 +84,6 @@
         margin-bottom: 60px;
         /* or 25px */
 
-
         /* Black */
 
         color: #777;
@@ -108,7 +94,7 @@
     }
 
     .facebook-btn{
-        top: 20vh;
+        top: 10vh;
     }
 
     .landing-body{

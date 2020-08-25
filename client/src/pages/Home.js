@@ -42,9 +42,7 @@ class Home extends React.Component {
           topMargin,
           rightMargin
          })  
-         
-         console.log(this.state.hideShowSearch, 'this.state.hideShowSearch')
-    }
+     }
 
 
   render () {

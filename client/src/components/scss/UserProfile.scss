@@ -7,6 +7,9 @@
         color: $dark-grey;
         margin: $base-margin
     }
+    h3:hover {
+        cursor: pointer;
+    }
     .settings-icon {
         position: absolute;
         z-index: 99;
@@ -99,10 +102,11 @@
               bottom: 10px;
              
             img {
-                width: 10px;
-                height: 14px;
+                // width: 10px;
+                // height: 14px;
                 position: relative;
                 left: 3px;
+                bottom: 2px;
             }
             .location {
                 font-size: 14px;
@@ -156,7 +160,7 @@
         .container {
             display: block;
             position: relative;
-            bottom: 15px;
+            // bottom: 15px;
             font-size: 22px;
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -195,7 +199,7 @@
             position: absolute;
             border-radius: 50px;
             text-align: center;
-            padding: 8px 0;
+            padding: 6px 0;
             top: 0;
             left: 0;
             height: 50px;
@@ -204,7 +208,6 @@
             font-weight: 500;
             color: $dark-grey;
             background-color: #fff;
-            border: 1px solid #F2F2F2;
             word-wrap: break-word;
             img {
                 position: relative;
