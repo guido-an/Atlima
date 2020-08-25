@@ -46,13 +46,16 @@ class CreateComment extends React.Component {
         </form>
         <div className="spacer"></div>
         {this.state.post.comments && this.state.post.comments.map((comment, i )=> {
+          
         return (
           <div key={i}>
-             <TimeAgo date={Date.parse(comment.date)} />
-            {comment.user.profilePicture ? <img className='ui avatar image circular' src={comment.user.profilePicture} />
+            {comment.user.profilePicture ? 
+            <div>
+              <img className='ui avatar image circular' src={comment.user.profilePicture.url} />
+            </div>
              : 
              <ProfilePictureDefault 
-                     user={this.state.post.user}
+                     user={comment.user}
                      heightAndWidth="40px"
                      fontSize="16px"
                      bottom="-65px"
@@ -61,6 +64,7 @@ class CreateComment extends React.Component {
               }
             <p><Link to={`/profile/${comment.user._id}`}>{comment.user.firstName} {comment.user.lastName}</Link></p>
             <p className="coment-text">{comment.content}</p>
+            <TimeAgo date={Date.parse(comment.date)} />
             <div className="spacer"></div>
           </div>
         )
