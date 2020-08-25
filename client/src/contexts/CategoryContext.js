@@ -76,7 +76,6 @@ export class CategoryContext extends React.Component {
           }
 
   render(){
-    console.log(this.state.selectedCategoriesIds, 'selectedCategoriesIds')
       const { getCategories, onSelectCategories, removeUserCategory, onSubmitUserCategories, cleanSelectedCategoriesIds, onMyFeedCategories, fillSelectedCategoriesIds } = this
       return(
           <Context.Provider 

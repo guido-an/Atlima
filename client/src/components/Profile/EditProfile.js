@@ -64,7 +64,6 @@ class EditProfile extends React.Component {
   };
     
     onInputChange = e => {
-         //e.persist();
         const { name, value } = e.target;
         this.setState({
           [name]: value,
@@ -81,7 +80,6 @@ class EditProfile extends React.Component {
     
    
   render () {
-    console.log(this.props.location.state, 'this.props.location.state')
     if(!this.state.loggedInUser)
     return <p></p>
 

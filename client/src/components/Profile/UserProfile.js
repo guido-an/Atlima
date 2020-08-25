@@ -175,7 +175,7 @@ class UserProfile extends React.Component {
                         </div> 
                     }
                    </div>
-                   <div>
+                   <div style={{ maxWidth: '200px'}}>
                      <p className="followers">Following {pageUser.followedUsers.length} Followers {pageUser.followedBy.length}</p>
                      <p className="bio">{pageUser.bio}</p>
                    </div>

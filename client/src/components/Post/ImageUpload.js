@@ -25,7 +25,6 @@ class ImageUpload extends Component {
       
       if (this.state.mediaFiles.length == 1){
         this.setState({ url: "" });
-        console.log(this.state.url)
       }
      }
 
@@ -75,7 +74,6 @@ class ImageUpload extends Component {
 
 
   render() {
-    console.log(this.state.mediaFiles.length, 'this.state.mediaFiles.length')
     if (this.props.newPost === true){
       return(
         <div className="newPostUploader">

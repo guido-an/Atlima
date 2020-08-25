@@ -31,7 +31,6 @@ class FilterByCategories extends React.Component {
 
 
   render () {
-    console.log(this.context.myFeedActive)
     return (
       <div className='feed-cat'>
         <div className='onboarding'>

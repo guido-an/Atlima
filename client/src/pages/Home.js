@@ -53,19 +53,19 @@ class Home extends React.Component {
             <img src={logo} id="logo-home" alt="altima-logo"/>
           </div>
           {this.state.hideShowSearch && <SearchBar/>}
-          <img src={searchIcon} 
-          style={{ 
-            width: this.state.searchIconSize + 'px !important',
-            height: this.state.searchIconSize + 'px',
-            position: 'absolute',
-            right: this.state.rightMargin + 'vw',
-            top: this.state.topMargin + 'px',
-            color: '#bfbfbf'
-            }} 
-          onClick={this.ShowSearchInput}/>
-        </div>
-        <FilterByCategories postContext={this.context} user={this.props.user}/>
-        <FeedPosts />
+              <img src={searchIcon} 
+                style={{ 
+                  width: this.state.searchIconSize + 'px !important',
+                  height: this.state.searchIconSize + 'px',
+                  position: 'absolute',
+                  right: this.state.rightMargin + 'vw',
+                  top: this.state.topMargin + 'px',
+                  color: '#bfbfbf'
+                  }} 
+              onClick={this.ShowSearchInput}/>
+         </div>
+           <FilterByCategories postContext={this.context} user={this.props.user}/>
+           <FeedPosts />
       </div>
     )
   }

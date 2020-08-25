@@ -41,7 +41,7 @@ class Notifications extends React.Component {
            </div>
            <TimeAgo date={notification.date} />
         </div>
-        {notification && notification.mediaFile.length > 0 ?
+        {notification.mediaFile && notification.mediaFile.length > 0 ?
              <Link to={notification.postUrl}>
                  <img className="media-file" src={notification.mediaFile} />
              </Link> : 

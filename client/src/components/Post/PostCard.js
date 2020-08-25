@@ -101,7 +101,7 @@ class PostCard extends React.Component {
               )}
               else if(media.type[0] == "i" ){
                 return (
-                  <div>
+                  <div key={i}>
                     <Link to={`/post/${this.state.post._id}`}>
                       <img key={i + this.state.post._id} src={media.url} style={{ maxWidth: '100vw', left: '0px' }} />
                     </Link>
