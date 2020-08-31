@@ -62,7 +62,7 @@ class Follow extends React.Component {
         <form onSubmit={this.onSubmitHandler}>
           <div style={{ display: 'flex '}}>
            {this.props.post.user.profilePicture ? 
-                <img className='ui avatar image circular' src={this.props.post.user.profilePicture} />
+                <img className='ui avatar image circular' src={this.props.post.user.profilePicture.url} />
                   :
                   <ProfilePictureDefault 
                          user={this.props.post.user}

@@ -41,12 +41,10 @@ class CreateComment extends React.Component {
       <div className="comments">
         <p className="comments-number">Comments {this.state.post.comments.length}</p>
         <form className="comment-form" onSubmit={this.onSubmit}>
-            {/* <img className='ui avatar image circular' src={this.props.loggedInUser.profilePicture ? this.props.loggedInUser.profilePicture.url : Discobolo } /> */}
             <input onChange={this.onInputChange} id="commentInput" ref={(ref) => this.commentInput= ref} type="text" placeholder="Write a comment..." name="content"/>
         </form>
         <div className="spacer"></div>
         {this.state.post.comments && this.state.post.comments.map((comment, i )=> {
-          
         return (
           <div key={i}>
             {comment.user.profilePicture ? 
