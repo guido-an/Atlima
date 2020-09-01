@@ -6,6 +6,7 @@ import ReactPlayer from 'react-player'
 import { Carousel } from 'react-responsive-carousel';
 import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
+import Crop from './Crop';
 
 
 class ImageUpload extends Component {
@@ -120,6 +121,7 @@ class ImageUpload extends Component {
               })}
             </Carousel>
           </div>
+          <Crop/>
         </div>
       )
     }    
