@@ -9,7 +9,8 @@ class CreateComment extends React.Component {
   static contextType = PostContext
   state = { 
       content: '',
-      post: null
+      post: null,
+      inputValue: '',
     }
     async componentDidMount(){
       const post = await this.context.getSinglePost(this.props.postId)
@@ -21,7 +22,7 @@ class CreateComment extends React.Component {
     if (this.state.content != ""){
       await this.context.commentPost(this.state.post._id, this.state.content)
       const post = await this.context.getSinglePost(this.state.post._id)
-      this.setState({post, content: ""})
+      this.setState({post, content: "", inputValue: "",})
       this.commentInput.value = "";
     }
   };
@@ -30,10 +31,12 @@ class CreateComment extends React.Component {
         const { name, value } = e.target;
         this.setState({
           [name]: value,
+          inputValue: value,
         });
     }
 
   render () {
+    console.log(this.state.inputValue , 'imput')
     if(!this.state.post){
       return <Spinner/>
     }
@@ -42,6 +45,7 @@ class CreateComment extends React.Component {
         <p className="comments-number">Comments {this.state.post.comments.length}</p>
         <form className="comment-form" onSubmit={this.onSubmit}>
             <input onChange={this.onInputChange} id="commentInput" ref={(ref) => this.commentInput= ref} type="text" placeholder="Write a comment..." name="content"/>
+            <button className={this.state.inputValue === "" ? 'comment-btn inactive' : 'comment-btn active'}>Send</button>
         </form>
         <div className="spacer"></div>
         {this.state.post.comments && this.state.post.comments.map((comment, i )=> {
