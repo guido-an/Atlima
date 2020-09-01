@@ -82,7 +82,8 @@ a, .link{
     }
 
     p {
-        margin-top: -8px !important;
+        position: relative;
+        bottom: 4px;
     }
 }
 
@@ -123,8 +124,8 @@ a, .link{
     p{
         color: #BFBFBF !important; 
         font-size: 12px; 
-        margin-top: -5px;
     }
+   
 
     .light{
         color: $primary-color !important;

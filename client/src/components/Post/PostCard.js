@@ -115,14 +115,25 @@ class PostCard extends React.Component {
         </div>
         {this.state.post.title ? <Link to={`/post/${this.state.post._id}`}><h4 className="title">{this.state.post.title}</h4></Link> : "" } 
         <div className='post-card-icons'>
-          <div className={this.isInclude(this.state.post.likes ) ? "like" : "" } onClick={this.likePostAndUpdateIt}>
-            <ThumbUpAltRoundedIcon />
-            <br/>
-            <p>{this.state.post.likes.length}</p>
+          <div>
+              <div className={this.isInclude(this.state.post.likes ) ? "like" : "" } onClick={this.likePostAndUpdateIt}>
+                
+                <ThumbUpAltRoundedIcon />
+                <br/>
+               
+              </div>
+              <Link to={`/post/${this.state.post._id}/likes`}>
+                  <p>{this.state.post.likes.length}</p>
+               </Link>
           </div>
+          
+          
           <div className="coment">
-            <Link to={`/post/${this.state.post._id}`}><ChatBubbleRoundedIcon /></Link>
-            <p>{this.state.post.comments.length}</p>
+            <Link to={`/post/${this.state.post._id}`}>
+               <ChatBubbleRoundedIcon />
+               <p>{this.state.post.comments.length}</p>
+            </Link>
+        
           </div>
           <div className="share">
             <ReplyRoundedIcon onClick={this.copyToClipboard} className={this.state.isCopyDone === false ? "" : "light"} />

@@ -21,8 +21,7 @@ class UserProfile extends React.Component {
       pageUser: null,
       pageUserIsFollowed: null,
       whichPostsToShow: 'user-posts',
-      redirect: false,
-      showLogout: false 
+      redirect: false
     }
   
     async componentDidMount(){
@@ -73,9 +72,7 @@ class UserProfile extends React.Component {
     }
 
 
-    showLogout = () => {
-      this.setState({ showLogout: !this.state.showLogout })
-    }
+  
 
   logoutUser = () =>{
     this.context.logout()
@@ -115,14 +112,11 @@ class UserProfile extends React.Component {
              </div>
              {this.props.profilePageId === loggedInUser._id &&
               <div>
-                <div onClick={this.showLogout}>
-                  <img className="settings-icon" src={settingsIcon}/>
+                <div>
+                  <Link to="/settings">
+                    <img className="settings-icon" src={settingsIcon}/>
+                  </Link>
                 </div>
-                 {this.state.showLogout && 
-                  <div className="logout" >
-                    <p onClick={this.logoutUser}>Logout</p>
-                  </div>
-                 }
               </div>
              }
 
@@ -176,7 +170,10 @@ class UserProfile extends React.Component {
                     }
                    </div>
                    <div style={{ maxWidth: '200px'}}>
-                     <p className="followers">Following {pageUser.followedUsers.length} Followers {pageUser.followedBy.length}</p>
+                     <p className="followers">
+                        <Link to={`/profile/${pageUser._id}/following`}>Following {pageUser.followedUsers.length} </Link> 
+                        <Link to={`/profile/${pageUser._id}/followers`}>Followers {pageUser.followedBy.length}</Link>
+                    </p>
                      <p className="bio">{pageUser.bio}</p>
                    </div>
                   
