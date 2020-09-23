@@ -29,9 +29,10 @@ class ImageUpload extends Component {
       }
      }
 
-  handleUpload = e => {
-    if (e.target.files[0]) {      
-      const image = e.target.files[0];
+  handleUpload = data => {
+    console.log(data)
+    if (data.event.file) {      
+      const image = data.event.file;
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
@@ -56,6 +57,7 @@ class ImageUpload extends Component {
               let file = {}
               file.type = image.type
               file.url = url
+              file.crop = data.setCroppedAreaPixels
               if (this.props.id == 1){
                 this.props.getBackgroundPicture && this.props.getBackgroundPicture(file)
               }else if(this.props.id == 2){
@@ -67,6 +69,7 @@ class ImageUpload extends Component {
               this.setState({ 
                 url, mediaFiles: [...this.state.mediaFiles, file]
               });
+              console.log(this.state.mediaFiles)
             });
         }
       );
@@ -78,12 +81,7 @@ class ImageUpload extends Component {
     if (this.props.newPost === true){
       return(
         <div className="newPostUploader">
-          <div>
-            <label htmlFor="newPostInput" className="custom-file-upload">
-                <AddIcon/>
-            </label>
-            <input id="newPostInput" type="file" onChange={this.handleUpload} className="newPostInput" />
-          </div>
+          
           <div className={this.state.url != "" ? "margin-left" : "image-base"}>
             <Carousel showArrows={false} showThumbs={false} showIndicators={this.state.mediaFiles && this.state.mediaFiles.length >= 2? true : false } showStatus={false} infiniteLoop={this.state.mediaFiles && this.state.mediaFiles.length >= 2? true : false } dynamicHeight={true} cancelable={false}>
               {this.state.url && this.state.mediaFiles && this.state.mediaFiles.map((media, i) => {
@@ -121,7 +119,7 @@ class ImageUpload extends Component {
               })}
             </Carousel>
           </div>
-          <Crop/>
+          <Crop handleUpload={this.handleUpload}/>
         </div>
       )
     }    

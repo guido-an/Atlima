@@ -6,6 +6,25 @@
         margin-bottom: 90px;
     }
 
+    .primary-btn-crop{
+        width: 90vw;
+        height: 48px;
+        background: $primary-color;
+        margin-left: 5vw;
+        border-radius: 4px;
+        font-family: Avenir;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 25px;
+        align-items: center;
+        text-align: center;
+        margin-top: 41px;
+        color: #FFFFFF;
+        bottom: -58vw;
+        position: relative;
+    }
+
     p{
         text-align: center;
         margin-right: 5vw;
