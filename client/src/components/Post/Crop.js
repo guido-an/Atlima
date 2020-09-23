@@ -1,9 +1,11 @@
 import React from 'react'
 import Cropper from 'react-easy-crop'
 import AddIcon from '@material-ui/icons/Add';
+import { getCroppedImg, getRotatedImage } from './Canvas'
 
 class Crop extends React.Component {
     state = {
+        video: null,
         image: null,
         crop: { x: 0, y: 0 },
         zoom: 1,
@@ -18,12 +20,22 @@ class Crop extends React.Component {
      
       onCropComplete = (croppedArea, croppedAreaPixels) => {
         console.log(croppedArea, croppedAreaPixels)
-        this.setState({ setCroppedAreaPixels: [croppedArea, croppedAreaPixels]})
+        this.setState({ setCroppedAreaPixels: croppedAreaPixels})
       }
 
-      onUploadImage = () => {
-        const data = {event: this.state.file, setCroppedAreaPixels: this.state.setCroppedAreaPixels}
-        this.props.handleUpload(data) 
+      onUploadImage = async () => {
+          console.log(this.state.image, 'image')
+        try {
+            const croppedImage = await getCroppedImg(
+              this.state.image,
+              this.state.setCroppedAreaPixels,
+            )
+            const data = {event: this.state.file, setCroppedAreaPixels: this.state.setCroppedAreaPixels, croppedImage: croppedImage}
+            this.props.handleUpload(data) 
+            console.log('croppedImage', croppedImage)
+          } catch (e) {
+            console.error(e)
+          }
         this.setState({ image: null, file: null })
       }
      
@@ -52,6 +64,7 @@ class Crop extends React.Component {
                 </div>
                 <div className={this.state.image ? '' : 'newPostInput'}>
                     <Cropper
+                        video={this.state.video}
                         image={this.state.image}
                         crop={this.state.crop}
                         zoom={this.state.zoom}

@@ -29,50 +29,65 @@ class ImageUpload extends Component {
       }
      }
 
-  handleUpload = data => {
-    console.log(data)
-    if (data.event.file) {      
-      const image = data.event.file;
-      const uploadTask = storage.ref(`images/${image.name}`).put(image);
-      uploadTask.on(
-        "state_changed",
-        snapshot => {
-          // progress function ...
-          const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
-          this.setState({ progress });
-        },
-        error => {
-          // Error function ...
-          console.log(error);
-        },
-        () => {
-          // complete function ...
-          storage
-            .ref("images")
-            .child(image.name)
-            .getDownloadURL()
-            .then(url => {
-              let file = {}
-              file.type = image.type
-              file.url = url
-              file.crop = data.setCroppedAreaPixels
-              if (this.props.id == 1){
-                this.props.getBackgroundPicture && this.props.getBackgroundPicture(file)
-              }else if(this.props.id == 2){
-                this.props.getProfilePicture && this.props.getProfilePicture(file)
-              }else if(this.props.id == 3){
-                this.props.getMediaFile(file)
-              }
-              
-              this.setState({ 
-                url, mediaFiles: [...this.state.mediaFiles, file]
+  urlToBlob = async (image,name) =>{
+    try{
+      const blob = await fetch(image).then(r => r.blob()).then(blobFile => new File([blobFile], name, { type: "image/png" }))
+      console.log("blob", blob)
+      return blob
+     }catch(err){
+       console.log(err)
+     }
+  }
+  
+
+  handleUpload = async data => {
+    if (data.event) {      
+      const image = data.croppedImage;
+      const name = data.croppedImage.substr(27);
+      try{
+        const blob = await this.urlToBlob(image, name)
+        const uploadTask = storage.ref(`images/${name}`).put(blob);
+        uploadTask.on(
+          "state_changed",
+          snapshot => {
+            // progress function ...
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            this.setState({ progress });
+          },
+          error => {
+            // Error function ...
+            console.log(error);
+          },
+          () => {
+            // complete function ...
+            storage
+              .ref("images")
+              .child(name)
+              .getDownloadURL()
+              .then(url => {
+                let file = {}
+                file.type = data.event.type
+                file.url = url
+                if (this.props.id == 1){
+                  this.props.getBackgroundPicture && this.props.getBackgroundPicture(file)
+                }else if(this.props.id == 2){
+                  this.props.getProfilePicture && this.props.getProfilePicture(file)
+                }else if(this.props.id == 3){
+                  this.props.getMediaFile(file)
+                }
+                
+                this.setState({ 
+                  url, mediaFiles: [...this.state.mediaFiles, file]
+                });
+                console.log("media", this.state.mediaFiles)
               });
-              console.log(this.state.mediaFiles)
-            });
-        }
-      );
+          }
+        );
+      }catch(err){
+        console.log(err)
+      }
     }
   };
 
@@ -81,7 +96,6 @@ class ImageUpload extends Component {
     if (this.props.newPost === true){
       return(
         <div className="newPostUploader">
-          
           <div className={this.state.url != "" ? "margin-left" : "image-base"}>
             <Carousel showArrows={false} showThumbs={false} showIndicators={this.state.mediaFiles && this.state.mediaFiles.length >= 2? true : false } showStatus={false} infiniteLoop={this.state.mediaFiles && this.state.mediaFiles.length >= 2? true : false } dynamicHeight={true} cancelable={false}>
               {this.state.url && this.state.mediaFiles && this.state.mediaFiles.map((media, i) => {
@@ -106,7 +120,7 @@ class ImageUpload extends Component {
                 )}
                 else if(media.type[0] == "i" ){
                   return (
-                    <div>
+                    <div key={i}>
                       <label onClick={(e) => this.removeMedia(media)} className="custom-file-remove">
                           <ClearIcon/>
                         </label>
