@@ -19,10 +19,9 @@
         line-height: 25px;
         align-items: center;
         text-align: center;
-        margin-top: 41px;
         color: #FFFFFF;
-        bottom: -58vw;
-        position: relative;
+        bottom: 80px;
+        position: fixed;
     }
 
     p{
@@ -55,6 +54,24 @@
 
     .img-file, .progress{
         display: none;
+    }
+
+    .google-places-autocomplete{
+        position: inherit;
+    }
+
+    .google-places-autocomplete__input:active, .google-places-autocomplete__input:focus, .google-places-autocomplete__input:hover {
+        outline: none;
+        border: 1px solid #D9D9D9;
+        box-shadow: none;
+    }
+
+    .slider-wrapper{
+        margin-top: 65px;
+    }
+
+    .google-places-autocomplete__input{
+        box-shadow: none;
     }
 
     input,textarea{

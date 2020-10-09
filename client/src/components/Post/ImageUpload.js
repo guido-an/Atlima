@@ -38,6 +38,7 @@ class ImageUpload extends Component {
        console.log(err)
      }
   }
+
   
 
   handleUpload = async data => {
@@ -88,7 +89,47 @@ class ImageUpload extends Component {
       }catch(err){
         console.log(err)
       }
+    }else if (data.target.files[0]) {      
+      const image = data.target.files[0];
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      uploadTask.on(
+        "state_changed",
+        snapshot => {
+          // progress function ...
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
+          this.setState({ progress });
+        },
+        error => {
+          // Error function ...
+          console.log(error);
+        },
+        () => {
+          // complete function ...
+          storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then(url => {
+              let file = {}
+              file.type = image.type
+              file.url = url
+              if (this.props.id == 1){
+                this.props.getBackgroundPicture && this.props.getBackgroundPicture(file)
+              }else if(this.props.id == 2){
+                this.props.getProfilePicture && this.props.getProfilePicture(file)
+              }else if(this.props.id == 3){
+                this.props.getMediaFile(file)
+              }
+              this.setState({ 
+                url, mediaFiles: [...this.state.mediaFiles, file]
+              });
+            });
+        }
+      );
     }
+
   };
 
 
@@ -102,7 +143,7 @@ class ImageUpload extends Component {
                 if (media.type[0] == "v"){
                 return (
                   <div>
-                    <label onClick={(e) => this.removeMedia(media)} id={media.url} className="custom-file-remove">
+                    <label onClick={(e) => this.removeMedia(media)} id={media.url} className="custom-file-remove-video">
                       <ClearIcon/>
                     </label>
                     <ReactPlayer
