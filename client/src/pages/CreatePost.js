@@ -9,7 +9,7 @@ class CreatePost extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="create-post-container">
         <SectionIntroduction title='Adding new post'/>
         <New postContext={this.context} />
       </div>

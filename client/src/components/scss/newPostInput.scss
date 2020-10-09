@@ -1,20 +1,20 @@
 @import "general.scss";
 .newPostUploader{
     .custom-file-upload{
-        width: 20vw;
+        width: 20%;
         color: $primary-color;
         svg{
             background: #fff;
             border-radius: 15px;
             z-index: 9999;   
             top: 15px;
-            right: 8vw;
+            right: 8%;
             position: absolute;
         }
     }
 
     .custom-file-remove{
-        width: 20vw;
+        width: 20%;
         color: $primary-color;
         margin-left: 0;
 
@@ -29,7 +29,7 @@
     }
 
     .custom-file-remove-video{
-        width: 20vw;
+        width: 20%;
         color: $primary-color;
         margin-left: 0;
         position: fixed;
@@ -49,7 +49,6 @@
     }
 
     .margin-left{
-        margin-left: 5vw;
         margin-top: -21px;
     }
 
@@ -57,13 +56,11 @@
         min-height: 40vh;
         background: url("https://support.hostgator.com/img/articles/weebly_image_sample.png") no-repeat center;
         margin-bottom: 20px;
-        margin-left: 5vw;
-        margin-right: 5vw;
         margin-top: -21px;
     }
 
     .carousel-root {
-        margin-left: 0vw ;
-        width: 90vw;
+        width: 90%;
+        margin: auto;
     }
 }

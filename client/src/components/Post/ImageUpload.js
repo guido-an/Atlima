@@ -23,9 +23,11 @@ class ImageUpload extends Component {
       const updatedArray = this.state.mediaFiles.filter(arrayMedia => {
           return arrayMedia !== media
       })
+      debugger
       this.setState({ mediaFiles: updatedArray });
       
       if (this.state.mediaFiles.length == 1){
+        document.getElementById("newPostInput").value = ""
         this.setState({ url: "" });
       }
     }
@@ -39,10 +41,6 @@ class ImageUpload extends Component {
        console.log(err)
      }
   }
-<<<<<<< HEAD
-  
-=======
->>>>>>> 7d89b1be96b41c4de4e1b2c2fa0626c32664d038
 
   handleUpload = async data => {
     debugger
