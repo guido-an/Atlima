@@ -74,14 +74,14 @@ class UserProfile extends React.Component {
 
   
 
-  logoutUser = () =>{
-    this.context.logout()
-    .then(() => {
-      this.context.setUser(null);  
-      this.setState({ redirect: true })
-    })
+  // logoutUser = () =>{
+  //   this.context.logout()
+  //   .then(() => {
+  //     this.context.setUser(null);  
+  //     this.setState({ redirect: true })
+  //   })
     
-  }
+  // }
   
 
   render () {

@@ -29,6 +29,7 @@ class ImageUpload extends Component {
       }
      }
 
+
   urlToBlob = async (image,name) =>{
     try{
       const blob = await fetch(image).then(r => r.blob()).then(blobFile => new File([blobFile], name, { type: "image/png" }))
@@ -89,7 +90,7 @@ class ImageUpload extends Component {
       }catch(err){
         console.log(err)
       }
-    }else if (data.target.files[0]) {      
+    } else if (data.target.files[0]) {      
       const image = data.target.files[0];
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       uploadTask.on(
