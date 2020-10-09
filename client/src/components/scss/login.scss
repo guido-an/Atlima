@@ -1,9 +1,10 @@
 @import "general.scss";
 .login{
+    margin: $base-margin;
+    padding-bottom: 80px;
     h1{
         margin-bottom: 150px;
         margin-top: 40px;
-        margin-left: 5vw;
         color: $dark;
     }
     
@@ -16,14 +17,12 @@
     }
 
     label{
-        margin-left: 5vw;
         font-size: 15px;
         line-height: 140%;
         color: #777;
     }
 
     input{
-        margin-left: 5vw;
         margin-bottom: 20px;
         margin-top: 5px;
         padding: 10px;
@@ -42,11 +41,11 @@
             text-align: center;
             position: relative;
             bottom: 3px;
-            margin-left: 3vw;
+            margin-left: 6%
         }
         hr{
             border-top: 1px solid #C4C4C4;
-            width: 40vw;
+            width: 36%;
         }
 
     }
@@ -55,16 +54,37 @@
 @media only screen and (max-width: 340px) {
     .or-line{
         span{
-            margin-left: 2.5vw !important;
+            margin-left: 5vw !important;
         }
     }
 }
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 760px) {
     .or-line{
         span{
-            margin-left: 4vw !important;
+            margin-left: 3vw !important;
         }
+
+        hr{
+            border-top: 1px solid #C4C4C4;
+            width: 28% !important;
+        }
+    }
+    .login{ 
+        margin: 0 30%;
+    }
+
+    .primary-btn {
+        width: 100%;
+        margin: 0 auto
+    }
+    .facebook-btn{
+        margin: 0 auto;
+        width: 40vw;
+    }
+
+    .login input {
+        width: 100%
     }
 }
 

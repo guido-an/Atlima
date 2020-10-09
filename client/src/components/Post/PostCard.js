@@ -12,7 +12,6 @@ import ReplyRoundedIcon from '@material-ui/icons/ReplyRounded';
 import RoomRoundedIcon from '@material-ui/icons/RoomRounded';
 import ReadMoreReact from 'read-more-react';
 import Follow from './Follow'
-
 import ProfilePictureDefault from '../Profile/ProfilePictureDefault'
 
 class PostCard extends React.Component {
@@ -47,7 +46,12 @@ class PostCard extends React.Component {
   };
 
   isInclude = likeUsers => {
-      const isThere = likeUsers.includes(this.props.loggedInUser._id)
+      let isThere = false
+        likeUsers.forEach(user => {
+        if(user._id === this.props.loggedInUser._id){
+          isThere = true
+        }
+      })
       return isThere
   }
 
@@ -117,7 +121,7 @@ class PostCard extends React.Component {
         {this.state.post.title ? <Link to={`/post/${this.state.post._id}`}><h4 className="title">{this.state.post.title}</h4></Link> : "" } 
         <div className='post-card-icons'>
           <div>
-              <div className={this.isInclude(this.state.post.likes ) ? "like" : "" } onClick={this.likePostAndUpdateIt}>
+              <div className={this.isInclude(this.state.post.likes) ? "like" : "" } onClick={this.likePostAndUpdateIt}>
                 
                 <ThumbUpAltRoundedIcon />
                 <br/>

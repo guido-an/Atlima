@@ -59,6 +59,7 @@
         border-radius: 5px;
         top: 0;
         left: 0;
+        filter:brightness(100%);
         height: 100px;
         width: 100px;
         background-image: url('../../images/Sport\ Image-1.png') ;
@@ -90,6 +91,10 @@
     /* When the checkbox is checked, add a blue background */
     .container input:checked ~ .checkmark {
         filter: grayscale(80%);
+    }
+
+    .container input[type="checkbox"] + .cat-name {
+        color: brown !important;
     }
     
     /* Create the checkmark/indicator (hidden when not checked) */
@@ -137,4 +142,10 @@
         width: 90px !important;
     }
   }
+}
+
+@media(min-width:'768px'){
+    #onboarding-page-container{
+       margin: 0 15vw;
+    }
 }
