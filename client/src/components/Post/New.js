@@ -58,8 +58,8 @@ class Post extends React.Component {
         });
     }
 
-    getMediaFile = file => {
-      this.setState({ mediaFile: [...this.state.mediaFile, file]})
+    getMediaFile = files => {
+      this.setState({ mediaFile: files})
     }
 
     getLocation = spotLocation => {

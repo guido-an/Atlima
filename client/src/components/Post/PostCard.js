@@ -40,7 +40,7 @@ class PostCard extends React.Component {
   copyToClipboard = (e) => {
     e.preventDefault();
     this.setState({ isCopyDone: true });
-    setTimeout(() => this.setState({ isCopyDone: false }), 300);
+    setTimeout(() => this.setState({ isCopyDone: false }), 600);
     const link = `www.altima.com/post/${this.state.post._id}`
     navigator.clipboard.writeText(link)
   };
