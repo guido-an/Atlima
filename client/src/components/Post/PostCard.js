@@ -41,12 +41,17 @@ class PostCard extends React.Component {
     e.preventDefault();
     this.setState({ isCopyDone: true });
     setTimeout(() => this.setState({ isCopyDone: false }), 600);
-    const link = `www.altima.com/post/${this.state.post._id}`
+    const link = `www.atlima.com/post/${this.state.post._id}`
     navigator.clipboard.writeText(link)
   };
 
   isInclude = likeUsers => {
-      const isThere = likeUsers.includes(this.props.loggedInUser._id)
+      let isThere = false
+        likeUsers.forEach(user => {
+        if(user._id === this.props.loggedInUser._id){
+          isThere = true
+        }
+      })
       return isThere
   }
 
@@ -116,7 +121,7 @@ class PostCard extends React.Component {
         {this.state.post.title ? <Link to={`/post/${this.state.post._id}`}><h4 className="title">{this.state.post.title}</h4></Link> : "" } 
         <div className='post-card-icons'>
           <div>
-              <div className={this.isInclude(this.state.post.likes ) ? "like" : "" } onClick={this.likePostAndUpdateIt}>
+              <div className={this.isInclude(this.state.post.likes) ? "like" : "" } onClick={this.likePostAndUpdateIt}>
                 
                 <ThumbUpAltRoundedIcon />
                 <br/>

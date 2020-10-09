@@ -74,9 +74,9 @@ class Follow extends React.Component {
                 } 
                <Link to={`/profile/${this.props.post.user._id}`}>{this.props.post.user.firstName} {this.props.post.user.lastName}</Link>
             </div>
-            <FollowUserBtn user={this.props.post.user}/>
+            
         </form> 
-
+        <FollowUserBtn user={this.props.post.user}/>
         <div className="spacer"></div>
       </div>
     )

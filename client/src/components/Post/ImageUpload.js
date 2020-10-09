@@ -39,7 +39,10 @@ class ImageUpload extends Component {
        console.log(err)
      }
   }
+<<<<<<< HEAD
   
+=======
+>>>>>>> 7d89b1be96b41c4de4e1b2c2fa0626c32664d038
 
   handleUpload = async data => {
     debugger
@@ -90,8 +93,9 @@ class ImageUpload extends Component {
       }catch(err){
         console.log(err)
       }
-    }else if (data.target.files[0]) {      
+    } else if (data.target.files[0]) {      
       const image = data.target.files[0];
+
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       uploadTask.on(
         "state_changed",

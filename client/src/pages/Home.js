@@ -6,7 +6,7 @@ import FilterByCategories from '../components/Categories/FilterByCategories'
 import SearchBar from '../components/SearchBar'
 // import SearchIcon from '@material-ui/icons/Search';
 import searchIcon from '../images/search-icon.png'
-import logo from '../images/altima-logo.png'
+import logo from '../images/logo-atlima.png'
 
 
 class Home extends React.Component {

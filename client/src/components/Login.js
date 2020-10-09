@@ -42,7 +42,7 @@ export default class Login extends Component {
     return (
       <div className='login'>
          <h1 >Login</h1>
-        <FacebookLogin/>
+        <FacebookLogin />
         <div className='or-line'>
           <hr className='left'></hr> <span>or</span> <hr className='right'></hr>
         </div>

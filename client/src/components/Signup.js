@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import AuthContext  from '../contexts/AuthContext'
 import '../components/scss/signup.scss'
 import '../components/scss/buttons.scss'
-import logo from '../images/altima-logo.png'
+import logo from '../images/logo-atlima.png'
 
 
 export default class Signup extends Component {
