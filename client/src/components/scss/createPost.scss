@@ -1,4 +1,11 @@
 @import "general.scss";
+
+.uploader-spinner{
+    position: fixed;
+    height: 40vh;
+    left: 50vw;
+}
+
 .create-post{
     
     .primary-btn{

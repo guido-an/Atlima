@@ -7,6 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
 import Crop from './Crop';
+import Spinner from '../../components/Spinner'
 
 
 class ImageUpload extends Component {
@@ -27,7 +28,7 @@ class ImageUpload extends Component {
       if (this.state.mediaFiles.length == 1){
         this.setState({ url: "" });
       }
-     }
+    }
 
   urlToBlob = async (image,name) =>{
     try{
@@ -38,8 +39,13 @@ class ImageUpload extends Component {
        console.log(err)
      }
   }
+<<<<<<< HEAD
+  
+=======
+>>>>>>> 7d89b1be96b41c4de4e1b2c2fa0626c32664d038
 
   handleUpload = async data => {
+    debugger
     if (data.event) {      
       const image = data.croppedImage;
       const name = data.croppedImage.substr(27);
@@ -74,7 +80,7 @@ class ImageUpload extends Component {
                 }else if(this.props.id == 2){
                   this.props.getProfilePicture && this.props.getProfilePicture(file)
                 }else if(this.props.id == 3){
-                  this.props.getMediaFile(file)
+                  this.props.getMediaFile([...this.state.mediaFiles, file])
                 }
                 
                 this.setState({ 
@@ -119,7 +125,7 @@ class ImageUpload extends Component {
               }else if(this.props.id == 2){
                 this.props.getProfilePicture && this.props.getProfilePicture(file)
               }else if(this.props.id == 3){
-                this.props.getMediaFile(file)
+                this.props.getMediaFile([...this.state.mediaFiles, file])
               }
               this.setState({ 
                 url, mediaFiles: [...this.state.mediaFiles, file]
@@ -133,6 +139,14 @@ class ImageUpload extends Component {
 
 
   render() {
+    console.log(this.state.mediaFiles)
+    if (this.state.progress >= 1 && this.state.progress <= 99){
+      return(
+        <div className="uploader-spinner">
+          <Spinner/>
+       </div>
+      )
+    }
     if (this.props.newPost === true){
       return(
         <div className="newPostUploader">
