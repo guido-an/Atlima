@@ -9,7 +9,7 @@ const SectionIntroduction = ({ title, saveEditProfile }) => {
   return (
     <div className='section-introduction'>
       <div>
-        {lastLocation ? <Link to={lastLocation.pathname}> <img src={GoBackArrow} /></Link> : <Link />}
+        {lastLocation ? <Link to={lastLocation.pathname}> <img src={GoBackArrow} /></Link> : undefined}
       </div>
       <h3>{title}</h3>
       {saveEditProfile ? <span onClick={saveEditProfile}>Save</span> : <span />}

@@ -11,6 +11,8 @@ router.get('/user/:id', async (req, res) => {
       .populate('categories')
       .populate('followedSpots')
       .populate('taggedPosts')
+      .populate('followedBy')
+      .populate('followedUsers')
       .populate({
         path: 'posts',
         populate: {

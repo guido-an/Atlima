@@ -5,6 +5,7 @@ import '../scss/PostCard.scss'
 import '../scss/Comments.scss'
 import {Link} from 'react-router-dom';
 import ProfilePictureDefault from '../Profile/ProfilePictureDefault'
+import FollowUserBtn from '../FollowUserBtn'
                     
             
 
@@ -62,7 +63,7 @@ class Follow extends React.Component {
         <form onSubmit={this.onSubmitHandler}>
           <div style={{ display: 'flex '}}>
            {this.props.post.user.profilePicture ? 
-                <img className='ui avatar image circular' src={this.props.post.user.profilePicture} />
+                <img className='ui avatar image circular' src={this.props.post.user.profilePicture.url} />
                   :
                   <ProfilePictureDefault 
                          user={this.props.post.user}
@@ -73,10 +74,7 @@ class Follow extends React.Component {
                 } 
                <Link to={`/profile/${this.props.post.user._id}`}>{this.props.post.user.firstName} {this.props.post.user.lastName}</Link>
             </div>
-            {this.state.pageUserIsFollowed ? 
-            <button className='unfollow-btn'>Unfollow</button> :
-            <button className='follow-btn'>Follow</button> 
-            }
+            <FollowUserBtn user={this.props.post.user}/>
         </form> 
 
         <div className="spacer"></div>

@@ -33,7 +33,6 @@ const notificationComments = async (currentUser, post) => {
   const postUserId = ObjectId(post.user._id).toString()
   try {
     if (myUserId == postUserId) {
-      console.log('same user')
       return
     }
     const usersToSendNotification = [postUserId]

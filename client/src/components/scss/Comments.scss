@@ -18,9 +18,27 @@
         border: 1px solid #D9D9D9;
         box-sizing: border-box;
         border-radius: 4px;
-        width: 80vw;
+        width: 90vw;
         padding: 12px 10px ;
         float: left;
+        padding-right: 50px;
+    }
+
+    .comment-btn{
+        text-align: left;
+        position: relative;
+        top: -30px;
+        right: 7vw;
+        padding: 0px ;
+        float: right;
+        background-color: #fff;
+    }
+
+    .active{
+        color: $primary-color;
+    }
+    .inactive{
+        color: #D9D9D9 !important;
     }
 
     .comment-form{
@@ -81,8 +99,7 @@
         text-align: left;
         position: relative;
         float: right;
-        bottom: 38px;
-
+        bottom: 70px;
     }
 
     .sports-section{

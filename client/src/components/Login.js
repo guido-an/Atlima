@@ -6,6 +6,7 @@ import AuthContext  from '../contexts/AuthContext'
 import FacebookLogin from './FacebookLogin'
 
 
+
 export default class Login extends Component {
   static contextType = AuthContext
 
@@ -39,8 +40,6 @@ export default class Login extends Component {
 
   render() {
     return (
-
-  
       <div className='login'>
          <h1 >Login</h1>
         <FacebookLogin/>
@@ -60,7 +59,7 @@ export default class Login extends Component {
             type="password"
             name="password"
           />
-          <p style={{ margin: '0'}}>{this.state.errorMessage}</p> 
+          <p style={{ margin: '0', color: 'red' }}>{this.state.errorMessage}</p> 
           <button className='primary-btn'>Login</button>
           <p>Don't you have an acount? <Link id="signup-link" to="/signup">Signup</Link></p>
         </form>

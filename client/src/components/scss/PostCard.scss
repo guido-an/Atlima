@@ -14,6 +14,7 @@ $margin-left: 10px;
     line-height: 140%;
     margin-left: 6vw;
     margin-bottom: 0px;
+    padding-top: 10px;
 }
 
 form button {
@@ -82,7 +83,8 @@ a, .link{
     }
 
     p {
-        margin-top: -8px !important;
+        position: relative;
+        bottom: 4px;
     }
 }
 
@@ -123,8 +125,8 @@ a, .link{
     p{
         color: #BFBFBF !important; 
         font-size: 12px; 
-        margin-top: -5px;
     }
+   
 
     .light{
         color: $primary-color !important;
