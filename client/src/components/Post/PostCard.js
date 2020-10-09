@@ -12,6 +12,7 @@ import ReplyRoundedIcon from '@material-ui/icons/ReplyRounded';
 import RoomRoundedIcon from '@material-ui/icons/RoomRounded';
 import ReadMoreReact from 'read-more-react';
 import Follow from './Follow'
+
 import ProfilePictureDefault from '../Profile/ProfilePictureDefault'
 
 class PostCard extends React.Component {

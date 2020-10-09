@@ -22,8 +22,24 @@
             background: #fff;
             z-index: 9999;
             border-radius: 15px;
-            top: 15px;
-            left: 8vw;
+            top: 7px;
+            left: 7px;
+            position: absolute;
+        }
+    }
+
+    .custom-file-remove-video{
+        width: 20vw;
+        color: $primary-color;
+        margin-left: 0;
+        position: fixed;
+
+        svg{
+            background: #fff;
+            z-index: 9999;
+            border-radius: 15px;
+            top: 7px;
+            left: 7px;
             position: absolute;
         }
     }
