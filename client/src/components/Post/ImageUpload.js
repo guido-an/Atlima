@@ -29,7 +29,6 @@ class ImageUpload extends Component {
       }
      }
 
-<<<<<<< Updated upstream
   urlToBlob = async (image,name) =>{
     try{
       const blob = await fetch(image).then(r => r.blob()).then(blobFile => new File([blobFile], name, { type: "image/png" }))
@@ -39,8 +38,6 @@ class ImageUpload extends Component {
        console.log(err)
      }
   }
-
-  
 
   handleUpload = async data => {
     if (data.event) {      
@@ -93,12 +90,6 @@ class ImageUpload extends Component {
     } else if (data.target.files[0]) {      
       const image = data.target.files[0];
 
-=======
-  handleUpload = e => {
-    if (e.target.files[0]) { 
-      debugger     
-      const image = e.target.files[0];
->>>>>>> Stashed changes
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
