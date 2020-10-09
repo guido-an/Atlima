@@ -11,12 +11,12 @@ import PersonIcon from '@material-ui/icons/Person';
 class NavBar extends React.Component {
   static contextType = AuthContext
 
-  logoutUser = () =>{
-    this.context.logout()
-    .then(() => {
-      this.context.setUser(null);  
-    })
-  }
+  // logoutUser = () =>{
+  //   this.context.logout()
+  //   .then(() => {
+  //     this.context.setUser(null);  
+  //   })
+  // }
   
 
   render() {
@@ -44,7 +44,7 @@ class NavBar extends React.Component {
           <NavLink to={`/profile/${this.context.loggedInUser._id}`} className="item" activeClassName="active">
             <PersonIcon className="icon-navbar" />
           </NavLink>
-          <NavLink onClick={this.logoutUser} to="/">Logout</NavLink>
+          {/* <NavLink onClick={this.logoutUser} to="/">Logout</NavLink> */}
         </div>
       </nav>
     );

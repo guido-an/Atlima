@@ -7,6 +7,51 @@
         color: $dark-grey;
         margin: $base-margin
     }
+    h3:hover {
+        cursor: pointer;
+    }
+    .settings-icon {
+        position: absolute;
+        z-index: 99;
+        top: 2vh;
+        left: 2vw;
+     }
+     .logout {
+        position: absolute;
+             z-index: 99;
+             top: 2vh;
+             left: 4vw;
+             
+             p {
+                 background-color: #fff;
+                 padding: 10px 20px;
+                 position: relative;
+                 top: 30px;
+                 cursor: pointer;
+                 border-radius: 4px;
+                 font-size: 14px;
+                 color: #737373
+                
+             }
+     }
+     // .dropdown {
+    //     position: relative;
+    //   }
+    //   .dropdown-content {
+    //     display: none;
+    //     position: absolute;
+    //     z-index: 99;
+    //     top: 2vh;
+    //     left: 2vw;
+    //    p {
+    //        position: relative;
+    //        padding: 10px;
+    //        background-color: #fff;
+    //    }
+     // }
+      .dropdown:hover .dropdown-content {
+        display: block !important;
+      }
     .edit-profile-icon{
         position: absolute;
         z-index: 10;
@@ -45,32 +90,49 @@
 
     .user-info {
         position: relative;
-        left: 180px;
-        bottom: 130px;
+        left: 130px;
+        bottom: 160px;
+        max-width: 200px;
        
+        h1 {
+            color: #fff;
+        }
         .user-location-info{
               display: flex;
               position: relative;
               bottom: 10px;
+             
             img {
-                width: 10px;
-                height: 15px;
+                // width: 10px;
+                // height: 14px;
+                position: relative;
+                left: 3px;
+                bottom: 2px;
             }
             .location {
                 font-size: 14px;
-                margin-left: 5px
+                position: relative;
+                left: 10px;
+                bottom: 2px;
+                color: #fff;
                }
         }
     }
+
     .followers {
         color: $dark-grey;
         position: relative;
-        top: 10px;
+        bottom: 150px;
+        left: 130px;
         font-size: 15px;
+       
     }
     .bio {
-        margin-top: 30px
+        position: relative;
+        bottom: 150px;
+        left: 130px;
     }
+  
     .sports-section{
         position: relative;
         bottom: 80px;
@@ -99,7 +161,7 @@
         .container {
             display: block;
             position: relative;
-            bottom: 15px;
+            // bottom: 15px;
             font-size: 22px;
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -138,7 +200,7 @@
             position: absolute;
             border-radius: 50px;
             text-align: center;
-            padding: 8px 0;
+            padding: 6px 0;
             top: 0;
             left: 0;
             height: 50px;
@@ -147,7 +209,6 @@
             font-weight: 500;
             color: $dark-grey;
             background-color: #fff;
-            border: 1px solid #F2F2F2;
             word-wrap: break-word;
             img {
                 position: relative;
@@ -184,4 +245,11 @@
           border-bottom: 2px solid $primary-color;
       }
   
+}
+@media(min-width: 600px){
+    .user-profile{
+        .user-info, .followers, .bio {
+           left: 200px
+        }
+    }
 }

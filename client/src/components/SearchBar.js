@@ -32,7 +32,7 @@ class SearchBar extends React.Component {
     return (
       <div className="search">
           <div className="dropdown" >
-              <input type='text' onChange={this.onInputChange} placeholder='Search users' />
+              <input type='text' onChange={this.onInputChange} placeholder='Search sport lovers...' />
               <div className={this.state.dropDownActive ? "dropdown-content" : undefined}>
                   {this.state.usersSearched.length >= 1 ? 
                       this.state.usersSearched.map(user => {

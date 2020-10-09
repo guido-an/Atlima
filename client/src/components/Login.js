@@ -6,6 +6,7 @@ import AuthContext  from '../contexts/AuthContext'
 import FacebookLogin from './FacebookLogin'
 
 
+
 export default class Login extends Component {
   static contextType = AuthContext
 
@@ -40,8 +41,8 @@ export default class Login extends Component {
   render() {
     return (
       <div className='login'>
-        <h1 >altima</h1>
-        <FacebookLogin/>
+         <h1 >Login</h1>
+        <FacebookLogin />
         <div className='or-line'>
           <hr className='left'></hr> <span>or</span> <hr className='right'></hr>
         </div>
@@ -58,9 +59,9 @@ export default class Login extends Component {
             type="password"
             name="password"
           />
-          <p style={{ margin: '0'}}>{this.state.errorMessage}</p> 
+          <p style={{ margin: '0', color: 'red' }}>{this.state.errorMessage}</p> 
           <button className='primary-btn'>Login</button>
-          <p>Don't you have an acount? <Link to="/signup">Signup</Link></p>
+          <p>Don't you have an acount? <Link id="signup-link" to="/signup">Signup</Link></p>
         </form>
       </div>
     );

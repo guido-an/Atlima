@@ -8,7 +8,7 @@ class OnBoarding extends React.Component {
   static contextType = CategoryContext
   render () {
     return (
-      <div>
+      <div id="onboarding-page-container">
         <h1 className="onb-title">Choose the sports you enjoy</h1>
         <CategoriesOnBoarding categoryContext={this.context} />
       </div>

@@ -1,6 +1,7 @@
 @import "general.scss";
 
 .feed-cat{
+    
     .onboarding{
         overflow: auto;
         white-space: nowrap;
@@ -8,20 +9,28 @@
         margin-right: 5vw;
     }  
 
+    .myFeedActive{
+        background: $primary-color;
+        color: #fff;
+    }
+
     button{
-        width: 180px;
-        height: 60px;
+        width: 120px;
+        height: 40px;
         background: #FFFFFF;
         border: 2px solid $primary-color;
         box-sizing: border-box;
         border-radius: 8px;
         color: $primary-color;
-        font-size: 22px;
+        font-size: 15px;
         font-weight: bold;
         display: block;
         position: relative;
-        bottom: 32px;
+        bottom: 15px;
         cursor: pointer;
+    }
+    button:focus {
+        outline:0;
     }
     .onboarding::-webkit-scrollbar {
         display: none;
@@ -31,8 +40,8 @@
         color: white;
         text-align: center;
         font-weight: bold;
-        width: 200px;
-        height: 70px;
+        width: 130px;
+        height: 40px;
         text-decoration: none;
     }
     .container {
@@ -40,7 +49,7 @@
         position: relative;
         margin-bottom: 100px;
         cursor: pointer;
-        font-size: 22px;
+        font-size: 15px;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -61,13 +70,14 @@
         position: absolute;
         border-radius: 5px;
         text-align: center;
-        padding-top: 15px;
         top: 0;
         left: 0;
-        height: 60px;
-        width: 180px;
+        height: 40px;
+        width: 120px;
         background-color: #0000006c;
-        padding-top: 20px;
+        padding-top: 11px;
+        font-size: 15px;
+        background-size: cover;
         background-blend-mode: soft-light;
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Do not repeat the image */
@@ -135,18 +145,20 @@
     margin-bottom: 16px;
     display: flex;
     justify-content: space-between;
-    img {
-        display: block;
-        width: 28vw;
-    }
     input {
         border: 1px solid #e5e5e5;
         border-radius: 4px;
         outline: none;
         height: 34px;
-        width: 220px;
+        width: 200px;
         padding: 10px;
         margin-top: -5px;
+        box-shadow: 0px 1px 2px rgba(46,41,51,0.08), 0px 2px 4px rgba(71,63,79,0.08);
+        letter-spacing: 0.2px;
+    }
+    input::placeholder {
+        color: $light-grey;
+        font-size: 8px;
     }
     .dropdown-content {
         display: none;
@@ -178,11 +190,9 @@
         color: $primary-color;
         text-transform: capitalize;
     }
-    .MuiSvgIcon-root{
-        position: absolute;
-        right: 5vw;
-        top: 10px;
-        color: #bfbfbf;
-        font-size: 35px !important;
+
+    #logo-home {
+     width: 30%;
+     min-width: 70px;
     }
 }

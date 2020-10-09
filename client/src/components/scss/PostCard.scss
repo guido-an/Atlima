@@ -14,6 +14,7 @@ $margin-left: 10px;
     line-height: 140%;
     margin-left: 6vw;
     margin-bottom: 0px;
+    padding-top: 10px;
 }
 
 form button {
@@ -55,17 +56,25 @@ a, .link{
 }
 
 .share{
-    -moz-transform: scale(-1, 1);
-    -webkit-transform: scale(-1, 1);
-    -o-transform: scale(-1, 1);
-    -ms-transform: scale(-1, 1);
-    transform: scale(-1, 1);
-    margin-left: 21px;
-    margin-top: -5px;
-
     .MuiSvgIcon-root{
+        -moz-transform: scale(-1, 1);
+        -webkit-transform: scale(-1, 1);
+        -o-transform: scale(-1, 1);
+        -ms-transform: scale(-1, 1);
+        transform: scale(-1, 1);
+        margin-left: 21px;
+        margin-top: -5px;
         font-size: 35px !important;
     }
+    p{
+        position: relative;
+        left: 60px;
+        top: -20px;
+    }
+}
+
+.MuiSvgIcon-root{
+    font-size: 25px !important;
 }
 
 .coment{
@@ -74,7 +83,8 @@ a, .link{
     }
 
     p {
-        margin-top: -8px !important;
+        position: relative;
+        bottom: 4px;
     }
 }
 
@@ -115,17 +125,21 @@ a, .link{
     p{
         color: #BFBFBF !important; 
         font-size: 12px; 
-        margin-top: -5px;
+    }
+   
+
+    .light{
+        color: $primary-color !important;
+    }
+
+    .d-none{
+        display: none;
     }
     
 }
 
 .like{
     color: #FF9233;
-}
-
-.MuiSvgIcon-root {
-    font-size: 25px !important;
 }
 
 .spot-info{
@@ -185,6 +199,17 @@ a, .link{
     background: #fff !important;
 }
 
+.carousel {
+    .selected{
+        div{ 
+            display: flex;
+            a{
+                height: 100% !important;
+            }   
+        }
+    }
+}
+
 .slider-wrapper{
     border-radius: 8px;
 }
@@ -203,4 +228,19 @@ a, .link{
        position: relative;
        bottom: 12px;
     }
+}
+
+@media screen and (min-width: 1125px) {
+    .post-card-container{
+        width: 698px !important;
+        margin: auto;
+    }
+    .carousel-root {
+        width: auto;
+    }
+
+    .spacer{
+        width: 550px;
+    }
+    
 }

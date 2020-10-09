@@ -73,6 +73,7 @@ router.post('/new', async (req, res) => {
 
 // GET ALL POSTS
 router.get('/all', async (req, res) => {
+  console.log(req.cookies, 'cookies')
   try {
     const posts = await Post.find().sort({ created_at: -1 })
       .populate('spot').populate('user')
@@ -94,10 +95,10 @@ router.get('/all/spot', async (req, res) => {
 })
 
 // GET SINGLE POST
-router.get('/:id', async (req, res) => {
+router.get('/single/:id', async (req, res) => {
   try {
     const post = await Post.findOne({ _id: req.params.id })
-      .populate('user').populate('comments.user').populate('spot')
+      .populate('user').populate('comments.user').populate('spot').populate('taggedAthletes').populate('likes')
 
     res.status(200).send(post)
   } catch (err) {

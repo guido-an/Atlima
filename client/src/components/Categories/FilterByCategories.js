@@ -19,20 +19,24 @@ class FilterByCategories extends React.Component {
 
   }
 
-  onMyFeed =  e => {
-     this.context.onMyFeedCategories(this.props.user.categories)
+  onMyFeed = async  e => {
+    if(this.context.myFeedActive) {
+      this.context.cleanSelectedCategoriesIds()
+    }else{
+      console.log(this.props.user.categories, 'this.props.user.categories')
+     await this.context.onMyFeedCategories(this.props.user.categories)
      this.props.postContext.filterPostsOnCategoryHome() 
+    }
   }
 
 
 
   render () {
-    console.log(this.context.myFeedActive)
     return (
       <div className='feed-cat'>
         <div className='onboarding'>
           <div className="item">
-            <button onClick={this.onMyFeed} >My Feed</button>
+            <button onClick={this.onMyFeed} className={this.context.myFeedActive ? "myFeedActive" : ""} >Feed</button>
           </div>
         {this.context.allCategories.map(category => {
           return (

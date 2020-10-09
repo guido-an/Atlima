@@ -9,7 +9,6 @@ class Profile extends React.Component {
     return (
       <div>
         <UserProfile profilePageId={profilePageId} />
-        {/* <UserPosts /> */}
       </div>
     )
   }

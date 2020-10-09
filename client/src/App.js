@@ -11,11 +11,16 @@ import CreatePost from './pages/CreatePost';
 import Post from './pages/Post';
 import Landing from './pages/Landing';
 import Notifications from './pages/Notifications';
+import Settings from './pages/Settings';
+import PostLikes from './pages/ListOfUsers/PostLikes';
+import FollowedUsers from './pages/ListOfUsers/FollowedUsers';
+import FollowedBy from './pages/ListOfUsers/FollowedBy';
 
 import Navbar from './components/Navbar'; 
 import EditProfile from './components/Profile/EditProfile';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Spinner from './components/Spinner.js'
 
 class App extends React.Component {
   static contextType = AuthContext
@@ -29,7 +34,7 @@ class App extends React.Component {
   
   render() {
     if (this.context.isLoadingUser)
-      return <p>Loading...</p>
+      return <Spinner/>
     return (
       <div>
       {this.context.loggedInUser && <Navbar /> }    
@@ -67,23 +72,46 @@ class App extends React.Component {
             <Route
               path="/create-post"
               component={CreatePost} />
-            />  
+             
 
             <Route
-              path="/post/:id"
+              exact path="/post/:id"
               component={Post} />
-            />  
-  
-            {/* <Route
-              path="/profile/edit/:id"
-              component={EditProfile} /> */}
+            
+
+             {/* <Route
+              path={`/post/:id/likes`}
+              component={PostLikes} /> */}
+
+              <Route
+                 path="/post/:id/likes"
+                 render={props => <PostLikes {...props} title="Post Likes" />}
+                />  
 
               <Route
                  path="/profile/edit/:id"
                  render={props => <EditProfile {...props} loggedInUser={this.context.loggedInUser} />}
                 />     
-                          
+
+
+                {/* <Route
+                 path="/profile/:id/following"
+                 render={props => <FollowedUsers {...props} />}
+                />   */}
+
+                <Route
+                 path="/profile/:id/following"
+                component={FollowedUsers} />
+
+                {/* <Route
+                 path="/profile/:id/followers"
+                 render={props => <FollowedBy {...props} />}
+                />   */}
     
+            <Route
+              path="/profile/:id/followers"
+              component={FollowedBy} />
+
             <Route
               path="/spots-map"
               component={SpotsMap} />
@@ -92,7 +120,10 @@ class App extends React.Component {
             <Route
               path={`/:id/notifications`}
               component={Notifications} />
-            
+
+            <Route
+              path={`/settings`}
+              component={Settings} />
 
         </Switch>
       </div>

@@ -12,6 +12,7 @@
      margin-bottom: 30px;
      .text {
          display: flex;
+         max-width: 95%;
      }
      .time-ago{
          color: $dark-grey;
@@ -23,7 +24,7 @@
          position: relative;
          top: 5px;
          height: 12px;
-         width: 12px;
+         min-width: 12px;
          margin: 0 10px;
          background-color: $primary-color !important;
          border-radius: 50%;

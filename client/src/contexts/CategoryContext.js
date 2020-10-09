@@ -65,6 +65,7 @@ export class CategoryContext extends React.Component {
             e.preventDefault();
               try {
                 await ADD_CATEGORIES(this.state.selectedCategoriesIds)
+                window.location.reload()
             }  catch(err){
                   console.log(err)
              }
@@ -75,7 +76,6 @@ export class CategoryContext extends React.Component {
           }
 
   render(){
-    console.log(this.state.selectedCategoriesIds, 'selectedCategoriesIds')
       const { getCategories, onSelectCategories, removeUserCategory, onSubmitUserCategories, cleanSelectedCategoriesIds, onMyFeedCategories, fillSelectedCategoriesIds } = this
       return(
           <Context.Provider 

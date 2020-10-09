@@ -58,7 +58,6 @@ export class AuthStore extends React.Component {
     getUnreadNotifications = async () => {
       try {
         const response = await service.get('/profile/unread-notifications')
-        console.log(response, 'response')
         this.setState({ unreadNotifications: response.data.unreadNotifications })
       } catch(err){
         console.log(err)

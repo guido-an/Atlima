@@ -1,9 +1,34 @@
 @import "general.scss";
+
+.uploader-spinner{
+    position: fixed;
+    height: 40vh;
+    left: 50vw;
+}
+
 .create-post{
     
     .primary-btn{
         margin-top: 10px !important;
         margin-bottom: 90px;
+    }
+
+    .primary-btn-crop{
+        width: 90vw;
+        height: 48px;
+        background: $primary-color;
+        margin-left: 5vw;
+        border-radius: 4px;
+        font-family: Avenir;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 25px;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        bottom: 80px;
+        position: fixed;
     }
 
     p{
@@ -38,6 +63,24 @@
         display: none;
     }
 
+    .google-places-autocomplete{
+        position: inherit;
+    }
+
+    .google-places-autocomplete__input:active, .google-places-autocomplete__input:focus, .google-places-autocomplete__input:hover {
+        outline: none;
+        border: 1px solid #D9D9D9;
+        box-shadow: none;
+    }
+
+    .slider-wrapper{
+        margin-top: 65px;
+    }
+
+    .google-places-autocomplete__input{
+        box-shadow: none;
+    }
+
     input,textarea{
         margin-left: 5vw;
         margin-bottom: 20px;
@@ -47,6 +90,14 @@
         border-radius: 4px;
         width: 90vw;
         padding: 10px;
+    }
+
+    ::placeholder {
+        color: #878787;
+      }
+
+    textarea:focus, input:focus{
+        border: 1px solid #D9D9D9;
     }
 
     .or-line{
@@ -64,6 +115,14 @@
             width: 40vw;
         }
 
+    }
+
+    .google-places-autocomplete__suggestion {
+        box-shadow: none;
+    }
+
+    .google-places-autocomplete__input {
+        box-shadow: none;
     }
 
     .categories-on-create{
@@ -167,4 +226,27 @@
         }
     }
 }
+
+@media only screen and (min-width: 1348px) {
+    
+    .create-post{
+        margin: auto;
+        width: 698px;
+    
+        input,textarea{
+            width: 540px;
+        }
+    
+        .categories-on-create{
+            width: 540px;
+            
+        }
+
+        .primary-btn{
+            width: 540px;
+        }
+    }
+}
+
+
 

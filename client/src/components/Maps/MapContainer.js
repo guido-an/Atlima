@@ -11,6 +11,7 @@ import DisplayPosts from '../../components/Post/DisplayPosts'
 import CategoriesOnMap from '../../components/Categories/CategoriesOnMap'
 import iconActive from '../../images/icon-google-maps.png'
 import iconNormal from '../../images/icon-google-maps2.png'
+import Spinner from '../../components/Spinner'
 //import iconUser from '../../images/icon-user-location.png'
 
 class MapContainer extends React.Component {
@@ -26,8 +27,6 @@ class MapContainer extends React.Component {
  
      componentDidMount(){
       this.getUserLocation()
-     // this.props.categoryContext.cleanSelectedCategoriesIds()
-     // this.props.categoryContext.getCategories()
      }
     
     getPosts = async () => {
@@ -56,10 +55,6 @@ class MapContainer extends React.Component {
             lat,
             lng
            }) 
-
-          //  if(this.state.activeMarker){
-          //    this.context.filterMarkersOnCategories(this.state.activeMarker.place_id)
-          // }
        })
        .catch(error => console.error(error));
      }
@@ -68,7 +63,7 @@ class MapContainer extends React.Component {
         this.getLocation(props.location)
       }
 
-      onMapClicked = (props) => {
+      onMapClicked = () => {
           this.setState({
             activeMarker: null
           })
@@ -105,7 +100,7 @@ class MapContainer extends React.Component {
         onDragend={this.centerMoved}
         google={this.props.google} 
         style={style}
-        zoom={6}
+        zoom={5}
         center={{
             lat: this.state.lat,
             lng: this.state.lng
@@ -128,7 +123,7 @@ class MapContainer extends React.Component {
               position={{ lat: this.state.lat, lng: this.state.lng  }} />  */}
         </Map>
     } 
-    return <p>Loading..</p>
+    return <Spinner/>
   }
 
 

@@ -1,16 +1,56 @@
 @import "general.scss";
 .newPostUploader{
     .custom-file-upload{
-        position: absolute;
-        top: 30px;
-        right: 7vw;
         width: 20vw;
-        z-index: 9999;
         color: $primary-color;
+        svg{
+            background: #fff;
+            border-radius: 15px;
+            z-index: 9999;   
+            top: 15px;
+            right: 8vw;
+            position: absolute;
+        }
+    }
+
+    .custom-file-remove{
+        width: 20vw;
+        color: $primary-color;
+        margin-left: 0;
+
+        svg{
+            background: #fff;
+            z-index: 9999;
+            border-radius: 15px;
+            top: 7px;
+            left: 7px;
+            position: absolute;
+        }
+    }
+
+    .custom-file-remove-video{
+        width: 20vw;
+        color: $primary-color;
+        margin-left: 0;
+        position: fixed;
+
+        svg{
+            background: #fff;
+            z-index: 9999;
+            border-radius: 15px;
+            top: 7px;
+            left: 7px;
+            position: absolute;
+        }
     }
 
     .newPostInput{
         display: none;
+    }
+
+    .margin-left{
+        margin-left: 5vw;
+        margin-top: -21px;
     }
 
     .image-base{
@@ -19,6 +59,7 @@
         margin-bottom: 20px;
         margin-left: 5vw;
         margin-right: 5vw;
+        margin-top: -21px;
     }
 
     .carousel-root {

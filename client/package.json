@@ -12,10 +12,12 @@
     "node-sass": "^4.13.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-easy-crop": "^3.2.0",
     "react-google-places-autocomplete": "^2.0.5",
     "react-player": "^2.1.0",
     "react-responsive-carousel": "^3.2.7",
     "react-router-dom": "^5.1.2",
+    "react-router-last-location": "^2.0.1",
     "react-scripts": "3.2.0",
     "react-time-ago": "^5.0.8",
     "read-more-react": "^1.0.10"
@@ -24,7 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-dev": "dotenv -e .env.development react-scripts build",
+    "build-prod": "dotenv -e .env.production react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"

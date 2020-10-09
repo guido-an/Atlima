@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const bodyParser = require('body-parser')
+const path = require('path')
 const cookieParser = require('cookie-parser')
 const express = require('express')
 const mongoose = require('mongoose')
@@ -69,5 +70,11 @@ app.use('/categories', categoryRoutes)
 
 const spotsRoutes = require('./routes/spot')
 app.use('/spot', spotsRoutes)
+
+app.use(express.static(path.join(__dirname, 'build')))
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
 
 module.exports = app
