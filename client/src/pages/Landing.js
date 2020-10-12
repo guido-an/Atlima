@@ -19,12 +19,12 @@ export default class Landing extends Component {
       <div className='landing'>
         <div className="landing-header">
           <div style={{ display: 'flex', justifyContent: 'space-between'}}>
-             <div class="img-landing" style={{ background: `url('${landingImg1}')`, backgroundSize: 'cover', backgroundPosition: 'center', width: '200px', height: '200px', marginRight: '10px' }}></div>
-             <div class="img-landing" style={{ background: `url('${landingImg3}')`, backgroundSize: 'cover', backgroundPosition: 'center', width: '200px', height: '150px', borderRadius: '0 0 0 10px'}}></div>
+             <div className="img-landing" style={{ background: `url('${landingImg1}')`, backgroundSize: 'cover', backgroundPosition: 'center', width: '200px', height: '200px', marginRight: '10px' }}></div>
+             <div className="img-landing" style={{ background: `url('${landingImg3}')`, backgroundSize: 'cover', backgroundPosition: 'center', width: '200px', height: '150px', borderRadius: '0 0 0 10px'}}></div>
           </div> 
           <div style={{ display: 'flex'}}>
-             <div class="img-landing" style={{ background: `url('${landingImg4}')`, backgroundSize: 'cover', backgroundPosition: 'center', width: '200px', height: '200px', marginTop: '10px', position: 'relative', right: '10px', borderRadius: '0 10px 0 0'}}></div>
-             <div class="img-landing" style={{ background: `url('${landingImg2}')`, backgroundSize: 'cover', backgroundPosition: 'center', width: '400px', height: '100px', position: 'relative', bottom: '40px', right: '0px', borderRadius: '10px 0 0 0'}}></div>
+             <div className="img-landing" style={{ background: `url('${landingImg4}')`, backgroundSize: 'cover', backgroundPosition: 'center', width: '200px', height: '200px', marginTop: '10px', position: 'relative', right: '10px', borderRadius: '0 10px 0 0'}}></div>
+             <div className="img-landing" style={{ background: `url('${landingImg2}')`, backgroundSize: 'cover', backgroundPosition: 'center', width: '400px', height: '100px', position: 'relative', bottom: '40px', right: '0px', borderRadius: '10px 0 0 0'}}></div>
           </div> 
         </div>
         <div className="landing-body">

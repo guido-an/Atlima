@@ -66,6 +66,7 @@
         color: #fff;
         font-weight: 600;
     }
+    
     .follow-btn,
     .unfollow-btn{
         border-radius: $border-radius-btn;
@@ -130,7 +131,8 @@
     .bio {
         position: relative;
         bottom: 150px;
-        left: 130px;
+        padding: 0 5vw;
+        word-break: break-all 
     }
   
     .sports-section{
@@ -248,8 +250,12 @@
 }
 @media(min-width: 600px){
     .user-profile{
-        .user-info, .followers, .bio {
+        .user-info, .followers {
            left: 200px
         }
+    }
+    .bio{ 
+        max-width: 600px;
+        margin-top: 40px;
     }
 }

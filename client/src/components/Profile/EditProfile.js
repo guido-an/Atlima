@@ -9,7 +9,6 @@ import SelectionCategories from '../Categories/SelectionCategories'
 import ProfilePictureDefault from './ProfilePictureDefault'
 import SectionIntroduction from '../SectionIntroduction'
 
-
 class EditProfile extends React.Component {
   static contextType = CategoryContext
 
@@ -56,7 +55,6 @@ class EditProfile extends React.Component {
       )
         this.context.onSubmitUserCategories(e)     
         window.location.reload();
-        
     }  catch(err){
       alert('err')
           console.log(err)

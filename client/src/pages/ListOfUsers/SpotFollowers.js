@@ -1,22 +1,22 @@
 import '../../components/scss/general.scss' 
 import React from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import SectionIntroduction from '../../components/SectionIntroduction'
 import Avatar from '../../components/Profile/Avatar'
 import FollowUserBtn from '../../components/FollowUserBtn'
-// import ProfilePictureDefault from '../../components/Profile/ProfilePictureDefault'
-import PostContext from '../../contexts/PostContext'
+import { GET_SINGLE_SPOT } from '../../api/spotAPI'
 
-class PostLikes extends React.Component {
- static contextType = PostContext
 
- state = { post: null }
+class SpotFollowers extends React.Component {
+
+ state = { spot: null }
 
  async componentDidMount(){
-    const postId = this.props.match.params.id
+    const placeId = this.props.match.params.id
+    console.log(placeId, 'place id')
     try {
-       const post = await this.context.getSinglePost(postId)
-       this.setState({ post })
+       const spot = await GET_SINGLE_SPOT(placeId)
+       this.setState({ spot: spot[0] })
     }
    catch(err) {
       console.log(err)
@@ -24,14 +24,13 @@ class PostLikes extends React.Component {
  }
 
   render () {
-    console.log(this.state.post)
-      if(!this.state.post)
+      if(!this.state.spot)
       return <p></p>
     return (
       <div>
         <SectionIntroduction title={this.props.title} />
         <div style={{ paddingTop: '80px'}}>
-         {this.state.post.likes.map((user, i) => {
+         {this.state.spot.followedBy.map((user, i) => {
              return<div key={i} style={{ margin: '30px 5vw'}}>
                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <Avatar user={user}/>  
@@ -39,7 +38,6 @@ class PostLikes extends React.Component {
                </div>
                 <div className="divider"/>
              </div>
-           
          })}
         </div>
       </div>
@@ -47,4 +45,4 @@ class PostLikes extends React.Component {
   }
 }
 
-export default PostLikes
+export default SpotFollowers

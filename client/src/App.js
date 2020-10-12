@@ -15,6 +15,7 @@ import Settings from './pages/Settings';
 import PostLikes from './pages/ListOfUsers/PostLikes';
 import FollowedUsers from './pages/ListOfUsers/FollowedUsers';
 import FollowedBy from './pages/ListOfUsers/FollowedBy';
+import SpotFollowers from './pages/ListOfUsers/SpotFollowers';
 
 import Navbar from './components/Navbar'; 
 import EditProfile from './components/Profile/EditProfile';
@@ -52,7 +53,6 @@ class App extends React.Component {
             <Route
               path="/login"
               component={Login} />
-            
   
             <Route
               path="/signup"
@@ -77,36 +77,21 @@ class App extends React.Component {
             <Route
               exact path="/post/:id"
               component={Post} />
-            
-
-             {/* <Route
-              path={`/post/:id/likes`}
-              component={PostLikes} /> */}
-
+         
               <Route
                  path="/post/:id/likes"
                  render={props => <PostLikes {...props} title="Post Likes" />}
-                />  
+               />  
 
               <Route
                  path="/profile/edit/:id"
                  render={props => <EditProfile {...props} loggedInUser={this.context.loggedInUser} />}
                 />     
 
-
-                {/* <Route
-                 path="/profile/:id/following"
-                 render={props => <FollowedUsers {...props} />}
-                />   */}
-
                 <Route
                  path="/profile/:id/following"
                 component={FollowedUsers} />
 
-                {/* <Route
-                 path="/profile/:id/followers"
-                 render={props => <FollowedBy {...props} />}
-                />   */}
     
             <Route
               path="/profile/:id/followers"
@@ -115,7 +100,11 @@ class App extends React.Component {
             <Route
               path="/spots-map"
               component={SpotsMap} />
-            
+             
+              <Route
+                 path="/spot/:id/followers"
+                 render={props => <SpotFollowers {...props} title="Spot Followers" />}
+               />  
 
             <Route
               path={`/:id/notifications`}

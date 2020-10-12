@@ -1,5 +1,6 @@
 import '../../components/scss/SpotHeader.scss'
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { FOLLOW_SPOT, GET_SINGLE_SPOT } from '../../api/spotAPI'
 import iconActive from '../../images/icon-google-maps.png'
 import AuthContext from '../../contexts/AuthContext'
@@ -32,7 +33,9 @@ class SpotHeader extends React.Component {
   
     checkIfAlreadyFollowing = () => {
       const spot = this.state.spot
-        if(spot && spot.followedBy.includes(this.context.loggedInUser._id)){
+      const followeByIds = spot.followedBy.map(spot => spot._id)
+      console.log(followeByIds, spot)
+        if(spot && followeByIds.includes(this.context.loggedInUser._id)){
           this.setState({ isFollowingSpot: true })
         } 
       else {
@@ -64,10 +67,17 @@ class SpotHeader extends React.Component {
           </form> 
         </div>
             <div className="spot-info">
-              <span>{this.state.spot && this.state.spot.followedBy.length || 0 } Followers</span>
+               {this.state.spot && 
+                <Link to={`/spot/${this.state.spot.placeId}/followers`}>
+                   <span>{this.state.spot && this.state.spot.followedBy.length || 0 } Followers</span>
+                </Link>               }
                <span className="dot"></span>
-               <span>{this.state.spot && this.state.spot.posts.length} Posts</span>
+               <a href="/spots-map/#show-posts">
+                 <span>{this.state.spot && this.state.spot.posts.length} Posts</span>
+               </a>
             </div> 
+            {/* just for scrolling down when clicking on 'posts' */}
+            <div style={{position: 'relative', top: '80px'}} id="show-posts"/> 
       </div>
     )
   }

@@ -83,28 +83,34 @@
         background-repeat: no-repeat; /* Do not repeat the image */
     }
 
-    .Roller{
-        background-image: url('../../images/rollerskating.jpeg') ;   
+    .Skating{
+        background-image: url('../../images/Sport\ Image-1.png') ;   
     }
 
     .Martial{
-        background-image: url('../../images/boxing.jpg') ;   
+        background-image: url('../../images/Sport\ Image-5.png') ;   
     }
 
     .Running{
-        background-image: url('../../images/running.jpg') ;   
+        background-image: url('../../images/Sport\ Image-4.png') ;   
     }
     
-    .Surfing{
-        background-image: url('../../images/surfing.jpg') ;   
+    .Water{
+        background-image: url('../../images/Sport\ Image-2.png') ;   
     }
 
     .Cycling{
-        background-image: url('../../images/cycling.jpg') ;   
+        background-image: url('../../images/Sport\ Image-3.png') ;   
     }
 
-    .Fitness{
-        background-image: url('../../images/fitness.jpg') ;   
+    .Workout{
+        background-image: url('../../images/Sport\ Image.png') ;   
+    }
+    .Climbing{
+        background-image: url('../../images/climbing-category.jpg') ;   
+    }
+    .Yoga{
+        background-image: url('../../images/yoga-category.jpg') ;   
     }
     /* When the checkbox is checked, add a blue background */
     .container input:checked ~ .checkmark {

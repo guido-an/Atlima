@@ -26,6 +26,8 @@ class MapContainer extends React.Component {
      }
  
      componentDidMount(){
+      debugger
+
       this.getUserLocation()
      }
     

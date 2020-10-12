@@ -1,10 +1,9 @@
 import '../scss/UserProfile.scss'
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AuthContext  from '../../contexts/AuthContext'
 import { FOLLOW_USER, GET_USER } from '../../api/userAPI'
-// import editPencil from '../../images/edit-pencil.png'
 import editPencilWhite from '../../images/edit-pencil-white.png'
 import locationIcon from '../../images/location-icon.png'
 import locationIconWhite from '../../images/location-icon-white.png'
@@ -70,19 +69,6 @@ class UserProfile extends React.Component {
     switchPostsToShow = (string) => {
       this.setState({ whichPostsToShow: string})
     }
-
-
-  
-
-  // logoutUser = () =>{
-  //   this.context.logout()
-  //   .then(() => {
-  //     this.context.setUser(null);  
-  //     this.setState({ redirect: true })
-  //   })
-    
-  // }
-  
 
   render () {
     if (this.state.redirect) {
@@ -169,12 +155,12 @@ class UserProfile extends React.Component {
                         </div> 
                     }
                    </div>
-                   <div style={{ maxWidth: '200px'}}>
+                   <div>
                      <p className="followers">
                         <Link to={`/profile/${pageUser._id}/following`}>Following {pageUser.followedUsers.length} </Link> 
                         <Link to={`/profile/${pageUser._id}/followers`}>Followers {pageUser.followedBy.length}</Link>
                     </p>
-                     <p className="bio">{pageUser.bio}</p>
+                    <p className="bio">{pageUser.bio}</p>   
                    </div>
                   
                  {pageUser.categories.length >= 1 && 

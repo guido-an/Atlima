@@ -20,7 +20,7 @@ const categories = [
     name: 'Martial Arts'
   },
   {
-    name: 'Roller Skating'
+    name: 'Skating'
   },
   {
     name: 'Running'
@@ -29,10 +29,16 @@ const categories = [
     name: 'Cycling'
   },
   {
-    name: 'Fitness'
+    name: 'Workout'
   },
   {
-    name: 'Surfing'
+    name: 'Water sports'
+  },
+  {
+    name: 'Yoga'
+  },
+  {
+    name: 'Climbing'
   }
 ]
 
