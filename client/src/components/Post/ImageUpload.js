@@ -90,7 +90,6 @@ class ImageUpload extends Component {
       }
     } else if (data.target.files[0]) {      
       const image = data.target.files[0];
-
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
@@ -134,9 +133,9 @@ class ImageUpload extends Component {
   render() {
     if (this.state.progress >= 1 && this.state.progress <= 99){
       return(
-        <div className="uploader-spinner">
-          <Spinner/>
-       </div>
+        <div className="light-grey">
+          <div className="progress-bar" style={{width: this.state.progress}}></div>
+        </div>
       )
     }
     if (this.props.newPost === true){

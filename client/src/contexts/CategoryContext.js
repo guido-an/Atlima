@@ -27,7 +27,8 @@ export class CategoryContext extends React.Component {
      }
 
       onMyFeedCategories = userCategories => {      
-          const categoriesIds = userCategories.map(category => category._id) 
+          const mapCategoriesIds = userCategories.map(category => category._id)
+          const categoriesIds = mapCategoriesIds[0] == undefined  ? userCategories : mapCategoriesIds // for check the undifined on the  first feed call
           this.setState({ selectedCategoriesIds: categoriesIds, myFeedActive: true })   
       }
 

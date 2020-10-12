@@ -12,7 +12,7 @@ class FilterByCategories extends React.Component {
 
   onFilterCategoryChange = async e => {
     if(this.context.myFeedActive) {
-      this.context.cleanSelectedCategoriesIds()
+      await this.context.cleanSelectedCategoriesIds()
     }
     await this.context.onSelectCategories(e)
     this.props.postContext.filterPostsOnCategoryHome()
@@ -20,9 +20,9 @@ class FilterByCategories extends React.Component {
 
   onMyFeed = async  e => {
     if(this.context.myFeedActive) {
-      this.context.cleanSelectedCategoriesIds()
-    } else {
-      console.log(this.props.user, 'this.props.user')
+      await this.context.cleanSelectedCategoriesIds()
+      this.props.postContext.filterPostsOnCategoryHome()
+    }else{
      await this.context.onMyFeedCategories(this.props.user.categories)
      this.props.postContext.filterPostsOnCategoryHome() 
     }
