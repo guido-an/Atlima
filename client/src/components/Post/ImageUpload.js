@@ -23,7 +23,7 @@ class ImageUpload extends Component {
       const updatedArray = this.state.mediaFiles.filter(arrayMedia => {
           return arrayMedia !== media
       })
-      debugger
+      
       this.setState({ mediaFiles: updatedArray });
       
       if (this.state.mediaFiles.length == 1){
@@ -42,7 +42,6 @@ class ImageUpload extends Component {
      }
   }
   handleUpload = async data => {
-    debugger
     if (data.event) {      
       const image = data.croppedImage;
       const name = data.croppedImage.substr(27);
@@ -92,7 +91,6 @@ class ImageUpload extends Component {
       }
     } else if (data.target.files[0]) {      
       const image = data.target.files[0];
-
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       uploadTask.on(
         "state_changed",
@@ -137,9 +135,9 @@ class ImageUpload extends Component {
     console.log(this.state.mediaFiles)
     if (this.state.progress >= 1 && this.state.progress <= 99){
       return(
-        <div className="uploader-spinner">
-          <Spinner/>
-       </div>
+        <div className="light-grey">
+          <div className="progress-bar" style={{width: this.state.progress}}></div>
+        </div>
       )
     }
     if (this.props.newPost === true){

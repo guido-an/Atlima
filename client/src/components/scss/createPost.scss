@@ -71,6 +71,24 @@
         color: #777;
     }
 
+    
+    .light-grey{
+        color:#000!important;
+        background-color:#f1f1f1!important;
+        width: 90vw; 
+        z-index: 300;
+        position: absolute;
+        top: 60px;
+        margin-left: 5vw;
+    }
+
+    .progress-bar{
+        color:#000!important;
+        background-color: $primary-color!important;
+        height: 20px;  
+        z-index: 400;     
+    }
+
     label{
         margin-left: 5%;
         font-family: Avenir;
@@ -94,6 +112,12 @@
         outline: none;
         border: 1px solid #D9D9D9;
         box-shadow: none;
+    }
+
+    .google-places-autocomplete__suggestions-container{
+        width: 90vw;
+        margin-left: 5vw;
+        margin-top: -20px;
     }
 
     .slider-wrapper{
@@ -247,6 +271,11 @@
         margin: 0 30vw;
     }
 
+    .google-places-autocomplete__suggestions-container{
+        width: 35vw !important;
+        margin-left: 20px !important;
+    }
+
     .newPostUploader .custom-file-upload svg {
         right: 32%;
     }
@@ -261,9 +290,30 @@
     }
 }
 
-@media only screen and (min-width: 1348px) {
+@media only screen and (min-width: 1024px) {
+
+    .google-places-autocomplete__suggestions-container{
+        width: 35vw !important;
+        margin-left: 25px !important;
+    }
     
 }
 
+@media only screen and (min-width: 1348px) {
+
+    .google-places-autocomplete__suggestions-container{
+        width: 35.5vw !important;
+        margin-left: 32px !important;
+    }
+    
+}
+
+@media only screen and (min-width: 2248px) {
+
+    .google-places-autocomplete__suggestions-container{
+        margin-left: 55px !important;
+    }
+    
+}
 
 

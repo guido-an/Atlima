@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import AuthContext from '../contexts/AuthContext'
 import { GET_NOTIFICATIONS } from '../api/userAPI'
 import TimeAgo from '../components/TimeAgo'
+import ReactPlayer from 'react-player'
+import { height } from '@material-ui/system'
 
 class Notifications extends React.Component {
   static contextType = AuthContext
@@ -44,7 +46,7 @@ class Notifications extends React.Component {
         </div>
         {notification.mediaFile && notification.mediaFile.length > 0 ?
              <Link to={notification.postUrl}>
-                 <img className="media-file" src={notification.mediaFile} />
+               {notification.mediaType == "v" ? <ReactPlayer url={notification.mediaFile} width= "110px" height= "110px" /> :  <img className="media-file" src={notification.mediaFile} /> }
              </Link> : 
              <Link to="/create-post">
                 <p style={{width: '110px', color: '#FF7700', fontWeight: '600'}}>> Create Post</p>
