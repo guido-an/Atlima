@@ -59,59 +59,80 @@ class App extends React.Component {
               component={Signup} />
             
   
-            <Route
+            <ProtectedRoute
               path="/onboarding"
+              user={this.context.loggedInUser}
               component={OnBoarding} />
             
   
-            <Route
+            <ProtectedRoute
               exact path="/profile/:id"
+              user={this.context.loggedInUser}
               component={Profile} />
-          
         
-            <Route
+            <ProtectedRoute
               path="/create-post"
+              user={this.context.loggedInUser}
               component={CreatePost} />
              
 
-            <Route
+            <ProtectedRoute
               exact path="/post/:id"
+              user={this.context.loggedInUser}
               component={Post} />
          
+              {/* Proteced with Redirect inside the page */}
               <Route
                  path="/post/:id/likes"
-                 render={props => <PostLikes {...props} title="Post Likes" />}
+                 render={props => 
+                 <PostLikes {...props} 
+                   title="Post Likes"
+                   user={this.context.loggedInUser}
+                    />}
                />  
-
-              <Route
+              
+            {/* ProtectRouted not working but still, it can't be accessed*/}
+               <Route
                  path="/profile/edit/:id"
-                 render={props => <EditProfile {...props} loggedInUser={this.context.loggedInUser} />}
+                 render={props => 
+                 <EditProfile {...props} 
+                 loggedInUser={this.context.loggedInUser} />}
                 />     
-
-                <Route
+              
+                <ProtectedRoute
                  path="/profile/:id/following"
+                 user={this.context.loggedInUser}
                 component={FollowedUsers} />
 
     
-            <Route
+            <ProtectedRoute
               path="/profile/:id/followers"
+              user={this.context.loggedInUser}
               component={FollowedBy} />
 
-            <Route
+            <ProtectedRoute
               path="/spots-map"
+              user={this.context.loggedInUser}
               component={SpotsMap} />
              
-              <Route
-                 path="/spot/:id/followers"
-                 render={props => <SpotFollowers {...props} title="Spot Followers" />}
-               />  
-
+           
             <Route
+               path="/spot/:id/followers"
+               render={props => 
+               <SpotFollowers {...props} 
+               title="Spot Followers"
+               user={this.context.loggedInUser}
+                />}
+            />  
+
+            <ProtectedRoute
               path={`/:id/notifications`}
+              user={this.context.loggedInUser}
               component={Notifications} />
 
-            <Route
+            <ProtectedRoute
               path={`/settings`}
+              user={this.context.loggedInUser}
               component={Settings} />
 
         </Switch>

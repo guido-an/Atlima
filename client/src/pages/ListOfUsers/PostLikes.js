@@ -1,11 +1,11 @@
 import '../../components/scss/general.scss' 
 import React from 'react'
-// import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import SectionIntroduction from '../../components/SectionIntroduction'
 import Avatar from '../../components/Profile/Avatar'
 import FollowUserBtn from '../../components/FollowUserBtn'
-// import ProfilePictureDefault from '../../components/Profile/ProfilePictureDefault'
 import PostContext from '../../contexts/PostContext'
+
 
 class PostLikes extends React.Component {
  static contextType = PostContext
@@ -24,9 +24,12 @@ class PostLikes extends React.Component {
  }
 
   render () {
-    console.log(this.state.post)
+    if (!this.props.user) {
+      return <Redirect to='/login'/>;
+    }
       if(!this.state.post)
       return <p></p>
+
     return (
       <div>
         <SectionIntroduction title={this.props.title} />

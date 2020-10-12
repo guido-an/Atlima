@@ -1,6 +1,6 @@
 import '../../components/scss/general.scss' 
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Redirect, Router } from 'react-router-dom'
 import SectionIntroduction from '../../components/SectionIntroduction'
 import Avatar from '../../components/Profile/Avatar'
 import FollowUserBtn from '../../components/FollowUserBtn'
@@ -24,6 +24,9 @@ class SpotFollowers extends React.Component {
  }
 
   render () {
+      if(!this.props.user){
+          return <Redirect to="/login"/>
+      }
       if(!this.state.spot)
       return <p></p>
     return (
