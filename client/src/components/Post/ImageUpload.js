@@ -41,7 +41,6 @@ class ImageUpload extends Component {
        console.log(err)
      }
   }
-
   handleUpload = async data => {
     debugger
     if (data.event) {      
@@ -132,9 +131,7 @@ class ImageUpload extends Component {
         }
       );
     }
-
   };
-
 
   render() {
     console.log(this.state.mediaFiles)
