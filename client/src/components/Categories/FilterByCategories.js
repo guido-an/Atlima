@@ -16,7 +16,6 @@ class FilterByCategories extends React.Component {
     }
     await this.context.onSelectCategories(e)
     this.props.postContext.filterPostsOnCategoryHome()
-
   }
 
   onMyFeed = async  e => {
@@ -29,14 +28,14 @@ class FilterByCategories extends React.Component {
     }
   }
 
-
-
   render () {
+
+    console.log(this.context.selectedCategoriesIds, 'test')
     return (
       <div className='feed-cat'>
         <div className='onboarding'>
           <div className="item">
-            <button onClick={this.onMyFeed} className={this.context.myFeedActive ? "myFeedActive" : ""} >Feed</button>
+            <button onClick={this.onMyFeed} className={this.context.myFeedActive ? "myFeedActive" : ""} >My Sports</button>
           </div>
         {this.context.allCategories.map(category => {
           return (

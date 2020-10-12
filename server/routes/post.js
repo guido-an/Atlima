@@ -73,7 +73,6 @@ router.post('/new', async (req, res) => {
 
 // GET ALL POSTS
 router.get('/all', async (req, res) => {
-  console.log(req.cookies, 'cookies')
   try {
     const posts = await Post.find().sort({ created_at: -1 })
       .populate('spot').populate('user')

@@ -18,8 +18,11 @@ router.get('/all', async (req, res) => {
 
 // SINGLE SPOT
 router.get('/:id', async (req, res) => {
+  console.log(req.params.id)
   try {
-    const spot = await Spot.find({ placeId: req.params.id })
+    const spot = await Spot.find({ placeId: req.params.id }).populate('followedBy')
+    console.log(spot, 'spot')
+
     res.status(200).send(spot)
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong with categories 5000/all' })

@@ -4,11 +4,10 @@ import { Redirect } from 'react-router-dom'
 import CategoryContext  from '../../contexts/CategoryContext'
 import { EDIT_USER, GET_USER } from '../../api/userAPI'
 import ImageUpload from '../Post/ImageUpload'
-import CategoriesOnBoarding from '../Categories/CategoriesOnBoarding'
+// import CategoriesOnBoarding from '../Categories/CategoriesOnBoarding'
 import SelectionCategories from '../Categories/SelectionCategories'
 import ProfilePictureDefault from './ProfilePictureDefault'
 import SectionIntroduction from '../SectionIntroduction'
-
 
 class EditProfile extends React.Component {
   static contextType = CategoryContext
@@ -21,9 +20,13 @@ class EditProfile extends React.Component {
     location: "",
     bio: "",
     loggedInUser: null
-    }
+  }
  
     async componentDidMount(){
+      // if(!this.props.loggedInUser){
+      //   alert('helllo')
+      //   //return <Redirect to="/login"></Redirect>
+      //  }
       await this.getUser()
       this.context.cleanSelectedCategoriesIds()
       const userCategoriesIds = this.state.loggedInUser.categories.map(category => category._id)
@@ -56,7 +59,6 @@ class EditProfile extends React.Component {
       )
         this.context.onSubmitUserCategories(e)     
         window.location.reload();
-        
     }  catch(err){
       alert('err')
           console.log(err)
@@ -80,14 +82,14 @@ class EditProfile extends React.Component {
     
    
   render () {
-    if(!this.state.loggedInUser)
-    return <p></p>
-
+    if(!this.state.loggedInUser){
+    return <p></p> 
+    }
+   
     return (
       <section>
        <SectionIntroduction title='Edit Profile' saveEditProfile={this.onSubmit}/>
-    
-    <div className="edit-profile">
+      <div className="edit-profile">
         <form onSubmit={this.onSubmit}>
            {this.state.backgroundPicture ? 
             <div style={{

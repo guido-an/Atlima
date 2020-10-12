@@ -70,7 +70,15 @@ export class CategoryContext extends React.Component {
             }  catch(err){
                   console.log(err)
              }
-          };
+        };
+
+        requestNewSport = async newSport => {
+          try {
+              await service.post(newSport)
+          }  catch(err){
+                console.log(err)
+           }
+      };
 
           fillSelectedCategoriesIds = (array) => {
               this.setState({ selectedCategoriesIds: [...this.state.selectedCategoriesIds, ...array]})
@@ -89,7 +97,7 @@ export class CategoryContext extends React.Component {
                   cleanSelectedCategoriesIds,
                   onMyFeedCategories,
                   fillSelectedCategoriesIds
-                   }}>
+                  }}>
               {this.props.children}
           </Context.Provider>
       )

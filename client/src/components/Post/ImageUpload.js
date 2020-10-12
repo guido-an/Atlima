@@ -23,7 +23,6 @@ class ImageUpload extends Component {
       const updatedArray = this.state.mediaFiles.filter(arrayMedia => {
           return arrayMedia !== media
       })
-      
       this.setState({ mediaFiles: updatedArray });
       
       if (this.state.mediaFiles.length == 1){
@@ -35,12 +34,13 @@ class ImageUpload extends Component {
   urlToBlob = async (image,name) =>{
     try{
       const blob = await fetch(image).then(r => r.blob()).then(blobFile => new File([blobFile], name, { type: "image/png" }))
-      console.log("blob", blob)
+     
       return blob
      }catch(err){
        console.log(err)
      }
   }
+  
   handleUpload = async data => {
     if (data.event) {      
       const image = data.croppedImage;
@@ -82,7 +82,6 @@ class ImageUpload extends Component {
                 this.setState({ 
                   url, mediaFiles: [...this.state.mediaFiles, file]
                 });
-                console.log("media", this.state.mediaFiles)
               });
           }
         );
@@ -132,7 +131,6 @@ class ImageUpload extends Component {
   };
 
   render() {
-    console.log(this.state.mediaFiles)
     if (this.state.progress >= 1 && this.state.progress <= 99){
       return(
         <div className="light-grey">
