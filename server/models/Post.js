@@ -5,7 +5,6 @@ const postSchema = new Schema({
   mediaFile: Array,
   content: String,
   title: String,
-  tumbnail: String,
   spot: { type: mongoose.Schema.Types.ObjectId, ref: 'Spot' },
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   taggedAthletes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
