@@ -100,11 +100,13 @@ export class PostContext extends React.Component {
 
     filterOnBoundsSearch = areaSpot => {
             let insideSpot = [] 
+            debugger
             this.state.mapsMarkers.forEach(post => {
             if(!post.spot) {
                return 
             } else {
-                if(post.spot.placeId == areaSpot.place_id || post.spot.location.coordinates.lat >= areaSpot.geometry.bounds.Ya.i && post.spot.location.coordinates.lat <= areaSpot.geometry.bounds.Ya.j && post.spot.location.coordinates.lng >= areaSpot.geometry.bounds.Ua.i && post.spot.location.coordinates.lng <= areaSpot.geometry.bounds.Ua.j){
+                debugger
+                if(post.spot.placeId == areaSpot.place_id || post.spot.location.coordinates.lat >= areaSpot.geometry.bounds.Va.i && post.spot.location.coordinates.lat <= areaSpot.geometry.bounds.Va.j && post.spot.location.coordinates.lng >= areaSpot.geometry.bounds.Za.i && post.spot.location.coordinates.lng <= areaSpot.geometry.bounds.Za.j){
                     insideSpot.push(post)
                 }
             }
