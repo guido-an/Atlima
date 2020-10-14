@@ -36,7 +36,6 @@ class CreateComment extends React.Component {
     }
 
   render () {
-    console.log(this.state.inputValue , 'imput')
     if(!this.state.post){
       return <Spinner/>
     }

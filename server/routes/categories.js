@@ -13,7 +13,6 @@ router.get('/all', async (req, res) => {
 })
 
 router.post('/new-sport', async (req, res) => {
-  console.log(req.body)
   const { newSport } = req.body
   try {
     await RequestedSport.create({ name: newSport, user: req.session.currentUser._id })

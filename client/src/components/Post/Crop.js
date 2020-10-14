@@ -19,12 +19,10 @@ class Crop extends React.Component {
       }
      
       onCropComplete = (croppedArea, croppedAreaPixels) => {
-        console.log(croppedArea, croppedAreaPixels)
         this.setState({ setCroppedAreaPixels: croppedAreaPixels})
       }
 
       onUploadImage = async () => {
-          console.log(this.state.image, 'image')
         try {
             const croppedImage = await getCroppedImg(
               this.state.image,
@@ -32,7 +30,6 @@ class Crop extends React.Component {
             )
             const data = {event: this.state.file, setCroppedAreaPixels: this.state.setCroppedAreaPixels, croppedImage: croppedImage}
             this.props.handleUpload(data) 
-            console.log('croppedImage', croppedImage)
           } catch (e) {
             console.error(e)
           }

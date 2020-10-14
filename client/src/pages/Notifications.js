@@ -32,7 +32,6 @@ class Notifications extends React.Component {
 
  showNotifications = () => {
   return this.state.notifications.map((notification, i) => {
-    console.log(notification)
     return <div key={i}>
       <div className="container">
         <div>

@@ -42,7 +42,6 @@ class FollowUserBtn extends React.Component {
   onSubmitHandler = async e => {
     e.preventDefault()
     try {
-      console.log(this.state.userToDisplay._id)
       await FOLLOW_USER(this.state.userToDisplay._id)
       await this.getUser()
     } catch(err){

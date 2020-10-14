@@ -34,7 +34,6 @@ class SpotHeader extends React.Component {
     checkIfAlreadyFollowing = () => {
       const spot = this.state.spot
       const followeByIds = spot.followedBy.map(spot => spot._id)
-      console.log(followeByIds, spot)
         if(spot && followeByIds.includes(this.context.loggedInUser._id)){
           this.setState({ isFollowingSpot: true })
         } 
@@ -72,9 +71,7 @@ class SpotHeader extends React.Component {
                    <span>{this.state.spot && this.state.spot.followedBy.length || 0 } Followers</span>
                 </Link>               }
                <span className="dot"></span>
-               <a href="/spots-map/#show-posts">
-                 <span>{this.state.spot && this.state.spot.posts.length} Posts</span>
-               </a>
+                 <span>{this.state.spot && this.state.spot.posts.length || 0} Posts</span>
             </div> 
             {/* just for scrolling down when clicking on 'posts' */}
             <div style={{position: 'relative', top: '80px'}} id="show-posts"/> 

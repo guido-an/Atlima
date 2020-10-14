@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 const NoPostsOnMap = ({ activeMarker }) => {
+  console.log(activeMarker, 'active ')
   const description = activeMarker.description ? activeMarker.description.split(',')[0] : activeMarker.location.terms[0].value
 
   return (

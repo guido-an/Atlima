@@ -41,10 +41,9 @@ class PostCard extends React.Component {
     e.preventDefault();
     this.setState({ isCopyDone: true });
     setTimeout(() => this.setState({ isCopyDone: false }), 600);
-    const link = `www.atlima.com/post/${this.state.post._id}`
+    const link = ` https://www.atlima.com/post/${this.state.post._id}`
     navigator.clipboard.writeText(link)
   };
-
   isInclude = likeUsers => {
       let isThere = false
         likeUsers.forEach(user => {

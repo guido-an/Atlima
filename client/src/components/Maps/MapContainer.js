@@ -128,6 +128,7 @@ class MapContainer extends React.Component {
 
 
   render(){
+    console.log(this.state.activeMarker, 'this.state.activeMarker')
     return (
       <div className="map-wrapper">
           <div className="places-container">

@@ -13,7 +13,6 @@ class SpotFollowers extends React.Component {
 
  async componentDidMount(){
     const placeId = this.props.match.params.id
-    console.log(placeId, 'place id')
     try {
        const spot = await GET_SINGLE_SPOT(placeId)
        this.setState({ spot: spot[0] })

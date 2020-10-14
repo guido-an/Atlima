@@ -100,20 +100,24 @@ export class PostContext extends React.Component {
 
     filterOnBoundsSearch = areaSpot => {
             let insideSpot = [] 
+            console.log(this.state.mapsMarkers, 'this.state.mapsMarkers')
             this.state.mapsMarkers.forEach(post => {
+                debugger
             if(!post.spot) {
                return 
             } else {
                 if(post.spot.placeId == areaSpot.place_id || post.spot.location.coordinates.lat >= areaSpot.geometry.bounds.Va.i && post.spot.location.coordinates.lat <= areaSpot.geometry.bounds.Va.j && post.spot.location.coordinates.lng >= areaSpot.geometry.bounds.Za.i && post.spot.location.coordinates.lng <= areaSpot.geometry.bounds.Za.j){
-                    insideSpot.push(post)
+                    // insideSpot.push(post)
+                    insideSpot = [...insideSpot, post]
                 }
             }
         })
+        console.log(insideSpot, 'insideSpot')
         this.setState({ mapsPost: insideSpot })
      }
     
 
-      filterPostsOnCategory = (stateArrayCopy) => {
+      filterPostsOnCategory = stateArrayCopy => {
          let filteredFeedPosts = []
          const categoriesSelected = this.context.selectedCategoriesIds
           stateArrayCopy.forEach(post => {

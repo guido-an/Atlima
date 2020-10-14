@@ -29,8 +29,6 @@ class FilterByCategories extends React.Component {
   }
 
   render () {
-
-    console.log(this.context.selectedCategoriesIds, 'test')
     return (
       <div className='feed-cat'>
         <div className='onboarding'>

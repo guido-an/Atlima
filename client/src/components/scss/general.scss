@@ -30,8 +30,12 @@ h6 {
 }
 
 button {
-    border: none
+    border: none;
 }
+button:focus {
+    outline:0;
+}
+
 
 .root{
     margin-bottom: 44px;
