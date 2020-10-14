@@ -100,19 +100,16 @@ export class PostContext extends React.Component {
 
     filterOnBoundsSearch = areaSpot => {
             let insideSpot = [] 
-            console.log(this.state.mapsMarkers, 'this.state.mapsMarkers')
-            this.state.mapsMarkers.forEach(post => {
-                debugger
-            if(!post.spot) {
+            this.state.mapsMarkers.forEach(post => { 
+            if (!post.spot) {
                return 
             } else {
-                if(post.spot.placeId == areaSpot.place_id || post.spot.location.coordinates.lat >= areaSpot.geometry.bounds.Va.i && post.spot.location.coordinates.lat <= areaSpot.geometry.bounds.Va.j && post.spot.location.coordinates.lng >= areaSpot.geometry.bounds.Za.i && post.spot.location.coordinates.lng <= areaSpot.geometry.bounds.Za.j){
-                    // insideSpot.push(post)
+                // Fede --> find a solution for the bounds. In this way we need to update every now and then
+                if(post.spot.placeId == areaSpot.place_id || post.spot.location.coordinates.lat >= areaSpot.geometry.bounds.Za.i && post.spot.location.coordinates.lat <= areaSpot.geometry.bounds.Za.j && post.spot.location.coordinates.lng >= areaSpot.geometry.bounds.Va.i && post.spot.location.coordinates.lng <= areaSpot.geometry.bounds.Va.j){
                     insideSpot = [...insideSpot, post]
                 }
             }
         })
-        console.log(insideSpot, 'insideSpot')
         this.setState({ mapsPost: insideSpot })
      }
     
