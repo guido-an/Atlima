@@ -1,13 +1,11 @@
-// Seeds file that remove all users and create 2 new users
-
-// To execute this seed, run from the root of the project
-// $ node bin/seeds.js
+require('dotenv').config()
 
 const mongoose = require('mongoose')
 const Category = require('../models/Category')
 
+console.log(process.env.MONGODB_URI, 'process.env.MONGODB_URI')
 mongoose
-  .connect('mongodb://localhost/server', { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
