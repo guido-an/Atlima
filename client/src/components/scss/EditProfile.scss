@@ -2,11 +2,21 @@
 
 .edit-profile {
     margin-bottom: 120px;
+    // .edit-background-picture{
+    //     position: absolute;
+    //     z-index: 10;
+    //     top: 10vh;
+    //     right: 2vw;
+    //     .row {
+    //         display: none;
+    //     }
+    // }
     .edit-background-picture{
-        position: absolute;
-        z-index: 10;
-        top: 10vh;
-        right: 2vw;
+        // position: absolute;
+        position: relative;
+        // z-index: 10;
+        bottom: 280px;
+        left: 85vw;
         .row {
             display: none;
         }
@@ -20,13 +30,10 @@
   }
 
   .edit-profile-picture{
-    position: absolute;
-    left: 5vw;
-    top: 70vh;
     img {
         position: relative;
-        left: 58px;
-        bottom: 52px;
+        left: 80px;
+        bottom: 150px;
     }
     .row {
         display: none;
@@ -34,6 +41,8 @@
   }
   .input-container {
       margin: $base-margin;
+      position: relative;
+      bottom: 120px;
       input, textarea{
         display: block;
         margin: 5px 0 20px 0;
@@ -58,5 +67,10 @@
 @media(min-width: 768px){
   .edit-profile .input-container {
       margin: 0 30%
+  }
+  .edit-profile-picture{
+    img {
+        left: 110px !important;
+    }
   }
 }

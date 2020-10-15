@@ -14,7 +14,7 @@ class Avatar extends React.Component {
             heightAndWidth='40px'
             fontSize='16px'
             top='10px'
-          />}
+            />}
         <Link
           to={`/profile/${this.props.user._id}`}
           style={{ fontWeight: '500', marginLeft: '10px' }}

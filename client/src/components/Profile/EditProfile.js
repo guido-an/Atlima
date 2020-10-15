@@ -115,13 +115,13 @@ class EditProfile extends React.Component {
                    backgroundSize: "cover",
                    backroundPosition: "center",
                    position: "relative",
-                   bottom: "55px",
+                   bottom: "115px",
                    left: "5vw"
                   }} /> : 
                   <ProfilePictureDefault 
                      user={this.state.loggedInUser}
                      heightAndWidth="100px"
-                     bottom="55px"
+                     bottom="115px"
                      left="5vw"
                      fontSize="48px"
                      top="40px"

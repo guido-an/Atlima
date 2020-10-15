@@ -14,8 +14,8 @@ class Home extends React.Component {
   state = {
         hideShowSearch: false,
         searchIconSize: '20',
-        topMargin: '17',
-        rightMargin: '5'
+        topMargin: '7',
+        rightMargin: '1'
     }
 
   ShowSearchInput = () => {
@@ -26,13 +26,13 @@ class Home extends React.Component {
     if(!this.state.hideShowSearch){
       // make icon smaller 
       searchIconSize = '14'
-      topMargin = '22'
-      rightMargin = '7'
+      topMargin = '8'
+      rightMargin = '5'
      
     } else {
       searchIconSize = '20'
-      topMargin = '17'
-      rightMargin = '5'
+      topMargin = '5'
+      rightMargin = '2'
     }
 
 
@@ -57,9 +57,10 @@ class Home extends React.Component {
                 style={{ 
                   width: this.state.searchIconSize + 'px !important',
                   height: this.state.searchIconSize + 'px',
-                  position: 'absolute',
+                  position: 'relative',
                   right: this.state.rightMargin + 'vw',
-                  top: this.state.topMargin + 'px',
+                  marginTop: this.state.topMargin + 'px',
+
                   color: '#bfbfbf'
                   }} 
               onClick={this.ShowSearchInput}/>
