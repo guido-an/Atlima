@@ -50,7 +50,7 @@ class Home extends React.Component {
       <div>
         <div className="feed-header">
           <div className="logo-wrapper">
-            <img src={logo} id="logo-home" alt="altima-logo"/>
+            <img src={logo} id="logo-home" alt="atlima-logo"/>
           </div>
           {this.state.hideShowSearch && <SearchBar/>}
               <img src={searchIcon} 

@@ -18,7 +18,8 @@ router.get('/user/:id', async (req, res) => {
         populate: {
           path: 'user'
         }
-      })
+      }).sort({ created_at: -1 })
+    console.log(user, 'user')
     res.status(200).send(user)
   } catch (err) {
     res.status(400).send({ message: 'Something went wrong with getting the user 5000/profile/:id' })

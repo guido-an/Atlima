@@ -39,7 +39,8 @@ class UserProfile extends React.Component {
 
     checkIfPageUserIsFollowed = () => {
         const user = this.state.pageUser
-        if(user && user.followedBy.includes(this.context.loggedInUser._id)){
+        const followedByIds = user.followedBy.map(user => user._id)
+        if(user && followedByIds.includes(this.context.loggedInUser._id)){
           this.setState({ pageUserIsFollowed: true })
         } 
       else {

@@ -53,7 +53,7 @@ export default class Signup extends Component {
           <input onChange={this.handleChange} type="password"  name="password" />
          <p style={{ margin: '0', color: 'red'}}>{this.state.errorMessage}</p> 
           <button className='primary-btn'>Signup</button>  
-          <p>By signing up for Altima, you agree to the Terms of Service and Public Policy.</p>        
+          <p>By signing up for Atlima, you agree to the Terms of Service and Public Policy.</p>        
           <p id="login-text">Already have an account? <Link id="login-link" to="/login">Login</Link></p>
         </form>
       </div>

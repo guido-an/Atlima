@@ -103,7 +103,7 @@ const welcomeNotification = async (currentUser) => {
     const update = {
       $addToSet: {
         notifications: {
-          name: `Welcome to Altima ${currentUser.firstName} :)`,
+          name: `Welcome to Atlima ${currentUser.firstName} :)`,
           action: ' Happy to have you here, you can now start sharing your passion!',
           postUrl: '/create-post',
           mediaFile: url,

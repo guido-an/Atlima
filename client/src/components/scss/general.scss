@@ -8,8 +8,12 @@ $light-grey: #bfbfbf;
 $border-radius-btn: 4px;
 
 
-html {
+html, body {
+    overflow-x: hidden;
+    overscroll-behavior: none;
     scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
   }
 
 h1 {

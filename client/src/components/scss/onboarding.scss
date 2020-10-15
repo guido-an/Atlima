@@ -1,6 +1,10 @@
 @import "general.scss";
 
 /* The container */
+
+#onboarding-page-container {
+     height: 130vh // to fix: from iphone the 'done' button doesn't appear
+}
 .onb-title{
     margin: 0 6vw;
     margin-top: 20px !important;

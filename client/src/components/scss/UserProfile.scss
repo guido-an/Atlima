@@ -125,8 +125,7 @@
         position: relative;
         bottom: 150px;
         left: 130px;
-        font-size: 15px;
-       
+        font-size: 15px;       
     }
     .bio {
         position: relative;
@@ -137,7 +136,7 @@
   
     .sports-section{
         position: relative;
-        bottom: 80px;
+        bottom: 120px;
     } 
 
 
@@ -197,7 +196,7 @@
 
     .locations {
         position: relative;
-        bottom: 100px;
+        bottom: 150px;
         .checkmark-location {
             position: absolute;
             border-radius: 50px;
@@ -224,18 +223,23 @@
         }
     }
     .posts-to-show {
-      margin-top: 40px;
+      margin-top: 20px;
     }
     .divider{
         height: 1px;
         background-color: #e5e5e5;
         position: relative;
-        bottom: 100px;
+        bottom: 180px;
         margin: $base-margin;
       }
 
       .posts-header {
           display: flex;
+      }
+
+      .posts-header, .posts-to-show{
+          position: relative;
+          bottom: 140px;
       }
 
       .create-first-post{

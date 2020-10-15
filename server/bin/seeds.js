@@ -3,9 +3,8 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const Category = require('../models/Category')
 
-console.log(process.env.MONGODB_URI, 'process.env.MONGODB_URI')
 mongoose
-  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
+  .connect('http://localhost:5000/server', { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
