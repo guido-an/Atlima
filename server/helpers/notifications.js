@@ -49,6 +49,7 @@ const notificationComments = async (currentUser, post) => {
       const commentInPostUserId = ObjectId(userId).toString()
       if (commentInPostUserId != myUserId) {
         const filter = { _id: commentInPostUserId }
+        const mediaType = post.mediaFile[0] ? post.mediaFile[0].type[0] : ''
         const update = {
           $addToSet: {
             notifications: {
@@ -56,6 +57,7 @@ const notificationComments = async (currentUser, post) => {
               action: commentInPostUserId == postUserId ? 'had commented your post' : 'had also commented the post',
               postUrl: `/post/${post._id}/`,
               mediaFile: url,
+              mediaType: mediaType,
               date: Date.now()
             }
           },
@@ -75,6 +77,7 @@ const notificationUserTagged = async (currentUser, taggedUserId, post) => {
   } else {
     try {
       const url = post.mediaFile[0] ? post.mediaFile[0].url : ''
+      const mediaType = post.mediaFile[0] ? post.mediaFile[0].type[0] : ''
       const filter = { _id: taggedUserId }
       const update = {
         $addToSet: {
@@ -83,6 +86,7 @@ const notificationUserTagged = async (currentUser, taggedUserId, post) => {
             action: 'had tagged you in a post',
             postUrl: `/post/${post._id}/`,
             mediaFile: url,
+            mediaType: mediaType,
             date: Date.now()
           }
         },
