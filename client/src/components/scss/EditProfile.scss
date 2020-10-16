@@ -2,21 +2,13 @@
 
 .edit-profile {
     margin-bottom: 120px;
-    // .edit-background-picture{
-    //     position: absolute;
-    //     z-index: 10;
-    //     top: 10vh;
-    //     right: 2vw;
-    //     .row {
-    //         display: none;
-    //     }
-    // }
     .edit-background-picture{
-        // position: absolute;
         position: relative;
-        // z-index: 10;
-        bottom: 280px;
-        left: 85vw;
+        left: 28px;
+        img {
+            position: relative;
+            top: 20px;
+        }
         .row {
             display: none;
         }
@@ -33,7 +25,7 @@
     img {
         position: relative;
         left: 80px;
-        bottom: 150px;
+        bottom: 90px;
     }
     .row {
         display: none;
@@ -42,7 +34,7 @@
   .input-container {
       margin: $base-margin;
       position: relative;
-      bottom: 120px;
+      bottom: 60px;
       input, textarea{
         display: block;
         margin: 5px 0 20px 0;

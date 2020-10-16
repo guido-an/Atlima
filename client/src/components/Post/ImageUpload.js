@@ -169,7 +169,7 @@ class ImageUpload extends Component {
                       <label onClick={(e) => this.removeMedia(media)} className="custom-file-remove">
                           <ClearIcon/>
                         </label>
-                      <img key={i} src={media.url} style={{ maxWidth: '100vw', left: '0px' }} />
+                      <img key={i} src={media.url} style={{ maxWidth: '90vw', maxHeight: "90vw", left: '0px' }} />
                     </div>
                   )}
                 else{
