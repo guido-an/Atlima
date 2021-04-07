@@ -9,7 +9,7 @@
     "deploy": "rimraf build && cd ../client && npm run build && mv build ../server/ && cd .. && git subtree push --prefix server heroku master"
   },
   "dependencies": {
-    "bcrypt": "^3.0.0",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.18.3",
     "connect-ensure-login": "^0.1.1",
     "connect-flash": "^0.1.1",
