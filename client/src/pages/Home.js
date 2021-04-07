@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import PostContext from '../contexts/PostContext'
 import '../components/scss/feedFilter.scss'
-import FeedPosts from '../components/Post/FeedPosts'
 import FilterByCategories from '../components/Categories/FilterByCategories'
 import SearchBar from '../components/SearchBar'
+import Spinner from '../components/Spinner'
 // import SearchIcon from '@material-ui/icons/Search';
 import searchIcon from '../images/search-icon.png'
 import logo from '../images/logo-atlima.png'
+const FeedPosts = React.lazy(() => import('../components/Post/FeedPosts'));
+
+
+
+
 
 
 class Home extends React.Component {
@@ -66,7 +71,9 @@ class Home extends React.Component {
               onClick={this.ShowSearchInput}/>
          </div>
            <FilterByCategories postContext={this.context} user={this.props.user}/>
-           <FeedPosts />
+           <Suspense fallback={<Spinner/>}>
+             <FeedPosts />
+           </Suspense>
       </div>
     )
   }
