@@ -105,7 +105,7 @@ export class PostContext extends React.Component {
                return 
             } else {
                 // Fede --> find a solution for the bounds. In this way we need to update every now and then geometry.bounds
-                if(post.spot.placeId == areaSpot.place_id || post.spot.location.coordinates.lat >= areaSpot.geometry.bounds.Za.i && post.spot.location.coordinates.lat <= areaSpot.geometry.bounds.Za.j && post.spot.location.coordinates.lng >= areaSpot.geometry.bounds.Va.i && post.spot.location.coordinates.lng <= areaSpot.geometry.bounds.Va.j){
+                if(post.spot.placeId == areaSpot.place_id || post.spot.location.coordinates.lat >= areaSpot.geometry.bounds.Va.i && post.spot.location.coordinates.lat <= areaSpot.geometry.bounds.Va.j && post.spot.location.coordinates.lng >= areaSpot.geometry.bounds.Qa.i && post.spot.location.coordinates.lng <= areaSpot.geometry.bounds.Qa.j){
                     insideSpot = [...insideSpot, post]
                 }
             }

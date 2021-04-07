@@ -18,8 +18,8 @@ class MapContainer extends React.Component {
   static contextType = PostContext
 
   state = { 
-     lat: null,
-     lng: null,
+     lat: "52.377956",
+     lng: "4.897070",
      activeMarker: null,
      errorMessage: '',
      areaCoordinates: null
